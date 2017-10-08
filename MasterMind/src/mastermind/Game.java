@@ -5,6 +5,13 @@
  */
 package mastermind;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author kasthan
@@ -15,6 +22,13 @@ public class Game {
     private final String difficulty;
     private final String mode;
     private final int points;
+    
+    public Game (String idG, String dif, String mod, int puntos){
+        this.id = idG;
+        this.difficulty = dif;
+        this.mode = mod;
+        this.points = puntos;
+    }
     
     public Game (String idG, String dif, String mod){
         this.id = idG;
@@ -39,7 +53,42 @@ public class Game {
         return this.points;
     }
     
-    public void SaveGame(String idP, String dif, String mod, int puntos, int round, Casilla[] codeIni, Round[] rondAnt) {
+    public void SaveGame(String idP, String userName, String dif, String mod, int puntos, int round, Casilla[] codeIni, Round[] rondAnt) {
+        
+        try {
+            
+            FileWriter fileName = new FileWriter("games/"+idP+".txt");
+            PrintWriter pw = new PrintWriter(fileName);
+            
+            pw.println(idP);
+            pw.println(userName);
+            pw.println(dif);
+            pw.println(mod);
+            pw.println(puntos);
+            pw.println(round);
+            
+            for (int i = 0; i < codeIni.length; ++i) {
+                
+                
+                
+            }
+            
+            for (int i = 0; i < rondAnt.length; ++i) {
+                
+                
+                
+            }
+            
+            pw.close();
+            
+            out.println("Partida guardada");
+            
+        } catch (IOException ex) {
+            
+            out.println("No se ha podido guardar la partida");
+            
+        }
+        
         
     }
     
