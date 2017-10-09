@@ -5,14 +5,16 @@
  */
 package mastermind;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Usuario
  */
 public class Board {
-    private Round[] round;
+    private ArrayList<Round> round;
     
-    public Board(Round[] round){
+    public Board(ArrayList<Round> round){
         this.round = round;
     }
 }

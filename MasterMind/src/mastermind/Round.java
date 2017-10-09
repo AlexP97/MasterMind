@@ -5,15 +5,17 @@
  */
 package mastermind;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Usuario
  */
 public class Round {
     private final int number;
-    private final Casilla[] casilla;
+    private final ArrayList<Casilla> casilla;
     
-    public Round(int number, Casilla[] casilla){
+    public Round(int number, ArrayList<Casilla> casilla){
         this.number = number;
         this.casilla = casilla;
     }
