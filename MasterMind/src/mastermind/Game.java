@@ -5,10 +5,13 @@
  */
 package mastermind;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,11 +56,47 @@ public class Game {
         return this.points;
     }
     
-    public void SaveGame(String idP, String userName, String dif, String mod, int puntos, int round, Casilla[] codeIni, Round[] rondAnt) {
+    public void LoadGame(String userName){
+        
+        File folder = new File("mastermind/players");
+        File[] listOfFiles = folder.listFiles();
+
+        for (int i = 0; i < listOfFiles.length; i++) {
+
+            System.out.println("File " + listOfFiles[i].getName());
+        
+        }
+        
+        
+        
+        //Leer datos de la partida y cargar el Game
+        
+        try {
+
+            Scanner input = new Scanner(System.in);
+
+            File file = new File(input.nextLine());
+
+            input = new Scanner(file);
+
+
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                System.out.println(line);
+            }
+            input.close();
+
+        } catch (Exception ex) {
+            System.out.print("No se ha podido cargar la partida.");
+        }
+        
+    }
+    
+    public void SaveGame(String idP, String userName, String dif, String mod, int puntos, int round, ArrayList<Casilla> codeIni, ArrayList<Round> rondAnt) {
         
         try {
             
-            FileWriter fileName = new FileWriter("games/"+idP+".txt");
+            FileWriter fileName = new FileWriter("players/"+userName+"/"+idP+".txt");
             PrintWriter pw = new PrintWriter(fileName);
             
             pw.println(idP);
@@ -67,13 +106,13 @@ public class Game {
             pw.println(puntos);
             pw.println(round);
             
-            for (int i = 0; i < codeIni.length; ++i) {
+            for (int i = 0; i < codeIni.size(); ++i) {
                 
                 
                 
             }
             
-            for (int i = 0; i < rondAnt.length; ++i) {
+            for (int i = 0; i < rondAnt.size(); ++i) {
                 
                 
                 
@@ -81,11 +120,11 @@ public class Game {
             
             pw.close();
             
-            out.println("Partida guardada");
+            out.println("Partida guardada.");
             
         } catch (IOException ex) {
             
-            out.println("No se ha podido guardar la partida");
+            out.println("No se ha podido guardar la partida.");
             
         }
         
