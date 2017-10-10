@@ -58,36 +58,55 @@ public class Game {
     
     public void LoadGame(String userName){
         
-        File folder = new File("mastermind/players");
+        File folder = new File("players/"+userName);
         File[] listOfFiles = folder.listFiles();
 
-        for (int i = 0; i < listOfFiles.length; i++) {
+        if (listOfFiles != null){
+            for (int i = 0; i < listOfFiles.length; i++) {
 
-            System.out.println("File " + listOfFiles[i].getName());
-        
-        }
-        
-        
-        
-        //Leer datos de la partida y cargar el Game
-        
-        try {
+                String fileNameWithOutExt = listOfFiles[i].getName().replaceFirst("[.][^.]+$", "");
+                Integer num = i + 1;
+                System.out.println(num.toString() + " - " + fileNameWithOutExt);
 
-            Scanner input = new Scanner(System.in);
-
-            File file = new File(input.nextLine());
-
-            input = new Scanner(file);
-
-
-            while (input.hasNextLine()) {
-                String line = input.nextLine();
-                System.out.println(line);
             }
-            input.close();
+        
+            //Leer datos de la partida y cargar el Game
 
-        } catch (Exception ex) {
-            System.out.print("No se ha podido cargar la partida.");
+            Boolean cargado = false;
+
+            while (!cargado){            
+                try {
+
+                    System.out.print("Introduce el número de la partida." + "\n");
+
+                    Scanner input = new Scanner(System.in);
+
+                    int num = Integer.parseInt(input.nextLine());
+
+                    if (num - 1 >= listOfFiles.length) {
+                        System.out.print("Esta partida no existe. Introduce otro número." + "\n");
+                    }
+                    else {
+                        input = new Scanner(listOfFiles[num-1]);
+
+
+                        
+                        while (input.hasNextLine()) {
+                            String line = input.nextLine();
+                            System.out.println(line);
+                        }
+                        input.close();
+                        cargado = true;
+                        System.out.print("Partida cargada!." + "\n");
+                    }
+
+                } catch (Exception ex) {
+                    System.out.print("No se ha podido cargar la partida." + "\n");
+                }
+            }
+        }
+        else {
+            System.out.print("No hay ninguna partida guardada." + "\n");
         }
         
     }
@@ -120,11 +139,11 @@ public class Game {
             
             pw.close();
             
-            out.println("Partida guardada.");
+            out.println("Partida guardada." + "\n");
             
         } catch (IOException ex) {
             
-            out.println("No se ha podido guardar la partida.");
+            out.println("No se ha podido guardar la partida." + "\n");
             
         }
         

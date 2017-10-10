@@ -5,6 +5,8 @@
  */
 package mastermind;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Usuario
@@ -15,7 +17,17 @@ public class MasterMind {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+           
+        Game game = new Game("1", "1", "1");
+        
+        System.out.print("Introduce el nombre de usuario." + "\n");
+
+        Scanner input = new Scanner(System.in);
+
+        String user = input.nextLine();
+                    
+        game.LoadGame(user);
+        
     }
     
 }
