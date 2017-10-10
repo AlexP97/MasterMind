@@ -17,16 +17,27 @@ public class MasterMind {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-           
-        Game game = new Game("1", "1", "1");
         
-        System.out.print("Introduce el nombre de usuario." + "\n");
-
+        System.out.print("Bienvenido a MasterMind." + "\n");
+        Boolean entrado = false; 
         Scanner input = new Scanner(System.in);
-
-        String user = input.nextLine();
-                    
-        game.LoadGame(user);
+        while(!entrado){
+            System.out.print("Escribe login para iniciar sesión, o register para registrarte." + "\n");
+            String start = input.nextLine();
+            if(start == "login"){   //no entra nunca en ninguna de las 2 opciones
+                System.out.print("Introduce el nombre de usuario." + "\n");
+                System.out.print("Introduce la contraseña." + "\n");
+                entrado = true;
+            }
+            else if(start == "register"){
+                System.out.print("Introduce el nombre de usuario." + "\n");
+                System.out.print("Introduce la contraseña." + "\n");
+                entrado = true;
+            }
+            else System.out.print("Entrada no válida" + "\n");
+        }
+           
+        Game game = new Game("1", "1", "1");           
         
     }
     
