@@ -6,8 +6,11 @@
 
 package mastermind;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -30,7 +33,7 @@ public class Jugador {
         return this.name;
     }
     
-    public void register(String n, String c) throws IOException {
+    public boolean register(String n, String c) throws IOException {
         File dir = new File("players/"+n);
         boolean b = dir.mkdir();
         if(b) {      
@@ -42,16 +45,40 @@ public class Jugador {
             File dir2 = new File("players/"+n+"/games");
             dir2.mkdir();
             File info = new File("players/"+n+"/info.txt");
-            if(info.exists())
-                System.out.println("Te has registrado correctamente");
-            else {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-                bw.write(n+" "+c);
-                bw.close();
-            }
+            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
+            bw.write(n+" "+c+" 0 true");
+            bw.close();
+            return true;
         }
-        else
+        else {
             System.out.println("El jugador ya existe");
+            return false;
+        }
+    }
+    
+    public boolean login(String n, String c) throws IOException {
+        try{
+            String linea;
+            FileReader f = new FileReader("players/"+n+"/info.txt");
+            BufferedReader b = new BufferedReader(f);
+            linea = b.readLine();
+            b.close();
+            String palabra[] = linea.split(" ");
+            if(!palabra[1].equals(c)) {
+                System.out.println("La contraseña introducida es incorrecta");
+                return false;
+            }
+            this.name = palabra[0];
+            this.password = palabra[1];
+            this.record = Integer.parseInt(palabra[2]);
+            this.IA = Boolean.valueOf(palabra[3]);
+            System.out.println("Has iniciado sesión correctamente");
+            return true;
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println("El usuario introducido es incorrecto");
+            return false;
+        }
     }
     
     public String getPassword() {

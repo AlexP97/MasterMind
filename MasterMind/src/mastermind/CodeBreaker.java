@@ -12,6 +12,6 @@ package mastermind;
  */
 public class CodeBreaker extends Jugador {
     public CodeBreaker(String n, String c) {
-       super(n, c);
+       super();
     }
 }
