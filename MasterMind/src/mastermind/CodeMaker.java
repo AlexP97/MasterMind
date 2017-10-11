@@ -12,6 +12,6 @@ package mastermind;
  */
 public class CodeMaker extends Jugador {
     public CodeMaker(String n, String c) {
-       super(n, c);
+       super();
     }
 }

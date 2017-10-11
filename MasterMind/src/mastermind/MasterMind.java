@@ -5,7 +5,11 @@
  */
 package mastermind;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 
 /**
  *
@@ -16,8 +20,8 @@ public class MasterMind {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        
+
+    public static void main(String[] args) throws IOException {
         System.out.print("Bienvenido a MasterMind." + "\n");
         Boolean entrado = false; 
         Scanner input = new Scanner(System.in);
@@ -69,7 +73,9 @@ public class MasterMind {
             }
             else System.out.print("Entrada no válida" + "\n");
         }
-        Game game = new Game("1", "1");           
+        Game game = new Game("1", "1");  
+
+      
     }
     
 }
