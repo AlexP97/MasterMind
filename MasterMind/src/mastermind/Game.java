@@ -23,20 +23,17 @@ public class Game {
     
     private final String id;
     private final String difficulty;
-    private final String mode;
     private final int points;
     
-    public Game (String idG, String dif, String mod, int puntos){
+    public Game (String idG, String dif, int puntos){
         this.id = idG;
         this.difficulty = dif;
-        this.mode = mod;
         this.points = puntos;
     }
     
-    public Game (String idG, String dif, String mod){
+    public Game (String idG, String dif){
         this.id = idG;
         this.difficulty = dif;
-        this.mode = mod;
         this.points = 0;
     }
     
@@ -46,10 +43,6 @@ public class Game {
     
     public String getDifficulty(){
         return this.difficulty;
-    }
-    
-    public String getMode() {
-        return this.mode;
     }
     
     public int getPoints() {
