@@ -5,6 +5,11 @@
  */
 package mastermind;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +19,20 @@ import java.util.ArrayList;
 public class Ranking {
     private ArrayList<Pair> ranking;
     
-    public Ranking(){
-        
+    public Ranking() throws IOException{
+            File info = new File("ranking/info.txt");
+            if(info.exists()) {
+                String linea;
+                FileReader f = new FileReader("ranking/info.txt");
+                BufferedReader b = new BufferedReader(f);
+                linea = b.readLine();
+                b.close();
+                String palabra[] = linea.split(" ");
+                for(int i = 0; i < (ranking.size() * 2); i += 2){
+                    Pair p = new Pair(palabra[i], Integer.parseInt(palabra[i+1]));
+                        ranking.add(i/2,p);
+                }
+            }    
     }
     
     public void muestraRanking(){
@@ -30,12 +47,32 @@ public class Ranking {
     
     public void actualizaRanking(String nombre, int puntos){
         Pair p = new Pair(nombre,puntos);
-        if(ranking.size() < 10) ranking.add(p);
+        Pair aux;
+        if(ranking.size() < 10) {
+            int i = 0;
+            boolean b = false;
+            for(i= 0; i < ranking.size() && !b; i++)
+                b = ranking.get(i).getRight() < puntos;
+            if(b) {
+                for(int j = i; j < ranking.size(); j++) {
+                    aux = new Pair(ranking.get(j).getLeft(), ranking.get(j).getRight());
+                    ranking.remove(j);
+                    ranking.add(j,p);
+                    p = new Pair(aux.getLeft(), aux.getRight());
+                }
+            }
+            
+            ranking.add(p);
+        }
         else{
             for(int i = 0; i < ranking.size(); i++){
                 if(ranking.get(i).getRight() < puntos){
-                    ranking.remove(i);
-                    ranking.add(i,p);
+                    for(int j = i; j < ranking.size(); j++) {
+                        aux = new Pair(ranking.get(j).getLeft(), ranking.get(j).getRight());
+                        ranking.remove(j);
+                        ranking.add(j,p);
+                        p = new Pair(aux.getLeft(), aux.getRight());
+                    }
                     System.out.print("¡Te has colocado en " + i+1 + "a posición!" + "\n");
                     return;
                 }
