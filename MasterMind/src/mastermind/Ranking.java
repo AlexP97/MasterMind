@@ -7,7 +7,6 @@ package mastermind;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,10 +54,10 @@ public class Ranking {
                 b = ranking.get(i).getRight() < puntos;
             if(b) {
                 for(int j = i; j < ranking.size(); j++) {
-                    aux = new Pair(ranking.get(j).getLeft(), ranking.get(j).getRight());
+                    aux = new Pair(ranking.get(j));
                     ranking.remove(j);
                     ranking.add(j,p);
-                    p = new Pair(aux.getLeft(), aux.getRight());
+                    p = new Pair(aux);
                 }
             }
             
@@ -68,10 +67,10 @@ public class Ranking {
             for(int i = 0; i < ranking.size(); i++){
                 if(ranking.get(i).getRight() < puntos){
                     for(int j = i; j < ranking.size(); j++) {
-                        aux = new Pair(ranking.get(j).getLeft(), ranking.get(j).getRight());
+                        aux = new Pair(ranking.get(j));
                         ranking.remove(j);
                         ranking.add(j,p);
-                        p = new Pair(aux.getLeft(), aux.getRight());
+                        p = new Pair(aux);
                     }
                     System.out.print("¡Te has colocado en " + i+1 + "a posición!" + "\n");
                     return;
