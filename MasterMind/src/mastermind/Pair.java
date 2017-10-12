@@ -17,6 +17,11 @@ public class Pair {
       this.left = left;
       this.right = right;
     }
+    
+    public Pair(Pair p){
+        this.left = p.getLeft();
+        this.right = p.getRight();
+    }
 
     public String getLeft() {
         return left;
@@ -25,4 +30,5 @@ public class Pair {
     public int getRight() {
         return right;
     }
+    
 }
