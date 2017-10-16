@@ -24,17 +24,31 @@ public class Game {
     private final String id;
     private final String difficulty;
     private final int points;
+    private final Jugador player;
+    private final Jugador IA;
     
     public Game (String idG, String dif, int puntos){
         this.id = idG;
         this.difficulty = dif;
         this.points = puntos;
+        this.player = null;
+        this.IA = null;
     }
     
     public Game (String idG, String dif){
         this.id = idG;
         this.difficulty = dif;
         this.points = 0;
+        this.player = null;
+        this.IA = null;
+    }
+    
+    public Game () {
+        this.id = null;
+        this.difficulty = null;
+        this.points = 0;
+        this.player = null;
+        this.IA = null;
     }
     
     public String getId() {
