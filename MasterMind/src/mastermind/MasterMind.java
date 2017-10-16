@@ -22,7 +22,8 @@ public class MasterMind {
         int estado = 0;
         while(true){           
             System.out.print("Bienvenido a MasterMind." + "\n");
-            Scanner input = new Scanner(System.in);          
+            Scanner input = new Scanner(System.in);   
+            Jugador jugador = new Jugador();
             switch (estado){
                 case 0: //MENU DE INICIO/REGISTRO
                     estado = 1;
@@ -33,8 +34,7 @@ public class MasterMind {
                         String usuario = input.nextLine();
                         System.out.print("Introduce la contraseña:" + "\n");
                         String contraseña = input.nextLine();
-
-                        Jugador jugador = new Jugador();
+                    
                         Boolean b = jugador.login(usuario,contraseña);
                         if(!b) estado = 0;
                     }
@@ -54,24 +54,21 @@ public class MasterMind {
                     }
                     break;
                 case 1: //MENU DE CREAR/CARGAR/VER RANKING
-                    estado = 2;
+                    estado = 0;
                     System.out.print("Escribe crear para jugar una partida nueva, cargar para jugar una partida ya empezada, ranking para ver los records de puntuación o salir para volver al menú anterior." + "\n");
                     String jugar = input.nextLine();
                     if(jugar.equals("crear")){
-                        System.out.print("Introduce el id para la nueva partida:" + "\n");
-                        String idPartida = input.nextLine();
-                        System.out.print("Introduce la dificultad (puede ser facil, medio o dificil):" + "\n");
-                        String dificultad = input.nextLine();
-                        Game game = new Game(idPartida,dificultad);
+                        Game game = new Game();
+                        game.juega();
                     }
                     else if (jugar.equals("cargar")){
-                        System.out.print("Partida guardadas:" + "\n");  //aqui habria un bolcado de los posibles ids
-                        
-                        System.out.print("Introduce el id de la partida guardada:" + "\n");
-                        //comprobacion de que el id es posible, y si no vuelta a empezar
+                        Game game = new Game();
+                        game.LoadGame(jugador.getName());
+//                      game.continua();
                     }
                     else if (jugar.equals("ranking")){
-
+                        Ranking ranking = new Ranking();
+                        ranking.muestraRanking();
                     }
                     else if (jugar.equals("salir")) estado = 0;
                     else{
