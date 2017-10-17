@@ -21,11 +21,14 @@ import java.util.logging.Logger;
  */
 public class Game {
     
-    private final String id;
-    private final String difficulty;
-    private final int points;
-    private final Jugador player;
-    private final Jugador IA;
+    String id;
+    String difficulty;
+    int points;
+    Jugador player;
+    Jugador IA;
+    int turn;
+    int totalTurns;
+    String[] output;
     
     public Game (String idG, String dif, int puntos){
         this.id = idG;
@@ -33,6 +36,8 @@ public class Game {
         this.points = puntos;
         this.player = null;
         this.IA = null;
+        this.turn = 0;
+        this.output = null;
     }
     
     public Game (String idG, String dif){
@@ -41,6 +46,8 @@ public class Game {
         this.points = 0;
         this.player = null;
         this.IA = null;
+        this.turn = 0;
+        this.output = null;
     }
     
     public Game () {
@@ -49,6 +56,8 @@ public class Game {
         this.points = 0;
         this.player = null;
         this.IA = null;
+        this.turn = 0;
+        this.output = null;
     }
     
     public String getId() {
@@ -61,6 +70,77 @@ public class Game {
     
     public int getPoints() {
         return this.points;
+    }
+    
+    private boolean CheckAvailability(String ident, String userName) {
+        
+        boolean available = true;
+        
+        File folder = new File("players/"+userName);
+        File[] listOfFiles = folder.listFiles();
+        
+        if (listOfFiles != null){
+            for (int i = 0; i < listOfFiles.length && available; i++) {
+
+                String fileName = listOfFiles[i].getName().replaceFirst("[.][^.]+$", "");
+                if (fileName.equals(ident)) available = false;
+
+            }
+        }
+        
+        return available;
+        
+    }
+    
+    public void Play(String ident, String userName, String dif, String mod, Jugador playerN, Jugador IAN) {
+        
+        if (CheckAvailability(ident, userName)){
+            
+            this.id = ident;
+            if (dif == "Facil") this.totalTurns = 12;
+            else if (dif == "Medio") this.totalTurns = 10;
+            else if (dif == "Dificil") this.totalTurns = 8;
+            else {
+                System.out.print("Esta dificultad no esxiste" + "\n");
+                return;
+            }
+            this.difficulty = dif;
+            this.player = playerN;
+            this.IA = IAN;
+            
+            while (turn <= totalTurns){
+                
+                String outputP = null;
+                String outputIA = null;
+                
+                if (mod == "Codemaker") {
+                    outputP = player.Jugar(mod);
+                    outputIA = IA.Jugar("Codebreaker");
+                }
+                else if (mod == "Codebreaker") {
+                    outputP = player.Jugar(mod);
+                    outputIA = IA.Jugar("Codemaker");
+                }
+                else {
+                    System.out.print("Esta modo de juego no esxiste" + "\n");
+                    return;
+                }
+                
+                output[turn] = outputP + " " + outputIA;
+                
+                for (int i = 0; i <= turn; ++i) {
+                    
+                    System.out.print(output[i] + "\n");
+                    
+                }
+                
+                ++turn;
+            }
+            
+        }
+        else {
+            System.out.print("No se ha podido crear la partida. Este id ya está en uso." + "\n");
+        }
     }
     
     public void LoadGame(String userName){
