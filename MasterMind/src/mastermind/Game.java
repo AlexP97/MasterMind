@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,7 @@ public class Game {
     int turn;
     int totalTurns;
     String[] output;
+    CodePeg[] codeIni = new CodePeg[4];
     
     public Game (String idG, String dif, int puntos){
         this.id = idG;
@@ -38,6 +40,7 @@ public class Game {
         this.IA = null;
         this.turn = 0;
         this.output = null;
+        this.codeIni = null;
     }
     
     public Game (String idG, String dif){
@@ -48,6 +51,7 @@ public class Game {
         this.IA = null;
         this.turn = 0;
         this.output = null;
+        this.codeIni = null;
     }
     
     public Game () {
@@ -58,6 +62,7 @@ public class Game {
         this.IA = null;
         this.turn = 0;
         this.output = null;
+        this.codeIni = null;
     }
     
     public String getId() {
@@ -92,6 +97,41 @@ public class Game {
         
     }
     
+    private void SetCode(int i) {
+        
+        if (i == 1){
+            System.out.print("Introduce la combinación de colores separándolos con un "
+                    + "espacio. Ejemplo: 1-2-3-4" + "\n");
+            
+            Scanner input = new Scanner(System.in);
+            
+            String codIni = input.next();
+            
+            String casillas[] = codIni.split("-");
+            
+            for (int x = 0; x < 4; ++x){
+                
+                int n = Integer.parseInt(casillas[x]);
+                if (codeIni[x].colourValid(n)) {
+                    codeIni[x] = new CodePeg(n, x);
+                }
+            
+            }
+        }
+        else {
+            
+            Random r = new Random();
+            
+            for (int x = 0; x < 4; ++x) {
+                
+                codeIni[x] = new CodePeg(r.nextInt(9), x);
+                
+            }
+            
+        }
+        
+    }
+    
     public void Play(String ident, String userName, String dif, String mod, Jugador playerN, Jugador IAN) {
         
         if (CheckAvailability(ident, userName)){
@@ -114,12 +154,18 @@ public class Game {
                 String outputIA = null;
                 
                 if (mod == "Codemaker") {
-                    outputP = player.Jugar(mod);
-                    outputIA = IA.Jugar("Codebreaker");
+                    if (turn == 0) SetCode(1);
+                    else {
+                        outputP = player.Jugar(mod);
+                        outputIA = IA.Jugar("Codebreaker");
+                    }
                 }
                 else if (mod == "Codebreaker") {
-                    outputP = player.Jugar(mod);
-                    outputIA = IA.Jugar("Codemaker");
+                    if (turn == 0) SetCode(2);
+                    else {
+                        outputP = player.Jugar(mod);
+                        outputIA = IA.Jugar("Codemaker");
+                    }
                 }
                 else {
                     System.out.print("Esta modo de juego no esxiste" + "\n");
