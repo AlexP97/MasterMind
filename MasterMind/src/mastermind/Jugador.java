@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -96,6 +97,10 @@ public class Jugador {
     public void setRecord(int r) {
         if(r > this.record) 
             this.record = r;
+    }
+    
+    public ArrayList<Integer> jugar() { 
+            return null;
     }
     
   

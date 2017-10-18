@@ -6,12 +6,34 @@
 
 package mastermind;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * @author usuario
  */
 public class CodeBreaker extends Jugador {
-    public CodeBreaker(String n, String c) {
+    public CodeBreaker() {
        super();
+    }
+    
+    @Override
+    public ArrayList<Integer> jugar() {
+        ArrayList<Integer> linea;
+        linea = new ArrayList<>();
+        if(super.esIA()) {
+            
+        }
+        else {
+            Scanner input = new Scanner(System.in);
+            System.out.print("Introduce tu jugada poniendo cada ficha del 1 al 6 separada de un espacio:" + "\n");
+            String jugada = input.nextLine();
+            String fichas[] = jugada.split(" ");
+            for(int i = 0; i < fichas.length; i++) {
+                linea.add(Integer.parseInt(fichas[i]));
+            }
+        }
+        return linea;
     }
 }
