@@ -31,6 +31,8 @@ public class Game {
     int totalTurns;
     String[] output;
     CodePeg[] codeIni = new CodePeg[4];
+    CodeMaker codeM;
+    CodeBreaker codeB;
     
     public Game (String idG, String dif, int puntos){
         this.id = idG;
@@ -132,9 +134,9 @@ public class Game {
         
     }
     
-    public void Play(String ident, String userName, String dif, String mod, Jugador playerN, Jugador IAN) {
+    public void juega(Jugador playerN, String ident, String dif, String mod) {
         
-        if (CheckAvailability(ident, userName)){
+        if (CheckAvailability(ident, playerN.getName())){
             
             this.id = ident;
             if (dif == "Facil") this.totalTurns = 12;
@@ -146,40 +148,44 @@ public class Game {
             }
             this.difficulty = dif;
             this.player = playerN;
-            this.IA = IAN;
+            this.codeM = new CodeMaker();
+            this.codeB = new CodeBreaker();
             
             while (turn <= totalTurns){
                 
-                String outputP = null;
-                String outputIA = null;
+                output[turn] = "";
+                
+                ArrayList<Integer> outputM = null;
+                ArrayList<Integer> outputB = null;
                 
                 if (mod == "Codemaker") {
-                    if (turn == 0) SetCode(1);
-                    else {
-                        outputP = player.Jugar(mod);
-                        outputIA = IA.Jugar("Codebreaker");
-                    }
+                    outputB = codeB.jugar("IA");
+                    outputM = codeM.jugar("Player");
                 }
                 else if (mod == "Codebreaker") {
-                    if (turn == 0) SetCode(2);
-                    else {
-                        outputP = player.Jugar(mod);
-                        outputIA = IA.Jugar("Codemaker");
-                    }
+                    outputB = codeB.jugar("Player");
+                    outputM = codeM.jugar("IA");
                 }
                 else {
                     System.out.print("Esta modo de juego no esxiste" + "\n");
                     return;
                 }
                 
-                output[turn] = outputP + " " + outputIA;
+                for (int i = 0; i < outputB.size(); ++i) {
+                    output[turn] += outputB.get(i).toString();
+                }
                 
+                output[turn] += " ";
+                
+                for (int i = 0; i < outputM.size(); ++i) {
+                    output[turn] += outputM.get(i).toString();
+                }
+                                
                 for (int i = 0; i <= turn; ++i) {
                     
                     System.out.print(output[i] + "\n");
                     
                 }
-                
                 ++turn;
             }
             
@@ -189,9 +195,9 @@ public class Game {
         }
     }
     
-    public void LoadGame(String userName){
+    public void LoadGame(Jugador playerP){
         
-        File folder = new File("players/"+userName);
+        File folder = new File("players/"+playerP.getName());
         File[] listOfFiles = folder.listFiles();
 
         if (listOfFiles != null){
