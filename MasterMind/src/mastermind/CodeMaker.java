@@ -41,10 +41,10 @@ public class CodeMaker extends Jugador {
     }
     
     @Override
-    public ArrayList<Integer> jugar() {
+    public ArrayList<Integer> jugar(String s) {
         ArrayList<Integer> linea;
         linea = new ArrayList<>();
-        if(super.esIA()) {
+        if(s.equals("IA")) {
             
         }
         else {

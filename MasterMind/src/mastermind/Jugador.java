@@ -99,7 +99,7 @@ public class Jugador {
             this.record = r;
     }
     
-    public ArrayList<Integer> jugar() { 
+    public ArrayList<Integer> jugar(String s) { 
             return null;
     }
     
