@@ -34,7 +34,6 @@ public class MasterMind {
                         String usuario = input.nextLine();
                         System.out.print("Introduce la contraseña:" + "\n");
                         String contraseña = input.nextLine();
-                    
                         Boolean b = jugador.login(usuario,contraseña);
                         if(!b) estado = 0;
                     }
@@ -43,8 +42,6 @@ public class MasterMind {
                         String usuario = input.nextLine();
                         System.out.print("Introduce la contraseña:" + "\n");
                         String contraseña = input.nextLine();
-
-                        jugador = new Jugador();
                         Boolean b = jugador.register(usuario,contraseña);
                         if(!b) estado = 0;
                     }
