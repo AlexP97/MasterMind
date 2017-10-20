@@ -99,41 +99,6 @@ public class Game {
         
     }
     
-    private void SetCode(int i) {
-        
-        if (i == 1){
-            System.out.print("Introduce la combinación de colores separándolos con un "
-                    + "espacio. Ejemplo: 1-2-3-4" + "\n");
-            
-            Scanner input = new Scanner(System.in);
-            
-            String codIni = input.next();
-            
-            String casillas[] = codIni.split("-");
-            
-            for (int x = 0; x < 4; ++x){
-                
-                int n = Integer.parseInt(casillas[x]);
-                if (codeIni[x].colourValid(n)) {
-                    codeIni[x] = new CodePeg(n, x);
-                }
-            
-            }
-        }
-        else {
-            
-            Random r = new Random();
-            
-            for (int x = 0; x < 4; ++x) {
-                
-                codeIni[x] = new CodePeg(r.nextInt(9), x);
-                
-            }
-            
-        }
-        
-    }
-    
     public void juega(Jugador playerN, String ident, String dif, String mod) {
         
         if (CheckAvailability(ident, playerN.getName())){
