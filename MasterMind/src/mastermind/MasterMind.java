@@ -54,7 +54,6 @@ public class MasterMind {
                     }
                     break;
                 case 1: //MENU DE CREAR/CARGAR/VER RANKING
-                    estado = 0;
                     System.out.print("Escribe crear para jugar una partida nueva, cargar para jugar una partida ya empezada, ranking para ver los records de puntuación o salir para volver al menú anterior." + "\n");
                     String jugar = input.nextLine();
                     if(jugar.equals("crear")){
@@ -79,7 +78,6 @@ public class MasterMind {
                     else if (jugar.equals("salir")) estado = 0;
                     else{
                         System.out.print("Entrada no válida" + "\n");
-                        estado = 1;
                     }
                     break;
                 case 2:
