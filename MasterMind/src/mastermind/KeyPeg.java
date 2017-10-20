@@ -9,7 +9,7 @@ package mastermind;
  *
  * @author Usuario
  */
-public class KeyPeg extends Casilla {
+public final class KeyPeg extends Casilla {
     private final int colourKey;
     private final int position;
     
@@ -19,9 +19,11 @@ public class KeyPeg extends Casilla {
         this.colourKey = col;
         this.position = pos;
     }
+    @Override
     public boolean colourValid(int col){
         return (col == 0 || col == 1 || col == 2);
     }
+    @Override
     public boolean posValid(int pos){
         return (pos == 1 || pos == 2 || pos == 3 || pos == 4);
     }
