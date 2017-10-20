@@ -41,7 +41,7 @@ public class CodeMaker extends Jugador {
     }
     
     @Override
-    public ArrayList<Integer> jugar(String s) {
+    public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
         ArrayList<Integer> linea;
         linea = new ArrayList<>();
         if(s.equals("IA")) {
