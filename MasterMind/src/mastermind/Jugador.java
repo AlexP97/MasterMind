@@ -36,7 +36,7 @@ public class Jugador {
     
     public boolean register(String n, String c) throws IOException {
         File dir = new File("players/"+n);
-        boolean b = dir.mkdir();
+        boolean b = dir.mkdirs();
         if(b) {      
             System.out.println("Te has registrado correctamente");
             this.name = n;

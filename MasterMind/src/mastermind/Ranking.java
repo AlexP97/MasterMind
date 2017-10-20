@@ -6,8 +6,10 @@
 package mastermind;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,19 +21,26 @@ public class Ranking {
     private ArrayList<Pair> ranking;
     
     public Ranking() throws IOException{
+            File dir = new File("ranking");
+            dir.mkdir();
             File info = new File("ranking/info.txt");
-            if(info.exists()) {
+            ranking = new ArrayList<>();
+            if(info.exists() && info.length() != 0) {
                 String linea;
                 FileReader f = new FileReader("ranking/info.txt");
                 BufferedReader b = new BufferedReader(f);
                 linea = b.readLine();
                 b.close();
                 String palabra[] = linea.split(" ");
-                for(int i = 0; i < (ranking.size() * 2); i += 2){
+                for(int i = 0; i < palabra.length; i += 2){
                     Pair p = new Pair(palabra[i], Integer.parseInt(palabra[i+1]));
-                        ranking.add(i/2,p);
+                    ranking.add(i/2,p);
                 }
-            }    
+            }
+            else {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(info));
+                bw.close();
+            }   
     }
     
     public void muestraRanking(){
