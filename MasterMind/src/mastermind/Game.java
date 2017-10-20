@@ -25,10 +25,12 @@ public class Game {
     String id;
     String difficulty;
     int points;
+    String mode;
     Jugador player;
     Jugador IA;
     int turn;
     int totalTurns;
+    int puntos;
     String[] output;
     CodePeg[] codeIni = new CodePeg[4];
     CodeMaker codeM;
@@ -113,6 +115,7 @@ public class Game {
             }
             this.difficulty = dif;
             this.player = playerN;
+            this.mode = mod;
             this.codeM = new CodeMaker();
             this.codeB = new CodeBreaker();
             
@@ -197,6 +200,7 @@ public class Game {
                         
                         while (input.hasNextLine()) {
                             String line = input.nextLine();
+                            
                             System.out.println(line);
                         }
                         input.close();
@@ -215,29 +219,31 @@ public class Game {
         
     }
     
-    public void SaveGame(String idP, String userName, String dif, String mod, int puntos, int round, ArrayList<Casilla> codeIni, ArrayList<Round> rondAnt) {
+    public void SaveGame() {
         
         try {
             
-            FileWriter fileName = new FileWriter("players/"+userName+"/"+idP+".txt");
+            String userName = player.getName();
+            FileWriter fileName = new FileWriter("players/"+userName+"/"+id+".txt");
             PrintWriter pw = new PrintWriter(fileName);
             
-            pw.println(idP);
+            pw.println(id);
             pw.println(userName);
-            pw.println(dif);
-            pw.println(mod);
+            pw.println(difficulty);
+            pw.println(mode);
             pw.println(puntos);
-            pw.println(round);
+            pw.println(turn);
+            pw.println(totalTurns);
             
-            for (int i = 0; i < codeIni.size(); ++i) {
+            for (int i = 0; i < 4; ++i) {
                 
-                
+                pw.println(codeIni[i].toString());
                 
             }
             
-            for (int i = 0; i < rondAnt.size(); ++i) {
+            for (int i = 0; i < turn; ++i) {
                 
-                
+                pw.println(output[i]);
                 
             }
             
