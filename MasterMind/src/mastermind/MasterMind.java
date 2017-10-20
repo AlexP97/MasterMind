@@ -59,7 +59,7 @@ public class MasterMind {
                     if(jugar.equals("crear")){
                         System.out.print("Escribe el id de la partida" + "\n");
                         String id = input.nextLine();
-                        System.out.print("Escribe la dificultad de la partida" + "\n");
+                        System.out.print("Escribe la dificultad de la partida (facil, medio o dificil)" + "\n");
                         String dif = input.nextLine();
                         System.out.print("Escribe el modo de la partida (codebreaker o codemaker)" + "\n");
                         String mod = input.nextLine();
