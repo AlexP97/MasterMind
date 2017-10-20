@@ -45,7 +45,18 @@ public class CodeMaker extends Jugador {
         ArrayList<Integer> linea;
         linea = new ArrayList<>();
         if(s.equals("IA")) {
-            
+            for(int i = 0; i < tirada.size(); i++){
+                for(int k = 0; k < solucio.size(); k++) {
+                    if(tirada.get(i).getColour() == solucio.get(k).getColour()) {
+                        if(tirada.get(i).getPosition() == solucio.get(k).getPosition()) 
+                            linea.add(2);
+                        else 
+                            linea.add(1);
+                    }
+                }        
+            }
+            while(linea.size() < 4)
+                linea.add(0);
         }
         else {
             Scanner input = new Scanner(System.in);
