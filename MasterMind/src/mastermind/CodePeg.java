@@ -20,7 +20,7 @@ public final class CodePeg extends Casilla {
         this.position = pos;
     }
     @Override
-    public boolean colourValid(int col){
+    public boolean colourValid(int col){    //1 naranja, 2 rojo, 3 azul, 4 verde, 5 amarillo, 6 lila
         return (col == 1 || col == 2 || col == 3 || col == 4 || col == 5 || col == 6);
     }
     @Override

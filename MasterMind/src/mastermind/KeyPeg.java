@@ -20,7 +20,7 @@ public final class KeyPeg extends Casilla {
         this.position = pos;
     }
     @Override
-    public boolean colourValid(int col){
+    public boolean colourValid(int col){    //0 nada, 1 blanco (color bien posición mal), 2 negro (color y posición bien)
         return (col == 0 || col == 1 || col == 2);
     }
     @Override
