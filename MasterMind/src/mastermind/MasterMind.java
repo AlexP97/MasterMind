@@ -18,12 +18,11 @@ public class MasterMind {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        
+        Jugador jugador = new Jugador();
         int estado = 0;
         while(true){           
             System.out.print("Bienvenido a MasterMind." + "\n");
             Scanner input = new Scanner(System.in);   
-            Jugador jugador = new Jugador();
             switch (estado){
                 case 0: //MENU DE INICIO/REGISTRO
                     estado = 1;
