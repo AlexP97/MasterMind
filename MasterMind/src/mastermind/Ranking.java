@@ -53,11 +53,11 @@ public class Ranking {
         }
     }
     
-    public void actualizaRanking(String nombre, int puntos){
+    public void actualizaRanking(String nombre, int puntos) throws IOException{
         Pair p = new Pair(nombre,puntos);
         Pair aux;
         if(ranking.size() < 10) {
-            int i = 0;
+            int i;
             boolean b = false;
             for(i= 0; i < ranking.size() && !b; i++)
                 b = ranking.get(i).getRight() < puntos;
@@ -69,12 +69,13 @@ public class Ranking {
                     p = new Pair(aux);
                 }
             }
-            
             ranking.add(p);
         }
         else{
-            for(int i = 0; i < ranking.size(); i++){
+            boolean b = false;
+            for(int i = 0; i < ranking.size() && !b; i++){
                 if(ranking.get(i).getRight() < puntos){
+                    b = true;
                     for(int j = i; j < ranking.size(); j++) {
                         aux = new Pair(ranking.get(j));
                         ranking.remove(j);
@@ -82,10 +83,22 @@ public class Ranking {
                         p = new Pair(aux);
                     }
                     System.out.print("¡Te has colocado en " + i+1 + "a posición!" + "\n");
-                    return;
                 }
             }
-            System.out.print("No has entrado en el ranking" + "\n");
+            if(!b) {
+                System.out.print("No has entrado en el ranking" + "\n");
+                return;
+            }
+            
         }
+        File info = new File("ranking/info.txt");
+        BufferedWriter bw = new BufferedWriter(new FileWriter(info));
+        for(int i = 0; i < ranking.size(); i++) {
+            if(i == 0)
+                bw.write(ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
+            else
+                bw.write(" "+ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
+        }
+        bw.close();    
     }
 }

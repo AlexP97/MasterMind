@@ -30,10 +30,6 @@ public class Jugador {
       
     }
     
-    public String getName() {
-        return this.name;
-    }
-    
     public boolean register(String n, String c) throws IOException {
         File dir = new File("players/"+n);
         boolean b = dir.mkdirs();
@@ -82,6 +78,10 @@ public class Jugador {
         }
     }
     
+    public String getName() {
+        return this.name;
+    }
+    
     public String getPassword() {
         return this.password;
     }
@@ -94,9 +94,14 @@ public class Jugador {
         return this.IA;
     }
     
-    public void setRecord(int r) {
-        if(r > this.record) 
+    public void setRecord(int r) throws IOException {
+        if(r > this.record) {
             this.record = r;
+            File info = new File("players/"+this.name+"/info.txt");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
+            bw.write(this.name+" "+this.password+" "+String.valueOf(r)+" "+this.IA);
+            bw.close();
+        }
     }
     
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) { 

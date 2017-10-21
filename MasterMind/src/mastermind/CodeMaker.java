@@ -19,10 +19,10 @@ public class CodeMaker extends Jugador {
        super();
     }
     
-    public ArrayList<Integer> dona_patro() {
+    public ArrayList<Integer> dona_patro(String s) {
         ArrayList<Integer> linea;
         linea = new ArrayList<>();
-        if(super.esIA()) {
+        if(s.equals("IA")) {
             for(int i = 0; i < 4; i++) {
                 int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
                 linea.add(randomNum);
