@@ -32,7 +32,9 @@ public class Game {
     int totalTurns;
     int puntos;
     String[] output;
-    CodePeg[] codeIni;
+    ArrayList<CodePeg> codeIni;
+    ArrayList<CodePeg> codeBAnt;
+    ArrayList<KeyPeg> codeMAnt;
     CodeMaker codeM;
     CodeBreaker codeB;
     
@@ -81,11 +83,35 @@ public class Game {
         return this.points;
     }
     
+    private ArrayList<CodePeg> conversorCode (ArrayList<Integer> arrayList) {
+        
+        ArrayList<CodePeg> lista = new ArrayList<CodePeg>();
+        for (int i = 0; i < arrayList.size(); ++i) {
+            
+            CodePeg codeP = new CodePeg(arrayList.get(i), i+1);
+            lista.add(codeP);
+            
+        }
+        return lista;
+    }
+    
+    private ArrayList<KeyPeg> conversorKey (ArrayList<Integer> arrayList) {
+        
+        ArrayList<KeyPeg> lista = new ArrayList<KeyPeg>();
+        for (int i = 0; i < arrayList.size(); ++i) {
+            
+            KeyPeg codeP = new KeyPeg(arrayList.get(i), i+1);
+            lista.add(codeP);
+            
+        }
+        return lista;
+    }
+    
     private boolean CheckAvailability(String ident, String userName) {
         
         boolean available = true;
         
-        File folder = new File("players/"+userName);
+        File folder = new File("players/"+userName+"/games/");
         File[] listOfFiles = folder.listFiles();
         
         if (listOfFiles != null){
@@ -117,7 +143,7 @@ public class Game {
             
             for (int i = 0; i < 4; ++i) {
                 
-                pw.println(codeIni[i].getColour());
+                pw.println(codeIni.get(i));
                 
             }
             
@@ -156,7 +182,6 @@ public class Game {
         
         if (CheckAvailability(ident, playerN.getName())){
             
-            this.codeIni = new CodePeg[4];
             this.id = ident;
             if (dif.equals("facil")) this.totalTurns = 12;
             else if (dif.equals("medio")) this.totalTurns = 10;
@@ -171,10 +196,13 @@ public class Game {
             this.mode = mod;
             this.codeM = new CodeMaker();
             this.codeB = new CodeBreaker();
-            this.codeIni[0] = new CodePeg(2,1);
-            this.codeIni[1] = new CodePeg(2,2);
-            this.codeIni[2] = new CodePeg(2,3);
-            this.codeIni[3] = new CodePeg(2,4);
+            
+            if (mod.equals("codemaker")) this.codeIni = conversorCode(codeM.dona_patro("Player"));
+            else if (mod.equals("codebreaker")) this.codeIni = conversorCode(codeM.dona_patro("IA"));
+            else {
+                    System.out.print("Esta modo de juego no existe" + "\n");
+                    return;
+            }
             
             while (turn <= totalTurns){
                 
@@ -182,38 +210,39 @@ public class Game {
                 
                 boolean acierto = true;
                 
-                ArrayList<Integer> outputM = null;
-                ArrayList<Integer> outputB = null;
+                ArrayList<KeyPeg> outputM = null;
+                ArrayList<CodePeg> outputB = null;
                 
                 if (mod.equals("codemaker")) {
-                    outputB = codeB.jugar("IA");
-                    outputM = codeM.jugar("Player");
+                    outputB = conversorCode(codeB.jugar("IA", codeBAnt, codeMAnt));
+                    outputM = conversorKey(codeM.jugar("Player", outputB, codeIni));
                 }
                 else if (mod.equals("codebreaker")) {
-                    outputB = codeB.jugar("Player");
-                    outputM = codeM.jugar("IA");
+                    outputB = conversorCode(codeB.jugar("Player", codeBAnt, codeMAnt));
+                    outputM = conversorKey(codeM.jugar("IA", outputB, codeIni));
                 }
-                else {
-                    System.out.print("Esta modo de juego no existe" + "\n");
-                    return;
-                }
+                
+                codeBAnt = outputB;
+                codeMAnt = outputM;
                 
                 String linea = "";
                 
                 for (int i = 0; i < outputB.size(); ++i) {
-                    if (outputB.get(i) == -1) SaveGame(); 
+                    int color = outputB.get(i).getColour();
+                    if (color == -1) SaveGame(); 
                     else {
-                        linea += outputB.get(i).toString() + " ";
+                        linea += Integer.toString(color) + " ";
                     }
                 }
                 
                 linea += " ";
                 
                 for (int i = 0; i < outputM.size(); ++i) {
-                    if (outputM.get(i) == -1) SaveGame(); 
+                    int color = outputM.get(i).getColour();
+                    if (color == -1) SaveGame(); 
                     else {
-                        if (outputM.get(i) != 1) acierto = false;
-                        linea += outputM.get(i).toString();
+                        if (color != 1) acierto = false;
+                        linea += Integer.toString(color);
                     }
                 }
                 
@@ -273,8 +302,6 @@ public class Game {
                     else {
                         input = new Scanner(listOfFiles[num-1]);
                         
-                        this.codeIni = new CodePeg[4];
-                        
                         this.player = playerP;
                         System.out.print("Player cargado" + "\n");
                         
@@ -307,7 +334,8 @@ public class Game {
                         for (int i = 0; i < 4; ++i) {
 
                             line = input.nextLine(); 
-                            codeIni[i] = new CodePeg(Integer.parseInt(line), i+1);
+                            
+                            codeIni.add(new CodePeg(Integer.parseInt(line), i+1));
 
                         }
                         System.out.print("Codeini cargado" + "\n");

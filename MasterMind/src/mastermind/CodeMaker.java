@@ -40,7 +40,6 @@ public class CodeMaker extends Jugador {
         return linea;
     }
     
-    @Override
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
         ArrayList<Integer> linea;
         linea = new ArrayList<>();
