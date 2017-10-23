@@ -290,12 +290,14 @@ public class Game {
             while (!cargado){            
                 try {
                     
-                    System.out.print("Introduce el número de la partida." + "\n");
+                    System.out.print("Introduce el número de la partida o -1 para salir." + "\n");
 
                     Scanner input = new Scanner(System.in);
 
                     int num = Integer.parseInt(input.nextLine());
 
+                    if (num == -1) return;
+                    
                     if (num - 1 >= listOfFiles.length) {
                         System.out.print("Esta partida no existe. Introduce otro número." + "\n");
                     }
