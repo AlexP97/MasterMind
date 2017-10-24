@@ -52,7 +52,7 @@ public class Game {
     public Game (String idG, String dif){
         this.id = idG;
         this.difficulty = dif;
-        this.points = 0;
+        this.points = 100;
         this.player = null;
         this.IA = null;
         this.turn = 0;
@@ -63,7 +63,7 @@ public class Game {
     public Game () {
         this.id = null;
         this.difficulty = null;
-        this.points = 0;
+        this.points = 100;
         this.player = null;
         this.IA = null;
         this.turn = 0;
@@ -263,6 +263,7 @@ public class Game {
                     return;
                 }
                 ++turn;
+                this.points -= 10;
             }
             
             finishGame(false,null,0);
