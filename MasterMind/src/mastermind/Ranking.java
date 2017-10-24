@@ -8,10 +8,13 @@ package mastermind;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +23,8 @@ import java.util.ArrayList;
 public class Ranking {
     private ArrayList<Pair> ranking;
     
-    public Ranking() throws IOException{
+    public Ranking() {
+        try {
             File dir = new File("ranking");
             dir.mkdir();
             File info = new File("ranking/info.txt");
@@ -40,7 +44,10 @@ public class Ranking {
             else {
                 BufferedWriter bw = new BufferedWriter(new FileWriter(info));
                 bw.close();
-            }   
+            } 
+        } catch (IOException ex) {
+                System.out.println("Error creando el ranking");
+        }
     }
     
     public void muestraRanking(){
@@ -53,7 +60,7 @@ public class Ranking {
         }
     }
     
-    public void actualizaRanking(String nombre, int puntos) throws IOException{
+    public void actualizaRanking(String nombre, int puntos){
         Pair p = new Pair(nombre,puntos);
         Pair aux;
         if(ranking.size() < 10) {
@@ -91,14 +98,18 @@ public class Ranking {
             }
             
         }
-        File info = new File("ranking/info.txt");
-        BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-        for(int i = 0; i < ranking.size(); i++) {
-            if(i == 0)
-                bw.write(ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
-            else
-                bw.write(" "+ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
+        try{
+            File info = new File("ranking/info.txt");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
+            for(int i = 0; i < ranking.size(); i++) {
+                if(i == 0)
+                    bw.write(ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
+                else
+                    bw.write(" "+ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
         }
-        bw.close();    
+        bw.close();
+        } catch (IOException ex) {
+            System.out.println("Error actualiizando el ranking");
+        }    
     }
 }
