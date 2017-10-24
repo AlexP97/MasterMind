@@ -166,11 +166,15 @@ public class Game {
         
     }
     
-    public void finishGame(boolean ganado) {
+    public void finishGame(boolean ganado, String name, int points) {
         
         if (ganado) {
             if (mode.equals("codemaker")) System.out.print("¡La IA ha acertado la combinación!" + "\n");
-            else System.out.print("¡Has ganado la partida!" + "\n");
+            else{
+                Ranking ranking = new Ranking();
+                ranking.actualizaRanking(name,points);
+                System.out.print("¡Has ganado la partida!" + "\n");
+            }
         }
         else {
             System.out.print("Game Over..." + "\n");
@@ -200,7 +204,7 @@ public class Game {
             if (mod.equals("codemaker")) this.codeIni = conversorCode(codeM.dona_patro("Player"));
             else if (mod.equals("codebreaker")) this.codeIni = conversorCode(codeM.dona_patro("IA"));
             else {
-                    System.out.print("Esta modo de juego no existe" + "\n");
+                    System.out.print("Este modo de juego no existe" + "\n");
                     return;
             }
             
@@ -255,13 +259,13 @@ public class Game {
                 }
                 
                 if (acierto) {
-                    finishGame(true);
+                    finishGame(true,player.getName(),points);
                     return;
                 }
                 ++turn;
             }
             
-            finishGame(false);
+            finishGame(false,null,0);
             
         }
         else {
