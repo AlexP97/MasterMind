@@ -98,7 +98,7 @@ public class Game {
     private ArrayList<KeyPeg> conversorKey (ArrayList<Integer> arrayList) {
         
         ArrayList<KeyPeg> lista = new ArrayList<KeyPeg>();
-        for (int i = 0; i < arrayList.size(); ++i) {
+        for (int i = 0; i < 4; ++i) {
             
             KeyPeg codeP = new KeyPeg(arrayList.get(i), i+1);
             lista.add(codeP);
@@ -166,15 +166,11 @@ public class Game {
         
     }
     
-    public void finishGame(boolean ganado, String name, int points) {
+    public void finishGame(boolean ganado) {
         
         if (ganado) {
             if (mode.equals("codemaker")) System.out.print("¡La IA ha acertado la combinación!" + "\n");
-            else{
-                Ranking ranking = new Ranking();
-                ranking.actualizaRanking(name,points);
-                System.out.print("¡Has ganado la partida!" + "\n");
-            }
+            else System.out.print("¡Has ganado la partida!" + "\n");
         }
         else {
             System.out.print("Game Over..." + "\n");
@@ -194,17 +190,19 @@ public class Game {
                 System.out.print("Esta dificultad no existe" + "\n");
                 return;
             }
-            if (output == null) this.output = new String[totalTurns];
+            if (output == null) this.output = new String[totalTurns+1];
+            this.output[0] = "--------------";
             this.difficulty = dif;
             this.player = playerN;
             this.mode = mod;
             this.codeM = new CodeMaker();
             this.codeB = new CodeBreaker();
+            this.turn = 1;
             
             if (mod.equals("codemaker")) this.codeIni = conversorCode(codeM.dona_patro("Player"));
             else if (mod.equals("codebreaker")) this.codeIni = conversorCode(codeM.dona_patro("IA"));
             else {
-                    System.out.print("Este modo de juego no existe" + "\n");
+                    System.out.print("Esta modo de juego no existe" + "\n");
                     return;
             }
             
@@ -245,7 +243,7 @@ public class Game {
                     int color = outputM.get(i).getColour();
                     if (color == -1) SaveGame(); 
                     else {
-                        if (color != 1) acierto = false;
+                        if (color != 2) acierto = false;
                         linea += Integer.toString(color);
                     }
                 }
@@ -259,14 +257,14 @@ public class Game {
                 }
                 
                 if (acierto) {
-                    finishGame(true,player.getName(),points);
+                    finishGame(true);
                     return;
                 }
                 ++turn;
                 this.points -= 10;
             }
             
-            finishGame(false,null,0);
+            finishGame(false);
             
         }
         else {
@@ -336,7 +334,7 @@ public class Game {
                         this.totalTurns = Integer.parseInt(line);
                         System.out.print("totalturns cargado" + "\n");
                         
-                        this.output = new String[totalTurns];
+                        this.output = new String[totalTurns+1];
                                                                
                         for (int i = 0; i < 4; ++i) {
 
@@ -347,7 +345,7 @@ public class Game {
                         }
                         System.out.print("Codeini cargado" + "\n");
 
-                        for (int i = 0; i < turn; ++i) {
+                        for (int i = 0; i <= turn; ++i) {
 
                             line = input.nextLine();
                             output[i] = line;
