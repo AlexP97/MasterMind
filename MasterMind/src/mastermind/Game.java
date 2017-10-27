@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -52,7 +49,7 @@ public class Game {
     public Game (String idG, String dif){
         this.id = idG;
         this.difficulty = dif;
-        this.points = 100;
+        this.points = 150;
         this.player = null;
         this.IA = null;
         this.turn = 0;
@@ -63,7 +60,7 @@ public class Game {
     public Game () {
         this.id = null;
         this.difficulty = null;
-        this.points = 100;
+        this.points = 150;
         this.player = null;
         this.IA = null;
         this.turn = 0;
@@ -261,7 +258,7 @@ public class Game {
                     return;
                 }
                 ++turn;
-                this.points -= 10;
+                baja_Puntuacion();
             }
             
             finishGame(false);
@@ -270,6 +267,12 @@ public class Game {
         else {
             System.out.print("No se ha podido crear la partida. Este id ya está en uso." + "\n");
         }
+    }
+    
+    public void baja_Puntuacion(){
+        if (this.difficulty.equals("facil")) this.points -= 15;
+        else if (this.difficulty.equals("medio")) this.points -= 10;
+        else this.points -= 5;
     }
     
     public void LoadGame(Jugador playerP){
