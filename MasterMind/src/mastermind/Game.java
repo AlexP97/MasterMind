@@ -233,11 +233,11 @@ public class Game {
                 this.codeB = new CodeBreaker();
                 this.turn = 1;
 
-                if (mod.equals("codemaker")) {
+                if (mode.equals("codemaker")) {
                     //codeB.setIA();
                     this.codeIni = conversorCode(codeM.dona_patro("Player"));
                 }
-                else if (mod.equals("codebreaker")) {
+                else if (mode.equals("codebreaker")) {
                     //codeM.setIA();
                     this.codeIni = conversorCode(codeM.dona_patro("IA"));
                 }
@@ -251,10 +251,10 @@ public class Game {
                 this.codeM = new CodeMaker();
                 this.codeB = new CodeBreaker();
 
-                if (mod.equals("codemaker")) {
+                if (mode.equals("codemaker")) {
                     //codeB.setIA();
                 }
-                else if (mod.equals("codebreaker")) {
+                else if (mode.equals("codebreaker")) {
                     //codeM.setIA();
                 }    
             }
@@ -266,11 +266,11 @@ public class Game {
                 ArrayList<KeyPeg> outputM = null;
                 ArrayList<CodePeg> outputB = null;
                 
-                if (mod.equals("codemaker")) {
+                if (mode.equals("codemaker")) {
                     outputB = conversorCode(codeB.jugar("IA", codeBAnt, codeMAnt));
                     outputM = conversorKey(codeM.jugar("Player", outputB, codeIni));
                 }
-                else if (mod.equals("codebreaker")) {
+                else if (mode.equals("codebreaker")) {
                     outputB = conversorCode(codeB.jugar("Player", codeBAnt, codeMAnt));
                     outputM = conversorKey(codeM.jugar("IA", outputB, codeIni));
                 }
@@ -414,7 +414,7 @@ public class Game {
                         }
                         System.out.print("output mostrado" + "\n");
                         
-                        juega(null, null, null, null);
+                        juega(player, id, difficulty, mode);
                     }
 
                 } catch (Exception ex) {
