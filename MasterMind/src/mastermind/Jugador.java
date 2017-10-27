@@ -30,7 +30,7 @@ public class Jugador {
       
     }
     
-    public boolean register(String n, String c) throws IOException {
+    public boolean register(String n, String c) {
         File dir = new File("players/"+n);
         boolean b = dir.mkdirs();
         if(b) {      
@@ -42,9 +42,14 @@ public class Jugador {
             File dir2 = new File("players/"+n+"/games");
             dir2.mkdir();
             File info = new File("players/"+n+"/info.txt");
-            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-            bw.write(n+" "+c+" 0 true");
-            bw.close();
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(info));
+                bw.write(n+" "+c+" 0 true");
+                bw.close();
+            }
+            catch(IOException e) {
+                
+            }
             return true;
         }
         else {
