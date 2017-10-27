@@ -28,7 +28,6 @@ public class Game {
     Jugador IA;
     int turn;
     int totalTurns;
-    int puntos;
     String[] output;
     ArrayList<CodePeg> codeIni;
     ArrayList<CodePeg> codeBAnt;
@@ -159,7 +158,7 @@ public class Game {
             pw.println(id);
             pw.println(difficulty);
             pw.println(mode);
-            pw.println(puntos);
+            pw.println(points);
             pw.println(turn);
             pw.println(totalTurns);
             
@@ -194,9 +193,9 @@ public class Game {
         if (ganado) {
             if (mode.equals("codemaker")) System.out.print("¡La IA ha acertado la combinación!" + "\n");
             else {
-                System.out.print("¡Has ganado la partida!" + "\n" + "Tu puntuación es: "+ this.puntos + "\n");
+                System.out.print("¡Has ganado la partida!" + "\n" + "Tu puntuación es: "+ points + "\n");
                 Ranking ranking = new Ranking();
-                ranking.actualizaRanking(player.getName(), puntos);
+                ranking.actualizaRanking(player.getName(), points);
             }
         }
         else {
@@ -206,7 +205,7 @@ public class Game {
     }
     
     public void baja_Puntuacion(){
-        if (this.difficulty.equals("facil")) this.points -= 15;
+        if (this.difficulty.equals("facil")) points -= 15;
         else if (this.difficulty.equals("medio")) this.points -= 10;
         else this.points -= 5;
     }
@@ -229,6 +228,7 @@ public class Game {
                 this.difficulty = dif;
                 this.player = playerN;
                 this.mode = mod;
+                this.points = 150;
                 this.codeM = new CodeMaker();
                 this.codeB = new CodeBreaker();
                 this.turn = 1;
@@ -245,7 +245,9 @@ public class Game {
                         System.out.print("Esta modo de juego no existe" + "\n");
                         return;
                 }
-            
+                System.out.print("CodeIni: ");
+                for (int d = 0; d < 4; d++) System.out.print(codeIni.get(d).getColour() + " ");
+                System.out.print("\n");
             }else {
                         
                 this.codeM = new CodeMaker();
@@ -370,7 +372,7 @@ public class Game {
                         System.out.print("mode cargado" + "\n");
                         
                         line = input.nextLine();
-                        this.puntos = Integer.parseInt(line);
+                        this.points = Integer.parseInt(line);
                         System.out.print("Puntos cargado" + "\n");
                         
                         line = input.nextLine();
