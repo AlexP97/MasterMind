@@ -24,9 +24,7 @@ public class CodeBreaker extends Jugador {
             else {
                 for(int j = 1; j <= 6; j++) {
                     aux.set(i, j);
-                    conjunt(i+1, aux);
-                   
-                        
+                    conjunt(i+1, aux);      
                 }
             }
     }

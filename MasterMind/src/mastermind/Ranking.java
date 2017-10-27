@@ -66,13 +66,13 @@ public class Ranking {
         if(ranking.size() < 10) {
             int i;
             boolean b = false;
-            for(i= 0; i < ranking.size() && !b; i++)
+            for(i= 0; i < ranking.size() && !b; i++) {
                 b = ranking.get(i).getRight() < puntos;
+            }
             if(b) {
-                for(int j = i; j < ranking.size(); j++) {
+                for(int j = i-1; j < ranking.size(); j++) {
                     aux = new Pair(ranking.get(j));
-                    ranking.remove(j);
-                    ranking.add(j,p);
+                    ranking.set(j,p);
                     p = new Pair(aux);
                 }
             }
@@ -85,8 +85,7 @@ public class Ranking {
                     b = true;
                     for(int j = i; j < ranking.size(); j++) {
                         aux = new Pair(ranking.get(j));
-                        ranking.remove(j);
-                        ranking.add(j,p);
+                        ranking.set(j,p);
                         p = new Pair(aux);
                     }
                     System.out.print("¡Te has colocado en " + i+1 + "a posición!" + "\n");
@@ -98,6 +97,7 @@ public class Ranking {
             }
             
         }
+        System.out.println(ranking.get(0).getRight());
         try{
             File info = new File("ranking/info.txt");
             BufferedWriter bw = new BufferedWriter(new FileWriter(info));
