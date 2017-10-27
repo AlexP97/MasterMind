@@ -16,23 +16,28 @@ import java.util.Set;
  */
 public class CodeBreaker extends Jugador {
     Set<ArrayList<Integer> > S;
+    
+    public void conjunt(int i, ArrayList<Integer> aux) {
+            if(i == 4) {
+                    S.add(aux);
+            }
+            else {
+                for(int j = 1; j <= 6; j++) {
+                    aux.set(i, j);
+                    conjunt(i+1, aux);
+                   
+                        
+                }
+            }
+    }
+    
     public CodeBreaker() {
         super();
         if(this.esIA()){
-            ArrayList<Integer> aux = new ArrayList<Integer>();
-            for(int a = 1; a < 7; a++){
-                for(int b = 1; b < 7; b++){
-                    for(int c = 1; c < 7; c++){
-                        for(int d = 1; d < 7; d++){
-                            aux.add(a);
-                            aux.add(b);
-                            aux.add(c);
-                            aux.add(d);
-                            this.S.add(aux);
-                        }
-                    }
-                }
-            }
+            ArrayList<Integer> aux = new ArrayList<>();
+            for(int i = 0; i < 4; i++)
+                aux.add(1);
+            conjunt(0,aux);
         }
     }
     
