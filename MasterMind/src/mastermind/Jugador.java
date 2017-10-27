@@ -93,6 +93,10 @@ public class Jugador {
         return this.record;
     }
     
+    public void setIA() {
+        this.IA = true;
+    }
+    
     public boolean esIA() {
         return this.IA;
     }
