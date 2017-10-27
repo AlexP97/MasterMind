@@ -9,11 +9,9 @@ package mastermind;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 
 /**
@@ -48,7 +46,7 @@ public class Jugador {
                 bw.close();
             }
             catch(IOException e) {
-                
+                System.out.println("Error en el registro");
             }
             return true;
         }
@@ -58,7 +56,7 @@ public class Jugador {
         }
     }
     
-    public boolean login(String n, String c) throws IOException {
+    public boolean login(String n, String c) {
         try{
             String linea;
             FileReader f = new FileReader("players/"+n+"/info.txt");
@@ -77,7 +75,7 @@ public class Jugador {
             System.out.println("Has iniciado sesión correctamente");
             return true;
         }
-        catch(FileNotFoundException ex) {
+        catch(IOException ex) {
             System.out.println("El usuario introducido es incorrecto");
             return false;
         }
@@ -99,13 +97,18 @@ public class Jugador {
         return this.IA;
     }
     
-    public void setRecord(int r) throws IOException {
+    public void setRecord(int r) {
         if(r > this.record) {
             this.record = r;
             File info = new File("players/"+this.name+"/info.txt");
-            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-            bw.write(this.name+" "+this.password+" "+String.valueOf(r)+" "+this.IA);
-            bw.close();
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(info));
+                bw.write(this.name+" "+this.password+" "+String.valueOf(r)+" "+this.IA);
+                bw.close();
+            }
+            catch(IOException e) {
+                System.out.println("Error al agregar record");
+            }
         }
     }
     
