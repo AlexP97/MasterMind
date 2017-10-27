@@ -34,6 +34,7 @@ public class Game {
     ArrayList<KeyPeg> codeMAnt;
     CodeMaker codeM;
     CodeBreaker codeB;
+    boolean gameSaved;
     
     public Game (String idG, String dif, int puntos){
         this.id = idG;
@@ -44,6 +45,7 @@ public class Game {
         this.turn = 0;
         this.output = null;
         this.codeIni = null;
+        this.gameSaved = false;
     }
     
     public Game (String idG, String dif){
@@ -55,6 +57,7 @@ public class Game {
         this.turn = 0;
         this.output = null;
         this.codeIni = null;
+        this.gameSaved = false;
     }
     
     public Game () {
@@ -66,6 +69,7 @@ public class Game {
         this.turn = 0;
         this.output = null;
         this.codeIni = null;
+        this.gameSaved = false;
     }
     
     public String getId() {
@@ -85,8 +89,14 @@ public class Game {
         ArrayList<CodePeg> lista = new ArrayList<CodePeg>();
         for (int i = 0; i < arrayList.size(); ++i) {
             
-            CodePeg codeP = new CodePeg(arrayList.get(i), i+1);
-            lista.add(codeP);
+            if (arrayList.get(i) != -1) {
+                CodePeg codeP = new CodePeg(arrayList.get(i), i+1);
+                lista.add(codeP);
+            }
+            else {
+                SaveGame();
+                break;
+            }
             
         }
         return lista;
@@ -97,8 +107,14 @@ public class Game {
         ArrayList<KeyPeg> lista = new ArrayList<KeyPeg>();
         for (int i = 0; i < 4; ++i) {
             
-            KeyPeg codeP = new KeyPeg(arrayList.get(i), i+1);
-            lista.add(codeP);
+            if (arrayList.get(i) != -1) {
+                KeyPeg codeP = new KeyPeg(arrayList.get(i), i+1);
+                lista.add(codeP);
+            }
+            else {
+                SaveGame();
+                break;
+            }
             
         }
         return lista;
@@ -140,7 +156,7 @@ public class Game {
             
             for (int i = 0; i < 4; ++i) {
                 
-                pw.println(codeIni.get(i));
+                pw.println(codeIni.get(i).getColour());
                 
             }
             
@@ -153,6 +169,7 @@ public class Game {
             pw.close();
             
             out.println("Partida guardada." + "\n");
+            this.gameSaved = true;
             
         } catch (IOException ex) {
             
@@ -167,12 +184,22 @@ public class Game {
         
         if (ganado) {
             if (mode.equals("codemaker")) System.out.print("¡La IA ha acertado la combinación!" + "\n");
-            else System.out.print("¡Has ganado la partida!" + "\n");
+            else {
+                System.out.print("¡Has ganado la partida!" + "\n" + "Tu puntuación es: "+ this.puntos + "\n");
+                Ranking ranking = new Ranking();
+                ranking.actualizaRanking(player.getName(), puntos);
+            }
         }
         else {
             System.out.print("Game Over..." + "\n");
         }
         
+    }
+    
+    public void baja_Puntuacion(){
+        if (this.difficulty.equals("facil")) this.points -= 15;
+        else if (this.difficulty.equals("medio")) this.points -= 10;
+        else this.points -= 5;
     }
     
     public void juega(Jugador playerN, String ident, String dif, String mod) {
@@ -221,6 +248,8 @@ public class Game {
                     outputM = conversorKey(codeM.jugar("IA", outputB, codeIni));
                 }
                 
+                if (this.gameSaved) return;
+                
                 codeBAnt = outputB;
                 codeMAnt = outputM;
                 
@@ -228,21 +257,15 @@ public class Game {
                 
                 for (int i = 0; i < outputB.size(); ++i) {
                     int color = outputB.get(i).getColour();
-                    if (color == -1) SaveGame(); 
-                    else {
-                        linea += Integer.toString(color) + " ";
-                    }
+                    linea += Integer.toString(color) + " ";
                 }
                 
                 linea += " ";
                 
                 for (int i = 0; i < outputM.size(); ++i) {
                     int color = outputM.get(i).getColour();
-                    if (color == -1) SaveGame(); 
-                    else {
-                        if (color != 2) acierto = false;
-                        linea += Integer.toString(color);
-                    }
+                    if (color != 2) acierto = false;
+                    linea += Integer.toString(color);
                 }
                 
                 output[turn] = linea;
@@ -269,12 +292,6 @@ public class Game {
         }
     }
     
-    public void baja_Puntuacion(){
-        if (this.difficulty.equals("facil")) this.points -= 15;
-        else if (this.difficulty.equals("medio")) this.points -= 10;
-        else this.points -= 5;
-    }
-    
     public void LoadGame(Jugador playerP){
         
         File folder = new File("players/"+playerP.getName()+"/games/");
@@ -296,7 +313,7 @@ public class Game {
             while (!cargado){            
                 try {
                     
-                    System.out.print("Introduce el número de la partida o -1 para salir." + "\n");
+                    System.out.print("Introduce el n�mero de la partida o -1 para salir." + "\n");
 
                     Scanner input = new Scanner(System.in);
 
@@ -305,7 +322,7 @@ public class Game {
                     if (num == -1) return;
                     
                     if (num - 1 >= listOfFiles.length) {
-                        System.out.print("Esta partida no existe. Introduce otro número." + "\n");
+                        System.out.print("Esta partida no existe. Introduce otro n�mero." + "\n");
                     }
                     else {
                         input = new Scanner(listOfFiles[num-1]);
