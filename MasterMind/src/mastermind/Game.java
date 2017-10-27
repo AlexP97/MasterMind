@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,6 +36,7 @@ public class Game {
     CodeMaker codeM;
     CodeBreaker codeB;
     boolean gameSaved;
+    boolean cargado;
     
     public Game (String idG, String dif, int puntos){
         this.id = idG;
@@ -46,6 +48,7 @@ public class Game {
         this.output = null;
         this.codeIni = null;
         this.gameSaved = false;
+        this.cargado = false;
     }
     
     public Game (String idG, String dif){
@@ -58,6 +61,7 @@ public class Game {
         this.output = null;
         this.codeIni = null;
         this.gameSaved = false;
+        this.cargado = false;
     }
     
     public Game () {
@@ -70,6 +74,7 @@ public class Game {
         this.output = null;
         this.codeIni = null;
         this.gameSaved = false;
+        this.cargado = false;
     }
     
     public String getId() {
@@ -144,6 +149,10 @@ public class Game {
         
         try {
             
+            if (cargado) {
+                File file = new File("players/"+player.getName()+"/games/"+id+".txt");
+                file.delete();
+            }
             FileWriter fileName = new FileWriter("players/"+player.getName()+"/games/"+id+".txt");
             PrintWriter pw = new PrintWriter(fileName);
             
@@ -204,36 +213,54 @@ public class Game {
     
     public void juega(Jugador playerN, String ident, String dif, String mod) {
         
-        if (CheckAvailability(ident, playerN.getName())){
+        if (CheckAvailability(ident, playerN.getName()) || cargado){
             
-            this.id = ident;
-            if (dif.equals("facil")) this.totalTurns = 12;
-            else if (dif.equals("medio")) this.totalTurns = 10;
-            else if (dif.equals("dificil")) this.totalTurns = 8;
-            else {
-                System.out.print("Esta dificultad no existe" + "\n");
-                return;
-            }
-            if (output == null) this.output = new String[totalTurns+1];
-            this.output[0] = "--------------";
-            this.difficulty = dif;
-            this.player = playerN;
-            this.mode = mod;
-            this.codeM = new CodeMaker();
-            this.codeB = new CodeBreaker();
-            this.turn = 1;
-            
-            if (mod.equals("codemaker")) this.codeIni = conversorCode(codeM.dona_patro("Player"));
-            else if (mod.equals("codebreaker")) this.codeIni = conversorCode(codeM.dona_patro("IA"));
-            else {
-                    System.out.print("Esta modo de juego no existe" + "\n");
+            if (!cargado) {
+                this.id = ident;
+                if (dif.equals("facil")) this.totalTurns = 12;
+                else if (dif.equals("medio")) this.totalTurns = 10;
+                else if (dif.equals("dificil")) this.totalTurns = 8;
+                else {
+                    System.out.print("Esta dificultad no existe" + "\n");
                     return;
+                }
+                if (output == null) this.output = new String[totalTurns+1];
+                this.output[0] = "--------------";
+                this.difficulty = dif;
+                this.player = playerN;
+                this.mode = mod;
+                this.codeM = new CodeMaker();
+                this.codeB = new CodeBreaker();
+                this.turn = 1;
+
+                if (mod.equals("codemaker")) {
+                    //codeB.setIA();
+                    this.codeIni = conversorCode(codeM.dona_patro("Player"));
+                }
+                else if (mod.equals("codebreaker")) {
+                    //codeM.setIA();
+                    this.codeIni = conversorCode(codeM.dona_patro("IA"));
+                }
+                else {
+                        System.out.print("Esta modo de juego no existe" + "\n");
+                        return;
+                }
+            
+            }else {
+                        
+                this.codeM = new CodeMaker();
+                this.codeB = new CodeBreaker();
+
+                if (mod.equals("codemaker")) {
+                    //codeB.setIA();
+                }
+                else if (mod.equals("codebreaker")) {
+                    //codeM.setIA();
+                }    
             }
             
             while (turn <= totalTurns){
-                
-                output[turn] = "";
-                
+                                
                 boolean acierto = true;
                 
                 ArrayList<KeyPeg> outputM = null;
@@ -308,12 +335,12 @@ public class Game {
         
             //Leer datos de la partida y cargar el Game
 
-            Boolean cargado = false;
+            cargado = false;
 
             while (!cargado){            
                 try {
                     
-                    System.out.print("Introduce el n�mero de la partida o -1 para salir." + "\n");
+                    System.out.print("Introduce el número de la partida o -1 para salir." + "\n");
 
                     Scanner input = new Scanner(System.in);
 
@@ -322,7 +349,7 @@ public class Game {
                     if (num == -1) return;
                     
                     if (num - 1 >= listOfFiles.length) {
-                        System.out.print("Esta partida no existe. Introduce otro n�mero." + "\n");
+                        System.out.print("Esta partida no existe. Introduce otro número." + "\n");
                     }
                     else {
                         input = new Scanner(listOfFiles[num-1]);
@@ -355,19 +382,23 @@ public class Game {
                         System.out.print("totalturns cargado" + "\n");
                         
                         this.output = new String[totalTurns+1];
-                                                               
+                                                         
+                        codeIni = new ArrayList<CodePeg>();
+                        
                         for (int i = 0; i < 4; ++i) {
 
                             line = input.nextLine(); 
-                            
-                            codeIni.add(new CodePeg(Integer.parseInt(line), i+1));
+                            System.out.print(line + "\n");
+                            CodePeg code = new CodePeg(Integer.parseInt(line), i+1);
+                            codeIni.add(code);
 
                         }
                         System.out.print("Codeini cargado" + "\n");
 
-                        for (int i = 0; i <= turn; ++i) {
+                        for (int i = 0; i < turn; ++i) {
 
                             line = input.nextLine();
+                            System.out.print(line + "\n");
                             output[i] = line;
 
                         }
@@ -381,8 +412,9 @@ public class Game {
                             System.out.print(output[i] + "\n");
                     
                         }
+                        System.out.print("output mostrado" + "\n");
                         
-                        juega(player, id, difficulty, mode);
+                        juega(null, null, null, null);
                     }
 
                 } catch (Exception ex) {
