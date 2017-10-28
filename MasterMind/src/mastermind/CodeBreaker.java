@@ -8,14 +8,13 @@ package mastermind;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  *
  * @author usuario
  */
 public class CodeBreaker extends Jugador {
-    Set<ArrayList<Integer> > S;
+    ArrayList<ArrayList<Integer> > S;
     
     public void conjunt(int i, ArrayList<Integer> aux) {
             if(i == 4) {
