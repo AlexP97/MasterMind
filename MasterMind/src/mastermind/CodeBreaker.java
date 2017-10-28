@@ -49,7 +49,19 @@ public class CodeBreaker extends Jugador {
             aux.add(2);
             aux.add(2);
             if(!this.S.contains(aux)){
-                
+                //remove from S any code that would not give the same response if it (the guess) were the code
+                for(int i = 0; i < S.size(); i++){
+                    for(int j = 0; j < solucio.size(); j++){
+                        switch(solucio.get(j).getColour()){
+                            case 1: 
+                                
+                                break;
+                            case 2:
+                                
+                                break;
+                        }
+                    }
+                }
             }
             else{
                 S.remove(aux);
