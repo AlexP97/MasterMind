@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  * @author usuario
  */
-public class CodeBreaker extends Jugador {
+public final class CodeBreaker extends Jugador {
     ArrayList<ArrayList<Integer> > S;
     
     public void conjunt(int i, ArrayList<Integer> aux) {
@@ -37,6 +37,20 @@ public class CodeBreaker extends Jugador {
             conjunt(0,aux);
         }
     }
+    //code es un posible codigo inconsistente
+    public boolean compare(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio, ArrayList<Integer> code){
+        int nblancas = 0;
+        int nnegras = 0;
+        //comparar tirada con code
+        
+        int blancasSolucio = 0;
+        int negrasSolucio = 0;
+        for(int i = 0; i < 4; i++){
+            if (solucio.getColour() == 2) blancasSolucio++;
+            else if(solucio.getColour() == 1) negrasSolucio++;
+        }
+        return false;   
+    }
     
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio) {
         ArrayList<Integer> linea;
@@ -48,17 +62,14 @@ public class CodeBreaker extends Jugador {
             aux.add(2);
             aux.add(2);
             if(!this.S.contains(aux)){
-                //remove from S any code that would not give the same response if it (the guess) were the code
+                /*remove from S any code that would not give the same response if it (the guess) were the code
+                	* A code is inconsistent if the answer from comparing 'tirada' and a
+                        * code from 'S' is not the same as the answer from comparing
+                        * 'tirada' and the secret code given by the game.               
+                */
                 for(int i = 0; i < S.size(); i++){
-                    for(int j = 0; j < solucio.size(); j++){
-                        switch(solucio.get(j).getColour()){
-                            case 1: 
-                                
-                                break;
-                            case 2:
-                                
-                                break;
-                        }
+                    if(!compare(tirada,solucio,S.get(i))){
+                        
                     }
                 }
             }

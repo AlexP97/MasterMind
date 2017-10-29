@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author usuario
  */
-public class CodeMaker extends Jugador {
+public final class CodeMaker extends Jugador {
     public CodeMaker() {
        super();
     }
