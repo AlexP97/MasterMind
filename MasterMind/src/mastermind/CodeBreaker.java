@@ -42,7 +42,12 @@ public final class CodeBreaker extends Jugador {
         int nblancas = 0;
         int nnegras = 0;
         
-        ArrayList<Integer> aux = super.donaSolucio(tirada, code);
+        ArrayList<CodePeg> cambioCodePeg = null;
+        cambioCodePeg.add(new CodePeg(code.get(0),0));
+        cambioCodePeg.add(new CodePeg(code.get(1),1));
+        cambioCodePeg.add(new CodePeg(code.get(2),2));
+        cambioCodePeg.add(new CodePeg(code.get(3),3));
+        ArrayList<Integer> aux = super.donaSolucio(tirada, cambioCodePeg);
         for(int i = 0; i < aux.size(); i++){
             if(aux.get(i) == 2) nblancas++;
             else if(aux.get(i) == 1) nnegras++;
@@ -75,7 +80,7 @@ public final class CodeBreaker extends Jugador {
                 */
                 for(int i = 0; i < S.size(); i++){
                     if(!compare(tirada,solucio,S.get(i))){
-                        
+                        S.remove(i);
                     }
                 }
             }
