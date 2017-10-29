@@ -41,7 +41,12 @@ public final class CodeBreaker extends Jugador {
     public boolean compare(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio, ArrayList<Integer> code){
         int nblancas = 0;
         int nnegras = 0;
-        //comparar tirada con code
+        
+        ArrayList<Integer> aux = super.donaSolucio(tirada, code);
+        for(int i = 0; i < aux.size(); i++){
+            if(aux.get(i) == 2) nblancas++;
+            else if(aux.get(i) == 1) nnegras++;
+        }
         
         int blancasSolucio = 0;
         int negrasSolucio = 0;
@@ -49,6 +54,7 @@ public final class CodeBreaker extends Jugador {
             if (solucio.get(i).getColour() == 2) blancasSolucio++;
             else if(solucio.get(i).getColour() == 1) negrasSolucio++;
         }
+        if(nblancas == blancasSolucio && nnegras == negrasSolucio) return true;
         return false;   
     }
     
