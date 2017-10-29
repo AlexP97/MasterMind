@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -26,6 +27,31 @@ public class Jugador {
     
     public Jugador() {
       
+    }
+    
+    public ArrayList<Integer> donaSolucio(ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
+        ArrayList<Integer> linea = new ArrayList<>();
+        ArrayList<Boolean> visitado = new ArrayList<>();
+        for(int i = 0; i < 4; i++) {
+            visitado.add(false);
+        }
+        for(int i = 0; i < tirada.size(); i++){
+                boolean entrar = false;
+                for(int k = 0; k < solucio.size(); k++) {
+                    if(tirada.get(i).getColour() == solucio.get(k).getColour() && !visitado.get(k) && !entrar) {
+                        visitado.set(k,true);
+                        entrar = true;
+                        if(tirada.get(i).getPosition() == solucio.get(k).getPosition()) {
+                            linea.add(2);
+                        }
+                        else {
+                            linea.add(1);
+                        }
+                    }
+                }  
+            }
+        while (linea.size() < 4) linea.add(0);
+        return linea;
     }
     
     public boolean register(String n, String c) {

@@ -46,8 +46,8 @@ public final class CodeBreaker extends Jugador {
         int blancasSolucio = 0;
         int negrasSolucio = 0;
         for(int i = 0; i < 4; i++){
-            if (solucio.getColour() == 2) blancasSolucio++;
-            else if(solucio.getColour() == 1) negrasSolucio++;
+            if (solucio.get(i).getColour() == 2) blancasSolucio++;
+            else if(solucio.get(i).getColour() == 1) negrasSolucio++;
         }
         return false;   
     }
@@ -56,7 +56,7 @@ public final class CodeBreaker extends Jugador {
         ArrayList<Integer> linea;
         linea = new ArrayList<>();
         if(s.equals("IA")) {
-            ArrayList<Integer> aux = new ArrayList<Integer>();
+            ArrayList<Integer> aux = new ArrayList<>();
             aux.add(1);
             aux.add(1);
             aux.add(2);

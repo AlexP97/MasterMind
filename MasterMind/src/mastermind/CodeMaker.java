@@ -43,27 +43,9 @@ public final class CodeMaker extends Jugador {
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
         ArrayList<Integer> linea = null;
         linea = new ArrayList<Integer>();
-        ArrayList<Boolean> visitado = new ArrayList<Boolean>();
-        for(int i = 0; i < 4; i++) {
-            visitado.add(false);
-        }
+        
         if(s.equals("IA")) {
-            for(int i = 0; i < tirada.size(); i++){
-                boolean entrar = false;
-                for(int k = 0; k < solucio.size(); k++) {
-                    if(tirada.get(i).getColour() == solucio.get(k).getColour() && !visitado.get(k) && !entrar) {
-                        visitado.set(k,true);
-                        entrar = true;
-                        if(tirada.get(i).getPosition() == solucio.get(k).getPosition()) {
-                            linea.add(2);
-                        }
-                        else {
-                            linea.add(1);
-                        }
-                    }
-                }  
-            }
-            while (linea.size() < 4) linea.add(0);
+            linea = super.donaSolucio(tirada, solucio);
         }
         else {
             Scanner input = new Scanner(System.in);
