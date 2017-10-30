@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package mastermind;
+package domain;
 
 import java.util.ArrayList;
 import java.util.Scanner;

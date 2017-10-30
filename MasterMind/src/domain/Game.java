@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mastermind;
+package domain;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 

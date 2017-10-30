@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mastermind;
+package presentation;
 
 /**
  *
  * @author Usuario
  */
-public abstract class Casilla {
+public class CtrlPresentacionMenu {
     
-    abstract boolean colourValid(int col);
-    abstract boolean posValid(int pos);
-    
-    public Casilla(){
-    }
 }
