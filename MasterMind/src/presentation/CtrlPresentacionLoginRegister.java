@@ -19,10 +19,11 @@ public class CtrlPresentacionLoginRegister {
         this.Vg = Vg;
         this.CDj = CDj;
     }
+    
     public boolean loginRegister(){
         int opcion = -1;
         while(opcion != 0){
-            System.out.print("Bienvenido a MasterMind." + "\n");
+            Vg.mostrarMensaje("¡Bienvenido a Mastermind!");
             opcion = Vg.obtenerOpcion();
             switch(opcion){
                 case 0: return false;
@@ -37,7 +38,7 @@ public class CtrlPresentacionLoginRegister {
         ArrayList<String> datos = null;
         Vg.obtenerDatos(datos);
         //aqui llamar a controlador dominio para el login
-        boolean b = CDj.login();
+        boolean b = CDj.login(datos.get(0),datos.get(1));
         if(!b) Vg.mostrarError("No se ha podido iniciar sesión correctamente");
         return b;
     }
@@ -45,7 +46,7 @@ public class CtrlPresentacionLoginRegister {
         ArrayList<String> datos = null;
         Vg.obtenerDatos(datos);
         //aqui llamar a controlador dominio para el register
-        boolean b = CDj.register();
+        boolean b = CDj.register(datos.get(0),datos.get(1));
         if(!b) Vg.mostrarError("No se ha podido registrar correctamente");
         return b;
     }

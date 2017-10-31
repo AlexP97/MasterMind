@@ -12,6 +12,8 @@ package presentation;
 public class CtrlPresentacion {
     private CtrlDominio CD;
     private CtrlDominioJugador CDj;
+    private CtrlDominioPartida CDp;
+    private CtrlDominioRanking CDr;
     private CtrlPresentacionLoginRegister CPlr;
     private CtrlPresentacionMenu CPm;
     private VistaLoginRegister Vlr;
@@ -20,7 +22,10 @@ public class CtrlPresentacion {
     public CtrlPresentacion() {
         CD = new CtrlDominio();
         CDj = new CtrlDominioJugador();
+        CDp = new CtrlDominioPartida();
+        CDr = new CtrlDominioRanking();
         Vlr = new VistaLoginRegister();
+        Vm = new VistaMenu();
     }
     public void iniciarControlador() {
     // - ...
@@ -29,6 +34,13 @@ public class CtrlPresentacion {
     public void iniciarRegistroLogin(){
         CPlr = new CtrlPresentacionLoginRegister(Vlr,CDj);
         if (CPlr.loginRegister()){
+            iniciarCrearCargarRanking();
+        }
+    }
+    
+    public void iniciarCrearCargarRanking(){
+        CPm = new CtrlPresentacionMenu(Vm,CDp,CDr);
+        if(CPm.crearCargarRanking()){
             
         }
     }

@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * @author Usuario
  */
 public class VistaLoginRegister extends VistaGenerica {
-    
     int nOpciones = 3;
     
     public VistaLoginRegister(){
