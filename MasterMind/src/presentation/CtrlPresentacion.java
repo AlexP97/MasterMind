@@ -14,21 +14,23 @@ public class CtrlPresentacion {
     private CtrlDominioJugador CDj;
     private CtrlPresentacionLoginRegister CPlr;
     private CtrlPresentacionMenu CPm;
-    private VistaLoginRegister Vmj;
+    private VistaLoginRegister Vlr;
     private VistaMenu Vm;
     
     public CtrlPresentacion() {
         CD = new CtrlDominio();
         CDj = new CtrlDominioJugador();
-        Vmj = new VistaLoginRegister();
+        Vlr = new VistaLoginRegister();
     }
     public void iniciarControlador() {
     // - ...
     }
     
     public void iniciarRegistroLogin(){
-        CPlr = new CtrlPresentacionLoginRegister(Vmj,CDj);
-        CPlr.loginRegister();
+        CPlr = new CtrlPresentacionLoginRegister(Vlr,CDj);
+        if (CPlr.loginRegister()){
+            
+        }
     }
     
     public void iniciarMastermind(){

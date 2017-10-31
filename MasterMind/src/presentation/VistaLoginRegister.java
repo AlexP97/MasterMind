@@ -5,40 +5,37 @@
  */
 package presentation;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  *
  * @author Usuario
  */
-public class VistaLoginRegister {
-    protected Scanner input = new Scanner(System.in);
+public class VistaLoginRegister extends VistaGenerica {
+    
+    int nOpciones = 3;
     
     public VistaLoginRegister(){
-        
+        super();
     }
     
+    @Override
     public void mostrarVista(){
         System.out.println("0 - Salir");
         System.out.println("1 - Login");
         System.out.println("2 - Register");
     }
-    //NO SE SI HACER UNA SUPERCLASE VISTA CON ESTAS FUNCIONES, Y QUE LAS SUBCLASES DE LOGINREGISTER Y MENU 
-    //SE ENCARGUEN DEL I/O
-    public void mostrarMensaje(String mensaje){
-        System.out.println(mensaje);
-    }
     
-    public void mostrarError(String error){
-        System.out.println("Error: "+error);
-    }
+    @Override
+    public int getOpciones(){
+        return this.nOpciones;
+    }   
     
-    public int obtenerOpcion(){
-        int opcion = -1;
-        while(opcion < 0){
-            mostrarVista();
-            opcion = Integer.parseInt(input.nextLine());
-        }
-        return opcion;
+    @Override
+    public void obtenerDatos(ArrayList<String> datos){
+        System.out.println("Introduce el nombre de usuario:");
+        datos.add(input.nextLine());
+        System.out.println("Introduce la contraseña:");
+        datos.add(input.nextLine());
     }
 }

@@ -5,28 +5,49 @@
  */
 package presentation;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Usuario
  */
 public class CtrlPresentacionLoginRegister {
-    private VistaLoginRegister Vlr;
+    private VistaGenerica Vg;
     private CtrlDominioJugador CDj;
     
-    public CtrlPresentacionLoginRegister(VistaLoginRegister Vlr, CtrlDominioJugador CDj){
-        this.Vlr = Vlr;
+    public CtrlPresentacionLoginRegister(VistaGenerica Vg, CtrlDominioJugador CDj){
+        this.Vg = Vg;
         this.CDj = CDj;
     }
-    public void loginRegister(){
+    public boolean loginRegister(){
         int opcion = -1;
         while(opcion != 0){
             System.out.print("Bienvenido a MasterMind." + "\n");
-            opcion = Vlr.obtenerOpcion();
+            opcion = Vg.obtenerOpcion();
             switch(opcion){
-                case 0: break;
-                case 1: 
+                case 0: return false;
+                case 1: return login();
+                case 2: return register();
             }
         }
+        return false;
+    }
+    
+    private boolean login(){
+        ArrayList<String> datos = null;
+        Vg.obtenerDatos(datos);
+        //aqui llamar a controlador dominio para el login
+        boolean b = CDj.login();
+        if(!b) Vg.mostrarError("No se ha podido iniciar sesión correctamente");
+        return b;
+    }
+    private boolean register(){
+        ArrayList<String> datos = null;
+        Vg.obtenerDatos(datos);
+        //aqui llamar a controlador dominio para el register
+        boolean b = CDj.register();
+        if(!b) Vg.mostrarError("No se ha podido registrar correctamente");
+        return b;
     }
 }
 
