@@ -66,7 +66,7 @@ public class MasterMind {
                         game.LoadGame(jugador);
                     }
                     else if (jugar.equals("ranking")){
-                        Ranking ranking = new Ranking();
+                        RankingSingleton ranking = RankingSingleton.getInstance();
                         ranking.muestraRanking();
                     }
                     else if (jugar.equals("salir")) estado = 0;

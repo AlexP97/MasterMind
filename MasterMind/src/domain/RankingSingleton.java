@@ -17,10 +17,13 @@ import java.util.ArrayList;
  *
  * @author Usuario
  */
-public class Ranking {
-    private ArrayList<Pair> ranking;
+public class RankingSingleton {
+    private static final RankingSingleton INSTANCE = new RankingSingleton();
+    private static ArrayList<Pair> ranking;
     
-    public Ranking() {
+    private RankingSingleton(){}
+    
+    public static RankingSingleton getInstance(){
         try {
             File dir = new File("ranking");
             dir.mkdir();
@@ -45,6 +48,7 @@ public class Ranking {
         } catch (IOException ex) {
                 System.out.println("Error creando el ranking");
         }
+        return INSTANCE;
     }
     
     public void muestraRanking(){
@@ -109,4 +113,5 @@ public class Ranking {
             System.out.println("Error actualizando el ranking");
         }    
     }
+    
 }
