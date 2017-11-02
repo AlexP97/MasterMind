@@ -12,9 +12,9 @@ import java.util.ArrayList;
  * @author Usuario
  */
 public class CtrlPresentacionMenu {
-    private VistaGenerica Vg;
-    private CtrlDominioPartida CDp;
-    private CtrlDominioRanking CDr;
+    private final VistaGenerica Vg;
+    private final CtrlDominioPartida CDp;
+    private final CtrlDominioRanking CDr;
     
     public CtrlPresentacionMenu(VistaGenerica Vg, CtrlDominioPartida CDp, CtrlDominioRanking CDr){
         this.Vg = Vg;

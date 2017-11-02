@@ -16,7 +16,7 @@ public class Main {
     
     public static void main(String[] args){
         CP = new CtrlPresentacion();
-        CP.iniciarControlador();
+        CP.iniciarPresentacion();
         
         CP.iniciarMastermind();
     }

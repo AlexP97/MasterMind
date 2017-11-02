@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author Usuario
  */
 public class CtrlPresentacionLoginRegister {
-    private VistaGenerica Vg;
-    private CtrlDominioJugador CDj;
+    private final VistaGenerica Vg;
+    private final CtrlDominioJugador CDj;
     
     public CtrlPresentacionLoginRegister(VistaGenerica Vg, CtrlDominioJugador CDj){
         this.Vg = Vg;

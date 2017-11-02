@@ -27,8 +27,9 @@ public class CtrlPresentacion {
         Vlr = new VistaLoginRegister();
         Vm = new VistaMenu();
     }
-    public void iniciarControlador() {
-    // - ...
+    public void iniciarPresentacion() {
+        CD.inicializarDominio();
+        // ...
     }
     
     public void iniciarRegistroLogin(){
