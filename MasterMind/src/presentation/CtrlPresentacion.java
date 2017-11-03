@@ -5,6 +5,11 @@
  */
 package presentation;
 
+import domain.CtrlDominio;
+import domain.CtrlDominioJugador;
+import domain.CtrlDominioPartida;
+import domain.CtrlDominioRanking;
+
 /**
  *
  * @author Usuario

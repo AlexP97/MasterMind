@@ -5,6 +5,8 @@
  */
 package presentation;
 
+import domain.CtrlDominioPartida;
+import domain.CtrlDominioRanking;
 import java.util.ArrayList;
 
 /**

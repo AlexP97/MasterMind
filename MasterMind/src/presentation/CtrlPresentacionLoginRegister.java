@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import domain.CtrlDominioJugador;
 import java.util.ArrayList;
 
 /**

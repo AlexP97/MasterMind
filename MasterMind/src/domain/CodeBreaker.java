@@ -139,13 +139,14 @@ public final class CodeBreaker extends Jugador {
                     }
                 }
                 for(int i = 0; i < noUsados.get(indice).size(); i++)
-                    System.out.print(noUsados.get(indice).get(i));
-                System.out.println();
+                    System.out.print(noUsados.get(indice).get(i) + ' ');
                 return noUsados.get(indice);
             }
             else{
                 compatibles.remove(aux);
-                System.out.println("hola");
+                for (int i = 0; i < aux.size(); ++i) {
+                    System.out.print(aux.get(i) + ' ');
+                }
                 return aux;
             }
         }
