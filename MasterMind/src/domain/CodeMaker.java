@@ -15,8 +15,10 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author usuario
  */
 public final class CodeMaker extends Jugador {
-    public CodeMaker() {
+    public CodeMaker(boolean IA) {
        super();
+       if(IA)
+           super.setIA();
     }
     
     public ArrayList<Integer> dona_patro(String s) {

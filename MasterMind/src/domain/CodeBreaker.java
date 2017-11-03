@@ -18,25 +18,36 @@ public final class CodeBreaker extends Jugador {
     ArrayList<ArrayList<Integer> > noUsados;
     ArrayList<ArrayList<Integer> > combinaciones;
     
-    public void conjunt(int i, ArrayList<Integer> aux) {
+    public void conjunt(int i, ArrayList<Integer> aux, ArrayList<Integer> pos) {
             if(i == 4) {
-                    compatibles.add(aux);
+                    ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
+                    compatibles.add(añadir);
             }
             else {
-                for(int j = 1; j <= 6; j++) {
-                    aux.set(i, j);
-                    conjunt(i+1, aux);      
+                for(int j = 0; j < pos.size(); j++) {
+                    aux.set(i, pos.get(j));
+                    conjunt(i+1, aux, pos); 
                 }
             }
     }
     
-    public CodeBreaker() {
+    public CodeBreaker(boolean IA) {
         super();
+        compatibles = new ArrayList<>();
+        noUsados = new ArrayList<>();
+        combinaciones = new ArrayList<>();
+        if(IA)
+            super.setIA();
         if(this.esIA()){
             ArrayList<Integer> aux = new ArrayList<>();
-            for(int i = 0; i < 4; i++)
+            for(int i = 0; i < 4; i++){
                 aux.add(1);
-            conjunt(0,aux);
+            }
+            ArrayList<Integer> pos = new ArrayList<>();
+            for(int i = 0; i < 6; i++){
+                pos.add(i+1);
+            }
+            conjunt(0,aux, pos);
             noUsados = (ArrayList<ArrayList<Integer>>) compatibles.clone();
         }
     }
@@ -99,7 +110,7 @@ public final class CodeBreaker extends Jugador {
                         * 'tirada' and the secret code given by the game.               
                 */
                 int min = Integer.MAX_VALUE;
-                int indice = -1;
+                int indice = 0;
                 boolean compatible = false;
                 for(int i = 0; i < this.noUsados.size(); i++){
                     //algoritmo de posibilidades
@@ -110,10 +121,12 @@ public final class CodeBreaker extends Jugador {
                     }
                     int count = 0;
                     for(int j = 0; j < this.combinaciones.size(); j++) {
+                        int max = 0;
                         for(int k = 0; k < noUsados.size(); k++) {
                             boolean b = miraDescartes(noUsados.get(i), noUsados.get(k), combinaciones.get(j));
-                            if(b) count++;
+                            if(b) max++;
                         }
+                        if(max > count) count = max;
                     }
                     if(count < min) {
                         indice = i;

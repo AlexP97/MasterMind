@@ -228,16 +228,16 @@ public class Game {
                 this.player = playerN;
                 this.mode = mod;
                 this.points = 150;
-                this.codeM = new CodeMaker();
-                this.codeB = new CodeBreaker();
                 this.turn = 1;
 
                 if (mode.equals("codemaker")) {
-                    //codeB.setIA();
+                    this.codeB = new CodeBreaker(true);
+                    this.codeM = new CodeMaker(false);
                     this.codeIni = conversorCode(codeM.dona_patro("Player"));
                 }
                 else if (mode.equals("codebreaker")) {
-                    //codeM.setIA();
+                    this.codeB = new CodeBreaker(false);
+                    this.codeM = new CodeMaker(true);
                     this.codeIni = conversorCode(codeM.dona_patro("IA"));
                 }
                 else {
@@ -248,15 +248,13 @@ public class Game {
                 for (int d = 0; d < 4; d++) System.out.print(codeIni.get(d).getColour() + " ");
                 System.out.print("\n");
             }else {
-                        
-                this.codeM = new CodeMaker();
-                this.codeB = new CodeBreaker();
-
                 if (mode.equals("codemaker")) {
-                    //codeB.setIA();
+                    this.codeM = new CodeMaker(false);
+                    this.codeB = new CodeBreaker(true);
                 }
                 else if (mode.equals("codebreaker")) {
-                    //codeM.setIA();
+                    this.codeM = new CodeMaker(true);
+                    this.codeB = new CodeBreaker(false);
                 }    
             }
             
