@@ -20,7 +20,7 @@ public final class CodeBreaker extends Jugador {
     
     public void conjunt(int i, ArrayList<Integer> aux) {
             if(i == 4) {
-                    S.add(aux);
+                    compatibles.add(aux);
             }
             else {
                 for(int j = 1; j <= 6; j++) {
@@ -40,16 +40,21 @@ public final class CodeBreaker extends Jugador {
             noUsados = (ArrayList<ArrayList<Integer>>) compatibles.clone();
         }
     }
+    
+    public ArrayList<CodePeg> convert(ArrayList<Integer> a) {
+        ArrayList<CodePeg> cambioCodePeg = null;
+        cambioCodePeg.add(new CodePeg(a.get(0),0));
+        cambioCodePeg.add(new CodePeg(a.get(1),1));
+        cambioCodePeg.add(new CodePeg(a.get(2),2));
+        cambioCodePeg.add(new CodePeg(a.get(3),3));
+        return cambioCodePeg;
+    }
     //code es un posible codigo inconsistente
     public boolean compare(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio, ArrayList<Integer> code){
         int nblancas = 0;
         int nnegras = 0;
         
-        ArrayList<CodePeg> cambioCodePeg = null;
-        cambioCodePeg.add(new CodePeg(code.get(0),0));
-        cambioCodePeg.add(new CodePeg(code.get(1),1));
-        cambioCodePeg.add(new CodePeg(code.get(2),2));
-        cambioCodePeg.add(new CodePeg(code.get(3),3));
+        ArrayList<CodePeg> cambioCodePeg = convert(code);
         ArrayList<Integer> aux = super.donaSolucio(tirada, cambioCodePeg);
         for(int i = 0; i < aux.size(); i++){
             if(aux.get(i) == 2) nblancas++;
@@ -66,22 +71,14 @@ public final class CodeBreaker extends Jugador {
         return false;   
     }
     
-    public ArrayList<Integer> hola(ArrayList<Integer> candidat, ArrayList<Integer> descartat){
-        ArrayList<CodePeg> cambioCodePeg = null;
-        cambioCodePeg.add(new CodePeg(candidat.get(0),0));
-        cambioCodePeg.add(new CodePeg(candidat.get(1),1));
-        cambioCodePeg.add(new CodePeg(candidat.get(2),2));
-        cambioCodePeg.add(new CodePeg(candidat.get(3),3));
-        ArrayList<CodePeg> cambioCodePeg2 = null;
-        cambioCodePeg2.add(new CodePeg(descartat.get(0),0));
-        cambioCodePeg2.add(new CodePeg(descartat.get(1),1));
-        cambioCodePeg2.add(new CodePeg(descartat.get(2),2));
-        cambioCodePeg2.add(new CodePeg(descartat.get(3),3));
+    public ArrayList<Integer> miraSolucio(ArrayList<Integer> candidat, ArrayList<Integer> descartat){
+        ArrayList<CodePeg> cambioCodePeg = convert(candidat);
+        ArrayList<CodePeg> cambioCodePeg2 = convert(descartat);
         return donaSolucio(cambioCodePeg, cambioCodePeg2);
     }
     
     public boolean miraDescartes(ArrayList<Integer> candidat, ArrayList<Integer> descartat, ArrayList<Integer> combinacio) {
-        ArrayList<Integer> aux = hola(candidat,descartat);
+        ArrayList<Integer> aux = miraSolucio(candidat,descartat);
         return combinacio.equals(aux);
     }
    
@@ -102,20 +99,36 @@ public final class CodeBreaker extends Jugador {
                         * 'tirada' and the secret code given by the game.               
                 */
                 int min = Integer.MAX_VALUE;
+                int indice = -1;
+                boolean compatible = false;
                 for(int i = 0; i < this.noUsados.size(); i++){
                     //algoritmo de posibilidades
-                    for(int j = 0; j < this.combinaciones.size(); j++) {
-                        for(int k = 0; k < noUsados.size(); k++) {
-                            int aux2 = miraDescartes(noUsados.get(i), noUsados.get(k), combinaciones.get(j));
-                        }
-                    }
+                    boolean comp = true;
                     if(!compare(tirada,solucio,compatibles.get(i))){
                         compatibles.remove(i);
+                        comp = false;
+                    }
+                    int count = 0;
+                    for(int j = 0; j < this.combinaciones.size(); j++) {
+                        for(int k = 0; k < noUsados.size(); k++) {
+                            boolean b = miraDescartes(noUsados.get(i), noUsados.get(k), combinaciones.get(j));
+                            if(b) count++;
+                        }
+                    }
+                    if(count < min) {
+                        indice = i;
+                        if(comp)
+                            compatible = true;
+                    }
+                    if(count == min && !compatible && comp) {
+                        indice = i;
+                        compatible = comp;
                     }
                 }
+                return noUsados.get(indice);
             }
             else{
-                S.remove(aux);
+                compatibles.remove(aux);
                 return aux;
             }
         }
