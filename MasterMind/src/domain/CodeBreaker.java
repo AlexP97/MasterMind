@@ -14,7 +14,9 @@ import java.util.Scanner;
  * @author usuario
  */
 public final class CodeBreaker extends Jugador {
-    ArrayList<ArrayList<Integer> > S;
+    ArrayList<ArrayList<Integer> > compatibles;
+    ArrayList<ArrayList<Integer> > noUsados;
+    ArrayList<ArrayList<Integer> > combinaciones;
     
     public void conjunt(int i, ArrayList<Integer> aux) {
             if(i == 4) {
@@ -35,6 +37,7 @@ public final class CodeBreaker extends Jugador {
             for(int i = 0; i < 4; i++)
                 aux.add(1);
             conjunt(0,aux);
+            noUsados = (ArrayList<ArrayList<Integer>>) compatibles.clone();
         }
     }
     //code es un posible codigo inconsistente
@@ -63,6 +66,26 @@ public final class CodeBreaker extends Jugador {
         return false;   
     }
     
+    public ArrayList<Integer> hola(ArrayList<Integer> candidat, ArrayList<Integer> descartat){
+        ArrayList<CodePeg> cambioCodePeg = null;
+        cambioCodePeg.add(new CodePeg(candidat.get(0),0));
+        cambioCodePeg.add(new CodePeg(candidat.get(1),1));
+        cambioCodePeg.add(new CodePeg(candidat.get(2),2));
+        cambioCodePeg.add(new CodePeg(candidat.get(3),3));
+        ArrayList<CodePeg> cambioCodePeg2 = null;
+        cambioCodePeg2.add(new CodePeg(descartat.get(0),0));
+        cambioCodePeg2.add(new CodePeg(descartat.get(1),1));
+        cambioCodePeg2.add(new CodePeg(descartat.get(2),2));
+        cambioCodePeg2.add(new CodePeg(descartat.get(3),3));
+        return donaSolucio(cambioCodePeg, cambioCodePeg2);
+    }
+    
+    public boolean miraDescartes(ArrayList<Integer> candidat, ArrayList<Integer> descartat, ArrayList<Integer> combinacio) {
+        ArrayList<Integer> aux = hola(candidat,descartat);
+        return combinacio.equals(aux);
+    }
+   
+    
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio) {
         ArrayList<Integer> linea;
         linea = new ArrayList<>();
@@ -72,15 +95,22 @@ public final class CodeBreaker extends Jugador {
             aux.add(1);
             aux.add(2);
             aux.add(2);
-            if(!this.S.contains(aux)){
+            if(!this.noUsados.contains(aux)){
                 /*remove from S any code that would not give the same response if it (the guess) were the code
                 	* A code is inconsistent if the answer from comparing 'tirada' and a
                         * code from 'S' is not the same as the answer from comparing
                         * 'tirada' and the secret code given by the game.               
                 */
-                for(int i = 0; i < S.size(); i++){
-                    if(!compare(tirada,solucio,S.get(i))){
-                        S.remove(i);
+                int min = Integer.MAX_VALUE;
+                for(int i = 0; i < this.noUsados.size(); i++){
+                    //algoritmo de posibilidades
+                    for(int j = 0; j < this.combinaciones.size(); j++) {
+                        for(int k = 0; k < noUsados.size(); k++) {
+                            int aux2 = miraDescartes(noUsados.get(i), noUsados.get(k), combinaciones.get(j));
+                        }
+                    }
+                    if(!compare(tirada,solucio,compatibles.get(i))){
+                        compatibles.remove(i);
                     }
                 }
             }
