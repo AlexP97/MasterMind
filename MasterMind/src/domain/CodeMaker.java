@@ -44,12 +44,16 @@ public final class CodeMaker extends Jugador {
     
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
         ArrayList<Integer> linea = null;
-        linea = new ArrayList<Integer>();
+        linea = new ArrayList<>();
         
         if(s.equals("IA")) {
             linea = super.donaSolucio(tirada, solucio);
         }
         else {
+            for(int i = 0; i < tirada.size(); i++) {
+                System.out.print(tirada.get(i).getColour() + " ");
+            }
+            System.out.println();
             Scanner input = new Scanner(System.in);
             System.out.print("Introduce tu pista poniendo cada ficha del 0 al 2 separada de un espacio:" + "\n");
             String jugada = input.nextLine();

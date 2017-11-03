@@ -54,10 +54,10 @@ public final class CodeBreaker extends Jugador {
     
     public ArrayList<CodePeg> convert(ArrayList<Integer> a) {
         ArrayList<CodePeg> cambioCodePeg = null;
-        cambioCodePeg.add(new CodePeg(a.get(0),0));
-        cambioCodePeg.add(new CodePeg(a.get(1),1));
-        cambioCodePeg.add(new CodePeg(a.get(2),2));
-        cambioCodePeg.add(new CodePeg(a.get(3),3));
+        cambioCodePeg.add(new CodePeg(a.get(0),1));
+        cambioCodePeg.add(new CodePeg(a.get(1),2));
+        cambioCodePeg.add(new CodePeg(a.get(2),3));
+        cambioCodePeg.add(new CodePeg(a.get(3),4));
         return cambioCodePeg;
     }
     //code es un posible codigo inconsistente
@@ -103,7 +103,7 @@ public final class CodeBreaker extends Jugador {
             aux.add(1);
             aux.add(2);
             aux.add(2);
-            if(!this.noUsados.contains(aux)){
+            if(!this.compatibles.contains(aux)){
                 /*remove from S any code that would not give the same response if it (the guess) were the code
                 	* A code is inconsistent if the answer from comparing 'tirada' and a
                         * code from 'S' is not the same as the answer from comparing
@@ -138,10 +138,14 @@ public final class CodeBreaker extends Jugador {
                         compatible = comp;
                     }
                 }
+                for(int i = 0; i < noUsados.get(indice).size(); i++)
+                    System.out.print(noUsados.get(indice).get(i));
+                System.out.println();
                 return noUsados.get(indice);
             }
             else{
                 compatibles.remove(aux);
+                System.out.println("hola");
                 return aux;
             }
         }
