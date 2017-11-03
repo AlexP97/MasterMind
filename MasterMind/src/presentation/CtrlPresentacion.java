@@ -15,14 +15,14 @@ import domain.CtrlDominioRanking;
  * @author Usuario
  */
 public class CtrlPresentacion {
-    private CtrlDominio CD;
-    private CtrlDominioJugador CDj;
-    private CtrlDominioPartida CDp;
-    private CtrlDominioRanking CDr;
+    private final CtrlDominio CD;
+    private final CtrlDominioJugador CDj;
+    private final CtrlDominioPartida CDp;
+    private final CtrlDominioRanking CDr;
     private CtrlPresentacionLoginRegister CPlr;
     private CtrlPresentacionMenu CPm;
-    private VistaLoginRegister Vlr;
-    private VistaMenu Vm;
+    private final VistaLoginRegister Vlr;
+    private final VistaMenu Vm;
     
     public CtrlPresentacion() {
         CD = new CtrlDominio();

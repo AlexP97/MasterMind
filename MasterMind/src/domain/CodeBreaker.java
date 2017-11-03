@@ -53,7 +53,7 @@ public final class CodeBreaker extends Jugador {
     }
     
     public ArrayList<CodePeg> convert(ArrayList<Integer> a) {
-        ArrayList<CodePeg> cambioCodePeg = null;
+        ArrayList<CodePeg> cambioCodePeg = new ArrayList<>();
         cambioCodePeg.add(new CodePeg(a.get(0),1));
         cambioCodePeg.add(new CodePeg(a.get(1),2));
         cambioCodePeg.add(new CodePeg(a.get(2),3));
@@ -109,16 +109,19 @@ public final class CodeBreaker extends Jugador {
                         * code from 'S' is not the same as the answer from comparing
                         * 'tirada' and the secret code given by the game.               
                 */
+                
+                for(int i = 0; i < compatibles.size(); i++){
+                    if(!compare(tirada,solucio,compatibles.get(i))){
+                        compatibles.remove(i);
+                    }
+                }
+                
                 int min = Integer.MAX_VALUE;
                 int indice = 0;
                 boolean compatible = false;
                 for(int i = 0; i < this.noUsados.size(); i++){
                     //algoritmo de posibilidades
                     boolean comp = true;
-                    if(!compare(tirada,solucio,compatibles.get(i))){
-                        compatibles.remove(i);
-                        comp = false;
-                    }
                     int count = 0;
                     for(int j = 0; j < this.combinaciones.size(); j++) {
                         int max = 0;
@@ -128,6 +131,9 @@ public final class CodeBreaker extends Jugador {
                         }
                         if(max > count) count = max;
                     }
+                    
+                    comp = (compatibles.contains(noUsados.get(i)));
+                    
                     if(count < min) {
                         indice = i;
                         if(comp)
@@ -139,13 +145,11 @@ public final class CodeBreaker extends Jugador {
                     }
                 }
                 for(int i = 0; i < noUsados.get(indice).size(); i++)
-                    System.out.print(noUsados.get(indice).get(i) + ' ');
                 return noUsados.get(indice);
             }
             else{
                 compatibles.remove(aux);
                 for (int i = 0; i < aux.size(); ++i) {
-                    System.out.print(aux.get(i) + ' ');
                 }
                 return aux;
             }
