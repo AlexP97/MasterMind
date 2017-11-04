@@ -18,7 +18,7 @@ public final class CodeBreaker extends Jugador {
     ArrayList<ArrayList<Integer> > noUsados;
     ArrayList<ArrayList<Integer> > combinaciones;
     
-    public void conjunt(int i, ArrayList<Integer> aux, ArrayList<Integer> pos) {
+    private void conjunt(int i, ArrayList<Integer> aux, ArrayList<Integer> pos) {
             if(i == 4) {
                     ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
                     compatibles.add(añadir);
@@ -29,6 +29,32 @@ public final class CodeBreaker extends Jugador {
                     conjunt(i+1, aux, pos); 
                 }
             }
+    }
+    
+    private void creaCombinaciones(){
+        combinaciones.add(creaArray(2,2,2,2));
+        combinaciones.add(creaArray(2,2,1,1));
+        combinaciones.add(creaArray(2,1,1,1));
+        combinaciones.add(creaArray(1,1,1,1));
+        combinaciones.add(creaArray(2,2,2,0));
+        combinaciones.add(creaArray(2,2,1,0));
+        combinaciones.add(creaArray(2,1,1,0));
+        combinaciones.add(creaArray(1,1,1,0));
+        combinaciones.add(creaArray(2,2,0,0));
+        combinaciones.add(creaArray(2,1,0,0));
+        combinaciones.add(creaArray(1,1,0,0));
+        combinaciones.add(creaArray(2,0,0,0));
+        combinaciones.add(creaArray(1,0,0,0));
+        combinaciones.add(creaArray(0,0,0,0));
+    }
+    
+    private ArrayList<Integer> creaArray(int a, int b, int c, int d){
+        ArrayList<Integer> aux = new ArrayList<>();
+        aux.add(a);
+        aux.add(b);
+        aux.add(c);
+        aux.add(d);
+        return aux;
     }
     
     public CodeBreaker(boolean IA) {
@@ -50,9 +76,10 @@ public final class CodeBreaker extends Jugador {
             conjunt(0,aux, pos);
             noUsados = (ArrayList<ArrayList<Integer>>) compatibles.clone();
         }
+        creaCombinaciones();
     }
     
-    public ArrayList<CodePeg> convert(ArrayList<Integer> a) {
+    private ArrayList<CodePeg> convert(ArrayList<Integer> a) {
         ArrayList<CodePeg> cambioCodePeg = new ArrayList<>();
         cambioCodePeg.add(new CodePeg(a.get(0),1));
         cambioCodePeg.add(new CodePeg(a.get(1),2));
@@ -61,7 +88,7 @@ public final class CodeBreaker extends Jugador {
         return cambioCodePeg;
     }
     //code es un posible codigo inconsistente
-    public boolean compare(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio, ArrayList<Integer> code){
+    private boolean compare(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio, ArrayList<Integer> code){
         int nblancas = 0;
         int nnegras = 0;
         
@@ -82,13 +109,13 @@ public final class CodeBreaker extends Jugador {
         return false;   
     }
     
-    public ArrayList<Integer> miraSolucio(ArrayList<Integer> candidat, ArrayList<Integer> descartat){
+    private ArrayList<Integer> miraSolucio(ArrayList<Integer> candidat, ArrayList<Integer> descartat){
         ArrayList<CodePeg> cambioCodePeg = convert(candidat);
         ArrayList<CodePeg> cambioCodePeg2 = convert(descartat);
         return donaSolucio(cambioCodePeg, cambioCodePeg2);
     }
     
-    public boolean miraDescartes(ArrayList<Integer> candidat, ArrayList<Integer> descartat, ArrayList<Integer> combinacio) {
+    private boolean miraDescartes(ArrayList<Integer> candidat, ArrayList<Integer> descartat, ArrayList<Integer> combinacio) {
         ArrayList<Integer> aux = miraSolucio(candidat,descartat);
         return combinacio.equals(aux);
     }
@@ -98,11 +125,7 @@ public final class CodeBreaker extends Jugador {
         ArrayList<Integer> linea;
         linea = new ArrayList<>();
         if(s.equals("IA")) {
-            ArrayList<Integer> aux = new ArrayList<>();
-            aux.add(1);
-            aux.add(1);
-            aux.add(2);
-            aux.add(2);
+            ArrayList<Integer> aux = creaArray(1,1,2,2);
             if(!this.compatibles.contains(aux)){
                 /*remove from S any code that would not give the same response if it (the guess) were the code
                 	* A code is inconsistent if the answer from comparing 'tirada' and a
