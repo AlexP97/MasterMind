@@ -11,11 +11,26 @@ package domain;
  */
 public class CtrlDominio {
     
+    private CtrlDominioJugador CDmj;
+    private CtrlDominioPartida CDmp;
+    private CtrlDominioRanking CDmr;
+           
+    
     public CtrlDominio(){
-        
+        CDmj = new CtrlDominioJugador();
+        CDmp = new CtrlDominioPartida();
+        CDmr = new CtrlDominioRanking();
     }
     
-    public void inicializarDominio() {
-        
+    public CtrlDominioJugador getCtrlDominioJugador() {
+        return CDmj;
+    }
+    
+    public CtrlDominioPartida getCtrlDominioPartida() {
+        return CDmp;
+    }
+    
+    public CtrlDominioRanking getCtrlDominioRanking() {
+        return CDmr;
     }
 }

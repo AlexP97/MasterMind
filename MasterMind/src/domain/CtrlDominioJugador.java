@@ -16,12 +16,12 @@ public class CtrlDominioJugador {
     }
     
     public boolean login(String s1, String s2) {
-        
-        return false;
+        Jugador j = new Jugador();
+        return j.login(s1, s2);
     }
     
     public boolean register(String s1, String s2) {
-        
-        return false;
+        Jugador j = new Jugador();
+        return j.register(s1,s2);
     }
 }
