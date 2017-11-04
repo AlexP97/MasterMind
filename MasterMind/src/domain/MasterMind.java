@@ -59,11 +59,11 @@ public class MasterMind {
                         System.out.print("Escribe el modo de la partida (codebreaker o codemaker)" + "\n");
                         String mod = input.nextLine();
                         Game game = new Game();
-                        game.juega(jugador,id,dif,mod);
+                        boolean b = game.juega(jugador,id,dif,mod);
                     }
                     else if (jugar.equals("cargar")){
                         Game game = new Game();
-                        game.LoadGame(jugador);
+                        game.LoadGame(jugador.getName(), jugador.getPassword());
                     }
                     else if (jugar.equals("ranking")){
                         RankingSingleton ranking = RankingSingleton.getInstance();

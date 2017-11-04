@@ -209,7 +209,7 @@ public class Game {
         else this.points -= 5;
     }
     
-    public void juega(Jugador playerN, String ident, String dif, String mod) {
+    public boolean juega(Jugador playerN, String ident, String dif, String mod) {
         
         if (CheckAvailability(ident, playerN.getName()) || cargado){
             
@@ -220,7 +220,7 @@ public class Game {
                 else if (dif.equals("dificil")) this.totalTurns = 8;
                 else {
                     System.out.print("Esta dificultad no existe" + "\n");
-                    return;
+                    return false;
                 }
                 if (output == null) this.output = new String[totalTurns+1];
                 this.output[0] = "--------------";
@@ -242,7 +242,7 @@ public class Game {
                 }
                 else {
                         System.out.print("Esta modo de juego no existe" + "\n");
-                        return;
+                        return false;
                 }
                 System.out.print("CodeIni: ");
                 for (int d = 0; d < 4; d++) System.out.print(codeIni.get(d).getColour() + " ");
@@ -274,7 +274,7 @@ public class Game {
                     outputM = conversorKey(codeM.jugar("IA", outputB, codeIni));
                 }
                 
-                if (this.gameSaved) return;
+                if (this.gameSaved) return true;
                 
                 codeBAnt = outputB;
                 codeMAnt = outputM;
@@ -295,32 +295,34 @@ public class Game {
                 }
                 
                 output[turn] = linea;
-                                
-                for (int i = 0; i <= turn; ++i) {
-                    
-                    System.out.print(output[i] + "\n");
-                    
-                }
                 
+                if (mode.equals("codebreaker")) {
+                    for (int i = 0; i <= turn; ++i) {
+
+                        System.out.print(output[i] + "\n");
+
+                    }
+                }
                 if (acierto) {
                     finishGame(true);
-                    return;
+                    return true;
                 }
                 ++turn;
                 baja_Puntuacion();
             }
             
             finishGame(false);
-            
+            return true;
         }
         else {
             System.out.print("No se ha podido crear la partida. Este id ya está en uso." + "\n");
+            return false;
         }
     }
     
-    public void LoadGame(Jugador playerP){
+    public boolean LoadGame(String userName, String pass){
         
-        File folder = new File("players/"+playerP.getName()+"/games/");
+        File folder = new File("players/"+userName+"/games/");
         File[] listOfFiles = folder.listFiles();
 
         if (listOfFiles != null){
@@ -345,7 +347,7 @@ public class Game {
 
                     int num = Integer.parseInt(input.nextLine());
 
-                    if (num == -1) return;
+                    if (num == -1) return false;
                     
                     if (num - 1 >= listOfFiles.length) {
                         System.out.print("Esta partida no existe. Introduce otro número." + "\n");
@@ -353,7 +355,7 @@ public class Game {
                     else {
                         input = new Scanner(listOfFiles[num-1]);
                         
-                        this.player = playerP;
+                        this.player = new Jugador(userName, pass);
                         System.out.print("Player cargado" + "\n");
                         
                         String line = input.nextLine();
@@ -413,18 +415,21 @@ public class Game {
                         }
                         System.out.print("output mostrado" + "\n");
                         
-                        juega(player, id, difficulty, mode);
+                        return juega(player, id, difficulty, mode);
                     }
 
                 } catch (Exception ex) {
                     System.out.print("No se ha podido cargar la partida." + "\n");
+                    return false;
                 }
             }
         }
         else {
             System.out.print("No hay ninguna partida guardada." + "\n");
+            return false;
         }
-        
+        return false;
     }
+    
     
 }

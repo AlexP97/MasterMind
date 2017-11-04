@@ -22,6 +22,10 @@ public class CtrlDominio {
         CDmr = new CtrlDominioRanking();
     }
     
+    public void inicializarDominio() {
+        
+    }
+    
     public CtrlDominioJugador getCtrlDominioJugador() {
         return CDmj;
     }

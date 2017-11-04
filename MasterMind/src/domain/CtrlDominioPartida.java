@@ -11,13 +11,17 @@ package domain;
  */
 public class CtrlDominioPartida {
     
+    private Game game;
+    
     public CtrlDominioPartida() {
+        
+        game = new Game();
         
     }
     
-    public boolean cargarPartida() {
+    public boolean cargarPartida(String userName, String pass) {
         
-        return false;
+        return game.LoadGame(userName, pass);
     }
     
     public boolean crearPartida(String s1, String s2, String s3) {

@@ -48,8 +48,9 @@ public class CtrlPresentacionMenu {
     }
     
     private boolean cargarPartida(){
-        
-        boolean b = CDp.cargarPartida();
+        ArrayList<String> datos = null;
+        Vg.obtenerDatos(datos);
+        boolean b = CDp.cargarPartida(datos.get(0),datos.get(1));
         if(!b) Vg.mostrarError("No se ha podido cargar partida correctamente");
         return b;
     }
