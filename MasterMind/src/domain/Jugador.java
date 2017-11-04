@@ -31,29 +31,47 @@ public class Jugador {
     
     public ArrayList<Integer> donaSolucio(ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
         ArrayList<Integer> linea = new ArrayList<>();
-        ArrayList<Boolean> visitado = new ArrayList<>();
-        for(int i = 0; i < 4; i++) {
-            visitado.add(false);
-        }
+        ArrayList<Integer> visitats = new ArrayList<>();
+        for(int i = 0; i < 4; i++) 
+            visitats.add(0);
+        int indice;
+        int valor;
         for(int i = 0; i < tirada.size(); i++){
-                boolean entrar = false;
-                for(int k = 0; k < solucio.size(); k++) {
-                    if(tirada.get(i).getColour() == solucio.get(k).getColour() && !visitado.get(k) && !entrar) {
-                        visitado.set(k,true);
-                        entrar = true;
-                        if(tirada.get(i).getPosition() == solucio.get(k).getPosition()) {
-                            linea.add(2);
-                        }
-                        else {
-                            linea.add(1);
-                        }
+            valor = 0;
+            indice = -1;
+            for(int k = 0; k < solucio.size(); k++) {
+                if(tirada.get(i).getColour() == solucio.get(k).getColour()) {
+                    if(tirada.get(i).getPosition() == solucio.get(k).getPosition()) {
+                        indice = k;
+                        valor = 2;
+                    } 
+                    else {
+                        if(valor == 0 && visitats.get(k) == 0) {
+                            indice = k;
+                            valor = 1;
+                        }     
                     }
-                }  
+                }
             }
-        while (linea.size() < 4) linea.add(0);
+            if(indice != -1) {
+                if(visitats.get(indice) < valor)
+                    visitats.set(indice, valor);
+            }
+        }
+        //ordenar el vector
+        for(int i = 0; i < visitats.size(); i++) {
+            if(visitats.get(i) == 2)
+                linea.add(2);
+        }
+        for(int i = 0; i < visitats.size(); i++) {
+            if(visitats.get(i) == 1)
+                linea.add(1);
+        }
+        while(linea.size() < 4)
+            linea.add(0);
         return linea;
     }
-    
+       
     public boolean register(String n, String c) {
         File dir = new File("players/"+n);
         boolean b = dir.mkdirs();

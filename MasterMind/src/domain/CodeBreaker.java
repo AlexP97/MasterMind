@@ -65,10 +65,7 @@ public final class CodeBreaker extends Jugador {
         if(IA)
             super.setIA();
         if(this.esIA()){
-            ArrayList<Integer> aux = new ArrayList<>();
-            for(int i = 0; i < 4; i++){
-                aux.add(1);
-            }
+            ArrayList<Integer> aux = creaArray(1,1,1,1);
             ArrayList<Integer> pos = new ArrayList<>();
             for(int i = 0; i < 6; i++){
                 pos.add(i+1);
