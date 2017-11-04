@@ -17,6 +17,7 @@ public final class CodeBreaker extends Jugador {
     ArrayList<ArrayList<Integer> > compatibles;
     ArrayList<ArrayList<Integer> > noUsados;
     ArrayList<ArrayList<Integer> > combinaciones;
+    boolean primeraOpcio = true;
     
     private void conjunt(int i, ArrayList<Integer> aux, ArrayList<Integer> pos) {
             if(i == 4) {
@@ -88,9 +89,8 @@ public final class CodeBreaker extends Jugador {
     private boolean compare(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio, ArrayList<Integer> code){
         int nblancas = 0;
         int nnegras = 0;
-        
         ArrayList<CodePeg> cambioCodePeg = convert(code);
-        ArrayList<Integer> aux = super.donaSolucio(tirada, cambioCodePeg);
+        ArrayList<Integer> aux = super.donaSolucio(cambioCodePeg, tirada);
         for(int i = 0; i < aux.size(); i++){
             if(aux.get(i) == 2) nblancas++;
             else if(aux.get(i) == 1) nnegras++;
@@ -98,7 +98,7 @@ public final class CodeBreaker extends Jugador {
         
         int blancasSolucio = 0;
         int negrasSolucio = 0;
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < solucio.size(); i++){
             if (solucio.get(i).getColour() == 2) blancasSolucio++;
             else if(solucio.get(i).getColour() == 1) negrasSolucio++;
         }
@@ -123,18 +123,22 @@ public final class CodeBreaker extends Jugador {
         linea = new ArrayList<>();
         if(s.equals("IA")) {
             ArrayList<Integer> aux = creaArray(1,1,2,2);
-            if(!this.compatibles.contains(aux)){
+            if(!primeraOpcio){
                 /*remove from S any code that would not give the same response if it (the guess) were the code
                 	* A code is inconsistent if the answer from comparing 'tirada' and a
                         * code from 'S' is not the same as the answer from comparing
                         * 'tirada' and the secret code given by the game.               
                 */
+                System.out.println(compatibles.size());
                 
                 for(int i = 0; i < compatibles.size(); i++){
                     if(!compare(tirada,solucio,compatibles.get(i))){
                         compatibles.remove(i);
+                        i--;
                     }
-                }
+                }            
+                
+                System.out.println(compatibles.size());
                 
                 int min = Integer.MAX_VALUE;
                 int indice = 0;
@@ -145,9 +149,9 @@ public final class CodeBreaker extends Jugador {
                     int count = 0;
                     for(int j = 0; j < this.combinaciones.size(); j++) {
                         int max = 0;
-                        for(int k = 0; k < noUsados.size(); k++) {
-                            boolean b = miraDescartes(noUsados.get(i), noUsados.get(k), combinaciones.get(j));
-                            if(!b) max++;
+                        for(int k = 0; k < compatibles.size(); k++) {
+                            boolean b = miraDescartes(noUsados.get(i), compatibles.get(k), combinaciones.get(j));
+                            if(b) max++;
                         }
                         if(max > count) count = max;
                     }
@@ -168,6 +172,7 @@ public final class CodeBreaker extends Jugador {
                 return noUsados.get(indice);
             }
             else{
+                primeraOpcio = false;
                 compatibles.remove(aux);
                 return aux;
             }
