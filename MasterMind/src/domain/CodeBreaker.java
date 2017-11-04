@@ -150,7 +150,7 @@ public final class CodeBreaker extends Jugador {
                         int max = 0;
                         for(int k = 0; k < noUsados.size(); k++) {
                             boolean b = miraDescartes(noUsados.get(i), noUsados.get(k), combinaciones.get(j));
-                            if(b) max++;
+                            if(!b) max++;
                         }
                         if(max > count) count = max;
                     }
@@ -159,6 +159,7 @@ public final class CodeBreaker extends Jugador {
                     
                     if(count < min) {
                         indice = i;
+                        min = count;
                         if(comp)
                             compatible = true;
                     }
@@ -167,13 +168,10 @@ public final class CodeBreaker extends Jugador {
                         compatible = comp;
                     }
                 }
-                for(int i = 0; i < noUsados.get(indice).size(); i++)
                 return noUsados.get(indice);
             }
             else{
                 compatibles.remove(aux);
-                for (int i = 0; i < aux.size(); ++i) {
-                }
                 return aux;
             }
         }
