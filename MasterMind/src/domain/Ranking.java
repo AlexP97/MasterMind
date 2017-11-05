@@ -47,14 +47,8 @@ public class Ranking {
         }
     }
     
-    public void muestraRanking(){
-        if(ranking.isEmpty()){
-            System.out.print("El ranking está vacío" + "\n");
-            return;
-        }
-        for(int i = 0; i < ranking.size(); i++){
-            System.out.print(i+1 + ": " + ranking.get(i).getLeft() + " " + ranking.get(i).getRight() + "\n");
-        }
+    public ArrayList<Pair<String, Integer>> muestraRanking(){
+        return ranking;
     }
     
     public void actualizaRanking(String nombre, int puntos){

@@ -5,6 +5,8 @@
  */
 package domain;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Daniel
@@ -15,8 +17,8 @@ public class CtrlDominioRanking {
         
     }
     
-    public boolean muestraRanking() {
-        
-        return false;
+    public ArrayList<Pair<String, Integer>> muestraRanking() {
+        Ranking r = new Ranking();
+        return r.muestraRanking();
     }
 }
