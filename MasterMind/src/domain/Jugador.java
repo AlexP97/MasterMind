@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class Jugador {
     private String name;
     private String password;
-    private int record;
     private boolean IA;
     
     public Jugador() {
@@ -89,7 +88,6 @@ public class Jugador {
             this.name = n;
             this.password = c;
             this.IA = false;
-            this.record = 0;
             File dir2 = new File("players/"+n+"/games");
             dir2.mkdir();
             File info = new File("players/"+n+"/info.txt");
@@ -128,8 +126,7 @@ public class Jugador {
             }
             this.name = palabra[0];
             this.password = palabra[1];
-            this.record = Integer.parseInt(palabra[2]);
-            this.IA = Boolean.valueOf(palabra[3]);
+            this.IA = false;
             p.setRight("Has iniciado sesión correctamente");
             p.setLeft(true);
         }
@@ -149,30 +146,11 @@ public class Jugador {
         return this.password;
     }
     
-    public int getRecord() {
-        return this.record;
-    }
-    
     public void setIA() {
         this.IA = true;
     }
     
     public boolean esIA() {
         return this.IA;
-    }
-    
-    public void setRecord(int r) {
-        if(r > this.record) {
-            this.record = r;
-            File info = new File("players/"+this.name+"/info.txt");
-            try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-                bw.write(this.name+" "+this.password+" "+String.valueOf(r)+" "+this.IA);
-                bw.close();
-            }
-            catch(IOException e) {
-                System.out.println("Error al agregar record");
-            }
-        }
     }
 }
