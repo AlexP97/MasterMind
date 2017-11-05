@@ -7,6 +7,7 @@ package presentation;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import utils.Pair;
 
 /**
  *
@@ -17,6 +18,7 @@ public abstract class VistaGenerica {
     abstract void mostrarVista();
     abstract int getOpciones();
     abstract void obtenerDatos(ArrayList<String> datos);
+    void mostrarRanking(ArrayList<Pair<String, Integer>> ranking){ }
     
     public void mostrarMensaje(String mensaje){
         System.out.println(mensaje);
@@ -34,4 +36,5 @@ public abstract class VistaGenerica {
         }
         return opcion;
     }
+
 }

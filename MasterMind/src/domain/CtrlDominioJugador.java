@@ -5,6 +5,8 @@
  */
 package domain;
 
+import utils.Pair;
+
 /**
  *
  * @author Daniel

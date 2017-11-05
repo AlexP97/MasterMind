@@ -7,6 +7,7 @@ package presentation;
 
 import domain.CtrlDominioJugador;
 import java.util.ArrayList;
+import utils.Pair;
 
 /**
  *
@@ -39,19 +40,19 @@ public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
         ArrayList<String> datos = null;
         Vg.obtenerDatos(datos);
         //aqui llamar a controlador dominio para el login
-        boolean b = false;
-        if(datos != null) b = CDj.login(datos.get(0),datos.get(1));
-        if(!b) Vg.mostrarError("No se ha podido iniciar sesión correctamente");
-        return b;
+        Pair<Boolean, String> p = new Pair();
+        if(datos != null) p = CDj.login(datos.get(0),datos.get(1));
+        if(!p.getLeft()) Vg.mostrarError(p.getRight());
+        return p.getLeft();
     }
     private boolean register(){
         ArrayList<String> datos = null;
         Vg.obtenerDatos(datos);
         //aqui llamar a controlador dominio para el register
-        boolean b = false;
-        if(datos != null) b = CDj.register(datos.get(0),datos.get(1));
-        if(!b) Vg.mostrarError("No se ha podido registrar correctamente");
-        return b;
+        Pair<Boolean, String> p = new Pair();
+        if(datos != null) p = CDj.register(datos.get(0),datos.get(1));
+        if(!p.getLeft()) Vg.mostrarError(p.getRight());
+        return p.getLeft();
     }
 }
 

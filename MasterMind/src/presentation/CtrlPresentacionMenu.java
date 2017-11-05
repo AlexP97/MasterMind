@@ -8,6 +8,7 @@ package presentation;
 import domain.CtrlDominioPartida;
 import domain.CtrlDominioRanking;
 import java.util.ArrayList;
+import utils.Pair;
 
 /**
  *
@@ -58,8 +59,14 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
     }
     
     private boolean muestraRanking(){
-        boolean b = CDr.muestraRanking();
-        if(!b) Vg.mostrarError("No se ha podido mostrar el ranking correctamente");
-        return b;
+        ArrayList<Pair<String, Integer>> ranking = CDr.muestraRanking();
+        if(ranking.isEmpty()){
+            Vg.mostrarMensaje("El ranking está vacío");
+            return false;
+        }
+        else{
+            Vg.mostrarRanking(ranking);
+            return true;
+        }
     }
 }

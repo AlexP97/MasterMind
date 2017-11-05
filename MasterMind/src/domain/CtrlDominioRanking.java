@@ -6,6 +6,7 @@
 package domain;
 
 import java.util.ArrayList;
+import utils.Pair;
 
 /**
  *
@@ -18,7 +19,7 @@ public class CtrlDominioRanking {
     }
     
     public ArrayList<Pair<String, Integer>> muestraRanking() {
-        Ranking r = new Ranking();
+        Ranking r = Ranking.getInstance();
         return r.muestraRanking();
     }
 }

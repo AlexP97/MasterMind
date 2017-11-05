@@ -6,6 +6,7 @@
 
 package domain;
 
+import utils.Pair;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

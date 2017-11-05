@@ -6,6 +6,7 @@
 package presentation;
 
 import java.util.ArrayList;
+import utils.Pair;
 
 /**
  *
@@ -39,5 +40,12 @@ public class VistaMenu extends VistaGenerica {
         datos.add(input.nextLine());
         System.out.print("Escribe el modo de la partida (codebreaker o codemaker)" + "\n");
         datos.add(input.nextLine());
+    }
+    
+    @Override
+    public void mostrarRanking(ArrayList<Pair<String, Integer>> ranking){
+        for(int i = 0; i < ranking.size(); i++){
+            System.out.print(i+1 + ": " + ranking.get(i).getLeft() + " " + ranking.get(i).getRight() + "\n");
+        }
     }
 }

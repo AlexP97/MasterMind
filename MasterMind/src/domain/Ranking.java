@@ -5,6 +5,7 @@
  */
 package domain;
 
+import utils.Pair;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,9 +19,12 @@ import java.util.ArrayList;
  * @author Usuario
  */
 public class Ranking {
-    private ArrayList<Pair<String, Integer>> ranking;
+    private static final Ranking INSTANCE = new Ranking();
+    private static ArrayList<Pair<String, Integer>> ranking;
     
-    public Ranking() {
+    private Ranking(){}
+    
+    public static Ranking getInstance(){
         try {
             File dir = new File("ranking");
             dir.mkdir();
@@ -45,6 +49,7 @@ public class Ranking {
         } catch (IOException ex) {
                 System.out.println("Error creando el ranking");
         }
+        return INSTANCE;
     }
     
     public ArrayList<Pair<String, Integer>> muestraRanking(){
@@ -52,7 +57,7 @@ public class Ranking {
     }
     
     public void actualizaRanking(String nombre, int puntos){
-        Pair<String,Integer> p = new Pair<>(nombre,puntos);
+        Pair<String, Integer> p = new Pair(nombre,puntos);
         Pair aux;
         if(ranking.size() < 10) {
             int i;
@@ -97,10 +102,11 @@ public class Ranking {
                     bw.write(ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
                 else
                     bw.write(" "+ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
-            }
-            bw.close();
+        }
+        bw.close();
         } catch (IOException ex) {
             System.out.println("Error actualizando el ranking");
         }    
     }
+    
 }

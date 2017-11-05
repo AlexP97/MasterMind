@@ -6,6 +6,7 @@
 package domain;
 
 import java.util.Scanner;
+import utils.Pair;
 
 /**
  *
@@ -32,16 +33,18 @@ public class MasterMind {
                         String usuario = input.nextLine();
                         System.out.print("Introduce la contraseña:" + "\n");
                         String contraseña = input.nextLine();
-                        Boolean b = jugador.login(usuario,contraseña);
-                        if(!b) estado = 0;
+                        Pair<Boolean, String> p = new Pair();
+                        p = jugador.login(usuario,contraseña);
+                        if(!p.getLeft()) estado = 0;
                     }
                     else if(start.equals("register")){
                         System.out.print("Introduce el nombre de usuario:" + "\n");
                         String usuario = input.nextLine();
                         System.out.print("Introduce la contraseña:" + "\n");
                         String contraseña = input.nextLine();
-                        Boolean b = jugador.register(usuario,contraseña);
-                        if(!b) estado = 0;
+                        Pair<Boolean, String> p = new Pair();
+                        p = jugador.register(usuario,contraseña);
+                        if(!p.getLeft()) estado = 0;
                     }
                     else{
                         System.out.print("Entrada no válida" + "\n");
@@ -66,7 +69,7 @@ public class MasterMind {
                         game.LoadGame(jugador.getName(), jugador.getPassword());
                     }
                     else if (jugar.equals("ranking")){
-                        RankingSingleton ranking = RankingSingleton.getInstance();
+                        Ranking ranking = Ranking.getInstance();
                         ranking.muestraRanking();
                     }
                     else if (jugar.equals("salir")) estado = 0;

@@ -193,7 +193,7 @@ public class Game {
             if (mode.equals("codemaker")) System.out.print("¡La IA ha acertado la combinación!" + "\n");
             else {
                 System.out.print("¡Has ganado la partida!" + "\n" + "Tu puntuación es: "+ points + "\n");
-                Ranking ranking = new Ranking();
+                Ranking ranking = Ranking.getInstance();
                 ranking.actualizaRanking(player.getName(), points);
             }
         }
