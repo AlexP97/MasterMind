@@ -14,8 +14,13 @@ package domain;
  * @param <S>
  */
 public class Pair<F,S> {
-    private final F left;
-    private final S right;
+    private F left;
+    private S right;
+    
+    public Pair() {
+        left = null;
+        right = null;
+    }
 
     public Pair(F left, S right) {
       this.left = left;
@@ -33,6 +38,14 @@ public class Pair<F,S> {
     
     public S getRight() {
         return right;
+    }
+    
+    public void setLeft(F valor) {
+        left = valor;
+    }
+    
+    public void setRight(S valor) {
+        right = valor;
     }
     
 }

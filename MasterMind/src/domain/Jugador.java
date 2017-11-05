@@ -79,11 +79,12 @@ public class Jugador {
         return linea;
     }
        
-    public boolean register(String n, String c) {
+    public Pair<Boolean, String> register(String n, String c) {
         File dir = new File("players/"+n);
         boolean b = dir.mkdirs();
+        Pair<Boolean, String> p = new Pair();
         if(b) {      
-            System.out.println("Te has registrado correctamente");
+            p.setRight("Te has registrado correctamente");
             this.name = n;
             this.password = c;
             this.IA = false;
@@ -97,18 +98,21 @@ public class Jugador {
                 bw.close();
             }
             catch(IOException e) {
-                System.out.println("Error en el registro");
-                return false;
+                p.setRight("Error en el registro");
+                p.setLeft(false);
+                return p;
             }
-            return true;
+            p.setLeft(true);
         }
         else {
-            System.out.println("El jugador ya existe");
-            return false;
+            p.setRight("El jugador ya existe");
+            p.setLeft(false);
         }
+        return p;
     }
     
-    public boolean login(String n, String c) {
+    public Pair<Boolean, String> login(String n, String c) {
+        Pair<Boolean, String> p = new Pair();
         try{
             String linea;
             FileReader f = new FileReader("players/"+n+"/info.txt");
@@ -117,20 +121,23 @@ public class Jugador {
             b.close();
             String palabra[] = linea.split(" ");
             if(!palabra[1].equals(c)) {
-                System.out.println("La contraseña introducida es incorrecta");
-                return false;
+                p.setRight("La contraseña introducida es incorrecta");
+                p.setLeft(false);
+                return p;
             }
             this.name = palabra[0];
             this.password = palabra[1];
             this.record = Integer.parseInt(palabra[2]);
             this.IA = Boolean.valueOf(palabra[3]);
-            System.out.println("Has iniciado sesión correctamente");
-            return true;
+            p.setRight("Has iniciado sesión correctamente");
+            p.setLeft(true);
         }
         catch(IOException ex) {
-            System.out.println("El usuario introducido es incorrecto");
-            return false;
+            p.setRight("El usuario introducido es incorrecto");
+            p.setLeft(false);
+            return p;
         }
+        return p;
     }
     
     public String getName() {
