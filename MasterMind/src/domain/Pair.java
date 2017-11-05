@@ -5,9 +5,13 @@
  */
 package domain;
 
+
+
 /**
  *
  * @author Usuario
+ * @param <F>
+ * @param <S>
  */
 public class Pair<F,S> {
     private final F left;

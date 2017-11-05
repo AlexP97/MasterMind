@@ -98,6 +98,7 @@ public class Jugador {
             }
             catch(IOException e) {
                 System.out.println("Error en el registro");
+                return false;
             }
             return true;
         }
@@ -166,5 +167,4 @@ public class Jugador {
             }
         }
     }
-    
 }

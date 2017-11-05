@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class RankingSingleton {
     private static final RankingSingleton INSTANCE = new RankingSingleton();
-    private static ArrayList<Pair> ranking;
+    private static ArrayList<Pair<String, Integer>> ranking;
     
     private RankingSingleton(){}
     
@@ -62,7 +62,7 @@ public class RankingSingleton {
     }
     
     public void actualizaRanking(String nombre, int puntos){
-        Pair p = new Pair(nombre,puntos);
+        Pair<String, Integer> p = new Pair(nombre,puntos);
         Pair aux;
         if(ranking.size() < 10) {
             int i;

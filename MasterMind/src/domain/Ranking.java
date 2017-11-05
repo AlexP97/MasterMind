@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @author Usuario
  */
 public class Ranking {
-    private ArrayList<Pair> ranking;
+    private ArrayList<Pair<String, Integer>> ranking;
     
     public Ranking() {
         try {
@@ -58,7 +58,7 @@ public class Ranking {
     }
     
     public void actualizaRanking(String nombre, int puntos){
-        Pair p = new Pair(nombre,puntos);
+        Pair<String,Integer> p = new Pair<>(nombre,puntos);
         Pair aux;
         if(ranking.size() < 10) {
             int i;
@@ -103,8 +103,8 @@ public class Ranking {
                     bw.write(ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
                 else
                     bw.write(" "+ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
-        }
-        bw.close();
+            }
+            bw.close();
         } catch (IOException ex) {
             System.out.println("Error actualizando el ranking");
         }    
