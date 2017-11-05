@@ -28,7 +28,6 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
     public boolean crearCargarRanking(){
         int opcion = -1;
         while(opcion != 0){
-            System.out.print("Bienvenido a MasterMind." + "\n");
             opcion = Vg.obtenerOpcion();
             switch(opcion){
                 case 0: return false;

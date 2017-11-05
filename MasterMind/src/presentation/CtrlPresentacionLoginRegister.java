@@ -39,7 +39,6 @@ public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
     private boolean login(){
         ArrayList<String> datos = null;
         Vg.obtenerDatos(datos);
-        //aqui llamar a controlador dominio para el login
         Pair<Boolean, String> p = new Pair();
         if(datos != null) p = CDj.login(datos.get(0),datos.get(1));
         if(!p.getLeft()) Vg.mostrarError(p.getRight());
@@ -48,7 +47,6 @@ public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
     private boolean register(){
         ArrayList<String> datos = null;
         Vg.obtenerDatos(datos);
-        //aqui llamar a controlador dominio para el register
         Pair<Boolean, String> p = new Pair();
         if(datos != null) p = CDj.register(datos.get(0),datos.get(1));
         if(!p.getLeft()) Vg.mostrarError(p.getRight());

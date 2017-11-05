@@ -11,7 +11,7 @@ package domain;
  */
 public class CtrlDominioPartida {
     
-    private Game game;
+    private final Game game;
     
     public CtrlDominioPartida() {
         

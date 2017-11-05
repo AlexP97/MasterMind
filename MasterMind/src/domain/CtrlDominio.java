@@ -5,8 +5,6 @@
  */
 package domain;
 
-import presentation.CtrlPresentacion;
-
 /**
  *
  * @author Daniel
