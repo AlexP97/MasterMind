@@ -5,25 +5,23 @@
  */
 package domain;
 
+import presentation.CtrlPresentacion;
+
 /**
  *
  * @author Daniel
  */
 public class CtrlDominio {
     
-    private CtrlDominioJugador CDmj;
-    private CtrlDominioPartida CDmp;
-    private CtrlDominioRanking CDmr;
+    private final CtrlDominioJugador CDmj;
+    private final CtrlDominioPartida CDmp;
+    private final CtrlDominioRanking CDmr;
            
     
     public CtrlDominio(){
         CDmj = new CtrlDominioJugador();
         CDmp = new CtrlDominioPartida();
         CDmr = new CtrlDominioRanking();
-    }
-    
-    public void inicializarDominio() {
-        
     }
     
     public CtrlDominioJugador getCtrlDominioJugador() {
@@ -37,4 +35,5 @@ public class CtrlDominio {
     public CtrlDominioRanking getCtrlDominioRanking() {
         return CDmr;
     }
+    
 }

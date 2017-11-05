@@ -13,13 +13,13 @@ import java.util.ArrayList;
  *
  * @author Usuario
  */
-public class CtrlPresentacionMenu {
+public class CtrlPresentacionMenu extends CtrlPresentacion {
     private final VistaGenerica Vg;
     private final CtrlDominioPartida CDp;
     private final CtrlDominioRanking CDr;
     
-    public CtrlPresentacionMenu(VistaGenerica Vg, CtrlDominioPartida CDp, CtrlDominioRanking CDr){
-        this.Vg = Vg;
+    public CtrlPresentacionMenu(CtrlDominioPartida CDp, CtrlDominioRanking CDr){
+        this.Vg = new VistaMenu();
         this.CDp = CDp;
         this.CDr = CDr;
     }
@@ -42,7 +42,8 @@ public class CtrlPresentacionMenu {
     private boolean crearPartida(){
         ArrayList<String> datos = null;
         Vg.obtenerDatos(datos);
-        boolean b = CDp.crearPartida(datos.get(0),datos.get(1),datos.get(2));
+        boolean b = false;
+        if(datos != null) CDp.crearPartida(datos.get(0),datos.get(1),datos.get(2));
         if(!b) Vg.mostrarError("No se ha podido crear partida correctamente");
         return b;
     }
@@ -50,7 +51,8 @@ public class CtrlPresentacionMenu {
     private boolean cargarPartida(){
         ArrayList<String> datos = null;
         Vg.obtenerDatos(datos);
-        boolean b = CDp.cargarPartida(datos.get(0),datos.get(1));
+        boolean b = false;
+        if(datos != null) CDp.cargarPartida(datos.get(0),datos.get(1));
         if(!b) Vg.mostrarError("No se ha podido cargar partida correctamente");
         return b;
     }

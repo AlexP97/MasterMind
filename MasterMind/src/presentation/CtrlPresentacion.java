@@ -21,31 +21,23 @@ public class CtrlPresentacion {
     private final CtrlDominioRanking CDr;
     private CtrlPresentacionLoginRegister CPlr;
     private CtrlPresentacionMenu CPm;
-    private final VistaLoginRegister Vlr;
-    private final VistaMenu Vm;
     
     public CtrlPresentacion() {
         CD = new CtrlDominio();
-        CDj = new CtrlDominioJugador();
-        CDp = new CtrlDominioPartida();
-        CDr = new CtrlDominioRanking();
-        Vlr = new VistaLoginRegister();
-        Vm = new VistaMenu();
-    }
-    public void iniciarPresentacion() {
-        CD.inicializarDominio();
-        // ...
+        CDj = CD.getCtrlDominioJugador();
+        CDp = CD.getCtrlDominioPartida();
+        CDr = CD.getCtrlDominioRanking();
     }
     
-    public void iniciarRegistroLogin(){
-        CPlr = new CtrlPresentacionLoginRegister(Vlr,CDj);
+    private void iniciarRegistroLogin(){
+        CPlr = new CtrlPresentacionLoginRegister(CDj);
         if (CPlr.loginRegister()){
             iniciarCrearCargarRanking();
         }
     }
     
-    public void iniciarCrearCargarRanking(){
-        CPm = new CtrlPresentacionMenu(Vm,CDp,CDr);
+    private void iniciarCrearCargarRanking(){
+        CPm = new CtrlPresentacionMenu(CDp,CDr);
         if(CPm.crearCargarRanking()){
             
         }

@@ -12,12 +12,12 @@ import java.util.ArrayList;
  *
  * @author Usuario
  */
-public class CtrlPresentacionLoginRegister {
+public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
     private final VistaGenerica Vg;
     private final CtrlDominioJugador CDj;
     
-    public CtrlPresentacionLoginRegister(VistaGenerica Vg, CtrlDominioJugador CDj){
-        this.Vg = Vg;
+    public CtrlPresentacionLoginRegister(CtrlDominioJugador CDj){
+        this.Vg = new VistaLoginRegister();
         this.CDj = CDj;
     }
     
@@ -39,7 +39,8 @@ public class CtrlPresentacionLoginRegister {
         ArrayList<String> datos = null;
         Vg.obtenerDatos(datos);
         //aqui llamar a controlador dominio para el login
-        boolean b = CDj.login(datos.get(0),datos.get(1));
+        boolean b = false;
+        if(datos != null) b = CDj.login(datos.get(0),datos.get(1));
         if(!b) Vg.mostrarError("No se ha podido iniciar sesión correctamente");
         return b;
     }
@@ -47,7 +48,8 @@ public class CtrlPresentacionLoginRegister {
         ArrayList<String> datos = null;
         Vg.obtenerDatos(datos);
         //aqui llamar a controlador dominio para el register
-        boolean b = CDj.register(datos.get(0),datos.get(1));
+        boolean b = false;
+        if(datos != null) b = CDj.register(datos.get(0),datos.get(1));
         if(!b) Vg.mostrarError("No se ha podido registrar correctamente");
         return b;
     }

@@ -9,25 +9,25 @@ package domain;
  *
  * @author Usuario
  */
-public class Pair {
-    private final String left;
-    private final int right;
+public class Pair<F,S> {
+    private final F left;
+    private final S right;
 
-    public Pair(String left, int right) {
+    public Pair(F left, S right) {
       this.left = left;
       this.right = right;
     }
     
     public Pair(Pair p){
-        this.left = p.getLeft();
-        this.right = p.getRight();
+        this.left = (F) p.getLeft();
+        this.right = (S) p.getRight();
     }
 
-    public String getLeft() {
+    public F getLeft() {
         return left;
     }
     
-    public int getRight() {
+    public S getRight() {
         return right;
     }
     
