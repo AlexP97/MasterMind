@@ -98,7 +98,7 @@ public class Game {
             }
             else {
                 SaveGame();
-                break;
+                return lista;
             }
             
         }
@@ -116,7 +116,7 @@ public class Game {
             }
             else {
                 SaveGame();
-                break;
+                return lista;
             }
             
         }
