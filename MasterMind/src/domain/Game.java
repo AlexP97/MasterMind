@@ -344,8 +344,6 @@ public class Game {
                     Scanner input = new Scanner(System.in);
 
                     int num = Integer.parseInt(input.nextLine());
-
-                    if (num == -1) return false;
                     
                     if (num - 1 >= listOfFiles.length) {
                         System.out.print("Esta partida no existe. Introduce otro número." + "\n");
