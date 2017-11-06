@@ -209,7 +209,7 @@ public class Game {
         else this.points -= 5;
     }
     
-    public boolean juega(Jugador playerN, String ident, String dif, String mod) {
+    public void juega(Jugador playerN, String ident, String dif, String mod) {
         
         if (CheckAvailability(ident, playerN.getName()) || cargado){
             
@@ -220,7 +220,7 @@ public class Game {
                 else if (dif.equals("dificil")) this.totalTurns = 8;
                 else {
                     System.out.print("Esta dificultad no existe" + "\n");
-                    return false;
+                    return;
                 }
                 if (output == null) this.output = new String[totalTurns+1];
                 this.output[0] = "--------------";
@@ -242,7 +242,7 @@ public class Game {
                 }
                 else {
                         System.out.print("Esta modo de juego no existe" + "\n");
-                        return false;
+                        return;
                 }
                 System.out.print("CodeIni: ");
                 for (int d = 0; d < 4; d++) System.out.print(codeIni.get(d).getColour() + " ");
@@ -274,7 +274,7 @@ public class Game {
                     outputM = conversorKey(codeM.jugar("IA", outputB, codeIni));
                 }
                 
-                if (this.gameSaved) return true;
+                if (this.gameSaved) return;
                 
                 codeBAnt = outputB;
                 codeMAnt = outputM;
@@ -305,24 +305,22 @@ public class Game {
                 }
                 if (acierto) {
                     finishGame(true);
-                    return true;
                 }
                 ++turn;
                 baja_Puntuacion();
             }
             
             finishGame(false);
-            return true;
         }
         else {
             System.out.print("No se ha podido crear la partida. Este id ya está en uso." + "\n");
-            return false;
+            return;
         }
     }
     
-    public boolean LoadGame(String userName, String pass){
+    public void LoadGame(Jugador playerP){
         
-        File folder = new File("players/"+userName+"/games/");
+        File folder = new File("players/"+playerP.getName()+"/games/");
         File[] listOfFiles = folder.listFiles();
 
         if (listOfFiles != null){
@@ -355,7 +353,7 @@ public class Game {
                     else {
                         input = new Scanner(listOfFiles[num-1]);
                         
-                        this.player = new Jugador(userName, pass);
+                        this.player = playerP;
                         System.out.print("Player cargado" + "\n");
                         
                         String line = input.nextLine();
@@ -415,20 +413,17 @@ public class Game {
                         }
                         System.out.print("output mostrado" + "\n");
                         
-                        return juega(player, id, difficulty, mode);
+                        juega(player, id, difficulty, mode);
                     }
 
                 } catch (Exception ex) {
                     System.out.print("No se ha podido cargar la partida." + "\n");
-                    return false;
                 }
             }
         }
         else {
             System.out.print("No hay ninguna partida guardada." + "\n");
-            return false;
         }
-        return false;
     }
     
     

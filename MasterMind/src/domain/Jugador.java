@@ -29,13 +29,6 @@ public class Jugador {
       
     }
     
-    public Jugador(String userName, String pass) {
-        
-        this.name = userName;
-        this.password = pass;
-        
-    }
-    
     public ArrayList<Integer> donaSolucio(ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
         ArrayList<Integer> linea = new ArrayList<>();
         ArrayList<Integer> visitats = new ArrayList<>();

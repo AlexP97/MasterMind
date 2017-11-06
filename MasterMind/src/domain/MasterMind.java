@@ -66,7 +66,7 @@ public class MasterMind {
                     }
                     else if (jugar.equals("cargar")){
                         Game game = new Game();
-                        game.LoadGame(jugador.getName(), jugador.getPassword());
+                        game.LoadGame(jugador);
                     }
                     else if (jugar.equals("ranking")){
                         Ranking ranking = Ranking.getInstance();
