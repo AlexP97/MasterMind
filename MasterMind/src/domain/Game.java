@@ -305,6 +305,7 @@ public class Game {
                 }
                 if (acierto) {
                     finishGame(true);
+                    return;
                 }
                 ++turn;
                 baja_Puntuacion();

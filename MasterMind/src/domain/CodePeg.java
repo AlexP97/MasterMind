@@ -13,7 +13,7 @@ public final class CodePeg extends Casilla {
     private final int colourCode;
     private final int position;
     
-    public CodePeg(int col, int pos){
+    public CodePeg(int col, int pos) throws IllegalArgumentException{
         if(!colourValid(col) || !posValid(pos)) 
             throw new IllegalArgumentException("Invalid argument");
         this.colourCode = col;

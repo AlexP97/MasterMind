@@ -13,7 +13,7 @@ public final class KeyPeg extends Casilla {
     private final int colourKey;
     private final int position;
     
-    public KeyPeg(int col, int pos){
+    public KeyPeg(int col, int pos) throws IllegalArgumentException {
         if(!colourValid(col) || !posValid(pos)) 
             throw new IllegalArgumentException("Invalid argument");
         this.colourKey = col;

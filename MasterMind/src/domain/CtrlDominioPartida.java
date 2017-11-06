@@ -21,7 +21,8 @@ public class CtrlDominioPartida {
     
     public boolean cargarPartida(String userName, String pass) {
         
-        return game.LoadGame(userName, pass);
+        //return game.LoadGame(userName, pass);
+        return false;
     }
     
     public boolean crearPartida(String s1, String s2, String s3) {
