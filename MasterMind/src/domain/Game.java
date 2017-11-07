@@ -175,8 +175,16 @@ public class Game {
             
             pw.close();
             
-            out.println("Partida guardada." + "\n");
-            this.gameSaved = true;
+            boolean b = codeB.GuardarMatrices(player.getName(), id, cargado);
+            
+            if (!b) {
+                System.out.print("No se ha podido guardar la partida.");
+                return;
+            }
+            else {
+                out.println("Partida guardada." + "\n");
+                this.gameSaved = true;
+            }
             
         } catch (IOException ex) {
             
