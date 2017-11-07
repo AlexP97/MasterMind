@@ -216,13 +216,46 @@ public final class CodeBreaker extends Jugador implements Serializable{
         ArrayList<Integer> aux = miraSolucio(candidat,descartat);
         return combinacio.equals(aux);
     }
+    
+    private ArrayList<Integer> millorOpcio() {
+        int min = Integer.MAX_VALUE;
+        int indice = 0;
+        boolean compatible = false;
+        for(int i = 0; i < noUsados.size(); i++){
+            //algoritmo de posibilidades
+            
+            int count = 0;
+            for(int j = 0; j < combinaciones.size(); j++) {
+                int max = 0;
+                for(int k = 0; k < compatibles.size(); k++) {
+                    boolean b = miraDescartes(noUsados.get(i), compatibles.get(k), combinaciones.get(j));
+                    if(b) max++;
+                }
+                if(max > count) count = max;
+            }
+                    
+            boolean comp = (compatibles.contains(noUsados.get(i)));
+            if(count < min) {
+                indice = i;
+                min = count;
+                if(comp)
+                    compatible = true;
+                }
+                if(count == min && !compatible && comp) {
+                    indice = i;
+                    compatible = comp;
+                }
+        }
+        return noUsados.get(indice);
+    }
    
     
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio) {
         ArrayList<Integer> linea;
         linea = new ArrayList<>();
         if(s.equals("IA")) {
-            ArrayList<Integer> aux = creaArray(1,2,1,2);
+            ArrayList<Integer> aux = millorOpcio();
+            
             if(!primeraOpcio){
                 /*remove from S any code that would not give the same response if it (the guess) were the code
                 	* A code is inconsistent if the answer from comparing 'tirada' and a
@@ -240,36 +273,8 @@ public final class CodeBreaker extends Jugador implements Serializable{
                 
                 System.out.println(compatibles.size());
                 
-                int min = Integer.MAX_VALUE;
-                int indice = 0;
-                boolean compatible = false;
-                for(int i = 0; i < this.noUsados.size(); i++){
-                    //algoritmo de posibilidades
-                    boolean comp = true;
-                    int count = 0;
-                    for(int j = 0; j < this.combinaciones.size(); j++) {
-                        int max = 0;
-                        for(int k = 0; k < compatibles.size(); k++) {
-                            boolean b = miraDescartes(noUsados.get(i), compatibles.get(k), combinaciones.get(j));
-                            if(b) max++;
-                        }
-                        if(max > count) count = max;
-                    }
-                    
-                    comp = (compatibles.contains(noUsados.get(i)));
-                    
-                    if(count < min) {
-                        indice = i;
-                        min = count;
-                        if(comp)
-                            compatible = true;
-                    }
-                    if(count == min && !compatible && comp) {
-                        indice = i;
-                        compatible = comp;
-                    }
-                }
-                return noUsados.get(indice);
+                linea = millorOpcio();
+                return linea;
             }
             else{
                 primeraOpcio = false;
