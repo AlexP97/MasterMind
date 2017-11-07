@@ -28,50 +28,7 @@ public class Jugador {
     public Jugador() {
       
     }
-    
-    public ArrayList<Integer> donaSolucio(ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
-        ArrayList<Integer> linea = new ArrayList<>();
-        ArrayList<Integer> visitats = new ArrayList<>();
-        for(int i = 0; i < 4; i++) 
-            visitats.add(0);
-        int indice;
-        int valor;
-        for(int i = 0; i < tirada.size(); i++){
-            valor = 0;
-            indice = -1;
-            for(int k = 0; k < solucio.size(); k++) {
-                if(tirada.get(i).getColour() == solucio.get(k).getColour()) {
-                    if(tirada.get(i).getPosition() == solucio.get(k).getPosition()) {
-                        indice = k;
-                        valor = 2;
-                    } 
-                    else {
-                        if(valor == 0 && visitats.get(k) == 0) {
-                            indice = k;
-                            valor = 1;
-                        }     
-                    }
-                }
-            }
-            if(indice != -1) {
-                if(visitats.get(indice) < valor)
-                    visitats.set(indice, valor);
-            }
-        }
-        //ordenar el vector
-        for(int i = 0; i < visitats.size(); i++) {
-            if(visitats.get(i) == 2)
-                linea.add(2);
-        }
-        for(int i = 0; i < visitats.size(); i++) {
-            if(visitats.get(i) == 1)
-                linea.add(1);
-        }
-        while(linea.size() < 4)
-            linea.add(0);
-        return linea;
-    }
-       
+   
     public Pair<Boolean, String> register(String n, String c) {
         File dir = new File("players/"+n);
         boolean b = dir.mkdirs();
@@ -145,5 +102,40 @@ public class Jugador {
     
     public boolean esIA() {
         return this.IA;
+    }
+    
+    public ArrayList<Integer> donaSolucio(ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
+        ArrayList<Integer> linea = new ArrayList<>();
+        ArrayList<Boolean> visitats = new ArrayList<>();
+        ArrayList<Boolean> visitats2 = new ArrayList<>();
+        for(int i = 0; i < 4; i++) {
+            visitats.add(false);
+            visitats2.add(false);
+        }
+        int indice;
+        int valor;
+        
+        for(int i = 0; i < tirada.size(); i++) {
+            if(tirada.get(i) == solucio.get(i)) {
+                linea.add(2);
+                visitats.set(i,true);
+                visitats2.set(i,true);
+            }   
+        }
+        
+        for(int i = 0; i < tirada.size(); i++) {
+            for(int j = 0; j < solucio.size() && !visitats.get(i); j++) {
+                if(tirada.get(i) == solucio.get(j) && !visitats2.get(j)) {
+                    linea.add(1);
+                    visitats2.set(j,true);
+                    visitats.set(i,true);
+                }
+            }
+        }
+        while(linea.size() < 4) {
+            linea.add(0);
+        }
+            
+        return linea;
     }
 }
