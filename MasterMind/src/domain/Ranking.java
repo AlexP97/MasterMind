@@ -93,7 +93,6 @@ public class Ranking {
             }
             
         }
-        System.out.println(ranking.get(0).getRight());
         try{
             File info = new File("ranking/info.txt");
             BufferedWriter bw = new BufferedWriter(new FileWriter(info));

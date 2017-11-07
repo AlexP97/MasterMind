@@ -262,7 +262,6 @@ public final class CodeBreaker extends Jugador implements Serializable{
                         * code from 'S' is not the same as the answer from comparing
                         * 'tirada' and the secret code given by the game.               
                 */
-                System.out.println(compatibles.size());
                 
                 for(int i = 0; i < compatibles.size(); i++){
                     if(!compare(tirada,solucio,compatibles.get(i))){
@@ -270,9 +269,6 @@ public final class CodeBreaker extends Jugador implements Serializable{
                         i--;
                     }
                 }            
-                
-                System.out.println(compatibles.size());
-                
                 linea = millorOpcio();
                 return linea;
             }
