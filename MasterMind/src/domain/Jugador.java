@@ -112,20 +112,19 @@ public class Jugador {
             visitats.add(false);
             visitats2.add(false);
         }
-        int indice;
-        int valor;
         
         for(int i = 0; i < tirada.size(); i++) {
-            if(tirada.get(i) == solucio.get(i)) {
+            if(tirada.get(i).getColour() == solucio.get(i).getColour()) {
                 linea.add(2);
                 visitats.set(i,true);
                 visitats2.set(i,true);
             }   
         }
         
+        
         for(int i = 0; i < tirada.size(); i++) {
             for(int j = 0; j < solucio.size() && !visitats.get(i); j++) {
-                if(tirada.get(i) == solucio.get(j) && !visitats2.get(j)) {
+                if(tirada.get(i).getColour() == solucio.get(j).getColour() && !visitats2.get(j)) {
                     linea.add(1);
                     visitats2.set(j,true);
                     visitats.set(i,true);

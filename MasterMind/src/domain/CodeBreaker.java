@@ -222,7 +222,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
         ArrayList<Integer> linea;
         linea = new ArrayList<>();
         if(s.equals("IA")) {
-            ArrayList<Integer> aux = creaArray(1,1,2,2);
+            ArrayList<Integer> aux = creaArray(1,2,1,2);
             if(!primeraOpcio){
                 /*remove from S any code that would not give the same response if it (the guess) were the code
                 	* A code is inconsistent if the answer from comparing 'tirada' and a
