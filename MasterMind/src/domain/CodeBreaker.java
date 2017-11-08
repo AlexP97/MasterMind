@@ -183,7 +183,8 @@ public final class CodeBreaker extends Jugador implements Serializable{
             boolean jugadaHecha = false;
             while (!jugadaHecha){
                 Scanner input = new Scanner(System.in);
-                System.out.print("Introduce tu jugada poniendo cada ficha del 1 al 6 separada de un espacio:" + "\n");
+                System.out.print("Introduce tu jugada poniendo cada ficha del 1 al 6 separada de un espacio "
+                        + "(o introduce -1 para guardar partida):\n");
                 String jugada = input.nextLine();
                 String fichas[] = jugada.split(" ");
                 jugadaHecha = true;

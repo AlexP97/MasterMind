@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -354,10 +355,19 @@ public class Game {
         }
     }
     
+    public File[] finder( String dirName){
+        File dir = new File(dirName);
+
+        return dir.listFiles(new FilenameFilter() { 
+                 public boolean accept(File dir, String filename)
+                      { return filename.endsWith(".txt"); }
+        } );
+
+    }
+    
     public void LoadGame(Jugador playerP){
         
-        File folder = new File("players/"+playerP.getName()+"/games/");
-        File[] listOfFiles = folder.listFiles();
+        File[] listOfFiles = finder("players/"+playerP.getName()+"/games/");
 
         if (listOfFiles != null){
             for (int i = 0; i < listOfFiles.length; i++) {
