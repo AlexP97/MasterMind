@@ -5,9 +5,15 @@
  */
 package domain;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.util.ArrayList;
@@ -160,6 +166,16 @@ public class Game {
             pw.println(points);
             pw.println(turn);
             pw.println(totalTurns);
+            for (int i = 0; i < 4; ++i) {
+                
+                pw.println(codeMAnt.get(i).getColour());
+                
+            }
+            for (int i = 0; i < 4; ++i) {
+                
+                pw.println(codeBAnt.get(i).getColour());
+                
+            }
             
             for (int i = 0; i < 4; ++i) {
                 
@@ -175,11 +191,15 @@ public class Game {
             
             pw.close();
             
-            boolean b = codeB.GuardarMatrices(player.getName(), id, cargado);
-            
-            if (!b) {
-                System.out.print("No se ha podido guardar la partida.");
-                return;
+            if (mode.equals("codemaker")){
+                
+                FileOutputStream fout = new FileOutputStream("players/"+player.getName()+"/games/"+id+"CB");
+                ObjectOutputStream oos = new ObjectOutputStream(fout);
+                oos.writeObject(codeB);    
+                oos.close();
+                
+                out.println("Partida guardada." + "\n");
+                this.gameSaved = true;
             }
             else {
                 out.println("Partida guardada." + "\n");
@@ -220,7 +240,7 @@ public class Game {
     public void juega(Jugador playerN, String ident, String dif, String mod) {
         
         if (CheckAvailability(ident, playerN.getName()) || cargado){
-            
+            boolean primerTurnoCargado;
             if (!cargado) {
                 this.id = ident;
                 if (dif.equals("facil")) this.totalTurns = 12;
@@ -237,6 +257,8 @@ public class Game {
                 this.mode = mod;
                 this.points = 150;
                 this.turn = 1;
+                this.codeBAnt = null;
+                this.codeMAnt = null;
 
                 if (mode.equals("codemaker")) {
                     this.codeB = new CodeBreaker(true);
@@ -252,40 +274,45 @@ public class Game {
                         System.out.print("Esta modo de juego no existe" + "\n");
                         return;
                 }
+                primerTurnoCargado = false;
                 System.out.print("CodeIni: ");
                 for (int d = 0; d < 4; d++) System.out.print(codeIni.get(d).getColour() + " ");
                 System.out.print("\n");
             }else {
                 if (mode.equals("codemaker")) {
                     this.codeM = new CodeMaker(false);
-                    this.codeB = new CodeBreaker(true);
                 }
                 else if (mode.equals("codebreaker")) {
                     this.codeM = new CodeMaker(true);
                     this.codeB = new CodeBreaker(false);
-                }    
+                }   
+                primerTurnoCargado = true;
             }
-            
             while (turn <= totalTurns){
                                 
                 boolean acierto = true;
                 
-                ArrayList<KeyPeg> outputM = null;
-                ArrayList<CodePeg> outputB = null;
+                ArrayList<KeyPeg> outputM = codeMAnt;
+                ArrayList<CodePeg> outputB = codeBAnt;
                 
                 if (mode.equals("codemaker")) {
-                    outputB = conversorCode(codeB.jugar("IA", codeBAnt, codeMAnt));
+                    if (!primerTurnoCargado) {
+                        outputB = conversorCode(codeB.jugar("IA", codeBAnt, codeMAnt));
+                        codeBAnt = outputB;
+                    }
                     outputM = conversorKey(codeM.jugar("Player", outputB, codeIni));
+                    codeMAnt = outputM;
                 }
                 else if (mode.equals("codebreaker")) {
                     outputB = conversorCode(codeB.jugar("Player", codeBAnt, codeMAnt));
+                    codeBAnt = outputB;
                     outputM = conversorKey(codeM.jugar("IA", outputB, codeIni));
+                    codeMAnt = outputM;
                 }
                 
-                if (this.gameSaved) return;
+                primerTurnoCargado = false;
                 
-                codeBAnt = outputB;
-                codeMAnt = outputM;
+                if (this.gameSaved) return;
                 
                 String linea = "";
                 
@@ -361,31 +388,44 @@ public class Game {
                         input = new Scanner(listOfFiles[num-1]);
                         
                         this.player = playerP;
-                        System.out.print("Player cargado" + "\n");
                         
                         String line = input.nextLine();
                         this.id = line;
-                        System.out.print("Id cargado" + "\n");
                         
                         line = input.nextLine();
                         this.difficulty = line;
-                        System.out.print("Diff cargado" + "\n");
                         
                         line = input.nextLine();
                         this.mode = line;
-                        System.out.print("mode cargado" + "\n");
                         
                         line = input.nextLine();
                         this.points = Integer.parseInt(line);
-                        System.out.print("Puntos cargado" + "\n");
                         
                         line = input.nextLine();
                         this.turn = Integer.parseInt(line);
-                        System.out.print("turn cargado" + "\n");
                         
                         line = input.nextLine();
                         this.totalTurns = Integer.parseInt(line);
-                        System.out.print("totalturns cargado" + "\n");
+                        
+                        codeMAnt = new ArrayList<KeyPeg>();
+                        
+                        for (int i = 0; i < 4; ++i) {
+
+                            line = input.nextLine(); 
+                            KeyPeg code = new KeyPeg(Integer.parseInt(line), i+1);
+                            codeMAnt.add(code);
+
+                        }
+                        
+                        codeBAnt = new ArrayList<CodePeg>();
+                        
+                        for (int i = 0; i < 4; ++i) {
+
+                            line = input.nextLine(); 
+                            CodePeg code = new CodePeg(Integer.parseInt(line), i+1);
+                            codeBAnt.add(code);
+
+                        }
                         
                         this.output = new String[totalTurns+1];
                                                          
@@ -394,12 +434,10 @@ public class Game {
                         for (int i = 0; i < 4; ++i) {
 
                             line = input.nextLine(); 
-                            System.out.print(line + "\n");
                             CodePeg code = new CodePeg(Integer.parseInt(line), i+1);
                             codeIni.add(code);
 
                         }
-                        System.out.print("Codeini cargado" + "\n");
 
                         for (int i = 0; i < turn; ++i) {
 
@@ -408,8 +446,16 @@ public class Game {
                             output[i] = line;
 
                         }
-                        System.out.print("Output cargado" + "\n");
                         input.close();
+                        
+                        if (mode.equals("codemaker")){
+                            
+                            FileInputStream fout = new FileInputStream("players/"+player.getName()+"/games/"+id+"CB");
+                            ObjectInputStream oos = new ObjectInputStream(fout);
+                            codeB = (CodeBreaker) oos.readObject();
+                            oos.close();
+                
+                        }
                         cargado = true;
                         System.out.print("Partida cargada!" + "\n");
                         
@@ -418,7 +464,6 @@ public class Game {
                             System.out.print(output[i] + "\n");
                     
                         }
-                        System.out.print("output mostrado" + "\n");
                         
                         juega(player, id, difficulty, mode);
                     }

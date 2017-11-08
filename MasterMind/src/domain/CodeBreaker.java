@@ -6,18 +6,9 @@
 
 package domain;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -28,96 +19,6 @@ public final class CodeBreaker extends Jugador implements Serializable{
     ArrayList<ArrayList<Integer> > noUsados;
     ArrayList<ArrayList<Integer> > combinaciones;
     boolean primeraOpcio = true;
-    
-    public boolean GuardarMatrices(String userName, String id, boolean cargado) {
-        try {
-        ByteArrayOutputStream bs= new ByteArrayOutputStream();
-        ObjectOutputStream os = new ObjectOutputStream (bs);
-        os.writeObject(compatibles);  // this es de tipo DatoUdp
-        os.close();
-        byte[] bytes =  bs.toByteArray(); // devuelve byte
-        
-        if (cargado) {
-            File file = new File("players/"+userName+"/games/"+id+"MatrComp.txt");
-            file.delete();
-        }
-        
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("players/"+userName+"/games/"+id+"MatrComp.txt"));
-
-        for (int i = 0; i < bytes.length; i++)
-        {
-            // ojo, se hace un new por cada Persona. El new dentro del bucle.
-            Byte b = bytes[i];
-            oos.writeObject(b);
-        }
-        oos.close();  // Se cierra al terminar.
-        
-        } catch (IOException ex) {
-            System.out.print("No se han podido guardar los datos de la IA");
-            return false;
-        }
-        
-        try {
-        ByteArrayOutputStream bs= new ByteArrayOutputStream();
-        ObjectOutputStream os = new ObjectOutputStream (bs);
-        os.writeObject(noUsados);  // this es de tipo DatoUdp
-        os.close();
-        byte[] bytes =  bs.toByteArray(); // devuelve byte
-        
-        if (cargado) {
-            File file = new File("players/"+userName+"/games/"+id+"MatrNoUs.txt");
-            file.delete();
-        }
-        
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("players/"+userName+"/games/"+id+"MatrNoUs.txt"));
-
-        for (int i = 0; i < bytes.length; i++)
-        {
-            // ojo, se hace un new por cada Persona. El new dentro del bucle.
-            Byte b = bytes[i];
-            oos.writeObject(b);
-        }
-        oos.close();  // Se cierra al terminar.
-        
-        } catch (IOException ex) {
-            System.out.print("No se han podido guardar los datos de la IA");
-            return false;
-        }
-        
-        try {
-        ByteArrayOutputStream bs= new ByteArrayOutputStream();
-        ObjectOutputStream os = new ObjectOutputStream (bs);
-        os.writeObject(combinaciones);  // this es de tipo DatoUdp
-        os.close();
-        byte[] bytes =  bs.toByteArray(); // devuelve byte
-        
-        if (cargado) {
-            File file = new File("players/"+userName+"/games/"+id+"MatrComb.txt");
-            file.delete();
-        }
-        
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("players/"+userName+"/games/"+id+"MatrComb.txt"));
-
-        for (int i = 0; i < bytes.length; i++)
-        {
-            // ojo, se hace un new por cada Persona. El new dentro del bucle.
-            Byte b = bytes[i];
-            oos.writeObject(b);
-        }
-        oos.close();  // Se cierra al terminar.
-        
-        } catch (IOException ex) {
-            System.out.print("No se han podido guardar los datos de la IA");
-            return false;
-        }
-        return true;
-    }
-    
-    public void CargarMatrices() {
-        
-        
-        
-    }
     
     private void conjunt(int i, ArrayList<Integer> aux, ArrayList<Integer> pos) {
             if(i == 4) {
@@ -288,7 +189,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
                 jugadaHecha = true;
                 for(int i = 0; i < fichas.length; i++) {
                     int num = Integer.parseInt(fichas[i]);
-                    if (num >= 1 && num <= 6) linea.add(num);
+                    if (num >= 1 && num <= 6 || num == -1) linea.add(num);
                     else jugadaHecha = false;
                 }
                 if (!jugadaHecha) System.out.print("\nHas introducido un valor incorrecto.\n");

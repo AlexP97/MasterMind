@@ -63,7 +63,7 @@ public final class CodeMaker extends Jugador {
                 jugadaHecha = true;
                 for(int i = 0; i < fichas.length; i++) {
                     int num = Integer.parseInt(fichas[i]);
-                    if (num >= 0 && num <= 2) linea.add(num);
+                    if (num >= -1 && num <= 2) linea.add(num);
                     else jugadaHecha = false;
                 }
                 if (!jugadaHecha) System.out.print("\nHas introducido un valor incorrecto.\n");
