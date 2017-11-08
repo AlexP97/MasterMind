@@ -332,13 +332,12 @@ public class Game {
                 
                 output[turn] = linea;
                 
-                if (mode.equals("codebreaker")) {
-                    for (int i = 0; i <= turn; ++i) {
+                for (int i = 0; i <= turn; ++i) {
 
                         System.out.print(output[i] + "\n");
 
-                    }
                 }
+                
                 if (acierto) {
                     finishGame(true);
                     return;
@@ -452,7 +451,6 @@ public class Game {
                         for (int i = 0; i < turn; ++i) {
 
                             line = input.nextLine();
-                            System.out.print(line + "\n");
                             output[i] = line;
 
                         }
