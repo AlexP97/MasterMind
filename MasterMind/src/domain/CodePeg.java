@@ -13,19 +13,19 @@ public final class CodePeg extends Casilla {
     private final int colourCode;
     private final int position;
     
-    public CodePeg(int col, int pos) throws IllegalArgumentException{
-        if(!colourValid(col) || !posValid(pos)) 
+    public CodePeg(int col, int pos, int total, int rango) throws IllegalArgumentException{
+        if(!colourValid(col,rango) || !posValid(pos,total)) 
             throw new IllegalArgumentException("Invalid argument");
         this.colourCode = col;
         this.position = pos;
     }
     @Override
-    public boolean colourValid(int col){    //1 naranja, 2 rojo, 3 azul, 4 verde, 5 amarillo, 6 lila
-        return (col == 1 || col == 2 || col == 3 || col == 4 || col == 5 || col == 6);
+    public boolean colourValid(int col,int rango){
+        return (col > 0 && col <= rango);
     }
     @Override
-    public boolean posValid(int pos){
-        return (pos == 1 || pos == 2 || pos == 3 || pos == 4);
+    public boolean posValid(int pos,int total){
+        return (pos > 0 && pos <= total);
     }
     public int getColour(){
         return this.colourCode;

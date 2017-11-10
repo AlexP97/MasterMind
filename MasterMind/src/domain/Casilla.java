@@ -11,8 +11,8 @@ package domain;
  */
 public abstract class Casilla {
     
-    abstract boolean colourValid(int col);
-    abstract boolean posValid(int pos);
+    abstract boolean colourValid(int col, int rango);
+    abstract boolean posValid(int pos, int total);
     
     public Casilla(){
     }

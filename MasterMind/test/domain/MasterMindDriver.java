@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author Usuario
  */
-public class MasterMindTest {
+public class MasterMindDriver {
     
-    public MasterMindTest() {
+    public MasterMindDriver() {
     }
     
     @BeforeClass
