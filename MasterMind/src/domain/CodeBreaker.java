@@ -34,31 +34,33 @@ public final class CodeBreaker extends Jugador implements Serializable{
             }
     }
     
-    private void creaCombinaciones(){
-        combinaciones.add(creaArray(2,2,2,2));
-        combinaciones.add(creaArray(2,2,1,1));
-        combinaciones.add(creaArray(2,1,1,1));
-        combinaciones.add(creaArray(1,1,1,1));
-        combinaciones.add(creaArray(2,2,2,0));
-        combinaciones.add(creaArray(2,2,1,0));
-        combinaciones.add(creaArray(2,1,1,0));
-        combinaciones.add(creaArray(1,1,1,0));
-        combinaciones.add(creaArray(2,2,0,0));
-        combinaciones.add(creaArray(2,1,0,0));
-        combinaciones.add(creaArray(1,1,0,0));
-        combinaciones.add(creaArray(2,0,0,0));
-        combinaciones.add(creaArray(1,0,0,0));
-        combinaciones.add(creaArray(0,0,0,0));
+    private void creaCombinaciones(int i, ArrayList<Integer> aux){
+        if(i == super.getNFichas()){
+            ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
+            ordenar(añadir);
+            if(!combinaciones.contains(añadir)) combinaciones.add(añadir);
+        }
+        else{
+            for(int j = 2; j >= 0; j--){
+                aux.set(i,j);
+                creaCombinaciones(i+1,aux);
+            }
+        }
     }
     
-    private ArrayList<Integer> creaArray(int a, int b, int c, int d){
-        ArrayList<Integer> aux = new ArrayList<>();
-        aux.add(a);
-        aux.add(b);
-        aux.add(c);
-        aux.add(d);
-        return aux;
+    private void ordenar(ArrayList<Integer> aux){
+        int temp;
+        for(int i = 1; i < aux.size(); i++){
+            for(int j = i; j > 0; j--){
+                if(aux.get(j) > aux.get(j-1)){
+                    temp = aux.get(j);
+                    aux.set(j,aux.get(j-1));
+                    aux.set(j-1,temp);
+                }
+            }
+        }
     }
+
     
     public CodeBreaker(boolean IA, int nfichas, int ncolores) {
         super(nfichas,ncolores);
@@ -70,6 +72,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
             super.setIA();
         if(this.esIA()){
             ArrayList<Integer> aux = new ArrayList<>();
+            ArrayList<Integer> aux2 = new ArrayList<>();
             ArrayList<Integer> pos = new ArrayList<>();
             for(int i = 0; i < super.getNColores(); i++){
                 pos.add(i+1);
@@ -77,18 +80,26 @@ public final class CodeBreaker extends Jugador implements Serializable{
             for(int i = 0; i < super.getNFichas(); i++) {
                 aux.add(1);
             }
+            for(int i = 0; i < super.getNFichas(); i++) {
+                aux2.add(1);
+            }
             conjunt(0,aux, pos);
             noUsados = (ArrayList<ArrayList<Integer>>) compatibles.clone();
+            creaCombinaciones(0,aux2);
+            ArrayList<Integer> imposible = new ArrayList<>();
+            for(int i = 0; i < super.getNFichas(); i++){
+                if(i == ((super.getNFichas())-1)) imposible.add(1);
+                else imposible.add(2);
+            }
+        combinaciones.remove(imposible);
         }
-        creaCombinaciones();
     }
     
     private ArrayList<CodePeg> convert(ArrayList<Integer> a) {
         ArrayList<CodePeg> cambioCodePeg = new ArrayList<>();
-        cambioCodePeg.add(new CodePeg(a.get(0),1));
-        cambioCodePeg.add(new CodePeg(a.get(1),2));
-        cambioCodePeg.add(new CodePeg(a.get(2),3));
-        cambioCodePeg.add(new CodePeg(a.get(3),4));
+        for(int i = 0; i < a.size(); i++){
+            cambioCodePeg.add(new CodePeg(a.get(i),i+1,getNFichas(),getNColores()));
+        }
         return cambioCodePeg;
     }
     //code es un posible codigo inconsistente

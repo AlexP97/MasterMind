@@ -37,6 +37,14 @@ public class Jugador {
         this.nColores = ncolores;
     }
    
+    protected ArrayList<Integer> creaArray(int... args){
+        ArrayList<Integer> aux = new ArrayList<>();
+        for(int arg : args){
+            aux.add(arg);
+        }
+        return aux;
+    }
+    
     public Pair<Boolean, String> register(String n, String c) {
         File dir = new File("players/"+n);
         boolean b = dir.mkdirs();
