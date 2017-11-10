@@ -17,6 +17,23 @@ public class CodeBreakerDriver {
     KeyPegStub keyPeg;
     JugadorStub jugador;
     
+    public CodeBreakerDriver(){
+        jugador = new JugadorStub();
+        codebreaker = new CodeBreaker(true,jugador.getNFichas(),jugador.getNColores());
+        keyPeg = new KeyPegStub();
+        codePeg = new CodePegStub();
+        testConjunt();
+        testCreaCombinaciones();
+        testOrdenar();
+        testConstructor();
+        testConvert();
+        testCompare();
+        testMiraSolucio();
+        testMiraDescartes();
+        testMillorOpcio();
+        testJugar();
+    }
+    
     private void testConjunt() {
         ArrayList<Integer> a = new ArrayList<>();
         for(int i = 0; i < jugador.getNFichas(); i++){
@@ -77,19 +94,42 @@ public class CodeBreakerDriver {
     }
     
     private void testMiraSolucio() {
-        
+        ArrayList<Integer> a = new ArrayList<>();
+        ArrayList<Integer> b = new ArrayList<>();
+        for(int i = 0; i < jugador.getNFichas(); i++){
+            a.add(1);
+            b.add(1);
+        }
+        ArrayList<Integer> c = codebreaker.miraSolucio(a,b);
+             
     }
        
     private void testMiraDescartes() {
-        
+        ArrayList<Integer> a = new ArrayList<>();
+        ArrayList<Integer> b = new ArrayList<>();
+        ArrayList<Integer> c = new ArrayList<>();
+        for(int i = 0; i < jugador.getNFichas(); i++){
+            a.add(1);
+            b.add(1);
+            c.add(2);
+        }
+        boolean d = codebreaker.miraDescartes(a,b,c);
     }
     
     private void testMillorOpcio() {
-        
+        ArrayList<Integer> a = codebreaker.millorOpcio();
     }
     
     private void testJugar() {
-        
+        CodePeg cp = codePeg.create();
+        ArrayList<CodePeg> a = new ArrayList<>();
+        for(int i = 0; i < jugador.getNFichas(); i++)
+            a.add(cp);
+        KeyPeg kp = keyPeg.create();
+        ArrayList<KeyPeg> b = new ArrayList<>();
+        for(int i = 0; i < jugador.getNFichas(); i++)
+            b.add(kp);
+        ArrayList<Integer> c = codebreaker.jugar("IA", a, b);
     }
     
             

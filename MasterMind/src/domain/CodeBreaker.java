@@ -118,18 +118,18 @@ public final class CodeBreaker extends Jugador implements Serializable{
         return false;   
     }
     
-    private ArrayList<Integer> miraSolucio(ArrayList<Integer> candidat, ArrayList<Integer> descartat){
+    protected ArrayList<Integer> miraSolucio(ArrayList<Integer> candidat, ArrayList<Integer> descartat){
         ArrayList<CodePeg> cambioCodePeg = convert(candidat);
         ArrayList<CodePeg> cambioCodePeg2 = convert(descartat);
         return donaSolucio(cambioCodePeg, cambioCodePeg2);
     }
     
-    private boolean miraDescartes(ArrayList<Integer> candidat, ArrayList<Integer> descartat, ArrayList<Integer> combinacio) {
+    protected boolean miraDescartes(ArrayList<Integer> candidat, ArrayList<Integer> descartat, ArrayList<Integer> combinacio) {
         ArrayList<Integer> aux = miraSolucio(candidat,descartat);
         return combinacio.equals(aux);
     }
     
-    private ArrayList<Integer> millorOpcio() {
+    protected ArrayList<Integer> millorOpcio() {
         int min = Integer.MAX_VALUE;
         int indice = 0;
         boolean compatible = false;
