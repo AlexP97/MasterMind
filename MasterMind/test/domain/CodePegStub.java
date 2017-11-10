@@ -12,7 +12,7 @@ package domain;
 public class CodePegStub {
     
     public CodePeg create(){
-        return new CodePeg(1,1,1,1);
+        return new CodePeg(1,1,4,6);
     }
     
     public int getColour(){

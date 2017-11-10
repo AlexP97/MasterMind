@@ -12,7 +12,7 @@ package domain;
 public class KeyPegStub {
     
     public KeyPeg create(){
-        return new KeyPeg(1,1,1);
+        return new KeyPeg(1,1,4);
     }
     
     public int getColour(){

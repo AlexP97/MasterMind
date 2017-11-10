@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author usuario
  */
-public class CodeBreakerDriver {
+public final class CodeBreakerDriver {
     CodeBreaker codebreaker;
     CodePegStub codePeg;
     KeyPegStub keyPeg;
