@@ -9,26 +9,30 @@ package domain;
  *
  * @author Usuario
  */
-public class CodePegDriver {
+public final class CodePegDriver {
     CodePeg codePeg;
     
+    public CodePegDriver(){
+        codePeg = new CodePeg(1,1,1,1);
+        testColourValid();
+        testPosValid();
+        testGetColour();
+        testGetPosition();
+    }
+    
     public void testColourValid() {
-        System.out.println("colourValid");
         boolean result = codePeg.colourValid(1,4);
     }
     
     public void testPosValid() {
-        System.out.println("posValid");
         boolean result = codePeg.posValid(1,4);
     }
 
     public void testGetColour() {
-        System.out.println("getColour");
         int result = codePeg.getColour();
     }
 
     public void testGetPosition() {
-        System.out.println("getPosition");
         int result = codePeg.getPosition();
     }
 }

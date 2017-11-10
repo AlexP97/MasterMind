@@ -5,6 +5,8 @@
  */
 package domain;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author usuario
@@ -14,6 +16,10 @@ public class JugadorDriver {
     
     public void testConstructor() {
         
+    }
+    
+    public void testCreaArray(){
+        ArrayList<Integer> a = jugador.creaArray(1,1,1,1);
     }
     
     public void testRegister() {
@@ -30,6 +36,14 @@ public class JugadorDriver {
     
     public void testGetPassword() {
         
+    }
+    
+    public void getNColores() {
+        int n = jugador.getNColores();
+    }
+    
+    public void getNFichas() {
+        int n = jugador.getNFichas();
     }
     
     public void testSetIA() {

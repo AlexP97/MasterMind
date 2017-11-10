@@ -15,7 +15,7 @@ import utils.Pair;
  */
 public class MasterMind {
 
-    private static boolean login(Jugador jugador){
+    protected static boolean login(Jugador jugador){
         Scanner input = new Scanner(System.in);
         System.out.print("Introduce el nombre de usuario:" + "\n");
         String usuario = input.nextLine();
@@ -27,7 +27,7 @@ public class MasterMind {
         return p.getLeft();
     }
     
-    private static boolean register(Jugador jugador){
+    protected static boolean register(Jugador jugador){
         Scanner input = new Scanner(System.in);
         System.out.print("Introduce el nombre de usuario:" + "\n");
         String usuario = input.nextLine();
@@ -39,7 +39,7 @@ public class MasterMind {
         return p.getLeft();
     }
     
-    private static void crearPartida(Jugador jugador){
+    protected static void crearPartida(Jugador jugador){
         Scanner input = new Scanner(System.in);
         System.out.print("Escribe el id de la partida" + "\n");
         String id = input.nextLine();
@@ -55,12 +55,12 @@ public class MasterMind {
         game.juega(jugador,id,dif,mod, Integer.parseInt(num), Integer.parseInt(ran));
     }
     
-    private static void cargarPartida(Jugador jugador){
+    protected static void cargarPartida(Jugador jugador){
         Game game = new Game();
         game.LoadGame(jugador);
     }
     
-    private static void muestraRanking(){
+    protected static void muestraRanking(){
         Ranking ranking = Ranking.getInstance();
         ArrayList<Pair<String, Integer>> output = ranking.muestraRanking();
         for(int i = 0; i < output.size(); i++){

@@ -9,30 +9,36 @@ package domain;
  *
  * @author Usuario
  */
-public class MasterMindDriver {
+public final class MasterMindDriver {
     MasterMind main;
+    JugadorStub jugador;
+    RankingStub ranking;
     
     public MasterMindDriver(){
-        main = new MasterMind();
+        testLogin();
+        testRegister();
+        testCrearPartida();
+        testCargarPartida();
+        testMuestraRanking();
     }
     
     public void testLogin(){
-        System.out.println("login");
+        boolean b = MasterMind.login(jugador.create());
     }
     
     public void testRegister(){
-        System.out.println("register");
+        boolean b = MasterMind.register(jugador.create());
     }
     
     public void testCrearPartida(){
-        System.out.println("crearPartida");
+        MasterMind.crearPartida(jugador.create());
     }
     
     public void testCargarPartida(){
-        System.out.println("cargarPartida");
+        MasterMind.cargarPartida(jugador.create());
     }
     
     public void testMuestraRanking(){
-        System.out.println("muestraRanking");
+        ranking.muestraRanking();
     }
 }

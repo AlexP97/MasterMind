@@ -34,7 +34,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
             }
     }
     
-    private void creaCombinaciones(int i, ArrayList<Integer> aux){
+    protected void creaCombinaciones(int i, ArrayList<Integer> aux){
         if(i == super.getNFichas()){
             ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
             ordenar(añadir);
@@ -48,7 +48,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
         }
     }
     
-    private void ordenar(ArrayList<Integer> aux){
+    protected void ordenar(ArrayList<Integer> aux){
         int temp;
         for(int i = 1; i < aux.size(); i++){
             for(int j = i; j > 0; j--){
@@ -95,7 +95,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
         }
     }
     
-    private ArrayList<CodePeg> convert(ArrayList<Integer> a) {
+    protected ArrayList<CodePeg> convert(ArrayList<Integer> a) {
         ArrayList<CodePeg> cambioCodePeg = new ArrayList<>();
         for(int i = 0; i < a.size(); i++){
             cambioCodePeg.add(new CodePeg(a.get(i),i+1,getNFichas(),getNColores()));
@@ -103,7 +103,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
         return cambioCodePeg;
     }
     //code es un posible codigo inconsistente
-    private boolean compare(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio, ArrayList<Integer> code){
+    protected boolean compare(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio, ArrayList<Integer> code){
         int nblancas = 0;
         int nnegras = 0;
         ArrayList<CodePeg> cambioCodePeg = convert(code);

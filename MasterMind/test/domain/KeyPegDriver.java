@@ -9,28 +9,30 @@ package domain;
  *
  * @author Usuario
  */
-public class KeyPegDriver {
+public final class KeyPegDriver {
     KeyPeg keyPeg;
     
-    
+    public KeyPegDriver(){
+        keyPeg = new KeyPeg(1,1,1);
+        testColourValid();
+        testPosValid();
+        testGetColour();
+        testGetPosition();
+    }
     
     public void testColourValid() {
-        System.out.println("colourValid");
         boolean result = keyPeg.colourValid(1,4);
     }
     
     public void testPosValid() {
-        System.out.println("posValid");
         boolean result = keyPeg.posValid(1,4);
     }
 
     public void testGetColour() {
-        System.out.println("getColour");
         int result = keyPeg.getColour();
     }
 
     public void testGetPosition() {
-        System.out.println("getPosition");
         int result = keyPeg.getPosition();
     }
 }
