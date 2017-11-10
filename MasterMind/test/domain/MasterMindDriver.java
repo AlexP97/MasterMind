@@ -5,48 +5,34 @@
  */
 package domain;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
 /**
  *
  * @author Usuario
  */
 public class MasterMindDriver {
+    MasterMind main;
     
-    public MasterMindDriver() {
+    public MasterMindDriver(){
+        main = new MasterMind();
     }
     
-    @BeforeClass
-    public static void setUpClass() {
+    public void testLogin(){
+        System.out.println("login");
     }
     
-    @AfterClass
-    public static void tearDownClass() {
+    public void testRegister(){
+        System.out.println("register");
     }
     
-    @Before
-    public void setUp() {
+    public void testCrearPartida(){
+        System.out.println("crearPartida");
     }
     
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of main method, of class MasterMind.
-     */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        MasterMind.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testCargarPartida(){
+        System.out.println("cargarPartida");
     }
     
+    public void testMuestraRanking(){
+        System.out.println("muestraRanking");
+    }
 }
