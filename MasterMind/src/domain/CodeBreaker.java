@@ -79,8 +79,6 @@ public final class CodeBreaker extends Jugador implements Serializable{
             }
             for(int i = 0; i < super.getNFichas(); i++) {
                 aux.add(1);
-            }
-            for(int i = 0; i < super.getNFichas(); i++) {
                 aux2.add(1);
             }
             conjunt(0,aux, pos);
@@ -91,7 +89,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
                 if(i == ((super.getNFichas())-1)) imposible.add(1);
                 else imposible.add(2);
             }
-        combinaciones.remove(imposible);
+            combinaciones.remove(imposible);
         }
     }
     
