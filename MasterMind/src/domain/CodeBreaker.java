@@ -18,6 +18,9 @@ public final class CodeBreaker extends Jugador implements Serializable{
     ArrayList<ArrayList<Integer> > compatibles;
     ArrayList<ArrayList<Integer> > noUsados;
     ArrayList<ArrayList<Integer> > combinaciones;
+    int nColores;
+    int nFichas;
+         
     boolean primeraOpcio = true;
     
     private void conjunt(int i, ArrayList<Integer> aux, ArrayList<Integer> pos) {
