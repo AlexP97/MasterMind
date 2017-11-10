@@ -21,15 +21,15 @@ public final class CodeBreaker extends Jugador implements Serializable{
          
     boolean primeraOpcio = true;
     
-    private void conjunt(int i, ArrayList<Integer> aux, ArrayList<Integer> pos) {
+    private void conjunt(int i, ArrayList<Integer> aux) {
             if(i == super.getNFichas()) {
                     ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
                     compatibles.add(añadir);
             }
             else {
-                for(int j = 0; j < pos.size(); j++) {
-                    aux.set(i,pos.get(j));
-                    conjunt(i+1, aux, pos); 
+                for(int j = 0; j < super.getNColores(); j++) {
+                    aux.set(i,j+1);
+                    conjunt(i+1, aux); 
                 }
             }
     }
@@ -73,15 +73,12 @@ public final class CodeBreaker extends Jugador implements Serializable{
         if(this.esIA()){
             ArrayList<Integer> aux = new ArrayList<>();
             ArrayList<Integer> aux2 = new ArrayList<>();
-            ArrayList<Integer> pos = new ArrayList<>();
-            for(int i = 0; i < super.getNColores(); i++){
-                pos.add(i+1);
-            }
+            
             for(int i = 0; i < super.getNFichas(); i++) {
                 aux.add(1);
                 aux2.add(1);
             }
-            conjunt(0,aux, pos);
+            conjunt(0,aux);
             noUsados = (ArrayList<ArrayList<Integer>>) compatibles.clone();
             creaCombinaciones(0,aux2);
             ArrayList<Integer> imposible = new ArrayList<>();
