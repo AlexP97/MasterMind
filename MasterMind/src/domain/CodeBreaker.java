@@ -28,9 +28,8 @@ public final class CodeBreaker extends Jugador implements Serializable{
             }
             else {
                 for(int j = 0; j < pos.size(); j++) {
-                    aux.add(i,pos.get(j));
+                    aux.set(i,pos.get(j));
                     conjunt(i+1, aux, pos); 
-                    aux.remove(i);
                 }
             }
     }
@@ -74,6 +73,9 @@ public final class CodeBreaker extends Jugador implements Serializable{
             ArrayList<Integer> pos = new ArrayList<>();
             for(int i = 0; i < super.getNColores(); i++){
                 pos.add(i+1);
+            }
+            for(int i = 0; i < super.getNFichas(); i++) {
+                aux.add(1);
             }
             conjunt(0,aux, pos);
             noUsados = (ArrayList<ArrayList<Integer>>) compatibles.clone();
