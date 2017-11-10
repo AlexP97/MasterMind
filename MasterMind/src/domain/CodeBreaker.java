@@ -21,7 +21,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
          
     boolean primeraOpcio = true;
     
-    private void conjunt(int i, ArrayList<Integer> aux) {
+    protected void conjunt(int i, ArrayList<Integer> aux) {
             if(i == super.getNFichas()) {
                     ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
                     compatibles.add(añadir);

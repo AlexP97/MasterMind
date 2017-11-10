@@ -18,7 +18,11 @@ public class CodeBreakerDriver {
     JugadorStub jugador;
     
     private void testConjunt() {
-        
+        ArrayList<Integer> a = new ArrayList<>();
+        for(int i = 0; i < jugador.getNFichas(); i++){
+            a.add(1);
+        }
+        codebreaker.conjunt(0,a);
     }
     
     private void testCreaCombinaciones() {
@@ -37,7 +41,10 @@ public class CodeBreakerDriver {
     }
     
     public void testConstructor() {
-        
+        boolean b = false;
+        int nf = 2;
+        int nc = 3;
+        CodeBreaker p = new CodeBreaker(b, nf, nc);
     }
     
     private void testConvert() {
