@@ -18,20 +18,19 @@ public final class CodeBreaker extends Jugador implements Serializable{
     ArrayList<ArrayList<Integer> > compatibles;
     ArrayList<ArrayList<Integer> > noUsados;
     ArrayList<ArrayList<Integer> > combinaciones;
-    int nColores;
-    int nFichas;
          
     boolean primeraOpcio = true;
     
     private void conjunt(int i, ArrayList<Integer> aux, ArrayList<Integer> pos) {
-            if(i == 4) {
+            if(i == super.getNFichas()) {
                     ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
                     compatibles.add(añadir);
             }
             else {
                 for(int j = 0; j < pos.size(); j++) {
-                    aux.set(i, pos.get(j));
+                    aux.add(i,pos.get(j));
                     conjunt(i+1, aux, pos); 
+                    aux.remove(i);
                 }
             }
     }
@@ -62,17 +61,18 @@ public final class CodeBreaker extends Jugador implements Serializable{
         return aux;
     }
     
-    public CodeBreaker(boolean IA) {
-        super();
-        compatibles = new ArrayList<>();
-        noUsados = new ArrayList<>();
-        combinaciones = new ArrayList<>();
+    public CodeBreaker(boolean IA, int nfichas, int ncolores) {
+        super(nfichas,ncolores);
+        this.compatibles = new ArrayList<>();
+        this.noUsados = new ArrayList<>();
+        this.combinaciones = new ArrayList<>();
+        
         if(IA)
             super.setIA();
         if(this.esIA()){
-            ArrayList<Integer> aux = creaArray(1,1,1,1);
+            ArrayList<Integer> aux = new ArrayList<>();
             ArrayList<Integer> pos = new ArrayList<>();
-            for(int i = 0; i < 6; i++){
+            for(int i = 0; i < super.getNColores(); i++){
                 pos.add(i+1);
             }
             conjunt(0,aux, pos);
@@ -193,7 +193,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
                 jugadaHecha = true;
                 for(int i = 0; i < fichas.length; i++) {
                     int num = Integer.parseInt(fichas[i]);
-                    if (num >= 1 && num <= 6 || num == -1) linea.add(num);
+                    if (num >= 1 && num <= super.getNColores() || num == -1) linea.add(num);
                     else jugadaHecha = false;
                 }
                 if (!jugadaHecha) System.out.print("\nHas introducido un valor incorrecto.\n");

@@ -15,8 +15,10 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author usuario
  */
 public final class CodeMaker extends Jugador {
-    public CodeMaker(boolean IA) {
-       super();
+    
+    public CodeMaker(boolean IA, int nfichas, int ncolores) {
+       super(nfichas, ncolores);
+       
        if(IA)
            super.setIA();
     }
@@ -25,8 +27,8 @@ public final class CodeMaker extends Jugador {
         ArrayList<Integer> linea;
         linea = new ArrayList<>();
         if(s.equals("IA")) {
-            for(int i = 0; i < 4; i++) {
-                int randomNum = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+            for(int i = 0; i < super.getNFichas(); i++) {
+                int randomNum = ThreadLocalRandom.current().nextInt(1, super.getNColores() + 1);
                 linea.add(randomNum);
             }
         }

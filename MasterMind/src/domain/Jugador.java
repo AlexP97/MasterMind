@@ -24,9 +24,17 @@ public class Jugador {
     private String name;
     private String password;
     private boolean IA;
+    private int nFichas;
+    private int nColores;
+    
     
     public Jugador() {
       
+    }
+    
+    public Jugador(int nfichas, int ncolores) {
+        this.nFichas = nfichas;
+        this.nColores = ncolores;
     }
    
     public Pair<Boolean, String> register(String n, String c) {
@@ -96,6 +104,14 @@ public class Jugador {
         return this.password;
     }
     
+    public int getNColores() {
+        return this.nColores;
+    }
+    
+    public int getNFichas() {
+        return this.nFichas;
+    }
+    
     public void setIA() {
         this.IA = true;
     }
@@ -108,7 +124,7 @@ public class Jugador {
         ArrayList<Integer> linea = new ArrayList<>();
         ArrayList<Boolean> visitats = new ArrayList<>();
         ArrayList<Boolean> visitats2 = new ArrayList<>();
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < nFichas; i++) {
             visitats.add(false);
             visitats2.add(false);
         }
@@ -131,7 +147,7 @@ public class Jugador {
                 }
             }
         }
-        while(linea.size() < 4) {
+        while(linea.size() < nFichas) {
             linea.add(0);
         }
             
