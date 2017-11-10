@@ -42,32 +42,9 @@ public class Game {
     CodeBreaker codeB;
     boolean gameSaved;
     boolean cargado;
-    
-    public Game (String idG, String dif, int puntos){
-        this.id = idG;
-        this.difficulty = dif;
-        this.points = puntos;
-        this.player = null;
-        this.IA = null;
-        this.turn = 0;
-        this.output = null;
-        this.codeIni = null;
-        this.gameSaved = false;
-        this.cargado = false;
-    }
-    
-    public Game (String idG, String dif){
-        this.id = idG;
-        this.difficulty = dif;
-        this.points = 150;
-        this.player = null;
-        this.IA = null;
-        this.turn = 0;
-        this.output = null;
-        this.codeIni = null;
-        this.gameSaved = false;
-        this.cargado = false;
-    }
+    boolean acierto;
+    int numero;
+    int rango;
     
     public Game () {
         this.id = null;
@@ -97,7 +74,7 @@ public class Game {
     private ArrayList<CodePeg> conversorCode (ArrayList<Integer> arrayList) {
         
         ArrayList<CodePeg> lista = new ArrayList<CodePeg>();
-        for (int i = 0; i < arrayList.size(); ++i) {
+        for (int i = 0; i < numero; ++i) {
             
             if (arrayList.get(i) != -1) {
                 CodePeg codeP = new CodePeg(arrayList.get(i), i+1);
@@ -115,7 +92,7 @@ public class Game {
     private ArrayList<KeyPeg> conversorKey (ArrayList<Integer> arrayList) {
         
         ArrayList<KeyPeg> lista = new ArrayList<KeyPeg>();
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < numero; ++i) {
             
             if (arrayList.get(i) != -1) {
                 KeyPeg codeP = new KeyPeg(arrayList.get(i), i+1);
@@ -167,18 +144,20 @@ public class Game {
             pw.println(points);
             pw.println(turn);
             pw.println(totalTurns);
-            for (int i = 0; i < 4; ++i) {
+            pw.println(numero);
+            pw.println(rango);
+            for (int i = 0; i < codeMAnt.size(); ++i) {
                 
                 pw.println(codeMAnt.get(i).getColour());
                 
             }
-            for (int i = 0; i < 4; ++i) {
+            for (int i = 0; i < codeBAnt.size(); ++i) {
                 
                 pw.println(codeBAnt.get(i).getColour());
                 
             }
             
-            for (int i = 0; i < 4; ++i) {
+            for (int i = 0; i < codeIni.size(); ++i) {
                 
                 pw.println(codeIni.get(i).getColour());
                 
@@ -210,6 +189,8 @@ public class Game {
         } catch (IOException ex) {
             
             out.println("No se ha podido guardar la partida." + "\n");
+            File file = new File("players/"+player.getName()+"/games/"+id+".txt");
+            file.delete();
             
         }
         
@@ -238,76 +219,104 @@ public class Game {
         else this.points -= 5;
     }
     
-    public void juega(Jugador playerN, String ident, String dif, String mod) {
+    private boolean SetAtributos(Jugador playerN, String ident, String dif, String mod, int num, int ran){
+        
+        if (cargado) {
+            if (mode.equals("codemaker")) {
+                this.codeM = new CodeMaker(false);
+            }
+            else if (mode.equals("codebreaker")) {
+                this.codeM = new CodeMaker(true);
+                this.codeB = new CodeBreaker(false);
+            }   
+        }
+        else {
+            this.id = ident;
+            if (dif.equals("facil")) this.totalTurns = 12;
+            else if (dif.equals("medio")) this.totalTurns = 10;
+            else if (dif.equals("dificil")) this.totalTurns = 8;
+            else {
+                System.out.print("Esta dificultad no existe" + "\n");
+                return false;
+            }
+            if (output == null) this.output = new String[totalTurns+1];
+            this.output[0] = "--------------";
+            this.difficulty = dif;
+            this.player = playerN;
+            this.mode = mod;
+            this.points = 150;
+            this.turn = 1;
+            this.codeBAnt = new ArrayList<CodePeg>();
+            this.codeMAnt = new ArrayList<KeyPeg>();
+            this.numero = num;
+            this.rango = ran;
+
+            if (mode.equals("codemaker")) {
+                this.codeB = new CodeBreaker(true);
+                this.codeM = new CodeMaker(false);
+                this.codeIni = conversorCode(codeM.dona_patro("Player"));
+            }
+            else if (mode.equals("codebreaker")) {
+                this.codeB = new CodeBreaker(false);
+                this.codeM = new CodeMaker(true);
+                this.codeIni = conversorCode(codeM.dona_patro("IA"));
+            }
+            else {
+                    System.out.print("Esta modo de juego no existe" + "\n");
+                    return false;
+            }
+        }
+        return true;
+    }
+    
+    private String GenerarLinea( ArrayList<KeyPeg> outputM, ArrayList<CodePeg> outputB){
+        
+        String linea = "";
+        
+        for (int i = 0; i < outputB.size(); ++i) {
+            int color = outputB.get(i).getColour();
+            linea += Integer.toString(color) + " ";
+        }
+
+        linea += " ";
+
+        for (int i = 0; i < outputM.size(); ++i) {
+            int color = outputM.get(i).getColour();
+            if (color != 2) acierto = false;
+            linea += Integer.toString(color);
+        }
+        
+        return linea;
+        
+    }
+    
+    public void juega(Jugador playerN, String ident, String dif, String mod, int num, int ran) {
         
         if (CheckAvailability(ident, playerN.getName()) || cargado){
-            boolean primerTurnoCargado;
-            if (!cargado) {
-                this.id = ident;
-                if (dif.equals("facil")) this.totalTurns = 12;
-                else if (dif.equals("medio")) this.totalTurns = 10;
-                else if (dif.equals("dificil")) this.totalTurns = 8;
-                else {
-                    System.out.print("Esta dificultad no existe" + "\n");
-                    return;
-                }
-                if (output == null) this.output = new String[totalTurns+1];
-                this.output[0] = "--------------";
-                this.difficulty = dif;
-                this.player = playerN;
-                this.mode = mod;
-                this.points = 150;
-                this.turn = 1;
-                this.codeBAnt = null;
-                this.codeMAnt = null;
+            boolean primerTurnoCargado = cargado;
 
-                if (mode.equals("codemaker")) {
-                    this.codeB = new CodeBreaker(true);
-                    this.codeM = new CodeMaker(false);
-                    this.codeIni = conversorCode(codeM.dona_patro("Player"));
-                }
-                else if (mode.equals("codebreaker")) {
-                    this.codeB = new CodeBreaker(false);
-                    this.codeM = new CodeMaker(true);
-                    this.codeIni = conversorCode(codeM.dona_patro("IA"));
-                }
-                else {
-                        System.out.print("Esta modo de juego no existe" + "\n");
-                        return;
-                }
-                primerTurnoCargado = false;
-                System.out.print("CodeIni: ");
-                for (int d = 0; d < 4; d++) System.out.print(codeIni.get(d).getColour() + " ");
-                System.out.print("\n");
-            }else {
-                if (mode.equals("codemaker")) {
-                    this.codeM = new CodeMaker(false);
-                }
-                else if (mode.equals("codebreaker")) {
-                    this.codeM = new CodeMaker(true);
-                    this.codeB = new CodeBreaker(false);
-                }   
-                primerTurnoCargado = true;
-            }
+            boolean b = SetAtributos(playerN, ident, dif, mod, num, ran);
+            if (!b) return;
+            
             while (turn <= totalTurns){
                                 
-                boolean acierto = true;
+                acierto = true;
                 
                 ArrayList<KeyPeg> outputM = codeMAnt;
                 ArrayList<CodePeg> outputB = codeBAnt;
                 
                 if (mode.equals("codemaker")) {
                     if (!primerTurnoCargado) {
-                        outputB = conversorCode(codeB.jugar("IA", codeBAnt, codeMAnt));
+                        outputB = conversorCode(codeB.jugar("IA", codeBAnt, codeMAnt, num, ran));
                         codeBAnt = outputB;
                     }
-                    outputM = conversorKey(codeM.jugar("Player", outputB, codeIni));
+                    outputM = conversorKey(codeM.jugar("Player", outputB, codeIni, num, ran));
                     codeMAnt = outputM;
                 }
                 else if (mode.equals("codebreaker")) {
-                    outputB = conversorCode(codeB.jugar("Player", codeBAnt, codeMAnt));
+                    outputB = conversorCode(codeB.jugar("Player", codeBAnt, codeMAnt, num, ran));
                     codeBAnt = outputB;
-                    outputM = conversorKey(codeM.jugar("IA", outputB, codeIni));
+                    outputM = conversorKey(codeM.jugar("IA", outputB, codeIni, num, ran));
                     codeMAnt = outputM;
                 }
                 
@@ -315,20 +324,7 @@ public class Game {
                 
                 if (this.gameSaved) return;
                 
-                String linea = "";
-                
-                for (int i = 0; i < outputB.size(); ++i) {
-                    int color = outputB.get(i).getColour();
-                    linea += Integer.toString(color) + " ";
-                }
-                
-                linea += " ";
-                
-                for (int i = 0; i < outputM.size(); ++i) {
-                    int color = outputM.get(i).getColour();
-                    if (color != 2) acierto = false;
-                    linea += Integer.toString(color);
-                }
+                String linea = GenerarLinea(outputM, outputB);
                 
                 output[turn] = linea;
                 
@@ -416,9 +412,15 @@ public class Game {
                         line = input.nextLine();
                         this.totalTurns = Integer.parseInt(line);
                         
+                        line = input.nextLine();
+                        this.numero = Integer.parseInt(line);
+                        
+                        line = input.nextLine();
+                        this.rango = Integer.parseInt(line);
+                        
                         codeMAnt = new ArrayList<KeyPeg>();
                         
-                        for (int i = 0; i < 4; ++i) {
+                        for (int i = 0; i < numero; ++i) {
 
                             line = input.nextLine(); 
                             KeyPeg code = new KeyPeg(Integer.parseInt(line), i+1);
@@ -428,7 +430,7 @@ public class Game {
                         
                         codeBAnt = new ArrayList<CodePeg>();
                         
-                        for (int i = 0; i < 4; ++i) {
+                        for (int i = 0; i < numero; ++i) {
 
                             line = input.nextLine(); 
                             CodePeg code = new CodePeg(Integer.parseInt(line), i+1);
@@ -440,7 +442,7 @@ public class Game {
                                                          
                         codeIni = new ArrayList<CodePeg>();
                         
-                        for (int i = 0; i < 4; ++i) {
+                        for (int i = 0; i < numero; ++i) {
 
                             line = input.nextLine(); 
                             CodePeg code = new CodePeg(Integer.parseInt(line), i+1);
@@ -473,7 +475,7 @@ public class Game {
                     
                         }
                         
-                        juega(player, id, difficulty, mode);
+                        juega(player, id, difficulty, mode, numero, rango);
                     }
 
                 } catch (Exception ex) {

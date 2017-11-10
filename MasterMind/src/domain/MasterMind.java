@@ -47,8 +47,12 @@ public class MasterMind {
         String dif = input.nextLine();
         System.out.print("Escribe el modo de la partida (codebreaker o codemaker)" + "\n");
         String mod = input.nextLine();
+        System.out.print("Escribe el número de fichas con las que quieres jugar" + "\n");
+        String num = input.nextLine();
+        System.out.print("Escribe el número máximo que quieres que tenga la ficha" + "\n");
+        String ran = input.nextLine();
         Game game = new Game();
-        game.juega(jugador,id,dif,mod);
+        game.juega(jugador,id,dif,mod, Integer.parseInt(num), Integer.parseInt(ran));
     }
     
     private static void cargarPartida(Jugador jugador){
