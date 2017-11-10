@@ -34,7 +34,7 @@ public final class CodeMaker extends Jugador {
         }
         else {
             Scanner input = new Scanner(System.in);
-            System.out.print("Introduce el patron a adivinar poniendo cada ficha del 1 al 6 separada de un espacio:" + "\n");
+            System.out.print("Introduce el patron a adivinar poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al "+super.getNColores()+" separada de un espacio:" + "\n");
             String jugada = input.nextLine();
             String fichas[] = jugada.split(" ");
             for(int i = 0; i < fichas.length; i++) {
@@ -59,7 +59,7 @@ public final class CodeMaker extends Jugador {
                 }
                 System.out.println();
                 Scanner input = new Scanner(System.in);
-                System.out.print("Introduce tu pista poniendo cada ficha del 0 al 2 separada de un espacio "
+                System.out.print("Introduce tu pista poniendo "+super.getNFichas()+" fichas, cada ficha del 0 al 2 separada de un espacio "
                         + "(o introduce -1 para guardar partida):\n");
                 String jugada = input.nextLine();
                 String fichas[] = jugada.split(" ");

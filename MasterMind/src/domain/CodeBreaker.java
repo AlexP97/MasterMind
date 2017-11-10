@@ -199,17 +199,20 @@ public final class CodeBreaker extends Jugador implements Serializable{
             boolean jugadaHecha = false;
             while (!jugadaHecha){
                 Scanner input = new Scanner(System.in);
-                System.out.print("Introduce tu jugada poniendo cada ficha del 1 al 6 separada de un espacio "
+                System.out.print("Introduce tu jugada poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al 6 separada de un espacio "
                         + "(o introduce -1 para guardar partida):\n");
                 String jugada = input.nextLine();
                 String fichas[] = jugada.split(" ");
+                boolean fichasNoValid = false;
+                if(fichas.length != super.getNFichas())
+                    fichasNoValid = true;
                 jugadaHecha = true;
-                for(int i = 0; i < fichas.length; i++) {
+                for(int i = 0; i < fichas.length && fichasNoValid; i++) {
                     int num = Integer.parseInt(fichas[i]);
                     if (num >= 1 && num <= super.getNColores() || num == -1) linea.add(num);
                     else jugadaHecha = false;
                 }
-                if (!jugadaHecha) System.out.print("\nHas introducido un valor incorrecto.\n");
+                if (!jugadaHecha || fichasNoValid) System.out.print("\nHas introducido un valor incorrecto.\n");
             }
         }
         return linea;
