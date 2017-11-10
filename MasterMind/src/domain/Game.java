@@ -77,7 +77,7 @@ public class Game {
         for (int i = 0; i < numero; ++i) {
             
             if (arrayList.get(i) != -1) {
-                CodePeg codeP = new CodePeg(arrayList.get(i), i+1);
+                CodePeg codeP = new CodePeg(arrayList.get(i), i+1, numero, rango);
                 lista.add(codeP);
             }
             else {
@@ -95,7 +95,7 @@ public class Game {
         for (int i = 0; i < numero; ++i) {
             
             if (arrayList.get(i) != -1) {
-                KeyPeg codeP = new KeyPeg(arrayList.get(i), i+1);
+                KeyPeg codeP = new KeyPeg(arrayList.get(i), i+1, numero);
                 lista.add(codeP);
             }
             else {
@@ -223,11 +223,11 @@ public class Game {
         
         if (cargado) {
             if (mode.equals("codemaker")) {
-                this.codeM = new CodeMaker(false);
+                this.codeM = new CodeMaker(false, numero, rango);
             }
             else if (mode.equals("codebreaker")) {
-                this.codeM = new CodeMaker(true);
-                this.codeB = new CodeBreaker(false);
+                this.codeM = new CodeMaker(true, numero, rango);
+                this.codeB = new CodeBreaker(false, numero, rango);
             }   
         }
         else {
@@ -252,13 +252,13 @@ public class Game {
             this.rango = ran;
 
             if (mode.equals("codemaker")) {
-                this.codeB = new CodeBreaker(true);
-                this.codeM = new CodeMaker(false);
+                this.codeB = new CodeBreaker(true, numero, rango);
+                this.codeM = new CodeMaker(false, numero, rango);
                 this.codeIni = conversorCode(codeM.dona_patro("Player"));
             }
             else if (mode.equals("codebreaker")) {
-                this.codeB = new CodeBreaker(false);
-                this.codeM = new CodeMaker(true);
+                this.codeB = new CodeBreaker(false, numero, rango);
+                this.codeM = new CodeMaker(true, numero, rango);
                 this.codeIni = conversorCode(codeM.dona_patro("IA"));
             }
             else {
@@ -307,16 +307,16 @@ public class Game {
                 
                 if (mode.equals("codemaker")) {
                     if (!primerTurnoCargado) {
-                        outputB = conversorCode(codeB.jugar("IA", codeBAnt, codeMAnt, num, ran));
+                        outputB = conversorCode(codeB.jugar("IA", codeBAnt, codeMAnt));
                         codeBAnt = outputB;
                     }
-                    outputM = conversorKey(codeM.jugar("Player", outputB, codeIni, num, ran));
+                    outputM = conversorKey(codeM.jugar("Player", outputB, codeIni));
                     codeMAnt = outputM;
                 }
                 else if (mode.equals("codebreaker")) {
-                    outputB = conversorCode(codeB.jugar("Player", codeBAnt, codeMAnt, num, ran));
+                    outputB = conversorCode(codeB.jugar("Player", codeBAnt, codeMAnt));
                     codeBAnt = outputB;
-                    outputM = conversorKey(codeM.jugar("IA", outputB, codeIni, num, ran));
+                    outputM = conversorKey(codeM.jugar("IA", outputB, codeIni));
                     codeMAnt = outputM;
                 }
                 
@@ -423,7 +423,7 @@ public class Game {
                         for (int i = 0; i < numero; ++i) {
 
                             line = input.nextLine(); 
-                            KeyPeg code = new KeyPeg(Integer.parseInt(line), i+1);
+                            KeyPeg code = new KeyPeg(Integer.parseInt(line), i+1, numero);
                             codeMAnt.add(code);
 
                         }
@@ -433,7 +433,7 @@ public class Game {
                         for (int i = 0; i < numero; ++i) {
 
                             line = input.nextLine(); 
-                            CodePeg code = new CodePeg(Integer.parseInt(line), i+1);
+                            CodePeg code = new CodePeg(Integer.parseInt(line), i+1, numero, rango);
                             codeBAnt.add(code);
 
                         }
@@ -445,7 +445,7 @@ public class Game {
                         for (int i = 0; i < numero; ++i) {
 
                             line = input.nextLine(); 
-                            CodePeg code = new CodePeg(Integer.parseInt(line), i+1);
+                            CodePeg code = new CodePeg(Integer.parseInt(line), i+1, numero, rango);
                             codeIni.add(code);
 
                         }
