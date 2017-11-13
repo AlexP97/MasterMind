@@ -33,12 +33,24 @@ public final class CodeMaker extends Jugador {
             }
         }
         else {
-            Scanner input = new Scanner(System.in);
-            System.out.print("Introduce el patron a adivinar poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al "+super.getNColores()+" separada de un espacio:" + "\n");
-            String jugada = input.nextLine();
-            String fichas[] = jugada.split(" ");
-            for(int i = 0; i < fichas.length; i++) {
-                linea.add(Integer.parseInt(fichas[i]));
+            boolean jugadaHecha = false;
+            while(!jugadaHecha) {
+                Scanner input = new Scanner(System.in);
+                System.out.print("Introduce el patron a adivinar poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al "+super.getNColores()+" separada de un espacio:" + "\n");
+                String jugada = input.nextLine();
+                String fichas[] = jugada.split(" ");
+                boolean fichasNoValid = false;
+                if(fichas.length != super.getNFichas())
+                    fichasNoValid =  true;
+                for(int i = 0; i < fichas.length && !fichasNoValid; i++) {
+                    int num = Integer.parseInt(fichas[i]);
+                    if(num >= 1 && num <= super.getNColores()) linea.add(num);
+                }
+                if(linea.size() == fichas.length) jugadaHecha = true;
+                if(fichasNoValid) 
+                    System.out.println("El número de fichas introducido es incorrecto.");
+                else if (!jugadaHecha) 
+                    System.out.println("Has introducido un valor incorrecto.");
             }
         }
         return linea;
@@ -53,25 +65,40 @@ public final class CodeMaker extends Jugador {
         }
         else {
             boolean jugadaHecha = false;
-            while (!jugadaHecha){
-                for(int i = 0; i < tirada.size(); i++) {
-                    System.out.print(tirada.get(i).getColour() + " ");
-                }
-                System.out.println();
+            boolean guardar = false;
+            //esto se deberia hacer en game
+            for(int i = 0; i < tirada.size(); i++) {
+                System.out.print(tirada.get(i).getColour() + " ");
+            }
+            System.out.println();
+            while (!jugadaHecha && !guardar){
                 Scanner input = new Scanner(System.in);
                 System.out.print("Introduce tu pista poniendo "+super.getNFichas()+" fichas, cada ficha del 0 al 2 separada de un espacio "
                         + "(o introduce -1 para guardar partida):\n");
                 String jugada = input.nextLine();
                 String fichas[] = jugada.split(" ");
-                jugadaHecha = true;
-                for(int i = 0; i < fichas.length; i++) {
-                    int num = Integer.parseInt(fichas[i]);
-                    if (num >= -1 && num <= 2) linea.add(num);
-                    else jugadaHecha = false;
+                if(fichas[0].equals("-1")) {
+                    guardar = true;
+                    linea.add(-1);
+                }    
+                if(!guardar) {
+                    boolean fichasNoValid = false;
+                    if(fichas.length != super.getNFichas())
+                        fichasNoValid = true;
+                    for(int i = 0; i < fichas.length && !fichasNoValid; i++) {
+                        int num = Integer.parseInt(fichas[i]);
+                        if (num >= 0 && num <= 2) linea.add(num);
+                    }
+                    if(linea.size() == fichas.length) jugadaHecha = true;
+                    if(fichasNoValid) 
+                        System.out.println("El número de fichas introducido es incorrecto.");
+                    if (!jugadaHecha) 
+                        System.out.println("Has introducido un valor incorrecto.");
                 }
-                if (!jugadaHecha) System.out.print("\nHas introducido un valor incorrecto.\n");
             }
         }
+        
+        
         return linea;
     }
     
