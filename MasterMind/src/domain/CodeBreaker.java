@@ -192,21 +192,26 @@ public final class CodeBreaker extends Jugador implements Serializable{
         }
         else {
             boolean jugadaHecha = false;
-            while (!jugadaHecha){
+            boolean salir = false;
+            while (!jugadaHecha && !salir){
                 Scanner input = new Scanner(System.in);
                 System.out.print("Introduce tu jugada poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al 6 separada de un espacio "
                         + "(o introduce -1 para guardar partida):\n");
                 String jugada = input.nextLine();
                 String fichas[] = jugada.split(" ");
-                boolean fichasNoValid = false;
-                if(fichas.length != super.getNFichas())
-                    fichasNoValid = true;
-                for(int i = 0; i < fichas.length && !fichasNoValid; i++) {
-                    int num = Integer.parseInt(fichas[i]);
-                    if (num >= 1 && num <= super.getNColores() || num == -1) linea.add(num);
+                if(fichas.length != 0 && Integer.parseInt(fichas[0]) == -1)
+                   salir = true;
+                if(!salir) {
+                    boolean fichasNoValid = false;
+                    if(fichas.length != super.getNFichas())
+                        fichasNoValid = true;
+                    for(int i = 0; i < fichas.length && !fichasNoValid; i++) {
+                        int num = Integer.parseInt(fichas[i]);
+                        if (num >= 1 && num <= super.getNColores() || num == -1) linea.add(num);
+                    }
+                    if(linea.size() == fichas.length) jugadaHecha = true;
+                    if (!jugadaHecha || fichasNoValid) System.out.print("\nHas introducido un valor incorrecto.\n");
                 }
-                if(linea.size() == fichas.length) jugadaHecha = true;
-                if (!jugadaHecha || fichasNoValid) System.out.print("\nHas introducido un valor incorrecto.\n");
             }
         }
         return linea;

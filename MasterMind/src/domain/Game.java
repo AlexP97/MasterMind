@@ -210,7 +210,11 @@ public class Game {
             }
         }
         else {
-            System.out.print("Game Over..." + "\n");
+            System.out.print("Game Over..." + "\n" + "El código correcto era:");
+            for(int i = 0; i < codeIni.size(); i++) {
+                System.out.print(" " + codeIni.get(i).getColour());
+            }
+            System.out.println();
         }
         
     }
@@ -251,7 +255,15 @@ public class Game {
             this.turn = 1;
             this.codeBAnt = new ArrayList<CodePeg>();
             this.codeMAnt = new ArrayList<KeyPeg>();
+            if(num < 1 || num > 10) {
+                System.out.println("El número de fichas introducido es incorrecto.");
+                return false;
+            }
             this.numero = num;
+            if(ran < 1 || ran > 15) {
+                System.out.println("El número de colores introducido es incorrecto.");
+                return false;
+            }
             this.rango = ran;
 
             if (mode.equals("codemaker")) {
@@ -265,7 +277,7 @@ public class Game {
                 this.codeIni = conversorCode(codeM.dona_patro("IA"));
             }
             else {
-                    System.out.print("Esta modo de juego no existe" + "\n");
+                    System.out.print("Este modo de juego no existe" + "\n");
                     return false;
             }
         }

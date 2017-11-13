@@ -71,19 +71,24 @@ public class MasterMind {
     public static void main(String[] args) {
         Jugador jugador = new Jugador();
         int estado = 0;
-        while(true){           
+        boolean fin = false;
+        while(!fin){           
             System.out.print("Bienvenido a MasterMind." + "\n");
             Scanner input = new Scanner(System.in);   
             switch (estado){
                 case 0: //MENU DE INICIO/REGISTRO
                     estado = 1;
-                    System.out.print("Escribe login para iniciar sesión, o register para registrarte." + "\n");
+                    System.out.print("Escribe login para iniciar sesión, register para registrarte o salir para finalizar el juego." + "\n");
                     String start = input.nextLine();
                     if(start.equals("login")){
                         if(!login(jugador)) estado = 0;
                     }
                     else if(start.equals("register")){
                         if(!register(jugador)) estado = 0;
+                    }
+                    else if(start.equals("salir")) {
+                        fin = true;
+                        estado = 2;
                     }
                     else{
                         System.out.print("Entrada no válida" + "\n");
@@ -106,7 +111,7 @@ public class MasterMind {
                     else{
                         System.out.print("Entrada no válida" + "\n");
                     }
-                    break;
+                    
                 case 2:
                     break;
             }      
