@@ -42,7 +42,6 @@ public final class CodeBreakerDriver {
     }
     
     private void testCreaCombinaciones() {
-        //adri
         ArrayList<Integer> a = new ArrayList<>();
         for(int i = 0; i < jugador.getNFichas(); i++){
             a.add(1);
@@ -58,14 +57,12 @@ public final class CodeBreakerDriver {
     }
     
     private void testConvert() {
-        //adri
         ArrayList<CodePeg> a = new ArrayList<>();
         ArrayList<Integer> b = new ArrayList<>();
         a = codebreaker.convert(b);
     }
     
     private void testCompare() {
-        //adri
         CodePeg cp = codePeg.create();
         ArrayList<CodePeg> a = new ArrayList<>();
         a.add(cp);
@@ -123,9 +120,5 @@ public final class CodeBreakerDriver {
         for(int i = 0; i < jugador.getNFichas(); i++)
             b.add(kp);
         ArrayList<Integer> c = codebreaker.jugar("IA", a, b);
-    }
-    
-            
-            
-           
+    }     
 }
