@@ -255,15 +255,7 @@ public class Game {
             this.turn = 1;
             this.codeBAnt = new ArrayList<CodePeg>();
             this.codeMAnt = new ArrayList<KeyPeg>();
-            if(num < 1 || num > 10) {
-                System.out.println("El número de fichas introducido es incorrecto.");
-                return false;
-            }
             this.numero = num;
-            if(ran < 1 || ran > 15) {
-                System.out.println("El número de colores introducido es incorrecto.");
-                return false;
-            }
             this.rango = ran;
 
             if (mode.equals("codemaker")) {
