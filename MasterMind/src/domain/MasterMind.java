@@ -64,12 +64,12 @@ public class MasterMind {
                         if(mod.equals("codebreaker") || mod.equals("codemaker")) estado++;
                         else System.out.println("Modo no válido");
                         break;
-                case 3: System.out.print("Escribe el número de fichas con las que quieres jugar" + "\n");
+                case 3: System.out.print("Escribe el número de fichas con las que quieres jugar del 1 al 9" + "\n");
                         num = Integer.parseInt(input.nextLine());
                         if (num > 0 && num < 10) estado++;
                         else System.out.println("Número de fichas no válido");
                         break;
-                case 4: System.out.print("Escribe el número máximo que quieres que tenga la ficha" + "\n");
+                case 4: System.out.print("Escribe el número máximo que quieres que tenga la ficha del 1 al 9" + "\n");
                         ran = Integer.parseInt(input.nextLine());
                         if (ran > 0 && ran < 10){
                             estado++;

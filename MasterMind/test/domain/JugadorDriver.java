@@ -21,7 +21,6 @@ public class JugadorDriver {
         codePeg = new CodePegStub();
         testConstructor();
         testConstructor2();
-        testCreaArray();
         testRegister();
         testLogin();
         testGetName();
@@ -39,11 +38,6 @@ public class JugadorDriver {
     
     public void testConstructor2() {
         Jugador j = new Jugador(3,4);
-    }
-            
-    
-    public void testCreaArray(){
-        ArrayList<Integer> a = jugador.creaArray(1,1,1,1);
     }
     
     public void testRegister() {

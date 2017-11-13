@@ -24,7 +24,6 @@ public final class CodeBreakerDriver {
         codePeg = new CodePegStub();
         testConjunt();
         testCreaCombinaciones();
-        testOrdenar();
         testConstructor();
         testConvert();
         testCompare();
@@ -49,12 +48,6 @@ public final class CodeBreakerDriver {
             a.add(1);
         }
         codebreaker.creaCombinaciones(0,a);
-    }
-    
-    public void testOrdenar(){
-        //adri
-        ArrayList<Integer> a = new ArrayList<>();
-        codebreaker.ordenar(a);
     }
     
     public void testConstructor() {

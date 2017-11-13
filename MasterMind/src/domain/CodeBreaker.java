@@ -9,6 +9,7 @@ package domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
+import utils.Funciones;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
     protected void creaCombinaciones(int i, ArrayList<Integer> aux){
         if(i == super.getNFichas()){
             ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
-            ordenar(añadir);
+            Funciones.ordenar(añadir);
             if(!combinaciones.contains(añadir)) combinaciones.add(añadir);
         }
         else{
@@ -47,20 +48,6 @@ public final class CodeBreaker extends Jugador implements Serializable{
             }
         }
     }
-    
-    protected void ordenar(ArrayList<Integer> aux){
-        int temp;
-        for(int i = 1; i < aux.size(); i++){
-            for(int j = i; j > 0; j--){
-                if(aux.get(j) > aux.get(j-1)){
-                    temp = aux.get(j);
-                    aux.set(j,aux.get(j-1));
-                    aux.set(j-1,temp);
-                }
-            }
-        }
-    }
-
     
     public CodeBreaker(boolean IA, int nfichas, int ncolores) {
         super(nfichas,ncolores);
