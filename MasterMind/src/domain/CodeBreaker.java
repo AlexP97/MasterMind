@@ -201,12 +201,11 @@ public final class CodeBreaker extends Jugador implements Serializable{
                 boolean fichasNoValid = false;
                 if(fichas.length != super.getNFichas())
                     fichasNoValid = true;
-                jugadaHecha = true;
-                for(int i = 0; i < fichas.length && fichasNoValid; i++) {
+                for(int i = 0; i < fichas.length && !fichasNoValid; i++) {
                     int num = Integer.parseInt(fichas[i]);
                     if (num >= 1 && num <= super.getNColores() || num == -1) linea.add(num);
-                    else jugadaHecha = false;
                 }
+                if(linea.size() == fichas.length) jugadaHecha = true;
                 if (!jugadaHecha || fichasNoValid) System.out.print("\nHas introducido un valor incorrecto.\n");
             }
         }
