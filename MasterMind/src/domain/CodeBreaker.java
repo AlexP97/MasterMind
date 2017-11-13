@@ -179,27 +179,30 @@ public final class CodeBreaker extends Jugador implements Serializable{
         }
         else {
             boolean jugadaHecha = false;
-            boolean salir = false;
-            while (!jugadaHecha && !salir){
+            boolean guardar = false;
+            while (!jugadaHecha && !guardar){
                 Scanner input = new Scanner(System.in);
-                System.out.print("Introduce tu jugada poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al 6 separada de un espacio "
-                        + "(o introduce -1 para guardar partida):\n");
+                System.out.println("Introduce tu jugada poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al 6 separada de un espacio "
+                        + "(o introduce -1 para guardar partida):");
                 String jugada = input.nextLine();
                 String fichas[] = jugada.split(" ");
                 if(fichas[0].equals("-1")) {
-                    salir = true;
+                    guardar = true;
                     linea.add(-1);
                 }    
-                if(!salir) {
+                if(!guardar) {
                     boolean fichasNoValid = false;
                     if(fichas.length != super.getNFichas())
                         fichasNoValid = true;
                     for(int i = 0; i < fichas.length && !fichasNoValid; i++) {
                         int num = Integer.parseInt(fichas[i]);
-                        if (num >= 1 && num <= super.getNColores() || num == -1) linea.add(num);
+                        if (num >= 1 && num <= super.getNColores()) linea.add(num);
                     }
                     if(linea.size() == fichas.length) jugadaHecha = true;
-                    if (!jugadaHecha || fichasNoValid) System.out.print("Has introducido un valor incorrecto.\n");
+                    if(fichasNoValid) 
+                        System.out.println("El número de fichas introducido es incorrecto.");
+                    if (!jugadaHecha) 
+                        System.out.println("Has introducido un valor incorrecto.");
                 }
             }
         }
