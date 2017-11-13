@@ -59,7 +59,7 @@ public class Jugador {
             File info = new File("players/"+n+"/info.txt");
             try {
                 BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-                bw.write(n+" "+c+" 0 true");
+                bw.write(n+" "+c);
                 bw.close();
             }
             catch(IOException e) {

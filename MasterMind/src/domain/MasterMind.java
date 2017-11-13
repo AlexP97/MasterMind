@@ -41,18 +41,46 @@ public class MasterMind {
     
     protected static void crearPartida(Jugador jugador){
         Scanner input = new Scanner(System.in);
-        System.out.print("Escribe el id de la partida" + "\n");
-        String id = input.nextLine();
-        System.out.print("Escribe la dificultad de la partida (facil, medio o dificil)" + "\n");
-        String dif = input.nextLine();
-        System.out.print("Escribe el modo de la partida (codebreaker o codemaker)" + "\n");
-        String mod = input.nextLine();
-        System.out.print("Escribe el número de fichas con las que quieres jugar" + "\n");
-        String num = input.nextLine();
-        System.out.print("Escribe el número máximo que quieres que tenga la ficha" + "\n");
-        String ran = input.nextLine();
+        int estado = 0;
+        String id = null;
+        String dif = null;
+        String mod = null;
+        int num = 0;
+        int ran = 0;
+        boolean partidaCreada = false;
+        while(!partidaCreada){
+            switch(estado){
+                case 0: System.out.print("Escribe el id de la partida" + "\n");
+                        id = input.nextLine();
+                        estado++;
+                        break;
+                case 1: System.out.print("Escribe la dificultad de la partida (facil, medio o dificil)" + "\n");
+                        dif = input.nextLine();
+                        if(dif.equals("facil") || dif.equals("medio") || dif.equals("dificil")) estado++; 
+                        else System.out.println("Dificultad no válida");
+                        break;
+                case 2: System.out.print("Escribe el modo de la partida (codebreaker o codemaker)" + "\n");
+                        mod = input.nextLine();
+                        if(mod.equals("codebreaker") || mod.equals("codemaker")) estado++;
+                        else System.out.println("Modo no válido");
+                        break;
+                case 3: System.out.print("Escribe el número de fichas con las que quieres jugar" + "\n");
+                        num = Integer.parseInt(input.nextLine());
+                        if (num > 0 && num < 10) estado++;
+                        else System.out.println("Número de fichas no válido");
+                        break;
+                case 4: System.out.print("Escribe el número máximo que quieres que tenga la ficha" + "\n");
+                        ran = Integer.parseInt(input.nextLine());
+                        if (ran > 0 && ran < 10){
+                            estado++;
+                            partidaCreada = true;
+                        }
+                        else System.out.println("Rango no válido");
+                        break;
+            }
+        } 
         Game game = new Game();
-        game.juega(jugador,id,dif,mod, Integer.parseInt(num), Integer.parseInt(ran));
+        game.juega(jugador,id,dif,mod, num, ran);
     }
     
     protected static void cargarPartida(Jugador jugador){
@@ -66,14 +94,15 @@ public class MasterMind {
         for(int i = 0; i < output.size(); i++){
             System.out.println(output.get(i).getLeft()+' '+output.get(i).getRight());
         }
+        if(output.isEmpty()) System.out.println("El ranking está vacío.");
     }
     
     public static void main(String[] args) {
         Jugador jugador = new Jugador();
         int estado = 0;
         boolean fin = false;
+        System.out.print("Bienvenido a MasterMind." + "\n");
         while(!fin){           
-            System.out.print("Bienvenido a MasterMind." + "\n");
             Scanner input = new Scanner(System.in);   
             switch (estado){
                 case 0: //MENU DE INICIO/REGISTRO
@@ -111,7 +140,6 @@ public class MasterMind {
                     else{
                         System.out.print("Entrada no válida" + "\n");
                     }
-                    
                 case 2:
                     break;
             }      
