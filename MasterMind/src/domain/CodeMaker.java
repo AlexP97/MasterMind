@@ -9,6 +9,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import utils.Funciones;
 
 /**
  *
@@ -96,6 +97,7 @@ public final class CodeMaker extends Jugador {
                         System.out.println("Has introducido un valor incorrecto.");
                 }
             }
+            Funciones.ordenar(linea);
         }
         
         
