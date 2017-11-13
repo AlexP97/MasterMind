@@ -199,8 +199,10 @@ public final class CodeBreaker extends Jugador implements Serializable{
                         + "(o introduce -1 para guardar partida):\n");
                 String jugada = input.nextLine();
                 String fichas[] = jugada.split(" ");
-                if(fichas.length != 0 && Integer.parseInt(fichas[0]) == -1)
-                   salir = true;
+                if(fichas[0].equals("-1")) {
+                    salir = true;
+                    linea.add(-1);
+                }    
                 if(!salir) {
                     boolean fichasNoValid = false;
                     if(fichas.length != super.getNFichas())
@@ -210,7 +212,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
                         if (num >= 1 && num <= super.getNColores() || num == -1) linea.add(num);
                     }
                     if(linea.size() == fichas.length) jugadaHecha = true;
-                    if (!jugadaHecha || fichasNoValid) System.out.print("\nHas introducido un valor incorrecto.\n");
+                    if (!jugadaHecha || fichasNoValid) System.out.print("Has introducido un valor incorrecto.\n");
                 }
             }
         }

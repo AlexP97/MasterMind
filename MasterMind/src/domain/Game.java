@@ -351,6 +351,8 @@ public class Game {
 
                 }
                 
+                System.out.println("--------------");
+                
                 if (acierto) {
                     finishGame(true);
                     return;
