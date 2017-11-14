@@ -157,6 +157,24 @@ public class Jugador {
         }
     }
     
+    public void borrarDirectorio(File f) {
+        File[] ficheros = f.listFiles();
+        for(int i = 0; i < ficheros.length; i++) {
+            if(ficheros[i].isDirectory())
+                borrarDirectorio(ficheros[i]);
+            ficheros[i].delete();
+        }
+    }
+    
+    public void elimina() {
+        File f = new File("players/"+this.name);
+        borrarDirectorio(f);
+        if(f.delete()) 
+            System.out.println("El usuario se ha eliminado correctamente");
+        else
+            System.out.println("No se ha podido eliminar el usuario");
+    }
+    
     public ArrayList<Integer> donaSolucio(ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
         ArrayList<Integer> linea = new ArrayList<>();
         ArrayList<Boolean> visitats = new ArrayList<>();

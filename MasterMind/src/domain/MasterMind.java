@@ -116,9 +116,9 @@ public class MasterMind {
         System.out.println("El jugador va a ser eliminado de forma definitiva, ¿estás seguro?");
         System.out.println("Escribe si o no");
         String respuesta = input.nextLine();
-        /*if(respuesta.equals("si")) jugador.elimina();
+        if(respuesta.equals("si")) jugador.elimina();
         else if(respuesta.equals("no")) return;
-        else eliminaUsuario(jugador);*/
+        else eliminaUsuario(jugador);
     }
     
     public static void main(String[] args) {
@@ -172,6 +172,7 @@ public class MasterMind {
                         }
                         else if(modificar.equals("eliminar")){
                             eliminaUsuario(jugador);
+                            estado = 0;
                         }
                         else if(modificar.equals("salir")) estado = 1;
                         else{
