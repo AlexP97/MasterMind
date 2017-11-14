@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
 import java.util.ArrayList;
@@ -15,6 +10,11 @@ import utils.Pair;
  */
 public class MasterMind {
 
+    /**
+     *
+     * @param jugador el jugador que está jugando
+     * @return si el jugador ha hecho login con éxito
+     */
     protected static boolean login(Jugador jugador){
         Scanner input = new Scanner(System.in);
         System.out.print("Introduce el nombre de usuario:" + "\n");
@@ -27,6 +27,11 @@ public class MasterMind {
         return p.getLeft();
     }
     
+    /**
+     *
+     * @param jugador el jugador que está jugando
+     * @return si el jugador se ha registrado con éxito
+     */
     protected static boolean register(Jugador jugador){
         Scanner input = new Scanner(System.in);
         System.out.print("Introduce el nombre de usuario:" + "\n");
@@ -39,6 +44,10 @@ public class MasterMind {
         return p.getLeft();
     }
     
+    /**
+     *
+     * @param jugador el jugador que está jugando
+     */
     protected static void crearPartida(Jugador jugador){
         Scanner input = new Scanner(System.in);
         int estado = 0;
@@ -83,6 +92,10 @@ public class MasterMind {
         game.juega(jugador,id,dif,mod, num, ran);
     }
     
+    /**
+     *
+     * @param jugador el jugador que está jugando
+     */
     protected static void cargarPartida(Jugador jugador){
         Game game = new Game();
         game.LoadGame(jugador);
@@ -98,6 +111,10 @@ public class MasterMind {
         if(output.isEmpty()) System.out.println("El ranking está vacío.");
     }
     
+    /**
+     *
+     * @param jugador el jugador que está jugando
+     */
     protected static void cambiaNombre(Jugador jugador){
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce tu nuevo nombre de usuario");
@@ -105,6 +122,10 @@ public class MasterMind {
         jugador.setName(name);
     }
     
+    /**
+     *
+     * @param jugador el jugador que está jugando
+     */
     protected static void cambiaContraseña(Jugador jugador){
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce tu nueva contraseña");
@@ -112,6 +133,10 @@ public class MasterMind {
         jugador.setPassword(password);
     }
     
+    /**
+     *
+     * @param jugador el jugador que está jugando
+     */
     protected static void eliminaUsuario(Jugador jugador){
         Scanner input = new Scanner(System.in);
         System.out.println("El jugador va a ser eliminado de forma definitiva, ¿estás seguro?");

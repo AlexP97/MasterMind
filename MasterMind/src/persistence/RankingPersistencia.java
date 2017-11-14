@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistence;
 
 import java.io.BufferedReader;
@@ -20,6 +15,10 @@ import utils.Pair;
  */
 public class RankingPersistencia {
     
+    /**
+     *
+     * @return el ranking guardado
+     */
     public ArrayList<Pair<String, Integer>> getRanking(){
         ArrayList<Pair<String, Integer>> ranking = new ArrayList<>();
         try {
@@ -48,6 +47,10 @@ public class RankingPersistencia {
         return ranking;
     }
     
+    /**
+     *
+     * @param ranking el ranking que se ha de guardar
+     */
     public void actualizaRanking(ArrayList<Pair<String, Integer>> ranking){
         try{
             File info = new File("data/ranking/info.txt");

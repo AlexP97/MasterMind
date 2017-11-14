@@ -1,4 +1,4 @@
-JFLAGS = -g
+JFLAGS = -g -nowarn
 JC = javac
 JVM= java
 

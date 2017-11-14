@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils;
 
 import java.util.ArrayList;
@@ -12,6 +7,12 @@ import java.util.ArrayList;
  * @author Espejo Saldaña, Adrián
  */
 public class Funciones {
+
+    /**
+     *
+     * @param args int que van a formar parte de la lista, en orden
+     * @return una lista con los parámetros que se le pasan
+     */
     public static ArrayList<Integer> creaArray(int... args){
         ArrayList<Integer> aux = new ArrayList<>();
         for(int arg : args){
@@ -20,6 +21,10 @@ public class Funciones {
         return aux;
     }
     
+    /**
+     *
+     * @param aux lista a ordenar, que se devolverá ordenada
+     */
     public static void ordenar(ArrayList<Integer> aux){
         int temp;
         for(int i = 1; i < aux.size(); i++){

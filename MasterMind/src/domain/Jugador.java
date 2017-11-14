@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package domain;
 
 import utils.Pair;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,11 +25,22 @@ public class Jugador {
       
     }
     
+    /**
+     *
+     * @param nfichas número de fichas de la partida actual
+     * @param ncolores número de colores de la partida actual
+     */
     public Jugador(int nfichas, int ncolores) {
         this.nFichas = nfichas;
         this.nColores = ncolores;
     }
     
+    /**
+     *
+     * @param n nombre de usuario
+     * @param c contraseña
+     * @return si se ha registrado con éxito
+     */
     public Pair<Boolean, String> register(String n, String c) {
         JugadorPersistencia j = new JugadorPersistencia();
         Pair<Boolean, String> p = j.register(n,c);
@@ -49,6 +52,12 @@ public class Jugador {
         return p;
     }
     
+    /**
+     *
+     * @param n nombre de usuario
+     * @param c contraseña
+     * @return si ha hecho login con éxito
+     */
     public Pair<Boolean, String> login(String n, String c) {
         JugadorPersistencia j = new JugadorPersistencia();
         Pair<Boolean, String> p = j.login(n,c);
@@ -60,18 +69,34 @@ public class Jugador {
         return p;
     }
     
+    /**
+     *
+     * @return el nombre de usuario del jugador
+     */
     public String getName() {
         return this.name;
     }
     
+    /**
+     *
+     * @return la contraseña del jugador
+     */
     public String getPassword() {
         return this.password;
     }
     
+    /**
+     *
+     * @return el número de colores de la partida actual
+     */
     public int getNColores() {
         return this.nColores;
     }
     
+    /**
+     *
+     * @return el número de fichas de la partida actual
+     */
     public int getNFichas() {
         return this.nFichas;
     }
@@ -80,10 +105,18 @@ public class Jugador {
         this.IA = true;
     }
     
+    /**
+     *
+     * @return si el jugador es la IA o es un jugador real
+     */
     public boolean esIA() {
         return this.IA;
     }
     
+    /**
+     *
+     * @param n el nombre de usuario
+     */
     public void setName(String n) {
         File dir = new File("data/players/"+this.name);
         File dir2 = new File("data/players/"+n);
@@ -101,11 +134,15 @@ public class Jugador {
             System.out.println("Has cambiado tu nombre de usuario correctamente.");
             
         }
-        catch (Exception e) {
+        catch (IOException e) {
             System.out.println("Error al cambiar de nombre");
         }
     }
     
+    /**
+     *
+     * @param c la contraseña
+     */
     public void setPassword(String c) {
         File info = new File("data/players/"+this.name+"/info.txt");
         try {
@@ -116,7 +153,7 @@ public class Jugador {
             System.out.println("Has cambiado tu contraseña correctamente.");
             
         }
-        catch (Exception e) {
+        catch (IOException e) {
             System.out.println("Error al cambiar de contraseña");
         }
     }
@@ -139,6 +176,12 @@ public class Jugador {
             System.out.println("No se ha podido eliminar el usuario");
     }
     
+    /**
+     *
+     * @param tirada intento de adivinar el patrón
+     * @param solucio patrón de la partida
+     * @return pegs que indican qué colores están bien colocados y cuáles están pero mal colocados
+     */
     public ArrayList<Integer> donaSolucio(ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
         ArrayList<Integer> linea = new ArrayList<>();
         ArrayList<Boolean> visitats = new ArrayList<>();

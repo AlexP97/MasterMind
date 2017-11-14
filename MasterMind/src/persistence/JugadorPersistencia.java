@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistence;
 
 import java.io.BufferedReader;
@@ -18,6 +13,13 @@ import utils.Pair;
  * @author Pérez Ortiz, Alejandro
  */
 public class JugadorPersistencia {
+
+    /**
+     *
+     * @param n nombre de usuario
+     * @param c contraseña
+     * @return si se ha registrado con éxito
+     */
     public Pair<Boolean, String> register(String n, String c) {
         File dir = new File("data/players/"+n);
         boolean b = dir.mkdirs();
@@ -46,7 +48,13 @@ public class JugadorPersistencia {
         return p;
     }
     
-     public Pair<Boolean, String> login(String n, String c) {
+    /**
+     *
+     * @param n nombre de usuario
+     * @param c contraseña
+     * @return si ha hecho login con éxito
+     */
+    public Pair<Boolean, String> login(String n, String c) {
         Pair<Boolean, String> p = new Pair();
         try{
             String linea;

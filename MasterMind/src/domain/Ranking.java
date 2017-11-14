@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
 import utils.Pair;
@@ -19,16 +14,29 @@ public class Ranking {
     
     private Ranking(){}
     
+    /**
+     *
+     * @return la única instancia de Ranking
+     */
     public static Ranking getInstance(){
         RankingPersistencia rp = new RankingPersistencia();
         ranking = rp.getRanking();
         return INSTANCE;
     }
     
+    /**
+     *
+     * @return el ranking
+     */
     public ArrayList<Pair<String, Integer>> muestraRanking(){
         return ranking;
     }
     
+    /**
+     *
+     * @param nombre el nombre del jugador que puede entrar en el ranking
+     * @param puntos los puntos del jugador que puede entrar en el ranking
+     */
     public void actualizaRanking(String nombre, int puntos){
         Pair<String, Integer> p = new Pair(nombre,puntos);
         Pair aux;
