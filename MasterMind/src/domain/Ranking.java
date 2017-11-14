@@ -1,22 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
 import utils.Pair;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
+import persistence.RankingPersistencia;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class Ranking {
     private static final Ranking INSTANCE = new Ranking();
@@ -24,38 +14,29 @@ public class Ranking {
     
     private Ranking(){}
     
+    /**
+     *
+     * @return la única instancia de Ranking
+     */
     public static Ranking getInstance(){
-        try {
-            File dir = new File("ranking");
-            dir.mkdir();
-            File info = new File("ranking/info.txt");
-            ranking = new ArrayList<>();
-            if(info.exists() && info.length() != 0) {
-                String linea;
-                FileReader f = new FileReader("ranking/info.txt");
-                BufferedReader b = new BufferedReader(f);
-                linea = b.readLine();
-                b.close();
-                String palabra[] = linea.split(" ");
-                for(int i = 0; i < palabra.length; i += 2){
-                    Pair p = new Pair(palabra[i], Integer.parseInt(palabra[i+1]));
-                    ranking.add(i/2,p);
-                }
-            }
-            else {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-                bw.close();
-            } 
-        } catch (IOException ex) {
-                System.out.println("Error creando el ranking");
-        }
+        RankingPersistencia rp = new RankingPersistencia();
+        ranking = rp.getRanking();
         return INSTANCE;
     }
     
+    /**
+     *
+     * @return el ranking
+     */
     public ArrayList<Pair<String, Integer>> muestraRanking(){
         return ranking;
     }
     
+    /**
+     *
+     * @param nombre el nombre del jugador que puede entrar en el ranking
+     * @param puntos los puntos del jugador que puede entrar en el ranking
+     */
     public void actualizaRanking(String nombre, int puntos){
         Pair<String, Integer> p = new Pair(nombre,puntos);
         Pair aux;
@@ -93,19 +74,8 @@ public class Ranking {
             }
             
         }
-        try{
-            File info = new File("ranking/info.txt");
-            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-            for(int i = 0; i < ranking.size(); i++) {
-                if(i == 0)
-                    bw.write(ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
-                else
-                    bw.write(" "+ranking.get(i).getLeft()+" "+String.valueOf(ranking.get(i).getRight()));
-        }
-        bw.close();
-        } catch (IOException ex) {
-            System.out.println("Error actualizando el ranking");
-        }    
+        RankingPersistencia rp = new RankingPersistencia();
+        rp.actualizaRanking(ranking);
     }
     
 }

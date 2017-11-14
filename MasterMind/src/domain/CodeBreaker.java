@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package domain;
 
 import java.io.Serializable;
@@ -13,7 +7,7 @@ import utils.Funciones;
 
 /**
  *
- * @author usuario
+ * @author Pérez Ortiz, Alejandro
  */
 public final class CodeBreaker extends Jugador implements Serializable{
     ArrayList<ArrayList<Integer> > compatibles;
@@ -22,6 +16,11 @@ public final class CodeBreaker extends Jugador implements Serializable{
          
     boolean primeraOpcio = true;
     
+    /**
+     *
+     * @param i posición de aux que se está modificando
+     * @param aux lista que es un código que posiblemente adivine el patrón
+     */
     protected void conjunt(int i, ArrayList<Integer> aux) {
             if(i == super.getNFichas()) {
                     ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
@@ -35,6 +34,11 @@ public final class CodeBreaker extends Jugador implements Serializable{
             }
     }
     
+    /**
+     *
+     * @param i posición de aux que se está modificando
+     * @param aux posible lista de pegs para dar la pista al CodeBreaker
+     */
     protected void creaCombinaciones(int i, ArrayList<Integer> aux){
         if(i == super.getNFichas()){
             ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
@@ -49,6 +53,12 @@ public final class CodeBreaker extends Jugador implements Serializable{
         }
     }
     
+    /**
+     *
+     * @param IA si el CodeBreaker es IA o un jugador real
+     * @param nfichas número de fichas de la partida actual
+     * @param ncolores número de colores de la partida actual
+     */
     public CodeBreaker(boolean IA, int nfichas, int ncolores) {
         super(nfichas,ncolores);
         this.compatibles = new ArrayList<>();
@@ -77,6 +87,11 @@ public final class CodeBreaker extends Jugador implements Serializable{
         }
     }
     
+    /**
+     *
+     * @param a lista de int a convertir en lista de CodePeg
+     * @return
+     */
     protected ArrayList<CodePeg> convert(ArrayList<Integer> a) {
         ArrayList<CodePeg> cambioCodePeg = new ArrayList<>();
         for(int i = 0; i < a.size(); i++){
@@ -84,7 +99,14 @@ public final class CodeBreaker extends Jugador implements Serializable{
         }
         return cambioCodePeg;
     }
-    //code es un posible codigo inconsistente
+
+    /**
+     *
+     * @param tirada una de las listas a comparar
+     * @param solucio segunda de las listas a comparar
+     * @param code código que tiene que dar como resultado de comparar tirada y solucio
+     * @return
+     */
     protected boolean compare(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio, ArrayList<Integer> code){
         int nblancas = 0;
         int nnegras = 0;
@@ -105,17 +127,34 @@ public final class CodeBreaker extends Jugador implements Serializable{
         return false;   
     }
     
+    /**
+     *
+     * @param candidat código candidato a ser el mejor intento
+     * @param descartat código que posiblemente quede descartado si intentamos adivinar el patrón con candidat
+     * @return el código de colores que daría CodeMaker si candidat fuera un intento y descartat el patrón
+     */
     protected ArrayList<Integer> miraSolucio(ArrayList<Integer> candidat, ArrayList<Integer> descartat){
         ArrayList<CodePeg> cambioCodePeg = convert(candidat);
         ArrayList<CodePeg> cambioCodePeg2 = convert(descartat);
         return donaSolucio(cambioCodePeg, cambioCodePeg2);
     }
     
+    /**
+     *
+     * @param candidat código candidato a ser el mejor intento
+     * @param descartat código que posiblemente quede descartado si intentamos adivinar el patrón con candidat
+     * @param combinacio código de colores que podría dar el CodeMaker como pista
+     * @return
+     */
     protected boolean miraDescartes(ArrayList<Integer> candidat, ArrayList<Integer> descartat, ArrayList<Integer> combinacio) {
         ArrayList<Integer> aux = miraSolucio(candidat,descartat);
         return combinacio.equals(aux);
     }
     
+    /**
+     *
+     * @return el mejor intento para el actual turno
+     */
     protected ArrayList<Integer> millorOpcio() {
         int min = Integer.MAX_VALUE;
         int indice = 0;
@@ -148,7 +187,13 @@ public final class CodeBreaker extends Jugador implements Serializable{
         return noUsados.get(indice);
     }
    
-    
+    /**
+     *
+     * @param s si el CodeBreaker es IA o un jugador real
+     * @param tirada el intento para adivinar el patrón del turno anterior
+     * @param solucio patrón a adivinar
+     * @return intento de adivinar el patrón para el turno actual
+     */
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio) {
         ArrayList<Integer> linea;
         linea = new ArrayList<Integer>();

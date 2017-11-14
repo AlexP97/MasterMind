@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package domain;
 
 import java.io.Serializable;
@@ -14,10 +8,16 @@ import utils.Funciones;
 
 /**
  *
- * @author usuario
+ * @author Pérez Ortiz, Alejandro
  */
 public final class CodeMaker extends Jugador implements Serializable{
     
+    /**
+     *
+     * @param IA si el CodeMaker es IA o es jugador real
+     * @param nfichas número de fichas de la partida actual
+     * @param ncolores número de colores de la partida actual
+     */
     public CodeMaker(boolean IA, int nfichas, int ncolores) {
        super(nfichas, ncolores);
        
@@ -25,6 +25,11 @@ public final class CodeMaker extends Jugador implements Serializable{
            super.setIA();
     }
     
+    /**
+     *
+     * @param s s es "IA" si el CodeMaker es IA
+     * @return el patrón que se deberá adivinar
+     */
     public ArrayList<Integer> dona_patro(String s) {
         ArrayList<Integer> linea;
         linea = new ArrayList<Integer>();
@@ -59,6 +64,13 @@ public final class CodeMaker extends Jugador implements Serializable{
         return linea;
     }
     
+    /**
+     *
+     * @param s s es "IA" si el CodeMaker es IA
+     * @param tirada intento de adivinar el patrón
+     * @param solucio patrón de la partida
+     * @return pegs que se devuelven para dar la pista al jugador CodeBreaker
+     */
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
         ArrayList<Integer> linea = null;
         linea = new ArrayList<Integer>();
@@ -106,8 +118,6 @@ public final class CodeMaker extends Jugador implements Serializable{
             }
             Funciones.ordenar(linea);
         }
-        
-        
         return linea;
     }
     

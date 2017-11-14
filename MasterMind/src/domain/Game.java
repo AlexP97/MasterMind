@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
 import java.io.ByteArrayInputStream;
@@ -24,7 +19,7 @@ import persistence.GamePersistencia;
 
 /**
  *
- * @author kasthan
+ * @author Martínez Martínez, Daniel
  */
 public class Game implements Serializable{
     
@@ -64,14 +59,26 @@ public class Game implements Serializable{
         this.jugando = false;
     }
     
+    /**
+     *
+     * @return el id de la partida
+     */
     public String getId() {
         return this.id;
     }
     
+    /**
+     *
+     * @return la dificultad de la partida
+     */
     public String getDifficulty(){
         return this.difficulty;
     }
     
+    /**
+     *
+     * @return los puntos de la partida
+     */
     public int getPoints() {
         return this.points;
     }
@@ -146,6 +153,10 @@ public class Game implements Serializable{
         
     }
     
+    /**
+     *
+     * @param ganado si el jugador ha ganado o no
+     */
     public void finishGame(boolean ganado) {
         
         if (ganado) {
@@ -243,14 +254,21 @@ public class Game implements Serializable{
         
     }
     
+    /**
+     *
+     * @param playerN jugador que juega la partida
+     * @param ident identificador de la partida
+     * @param dif dificultad de la partida
+     * @param mod modo de la partida
+     * @param num número de fichas para la partida
+     * @param ran rango de colores para la partida
+     */
     public void juega(Jugador playerN, String ident, String dif, String mod, int num, int ran) {
                 
         boolean primerTurnoCargado = cargado;
 
         boolean b = SetAtributos(playerN, ident, dif, mod, num, ran);
         if (!b) return;
-
-        jugando = true;
 
         while (turn <= totalTurns){
 
