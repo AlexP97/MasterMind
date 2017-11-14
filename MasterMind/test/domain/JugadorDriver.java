@@ -30,6 +30,9 @@ public class JugadorDriver {
         testSetIA();
         testEsIA();
         testDonaSolucio();
+        testSetName();
+        testSetPassword();
+        testElimina();
     }
     
     public void testConstructor() {
@@ -70,6 +73,20 @@ public class JugadorDriver {
     
     public void testEsIA() {
         Boolean b = jugador.esIA();
+    }
+    
+    public void testSetName() {
+        String s = "Roberto";
+        jugador.setName(s);
+    }
+    
+    public void testSetPassword() {
+        String s = "1234";
+        jugador.setPassword(s);
+    }
+    
+    public void testElimina() {
+        jugador.elimina();
     }
     
     public void testDonaSolucio() {

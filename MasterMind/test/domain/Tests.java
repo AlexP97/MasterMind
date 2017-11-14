@@ -5,6 +5,7 @@
  */
 package domain;
 
+import persistence.JugadorPersistenciaDriver;
 import utils.FuncionesDriver;
 import utils.PairDriver;
 
@@ -26,6 +27,7 @@ public class Tests {
         RankingDriver rankingDriver = new RankingDriver();
         FuncionesDriver funcDriver = new FuncionesDriver();
         PairDriver pairDriver = new PairDriver();
+        JugadorPersistenciaDriver jpDriver = new JugadorPersistenciaDriver();
     }
     
 }
