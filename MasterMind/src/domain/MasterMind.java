@@ -7,6 +7,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import persistence.GamePersistencia;
 import utils.Pair;
 
 /**
@@ -79,14 +80,13 @@ public class MasterMind {
                         break;
             }
         } 
-        Game game = new Game();
-        game.juega(jugador,id,dif,mod, num, ran);
+        GamePersistencia gameP = new GamePersistencia();
+        gameP.CrearPartida(jugador,id,dif,mod, num, ran);
     }
     
     protected static void cargarPartida(Jugador jugador){
-        Game game = new Game();
-        game.LoadGame(jugador);
-        if (game.cargado) game.comenzarPartida();
+        GamePersistencia gameP = new GamePersistencia();
+        gameP.LoadGame(jugador);
     }
     
     protected static void muestraRanking(){

@@ -5,11 +5,13 @@
  */
 package domain;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Usuario
  */
-public final class KeyPeg extends Casilla {
+public final class KeyPeg extends Casilla implements Serializable{
     private final int colourKey;
     private final int position;
     

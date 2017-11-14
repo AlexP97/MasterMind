@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import persistence.JugadorPersistencia;
 
@@ -21,7 +22,7 @@ import persistence.JugadorPersistencia;
  *
  * @author usuario
  */
-public class Jugador {
+public class Jugador implements Serializable{
     private String name;
     private String password;
     private boolean IA;

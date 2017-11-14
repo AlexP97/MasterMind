@@ -16,15 +16,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.Scanner;
+import persistence.GamePersistencia;
 
 /**
  *
  * @author kasthan
  */
-public class Game {
+public class Game implements Serializable{
     
     String id;
     String difficulty;
@@ -46,6 +48,7 @@ public class Game {
     int numero;
     int rango;
     boolean jugando;
+    GamePersistencia gameP;
     
     public Game () {
         this.id = null;
@@ -73,21 +76,37 @@ public class Game {
         return this.points;
     }
     
+    public boolean getCargado() {
+        return this.cargado;
+    }
+    
+    public Jugador getPlayer() {
+        return this.player;
+    }
+    
+    public String getMode() {
+        return this.mode;
+    }
+    
+    public void setCargado(boolean b) {
+        this.cargado = b;
+    }
+    
+    public void setGameP(GamePersistencia gamePer){
+        this.gameP = gamePer;
+    }
+    
+    public void setCB(CodeBreaker cb){
+        this.codeB = cb;
+    }
+    
     private ArrayList<CodePeg> conversorCode (ArrayList<Integer> arrayList) {
         
         ArrayList<CodePeg> lista = new ArrayList<CodePeg>();
         for (int i = 0; i < numero; ++i) {
             
-            if (arrayList.get(i) != -1 && arrayList.get(i) != -2) {
-                CodePeg codeP = new CodePeg(arrayList.get(i), i+1, numero, rango);
-                lista.add(codeP);
-            }
-            else {
-                acierto = false;
-                if (arrayList.get(i) == -1) SaveGame();
-                else gameSaved = true;
-                return null;
-            }
+            CodePeg codeP = new CodePeg(arrayList.get(i), i+1, numero, rango);
+            lista.add(codeP);
             
         }
         return lista;
@@ -98,109 +117,33 @@ public class Game {
         ArrayList<KeyPeg> lista = new ArrayList<KeyPeg>();
         for (int i = 0; i < numero; ++i) {
             
-            if (arrayList.get(i) != -1 && arrayList.get(i) != -2) {
-                KeyPeg codeP = new KeyPeg(arrayList.get(i), i+1, numero);
-                lista.add(codeP);
-            }
-            else {
-                acierto = false;
-                if (arrayList.get(i) == -1) SaveGame();
-                else gameSaved = true;
-                return null;
-            }
+            KeyPeg codeP = new KeyPeg(arrayList.get(i), i+1, numero);
+            lista.add(codeP);
             
         }
         return lista;
     }
     
-    private boolean CheckAvailability(String ident, String userName) {
-        
-        boolean available = true;
-        
-        File folder = new File("players/"+userName+"/games/");
-        File[] listOfFiles = folder.listFiles();
-        
-        if (listOfFiles != null){
-            for (int i = 0; i < listOfFiles.length && available; i++) {
-
-                String fileName = listOfFiles[i].getName().replaceFirst("[.][^.]+$", "");
-                if (fileName.equals(ident)) available = false;
-
-            }
-        }
-        
-        return available;
-        
-    }
-    
     public void SaveGame() {
+                
+        boolean b = gameP.SaveGame(player.getName(), id);
+        boolean b2 = true;
         
-        if (jugando){
-            try {
+        if (mode.equals("codemaker")){
 
-                if (cargado) {
-                    File file = new File("players/"+player.getName()+"/games/"+id+".txt");
-                    file.delete();
-                }
-                FileWriter fileName = new FileWriter("players/"+player.getName()+"/games/"+id+".txt");
-                PrintWriter pw = new PrintWriter(fileName);
-
-                pw.println(id);
-                pw.println(difficulty);
-                pw.println(mode);
-                pw.println(points);
-                pw.println(turn);
-                pw.println(totalTurns);
-                pw.println(numero);
-                pw.println(rango);
-                for (int i = 0; i < codeMAnt.size(); ++i) {
-
-                    pw.println(codeMAnt.get(i).getColour());
-
-                }
-                for (int i = 0; i < codeBAnt.size(); ++i) {
-
-                    pw.println(codeBAnt.get(i).getColour());
-
-                }
-
-                for (int i = 0; i < codeIni.size(); ++i) {
-
-                    pw.println(codeIni.get(i).getColour());
-
-                }
-
-                for (int i = 0; i < turn; ++i) {
-
-                    pw.println(output[i]);
-
-                }
-
-                pw.close();
-
-                if (mode.equals("codemaker")){
-
-                    FileOutputStream fout = new FileOutputStream("players/"+player.getName()+"/games/"+id+"CB");
-                    ObjectOutputStream oos = new ObjectOutputStream(fout);
-                    oos.writeObject(codeB);    
-                    oos.close();
-
-                    out.println("Partida guardada." + "\n");
-                    this.gameSaved = true;
-                }
-                else {
-                    out.println("Partida guardada." + "\n");
-                    this.gameSaved = true;
-                }
-
-            } catch (IOException ex) {
-
-                out.println("No se ha podido guardar la partida." + "\n");
-                File file = new File("players/"+player.getName()+"/games/"+id+".txt");
-                file.delete();
-
-            }
+            b2 = gameP.SaveCodeB(player.getName(), id);
+            
         }
+        
+        if (b && b2) {
+            gameSaved = true;
+            System.out.println("Se ha guardado la partida." + "\n");
+        }
+        else {
+            gameSaved = false;
+            return;
+        }
+        
     }
     
     public void finishGame(boolean ganado) {
@@ -263,7 +206,6 @@ public class Game {
             this.rango = ran;
 
             if (mode.equals("codemaker")) {
-                this.codeB = new CodeBreaker(true, numero, rango);
                 this.codeM = new CodeMaker(false, numero, rango);
                 this.codeIni = conversorCode(codeM.dona_patro("Player"));
             }
@@ -302,79 +244,108 @@ public class Game {
     }
     
     public void juega(Jugador playerN, String ident, String dif, String mod, int num, int ran) {
-        
-        if (playerN != null && !ident.equals("") && CheckAvailability(ident, playerN.getName()) || cargado){
-            boolean primerTurnoCargado = cargado;
+                
+        boolean primerTurnoCargado = cargado;
 
-            boolean b = SetAtributos(playerN, ident, dif, mod, num, ran);
-            if (!b) return;
-            
-            jugando = true;
-            
-            while (turn <= totalTurns){
-                                
-                acierto = true;
-                
-                ArrayList<KeyPeg> outputM = codeMAnt;
-                ArrayList<CodePeg> outputB = codeBAnt;
-                
-                if (mode.equals("codemaker")) {
-                    if (!primerTurnoCargado) {
-                        outputB = conversorCode(codeB.jugar("IA", codeBAnt, codeMAnt));
-                        codeBAnt = outputB;
+        boolean b = SetAtributos(playerN, ident, dif, mod, num, ran);
+        if (!b) return;
+
+        jugando = true;
+
+        while (turn <= totalTurns){
+
+            acierto = true;
+
+            ArrayList<Integer> outputM = new ArrayList<Integer>();
+            ArrayList<Integer> outputB = new ArrayList<Integer>();
+
+            outputM.add(-1);
+            outputM.add(-2);
+
+            outputB.add(-1);
+            outputB.add(-2);
+
+            if (mode.equals("codemaker")) {
+                if (!primerTurnoCargado) {
+                    outputB = codeB.jugar("IA", codeBAnt, codeMAnt);
+                    codeBAnt = conversorCode(outputB);
+                }
+                while (outputM.contains(-1) || outputM.contains(-2) || outputB.size() != numero) {
+                    outputM = codeM.jugar("Player", codeBAnt, codeIni);
+                    if (outputM.contains(-1)) {
+                        SaveGame();
+                        if (this.gameSaved) return;
                     }
-                    outputM = conversorKey(codeM.jugar("Player", outputB, codeIni));
-                    codeMAnt = outputM;
-                    if (this.gameSaved) return;
+                    else if (outputM.contains(-2)) return; 
                 }
-                else if (mode.equals("codebreaker")) {
-                    outputB = conversorCode(codeB.jugar("Player", codeBAnt, codeMAnt));
-                    codeBAnt = outputB;
-                    if (this.gameSaved) return;
-                    outputM = conversorKey(codeM.jugar("IA", outputB, codeIni));
-                    codeMAnt = outputM;
+                codeMAnt = conversorKey(outputM);
+            }
+            else if (mode.equals("codebreaker")) {
+                while (outputB.contains(-1) || outputB.contains(-2) || outputB.size() != numero) {
+                    outputB = codeB.jugar("Player", codeBAnt, codeMAnt);
+                    if (outputB.contains(-1)) {
+                        SaveGame();
+                        if (this.gameSaved) return;
+                    }
+                    else if (outputB.contains(-2)) return; 
                 }
-                
-                primerTurnoCargado = false;
-                
-                if (this.gameSaved) return;
-                
-                String linea = GenerarLinea(outputM, outputB);
-                
-                output[turn] = linea;
-                
-                for (int i = 0; i <= turn; ++i) {
+                codeBAnt = conversorCode(outputB);
+                outputM = codeM.jugar("IA", codeBAnt, codeIni);
+                codeMAnt = conversorKey(outputM);
+            }
 
-                        System.out.print(output[i] + "\n");
+            primerTurnoCargado = false;
 
+            String linea = GenerarLinea(codeMAnt, codeBAnt);
+
+            output[turn] = linea;
+
+            if(mode.equals("codemaker")) {
+            
+                System.out.print("Codigo a adivinar: ");
+                for (int i = 0; i < codeIni.size(); ++i) {
+                    System.out.print(codeIni.get(i).getColour() + " ");
                 }
-                
-                System.out.println("--------------");
-                
-                if (acierto) {
-                    finishGame(true);
-                    return;
-                }
-                ++turn;
-                baja_Puntuacion();
+                System.out.println();
+
             }
             
-            finishGame(false);
+            for (int i = 0; i <= turn; ++i) {
+
+                    System.out.print(output[i] + "\n");
+
+            }
+
+            System.out.println("--------------");
+
+            if (acierto) {
+                finishGame(true);
+                return;
+            }
+            ++turn;
+            baja_Puntuacion();
         }
-        else {
-            System.out.print("No se ha podido crear la partida. Este id ya está en uso." + "\n");
-            return;
-        }
+
+        finishGame(false);        
     }
     
-    public File[] finder( String dirName){
-        File dir = new File(dirName);
+    public void MostrarOutput() {
+        
+        if(mode.equals("codemaker")) {
+            
+            System.out.print("Codigo a adivinar: ");
+            for (int i = 0; i < codeIni.size(); ++i) {
+                System.out.print(codeIni.get(i).getColour() + " ");
+            }
+            System.out.println();
+          
+        }
+        for (int i = 0; i < turn; ++i) {
 
-        return dir.listFiles(new FilenameFilter() { 
-                 public boolean accept(File dir, String filename)
-                      { return filename.endsWith(".txt"); }
-        } );
+            System.out.print(output[i] + "\n");
 
+        }
+        
     }
     
     public void comenzarPartida() {
@@ -382,136 +353,5 @@ public class Game {
         juega(player, id, difficulty, mode, numero, rango);
         
     }
-    
-    public void LoadGame(Jugador playerP){
-        
-        if (playerP != null) {
-            File[] listOfFiles = finder("players/"+playerP.getName()+"/games/");
-
-            if (listOfFiles != null){
-                for (int i = 0; i < listOfFiles.length; i++) {
-
-                    String fileNameWithOutExt = listOfFiles[i].getName().replaceFirst("[.][^.]+$", "");
-                    Integer num = i + 1;
-                    System.out.println(num.toString() + " - " + fileNameWithOutExt);
-
-                }
-
-                //Leer datos de la partida y cargar el Game
-
-                cargado = false;
-
-                while (!cargado){            
-                    try {
-
-                        System.out.print("Introduce el número de la partida o -1 para salir." + "\n");
-
-                        Scanner input = new Scanner(System.in);
-
-                        int num = Integer.parseInt(input.nextLine());
-
-                        if (num > listOfFiles.length) {
-                            System.out.print("Esta partida no existe. Introduce otro número." + "\n");
-                        }
-                        else if (num == -1) return;
-                        else {
-                            input = new Scanner(listOfFiles[num-1]);
-
-                            this.player = playerP;
-
-                            String line = input.nextLine();
-                            this.id = line;
-
-                            line = input.nextLine();
-                            this.difficulty = line;
-
-                            line = input.nextLine();
-                            this.mode = line;
-
-                            line = input.nextLine();
-                            this.points = Integer.parseInt(line);
-
-                            line = input.nextLine();
-                            this.turn = Integer.parseInt(line);
-
-                            line = input.nextLine();
-                            this.totalTurns = Integer.parseInt(line);
-
-                            line = input.nextLine();
-                            this.numero = Integer.parseInt(line);
-
-                            line = input.nextLine();
-                            this.rango = Integer.parseInt(line);
-
-                            codeMAnt = new ArrayList<KeyPeg>();
-
-                            for (int i = 0; i < numero; ++i) {
-
-                                line = input.nextLine(); 
-                                KeyPeg code = new KeyPeg(Integer.parseInt(line), i+1, numero);
-                                codeMAnt.add(code);
-
-                            }
-
-                            codeBAnt = new ArrayList<CodePeg>();
-
-                            for (int i = 0; i < numero; ++i) {
-
-                                line = input.nextLine(); 
-                                CodePeg code = new CodePeg(Integer.parseInt(line), i+1, numero, rango);
-                                codeBAnt.add(code);
-
-                            }
-
-                            this.output = new String[totalTurns+1];
-
-                            codeIni = new ArrayList<CodePeg>();
-
-                            for (int i = 0; i < numero; ++i) {
-
-                                line = input.nextLine(); 
-                                CodePeg code = new CodePeg(Integer.parseInt(line), i+1, numero, rango);
-                                codeIni.add(code);
-
-                            }
-
-                            for (int i = 0; i < turn; ++i) {
-
-                                line = input.nextLine();
-                                output[i] = line;
-
-                            }
-                            input.close();
-
-                            if (mode.equals("codemaker")){
-
-                                FileInputStream fout = new FileInputStream("players/"+player.getName()+"/games/"+id+"CB");
-                                ObjectInputStream oos = new ObjectInputStream(fout);
-                                codeB = (CodeBreaker) oos.readObject();
-                                oos.close();
-
-                            }
-                            cargado = true;
-                            System.out.print("Partida cargada!" + "\n");
-
-                            for (int i = 0; i < turn; ++i) {
-
-                                System.out.print(output[i] + "\n");
-
-                            }
-
-                        }
-
-                    } catch (Exception ex) {
-                        System.out.print("No se ha podido cargar la partida." + "\n");
-                    }
-                }
-            }
-            else {
-                System.out.print("No hay ninguna partida guardada." + "\n");
-            }
-        }
-    }
-    
     
 }

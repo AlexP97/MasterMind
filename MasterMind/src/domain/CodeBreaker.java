@@ -151,7 +151,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
     
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio) {
         ArrayList<Integer> linea;
-        linea = new ArrayList<>();
+        linea = new ArrayList<Integer>();
         if(s.equals("IA")) {
             ArrayList<Integer> aux = millorOpcio();
             
@@ -181,6 +181,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
             boolean jugadaHecha = false;
             boolean guardar = false;
             while (!jugadaHecha && !guardar){
+                linea = new ArrayList<Integer>();
                 Scanner input = new Scanner(System.in);
                 System.out.println("Introduce tu jugada poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al "+super.getNColores()+" separada de un espacio."
                         + "\n(Introduce -1 para guardar partida, -2 para salir de la partida sin guardar):\n");
@@ -202,7 +203,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
                         int num = Integer.parseInt(fichas[i]);
                         if (num >= 1 && num <= super.getNColores()) linea.add(num);
                     }
-                    if(linea.size() == fichas.length) jugadaHecha = true;
+                    if(linea.size() == super.getNFichas()) jugadaHecha = true;
                     if(fichasNoValid) 
                         System.out.println("El número de fichas introducido es incorrecto.");
                     if (!jugadaHecha) 

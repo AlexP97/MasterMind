@@ -6,6 +6,7 @@
 
 package domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -15,7 +16,7 @@ import utils.Funciones;
  *
  * @author usuario
  */
-public final class CodeMaker extends Jugador {
+public final class CodeMaker extends Jugador implements Serializable{
     
     public CodeMaker(boolean IA, int nfichas, int ncolores) {
        super(nfichas, ncolores);
@@ -26,7 +27,7 @@ public final class CodeMaker extends Jugador {
     
     public ArrayList<Integer> dona_patro(String s) {
         ArrayList<Integer> linea;
-        linea = new ArrayList<>();
+        linea = new ArrayList<Integer>();
         if(s.equals("IA")) {
             for(int i = 0; i < super.getNFichas(); i++) {
                 int randomNum = ThreadLocalRandom.current().nextInt(1, super.getNColores() + 1);
@@ -36,6 +37,7 @@ public final class CodeMaker extends Jugador {
         else {
             boolean jugadaHecha = false;
             while(!jugadaHecha) {
+                linea = new ArrayList<Integer>();
                 Scanner input = new Scanner(System.in);
                 System.out.print("Introduce el patron a adivinar poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al "+super.getNColores()+" separada de un espacio:" + "\n");
                 String jugada = input.nextLine();
@@ -59,7 +61,7 @@ public final class CodeMaker extends Jugador {
     
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
         ArrayList<Integer> linea = null;
-        linea = new ArrayList<>();
+        linea = new ArrayList<Integer>();
         
         if(s.equals("IA")) {
             linea = super.donaSolucio(tirada, solucio);
@@ -73,6 +75,7 @@ public final class CodeMaker extends Jugador {
             }
             System.out.println();
             while (!jugadaHecha && !guardar){
+                linea = new ArrayList<Integer>();
                 Scanner input = new Scanner(System.in);
                 System.out.print("Introduce tu pista poniendo "+super.getNFichas()+" fichas, cada ficha del 0 al 2 separada de un espacio."
                         + "\n(Introduce -1 para guardar partida, -2 para salir de la partida sin guardar):\n");
@@ -94,7 +97,7 @@ public final class CodeMaker extends Jugador {
                         int num = Integer.parseInt(fichas[i]);
                         if (num >= 0 && num <= 2) linea.add(num);
                     }
-                    if(linea.size() == fichas.length) jugadaHecha = true;
+                    if(linea.size() == super.getNFichas()) jugadaHecha = true;
                     if(fichasNoValid) 
                         System.out.println("El número de fichas introducido es incorrecto.");
                     if (!jugadaHecha) 
