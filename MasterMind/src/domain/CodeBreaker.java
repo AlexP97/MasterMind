@@ -183,13 +183,17 @@ public final class CodeBreaker extends Jugador implements Serializable{
             while (!jugadaHecha && !guardar){
                 Scanner input = new Scanner(System.in);
                 System.out.println("Introduce tu jugada poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al "+super.getNColores()+" separada de un espacio."
-                        + "\n(Introduce -1 para guardar partida, -2 para salir de la partida sin guardar):");
+                        + "\n(Introduce -1 para guardar partida, -2 para salir de la partida sin guardar):\n");
                 String jugada = input.nextLine();
                 String fichas[] = jugada.split(" ");
-                if(fichas[0].equals("-1") || fichas[0].equals("-2")) {
+                if(fichas[0].equals("-1")) {
                     guardar = true;
                     linea.add(-1);
-                }    
+                }
+                else if(fichas[0].equals("-2")) {
+                    guardar = true;
+                    linea.add(-2);
+                }
                 if(!guardar) {
                     boolean fichasNoValid = false;
                     if(fichas.length != super.getNFichas())

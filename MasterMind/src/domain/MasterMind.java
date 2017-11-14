@@ -86,6 +86,7 @@ public class MasterMind {
     protected static void cargarPartida(Jugador jugador){
         Game game = new Game();
         game.LoadGame(jugador);
+        if (game.cargado) game.comenzarPartida();
     }
     
     protected static void muestraRanking(){

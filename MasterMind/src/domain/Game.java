@@ -85,6 +85,7 @@ public class Game {
             else {
                 acierto = false;
                 if (arrayList.get(i) == -1) SaveGame();
+                else gameSaved = true;
                 return null;
             }
             
@@ -104,6 +105,7 @@ public class Game {
             else {
                 acierto = false;
                 if (arrayList.get(i) == -1) SaveGame();
+                else gameSaved = true;
                 return null;
             }
             
@@ -323,10 +325,12 @@ public class Game {
                     }
                     outputM = conversorKey(codeM.jugar("Player", outputB, codeIni));
                     codeMAnt = outputM;
+                    if (this.gameSaved) return;
                 }
                 else if (mode.equals("codebreaker")) {
                     outputB = conversorCode(codeB.jugar("Player", codeBAnt, codeMAnt));
                     codeBAnt = outputB;
+                    if (this.gameSaved) return;
                     outputM = conversorKey(codeM.jugar("IA", outputB, codeIni));
                     codeMAnt = outputM;
                 }
@@ -373,6 +377,12 @@ public class Game {
 
     }
     
+    public void comenzarPartida() {
+        
+        juega(player, id, difficulty, mode, numero, rango);
+        
+    }
+    
     public void LoadGame(Jugador playerP){
         
         if (playerP != null) {
@@ -400,9 +410,10 @@ public class Game {
 
                         int num = Integer.parseInt(input.nextLine());
 
-                        if (num - 1 >= listOfFiles.length) {
+                        if (num > listOfFiles.length) {
                             System.out.print("Esta partida no existe. Introduce otro número." + "\n");
                         }
+                        else if (num == -1) return;
                         else {
                             input = new Scanner(listOfFiles[num-1]);
 
@@ -489,7 +500,6 @@ public class Game {
 
                             }
 
-                            juega(player, id, difficulty, mode, numero, rango);
                         }
 
                     } catch (Exception ex) {
