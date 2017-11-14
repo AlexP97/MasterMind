@@ -22,7 +22,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author kasthan
+ * @author Martínez Martínez, Daniel
  */
 public class Game {
     

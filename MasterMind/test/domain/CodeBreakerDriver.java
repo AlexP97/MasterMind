@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author usuario
+ * @author Pérez Ortiz, Alejandro
  */
 public final class CodeBreakerDriver {
     CodeBreaker codebreaker;

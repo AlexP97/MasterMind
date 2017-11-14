@@ -10,7 +10,7 @@ import utils.Pair;
 
 /**
  *
- * @author User
+ * @author Espejo Saldaña, Adrián
  */
 public class RankingStub {
     

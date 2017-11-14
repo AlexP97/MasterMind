@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author usuario
+ * @author Pérez Ortiz, Alejandro
  */
 public class CodeMakerDriver {
     CodeMaker codemaker;

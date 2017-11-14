@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class Funciones {
     public static ArrayList<Integer> creaArray(int... args){

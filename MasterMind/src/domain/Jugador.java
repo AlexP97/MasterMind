@@ -19,7 +19,7 @@ import persistence.JugadorPersistencia;
 
 /**
  *
- * @author usuario
+ * @author Pérez Ortiz, Alejandro
  */
 public class Jugador {
     private String name;

@@ -7,7 +7,7 @@ package domain;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public abstract class Casilla {
     

@@ -13,7 +13,7 @@ import utils.Funciones;
 
 /**
  *
- * @author usuario
+ * @author Pérez Ortiz, Alejandro
  */
 public final class CodeMaker extends Jugador {
     

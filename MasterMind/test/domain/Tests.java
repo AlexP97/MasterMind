@@ -6,12 +6,13 @@
 package domain;
 
 import persistence.JugadorPersistenciaDriver;
+import persistence.RankingPersistenciaDriver;
 import utils.FuncionesDriver;
 import utils.PairDriver;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class Tests {
 
@@ -28,6 +29,7 @@ public class Tests {
         FuncionesDriver funcDriver = new FuncionesDriver();
         PairDriver pairDriver = new PairDriver();
         JugadorPersistenciaDriver jpDriver = new JugadorPersistenciaDriver();
+        RankingPersistenciaDriver rpDriver = new RankingPersistenciaDriver();
     }
     
 }

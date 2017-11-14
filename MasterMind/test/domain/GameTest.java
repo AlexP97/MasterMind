@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author dissi
+ * @author Martínez Martínez, Daniel
  */
 public class GameTest {
     

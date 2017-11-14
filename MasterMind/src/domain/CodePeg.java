@@ -7,7 +7,7 @@ package domain;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public final class CodePeg extends Casilla {
     private final int colourCode;

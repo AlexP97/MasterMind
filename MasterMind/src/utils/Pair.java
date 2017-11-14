@@ -9,7 +9,7 @@ package utils;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  * @param <F>
  * @param <S>
  */

@@ -13,7 +13,7 @@ import utils.Funciones;
 
 /**
  *
- * @author usuario
+ * @author Pérez Ortiz, Alejandro
  */
 public final class CodeBreaker extends Jugador implements Serializable{
     ArrayList<ArrayList<Integer> > compatibles;

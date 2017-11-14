@@ -7,7 +7,7 @@ package domain;
 
 /**
  *
- * @author User
+ * @author Espejo Saldaña, Adrián
  */
 public class CodePegStub {
     

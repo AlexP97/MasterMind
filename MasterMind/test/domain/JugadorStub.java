@@ -7,7 +7,7 @@ package domain;
 
 /**
  *
- * @author Usuario
+ * @author Pérez Ortiz, Alejandro
  */
 public class JugadorStub {
     

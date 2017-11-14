@@ -10,7 +10,7 @@ import utils.Pair;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public final class RankingDriver {
     Ranking ranking;

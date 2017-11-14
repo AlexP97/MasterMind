@@ -7,7 +7,7 @@ package utils;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class PairDriver {
     Pair<String,Integer> p;

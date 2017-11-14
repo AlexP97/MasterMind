@@ -15,7 +15,7 @@ import utils.Pair;
 
 /**
  *
- * @author usuario
+ * @author Pérez Ortiz, Alejandro
  */
 public class JugadorPersistencia {
     public Pair<Boolean, String> register(String n, String c) {

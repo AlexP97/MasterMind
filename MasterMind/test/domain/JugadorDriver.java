@@ -10,7 +10,7 @@ import utils.Pair;
 
 /**
  *
- * @author usuario
+ * @author Pérez Ortiz, Alejandro
  */
 public class JugadorDriver {
     Jugador jugador;

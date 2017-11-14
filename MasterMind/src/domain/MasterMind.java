@@ -11,7 +11,7 @@ import utils.Pair;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class MasterMind {
 
