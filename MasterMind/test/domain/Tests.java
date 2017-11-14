@@ -5,6 +5,9 @@
  */
 package domain;
 
+import utils.FuncionesDriver;
+import utils.PairDriver;
+
 /**
  *
  * @author Usuario
@@ -20,8 +23,9 @@ public class Tests {
         JugadorDriver jugadorDriver = new JugadorDriver();
         CodeBreakerDriver codeBreakerDriver = new CodeBreakerDriver();
         CodeMakerDriver codeMakerDriver = new CodeMakerDriver();
-        //MasterMindDriver masterMindDriver = new MasterMindDriver();
         RankingDriver rankingDriver = new RankingDriver();
+        FuncionesDriver funcDriver = new FuncionesDriver();
+        PairDriver pairDriver = new PairDriver();
     }
     
 }

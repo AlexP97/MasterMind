@@ -97,6 +97,30 @@ public class MasterMind {
         if(output.isEmpty()) System.out.println("El ranking está vacío.");
     }
     
+    protected static void cambiaNombre(Jugador jugador){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Introduce tu nuevo nombre de usuario");
+        String name = input.nextLine();
+        jugador.setName(name);
+    }
+    
+    protected static void cambiaContraseña(Jugador jugador){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Introduce tu nueva contraseña");
+        String password = input.nextLine();
+        jugador.setPassword(password);
+    }
+    
+    protected static void eliminaUsuario(Jugador jugador){
+        Scanner input = new Scanner(System.in);
+        System.out.println("El jugador va a ser eliminado de forma definitiva, ¿estás seguro?");
+        System.out.println("Escribe si o no");
+        String respuesta = input.nextLine();
+        /*if(respuesta.equals("si")) jugador.elimina();
+        else if(respuesta.equals("no")) return;
+        else eliminaUsuario(jugador);*/
+    }
+    
     public static void main(String[] args) {
         Jugador jugador = new Jugador();
         int estado = 0;
@@ -125,7 +149,7 @@ public class MasterMind {
                     }
                     break;
                 case 1: //MENU DE CREAR/CARGAR/VER RANKING
-                    System.out.print("Escribe crear para jugar una partida nueva, cargar para jugar una partida ya empezada, ranking para ver los records de puntuación o salir para volver al menú anterior." + "\n");
+                    System.out.print("Escribe crear para jugar una partida nueva, cargar para jugar una partida ya empezada, ranking para ver los records de puntuación, modificar para modificar tus datos o salir para volver al menú anterior." + "\n");
                     String jugar = input.nextLine();
                     if(jugar.equals("crear")){
                         crearPartida(jugador);
@@ -135,6 +159,24 @@ public class MasterMind {
                     }
                     else if (jugar.equals("ranking")){
                         muestraRanking();
+                    }
+                    else if (jugar.equals("modificar")){
+                        System.out.println("Escribe usuario para modificar tu nombre de usuario, contrasena para modificar tu contraseña, eliminar para darte de baja o salir para volver al menú anterior");
+                        String modificar = input.nextLine();
+                        System.out.println(modificar);
+                        if(modificar.equals("usuario")){
+                            cambiaNombre(jugador);
+                        }
+                        else if(modificar.equals("contrasena")){
+                            cambiaContraseña(jugador);
+                        }
+                        else if(modificar.equals("eliminar")){
+                            eliminaUsuario(jugador);
+                        }
+                        else if(modificar.equals("salir")) estado = 1;
+                        else{
+                                System.out.print("Entrada no válida" + "\n");
+                        }
                     }
                     else if (jugar.equals("salir")) estado = 0;
                     else{
