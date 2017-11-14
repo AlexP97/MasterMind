@@ -108,7 +108,7 @@ public class MasterMind {
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce tu nueva contraseña");
         String password = input.nextLine();
-        //jugador.setPassword(password);
+        jugador.setPassword(password);
     }
     
     protected static void eliminaUsuario(Jugador jugador){
@@ -161,12 +161,13 @@ public class MasterMind {
                         muestraRanking();
                     }
                     else if (jugar.equals("modificar")){
-                        System.out.println("Escribe usuario para modificar tu nombre de usuario, contraseña para modificar tu contraseña, eliminar para darte de baja o salir para volver al menú anterior");
+                        System.out.println("Escribe usuario para modificar tu nombre de usuario, contrasena para modificar tu contraseña, eliminar para darte de baja o salir para volver al menú anterior");
                         String modificar = input.nextLine();
+                        System.out.println(modificar);
                         if(modificar.equals("usuario")){
                             cambiaNombre(jugador);
                         }
-                        else if(modificar.equals("contraseña")){
+                        else if(modificar.equals("contrasena")){
                             cambiaContraseña(jugador);
                         }
                         else if(modificar.equals("eliminar")){
