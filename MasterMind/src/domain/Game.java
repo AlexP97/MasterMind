@@ -1,20 +1,7 @@
 package domain;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
-import static java.lang.System.out;
 import java.util.ArrayList;
-import java.util.Scanner;
 import persistence.GamePersistencia;
 
 /**
@@ -83,18 +70,34 @@ public class Game implements Serializable{
         return this.points;
     }
     
+    /**
+     *
+     * @return si la partida ha cargado
+     */
     public boolean getCargado() {
         return this.cargado;
     }
     
+    /**
+     *
+     * @return el jugador de la partida
+     */
     public Jugador getPlayer() {
         return this.player;
     }
     
+    /**
+     *
+     * @return el modo de juego (CodeBreaker o CodeMaker)
+     */
     public String getMode() {
         return this.mode;
     }
     
+    /**
+     *
+     * @param b asigna si se ha cargado la partida
+     */
     public void setCargado(boolean b) {
         this.cargado = b;
     }

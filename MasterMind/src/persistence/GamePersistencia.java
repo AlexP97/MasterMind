@@ -28,6 +28,11 @@ public class GamePersistencia implements Serializable{
     Game game;
     CodeBreaker cb;
     
+    /**
+     *
+     * @param gameC la partida a guardar
+     * @param codeB el CodeBreaker de la partida a guardar
+     */
     public GamePersistencia(Game gameC, CodeBreaker codeB){
         
         this.game = gameC;
@@ -42,10 +47,18 @@ public class GamePersistencia implements Serializable{
         
     }
     
+    /**
+     *
+     * @param gameS la partida a guardar
+     */
     public void setGame(Game gameS){
         this.game = gameS;
     }
     
+    /**
+     *
+     * @param codeB el CodeBreaker de la partida a guardar
+     */
     public void setCB(CodeBreaker codeB){
         this.cb = codeB;
     }
@@ -75,6 +88,12 @@ public class GamePersistencia implements Serializable{
         }
     }
         
+    /**
+     *
+     * @param username el nombre de usuario
+     * @param id el id de la partida
+     * @return si se ha guardado la partida correctamente
+     */
     public boolean SaveCodeB(String username, String id){
                                 
         try {
@@ -110,6 +129,10 @@ public class GamePersistencia implements Serializable{
 
     }
     
+    /**
+     *
+     * @param playerP el jugador que intenta cargar partida
+     */
     public void LoadGame(Jugador playerP){
         
         if (playerP != null) {
@@ -186,6 +209,12 @@ public class GamePersistencia implements Serializable{
         }
     }
     
+    /**
+     *
+     * @param ident el identificador de la partida
+     * @param userName el nombre de usuario del jugador
+     * @return si el jugador puede crear una partida con ese identificador
+     */
     public boolean CheckAvailability(String ident, String userName) {
         
         boolean available = true;
@@ -207,6 +236,15 @@ public class GamePersistencia implements Serializable{
         
     }
     
+    /**
+     *
+     * @param playerN el jugador de la partida
+     * @param ident el identificador de la partida
+     * @param dif la dificultad de la partida
+     * @param mod el modo de la partida
+     * @param num el número de fichas de la partida
+     * @param ran el rango de colores de la partida
+     */
     public void CrearPartida(Jugador playerN, String ident, String dif, String mod, int num, int ran){
         
         if (playerN != null && !ident.equals("") && CheckAvailability(ident, playerN.getName())){
