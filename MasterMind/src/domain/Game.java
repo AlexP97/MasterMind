@@ -78,13 +78,14 @@ public class Game {
         ArrayList<CodePeg> lista = new ArrayList<CodePeg>();
         for (int i = 0; i < numero; ++i) {
             
-            if (arrayList.get(i) != -1) {
+            if (arrayList.get(i) != -1 && arrayList.get(i) != -2) {
                 CodePeg codeP = new CodePeg(arrayList.get(i), i+1, numero, rango);
                 lista.add(codeP);
             }
             else {
-                SaveGame();
-                return lista;
+                acierto = false;
+                if (arrayList.get(i) == -1) SaveGame();
+                return null;
             }
             
         }
@@ -96,13 +97,14 @@ public class Game {
         ArrayList<KeyPeg> lista = new ArrayList<KeyPeg>();
         for (int i = 0; i < numero; ++i) {
             
-            if (arrayList.get(i) != -1) {
+            if (arrayList.get(i) != -1 && arrayList.get(i) != -2) {
                 KeyPeg codeP = new KeyPeg(arrayList.get(i), i+1, numero);
                 lista.add(codeP);
             }
             else {
-                SaveGame();
-                return lista;
+                acierto = false;
+                if (arrayList.get(i) == -1) SaveGame();
+                return null;
             }
             
         }

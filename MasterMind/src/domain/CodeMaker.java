@@ -74,11 +74,11 @@ public final class CodeMaker extends Jugador {
             System.out.println();
             while (!jugadaHecha && !guardar){
                 Scanner input = new Scanner(System.in);
-                System.out.print("Introduce tu pista poniendo "+super.getNFichas()+" fichas, cada ficha del 0 al 2 separada de un espacio "
-                        + "(o introduce -1 para guardar partida):\n");
+                System.out.print("Introduce tu pista poniendo "+super.getNFichas()+" fichas, cada ficha del 0 al 2 separada de un espacio."
+                        + "\n(Introduce -1 para guardar partida, -2 para salir de la partida sin guardar)):\n");
                 String jugada = input.nextLine();
                 String fichas[] = jugada.split(" ");
-                if(fichas[0].equals("-1")) {
+                if(fichas[0].equals("-1") || fichas[0].equals("-2")) {
                     guardar = true;
                     linea.add(-1);
                 }    
