@@ -38,7 +38,7 @@ public class Jugador {
     }
     
     public Pair<Boolean, String> register(String n, String c) {
-        File dir = new File("players/"+n);
+        File dir = new File("data/players/"+n);
         boolean b = dir.mkdirs();
         Pair<Boolean, String> p = new Pair();
         if(b) {      
@@ -46,9 +46,9 @@ public class Jugador {
             this.name = n;
             this.password = c;
             this.IA = false;
-            File dir2 = new File("players/"+n+"/games");
+            File dir2 = new File("data/players/"+n+"/games");
             dir2.mkdir();
-            File info = new File("players/"+n+"/info.txt");
+            File info = new File("data/players/"+n+"/info.txt");
             try {
                 BufferedWriter bw = new BufferedWriter(new FileWriter(info));
                 bw.write(n+" "+c);
@@ -72,7 +72,7 @@ public class Jugador {
         Pair<Boolean, String> p = new Pair();
         try{
             String linea;
-            FileReader f = new FileReader("players/"+n+"/info.txt");
+            FileReader f = new FileReader("data/players/"+n+"/info.txt");
             BufferedReader b = new BufferedReader(f);
             linea = b.readLine();
             b.close();
@@ -121,14 +121,14 @@ public class Jugador {
     }
     
     public void setName(String n) {
-        File dir = new File("players/"+this.name);
-        File dir2 = new File("players/"+n);
+        File dir = new File("data/players/"+this.name);
+        File dir2 = new File("data/players/"+n);
         boolean success = dir.renameTo(dir2);
         if(!success) {
             System.out.println("El nombre de usuario ya está en uso.");
             return;
         }
-        File info = new File("players/"+n+"/info.txt");
+        File info = new File("data/players/"+n+"/info.txt");
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(info));
             bw.write(n+" "+this.password);
@@ -143,7 +143,7 @@ public class Jugador {
     }
     
     public void setPassword(String c) {
-        File info = new File("players/"+this.name+"/info.txt");
+        File info = new File("data/players/"+this.name+"/info.txt");
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(info));
             bw.write(this.name+" "+c);
@@ -167,7 +167,7 @@ public class Jugador {
     }
     
     public void elimina() {
-        File f = new File("players/"+this.name);
+        File f = new File("data/players/"+this.name);
         borrarDirectorio(f);
         if(f.delete()) 
             System.out.println("El usuario se ha eliminado correctamente");
