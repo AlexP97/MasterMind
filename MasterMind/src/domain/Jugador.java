@@ -120,6 +120,43 @@ public class Jugador {
         return this.IA;
     }
     
+    public void setName(String n) {
+        File dir = new File("players/"+this.name);
+        File dir2 = new File("players/"+n);
+        boolean success = dir.renameTo(dir2);
+        if(!success) {
+            System.out.println("El nombre de usuario ya está en uso.");
+            return;
+        }
+        File info = new File("players/"+n+"/info.txt");
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
+            bw.write(n+" "+this.password);
+            bw.close();
+            this.name = n;
+            System.out.println("Has cambiado tu nombre de usuario correctamente.");
+            
+        }
+        catch (Exception e) {
+            System.out.println("Error al cambiar de nombre");
+        }
+    }
+    
+    public void setPassword(String c) {
+        File info = new File("players/"+this.name+"/info.txt");
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
+            bw.write(this.name+" "+c);
+            bw.close();
+            this.password = c;
+            System.out.println("Has cambiado tu contraseña correctamente.");
+            
+        }
+        catch (Exception e) {
+            System.out.println("Error al cambiar de contraseña");
+        }
+    }
+    
     public ArrayList<Integer> donaSolucio(ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio) {
         ArrayList<Integer> linea = new ArrayList<>();
         ArrayList<Boolean> visitats = new ArrayList<>();
