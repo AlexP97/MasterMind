@@ -1,0 +1,14 @@
+Carpeta persistence
+
+Esta carpeta contiene todos los archivos .java, donde se encuentran todas las clases y funciones de la Capa de Persistencia.
+
+- GamePersistencia.java = este arhivo contiene la clase GamePersistencia y sus funciones. Corresponde a las funciones
+que utilizara la clase Game para acceder a los ficheros. Es la clase encargada de guardar las partidas dentro de la
+carpeta del jugador y la que permite cargarla tal y como se guardo.
+
+- JugadorPersistencia.java = este arhivo contiene la clase JugadorPersistencia y sus funciones. Corresponde a las
+funciones para dar de alta un jugador y mantenerlo una vez acabe la ejecución. Tambien permite loguearnos, cambiar
+el nombre, la contraseña o incluso eliminar nuestro usuario.
+
+- RankingPersistencia.java = este arhivo contiene la clase RankingPersistencia y sus funciones. Corresponde a las 
+funciones de la clase Ranking que permiten guardarlo en memoria(ficheros) y se accede a él para mostrarlo. 

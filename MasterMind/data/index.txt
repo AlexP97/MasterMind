@@ -1,0 +1,8 @@
+Carpeta data
+
+Contiene las diferentes carpetas, donde se encuentran las distintos archivos para guardar datos del juego.
+
+- players = Esta carpeta contiene una carpeta por cada jugador registrado en el juego.
+
+- ranking = Contiene un fichero con los datos del ranking.
+
