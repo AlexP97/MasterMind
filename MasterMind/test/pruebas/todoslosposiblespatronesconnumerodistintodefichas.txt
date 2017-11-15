@@ -11,7 +11,7 @@ import utils.Pair;
 
 /**
  *
- * @author Usuario
+ * @author Pérez Ortiz, Alejandro
  */
 public class MasterMind {
 
