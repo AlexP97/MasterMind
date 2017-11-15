@@ -119,25 +119,9 @@ public class Jugador implements Serializable{
      * @param n el nombre de usuario
      */
     public void setName(String n) {
-        File dir = new File("data/players/"+this.name);
-        File dir2 = new File("data/players/"+n);
-        boolean success = dir.renameTo(dir2);
-        if(!success) {
-            System.out.println("El nombre de usuario ya está en uso.");
-            return;
-        }
-        File info = new File("data/players/"+n+"/info.txt");
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-            bw.write(n+" "+this.password);
-            bw.close();
+        JugadorPersistencia j = new JugadorPersistencia();
+        if(j.setName(this.name, n, this.password))
             this.name = n;
-            System.out.println("Has cambiado tu nombre de usuario correctamente.");
-            
-        }
-        catch (IOException e) {
-            System.out.println("Error al cambiar de nombre");
-        }
     }
     
     /**
@@ -145,36 +129,17 @@ public class Jugador implements Serializable{
      * @param c la contraseña
      */
     public void setPassword(String c) {
-        File info = new File("data/players/"+this.name+"/info.txt");
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-            bw.write(this.name+" "+c);
-            bw.close();
+        JugadorPersistencia j = new JugadorPersistencia();
+        if(j.setPassword(this.name, c))
             this.password = c;
-            System.out.println("Has cambiado tu contraseña correctamente.");
-            
-        }
-        catch (IOException e) {
-            System.out.println("Error al cambiar de contraseña");
-        }
     }
     
-    private void borrarDirectorio(File f) {
-        File[] ficheros = f.listFiles();
-        for(int i = 0; i < ficheros.length; i++) {
-            if(ficheros[i].isDirectory())
-                borrarDirectorio(ficheros[i]);
-            ficheros[i].delete();
-        }
-    }
-    
+    /**
+     *
+     */
     public void elimina() {
-        File f = new File("data/players/"+this.name);
-        borrarDirectorio(f);
-        if(f.delete()) 
-            System.out.println("El usuario se ha eliminado correctamente");
-        else
-            System.out.println("No se ha podido eliminar el usuario");
+        JugadorPersistencia j = new JugadorPersistencia();
+        j.elimina(this.name);
     }
     
     /**

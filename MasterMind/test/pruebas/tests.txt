@@ -1,0 +1,188 @@
+/**
+ *
+ * @author Espejo Saldana, Adrian
+ */
+
+registr		--probar entrada no válida
+
+register 	--registro correcto
+adri
+123
+
+salir		--registro de un usuario que ya existe
+register
+adri
+123
+
+login		--login con usuario que no existe
+adri1
+123
+
+login		--login correcto
+adri
+123
+
+modificar	--modificar contraseña
+contrasena
+1234
+
+salir		--login con antigua contraseña
+login
+adri
+123
+
+register	--crear otro usuario
+adri2
+1234
+
+modificar	--modificar y poner nombre de otro usuario
+usuario
+adri
+
+modificar	--eliminar usuario adri2
+eliminar
+si
+
+login		--login con usuario eliminado
+adri2
+1234
+
+login		--login con nueva contraseña
+adri
+1234
+
+cargar		--cargar partida sin partidas guardadas
+-1
+
+ranking		--ranking vacio
+
+crear		--ganar partida codebreaker con 3 fichas y 3 colores
+adri
+facil
+codebreaker
+3
+3
+//partida ganada
+1 1 2  211
+2 1 1  211
+3 2 3  200
+1 2 1  222
+
+ranking		--comprobar ranking con 1 persona
+
+crear		--guardar partida con id="adri" codebreaker con 4 fichas y 4 colores
+adri
+facil
+codebreaker
+4
+4
+1 2 3		--comprobar si metemos numero de fichas incorrecto
+//partida guardada
+1 1 2 2  2100
+2 2 3 3  2110
+		--comprobar cargar partida
+cargar
+1
+//partida ganada
+1 1 2 2  2100
+2 2 3 3  2110
+1 1 3 3  1000
+3 2 2 4  1111
+2 3 4 1  2220
+2 2 4 1  2210
+2 3 4 2  2222
+
+ranking		--comprobar ranking 2 personas
+
+crear		--crear partida con id ya existente
+adri
+facil
+codemaker
+4
+4
+
+crear		--jugar partida codemaker con 4 fichas y 4 colores
+adri2
+facil
+codemaker
+4
+4
+1 2 3		--comprobar fichas incorrectas para el patrón
+1 2 3 4		//patrón
+//partida que gana la IA
+Codigo a adivinar: 1 2 3 4 
+--------------
+1 1 2 3  2110
+1 2 3 2  2220
+1 2 3 4  2222
+--------------
+
+crar		--probar entrada no válida
+
+crear		--poner pistas inconsistentes en partida codemaker
+adri2
+facil
+codemaker
+4
+4
+1 2 3 4		//patrón
+//partida que pierde la IA
+Codigo a adivinar: 1 2 3 4 
+--------------
+1 1 2 3  0000
+4 4 4 4  0000
+1 1 1 1  0000
+1 1 1 1  0000
+1 1 1 1  0000
+1 1 1 1  0000
+1 1 1 1  0000
+1 1 1 1  0000
+1 1 1 1  0000
+1 1 1 1  0000
+1 1 1 1  0000
+1 1 1 1  0000
+--------------
+Game Over...
+El código correcto era: 1 2 3 4
+
+crear		--perder partida en codebreaker
+adri2
+dificil
+codebreaker
+4
+4
+//partida
+--------------
+4 4 4 4  2200
+4 4 4 4  2200
+4 4 4 4  2200
+4 4 4 4  2200
+4 4 4 4  2200
+4 4 4 4  2200
+4 4 4 4  2200
+4 4 4 4  2200
+--------------
+Game Over...
+El código correcto era: 1 1 4 4
+
+crear		--guardar partida codemaker
+adri2
+medio
+codemaker
+4
+4
+//partida guardada
+--------------
+1 1 2 3  0000
+4 4 4 4  2221
+--------------
+cargar		--cargar partida codemaker y que la IA gane
+2
+//partida ganada
+Codigo a adivinar: 2 2 4 3 
+--------------
+1 1 2 3  0000
+4 4 4 4  2221
+1 1 1 1  2222
+--------------
+¡La IA ha acertado la combinación!

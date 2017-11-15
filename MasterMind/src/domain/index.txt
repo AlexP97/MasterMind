@@ -13,18 +13,6 @@ proporcionar las pistas a las jugadas del CodeBreaker.
 - CodePeg.java = contiene la clase CodePeg y sus funciones. Un CodePeg corresponde a una ficha de la combinacion que proporciona
 el CodeBreaker en una jugada. Es una subclase de la clase Casilla.
 
-- CtrlDominio.java = archivo que corresponde a la clase CtrlDominio. De momento es temporal, se terminara 
-de cara a la segunda entrega.
-
-- CtrlDominioJugador.java = archivo que corresponde a la clase CtrlDominioJugador. De momento es temporal, se terminara 
-de cara a la segunda entrega.
-
-- CtrlDominioPartida.java = archivo que corresponde a la clase CtrlDominioPartida. De momento es temporal, se terminara 
-de cara a la segunda entrega.
-
-- CtrlDominioRanking.java = archivo que corresponde a la clase CtrlDominioRanking. De momento es temporal, se terminara 
-de cara a la segunda entrega.
-
 - Game.java = corresponde a la clase Game y sus funciones. Es la clase encargada de gestionar todas las jugadas de la partida,
 mostrarlas por pantalla y guardarlas.
 
