@@ -1,4 +1,4 @@
-JFLAGS = -g -nowarn
+JFLAGS = -g -Xlint:unchecked
 JC = javac
 JVM= java
 

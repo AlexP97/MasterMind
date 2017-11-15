@@ -90,7 +90,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
     /**
      *
      * @param a lista de int a convertir en lista de CodePeg
-     * @return
+     * @return devuelve la lista de codepegs igual a la lista de enteros
      */
     protected ArrayList<CodePeg> convert(ArrayList<Integer> a) {
         ArrayList<CodePeg> cambioCodePeg = new ArrayList<>();
@@ -105,7 +105,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
      * @param tirada una de las listas a comparar
      * @param solucio segunda de las listas a comparar
      * @param code código que tiene que dar como resultado de comparar tirada y solucio
-     * @return
+     * @return devuelve si el codigo de pista obtenido al comparar tirada y solucio es igual a code
      */
     protected boolean compare(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio, ArrayList<Integer> code){
         int nblancas = 0;
@@ -144,7 +144,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
      * @param candidat código candidato a ser el mejor intento
      * @param descartat código que posiblemente quede descartado si intentamos adivinar el patrón con candidat
      * @param combinacio código de colores que podría dar el CodeMaker como pista
-     * @return
+     * @return devuelve si la pista que obtendriamos de tirar candidat siendo descartat la solucion sería igual a la pista dada en combinació
      */
     protected boolean miraDescartes(ArrayList<Integer> candidat, ArrayList<Integer> descartat, ArrayList<Integer> combinacio) {
         ArrayList<Integer> aux = miraSolucio(candidat,descartat);
@@ -190,8 +190,8 @@ public final class CodeBreaker extends Jugador implements Serializable{
     /**
      *
      * @param s si el CodeBreaker es IA o un jugador real
-     * @param tirada el intento para adivinar el patrón del turno anterior
-     * @param solucio patrón a adivinar
+     * @param tirada el intento de este turno mirando la pista del turno anterior
+     * @param solucio pista a la tirada del turno anterior
      * @return intento de adivinar el patrón para el turno actual
      */
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio) {

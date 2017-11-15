@@ -71,18 +71,34 @@ public class Game implements Serializable{
         return this.points;
     }
     
+    /**
+     *
+     * @return si la partida ha cargado
+     */
     public boolean getCargado() {
         return this.cargado;
     }
     
+    /**
+     *
+     * @return el jugador de la partida
+     */
     public Jugador getPlayer() {
         return this.player;
     }
     
+    /**
+     *
+     * @return el modo de juego (CodeBreaker o CodeMaker)
+     */
     public String getMode() {
         return this.mode;
     }
     
+    /**
+     *
+     * @param b asigna si se ha cargado la partida
+     */
     public void setCargado(boolean b) {
         this.cargado = b;
     }
