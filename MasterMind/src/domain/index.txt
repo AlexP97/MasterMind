@@ -1,0 +1,42 @@
+Carpeta domain
+
+Esta carpeta contiene todos los archivos .java, donde se encuentran todas las clases y funciones de la Capa de Dominio.
+
+- Casilla.java = corresponde a la clase Casilla y sus funciones. Una Casilla es la superclase de las clases CodePeg y KeyPeg.
+
+- CodeBreaker.java = este archivo contiene la clase CodeBreaker y sus funciones. Se encarga de dar las jugadas que ejecuta
+el CodeBreaker. Es la clase que contiene el algoritmo de la IA. Es subclase de la clase Jugador.
+
+- CodeMaker.java = contiene la clase CodeMaker y sus funciones. Es la que se encarga de proponer el codigo inicial y de
+proporcionar las pistas a las jugadas del CodeBreaker.
+
+- CodePeg.java = contiene la clase CodePeg y sus funciones. Un CodePeg corresponde a una ficha de la combinacion que proporciona
+el CodeBreaker en una jugada. Es una subclase de la clase Casilla.
+
+- CtrlDominio.java = archivo que corresponde a la clase CtrlDominio. De momento es temporal, se terminara 
+de cara a la segunda entrega.
+
+- CtrlDominioJugador.java = archivo que corresponde a la clase CtrlDominioJugador. De momento es temporal, se terminara 
+de cara a la segunda entrega.
+
+- CtrlDominioPartida.java = archivo que corresponde a la clase CtrlDominioPartida. De momento es temporal, se terminara 
+de cara a la segunda entrega.
+
+- CtrlDominioRanking.java = archivo que corresponde a la clase CtrlDominioRanking. De momento es temporal, se terminara 
+de cara a la segunda entrega.
+
+- Game.java = corresponde a la clase Game y sus funciones. Es la clase encargada de gestionar todas las jugadas de la partida,
+mostrarlas por pantalla y guardarlas.
+
+- Jugador.java = contiene la clase jugador y sus funciones. Es la clase que contiene la informacion del jugador
+(nombre de usuario y contraseña) y se encarga de hacer el login, el registro y modificar el usuario. Es la superclase
+de CodeMaker y Codebreaker.
+
+- KeyPeg.java = contiene la clase KeyPeg y sus funciones. Un KeyPeg corresponde a una ficha de la combinacion que proporciona
+el CodeMaker en una jugada. Es una subclase de la clase Casilla.
+
+- MasterMind.java = corresponde a la clase MasterMind y sus funciones. Es la clase que se encarga de gestionar los
+menus del juego. Contiene la funcion Main().
+
+- Ranking.java = archivo que contiene la clase Ranking y sus funciones. Gestiona el ranking de los usuarios y 
+lo muestra por pantalla.

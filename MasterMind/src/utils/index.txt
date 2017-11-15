@@ -1,0 +1,9 @@
+Carpeta utils
+
+Carpeta que contiene algunas clases complementarias para el proyecto, como la classe Pair o Funciones.
+
+- Pair = archivo que contiene la clase Pair y sus funciones. Implementa el tipo de datos Pair<T,T>.
+
+- Funciones = corresponde a la clase Funciones y sus funciones. Implementa dos funciones auxiliares: "creaArray", 
+que crea un arrayList de ints, aunque actualmente no se utiliza y "ordenar", que ordena el arrayList que le pasamos
+como parametro.

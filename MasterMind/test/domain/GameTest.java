@@ -1,16 +1,21 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package domain;
 
-import java.io.File;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import persistence.GamePersistencia;
 
 /**
  *
- * @author Martínez Martínez, Daniel
+ * @author Daniel
  */
 public class GameTest {
     
@@ -40,7 +45,7 @@ public class GameTest {
     public void testGetId() {
         System.out.println("getId");
         Game instance = new Game();
-        String expResult = null;
+        String expResult = "";
         String result = instance.getId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -53,7 +58,7 @@ public class GameTest {
     public void testGetDifficulty() {
         System.out.println("getDifficulty");
         Game instance = new Game();
-        String expResult = null;
+        String expResult = "";
         String result = instance.getDifficulty();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -69,6 +74,98 @@ public class GameTest {
         int expResult = 150;
         int result = instance.getPoints();
         assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of getCargado method, of class Game.
+     */
+    @Test
+    public void testGetCargado() {
+        System.out.println("getCargado");
+        Game instance = new Game();
+        boolean expResult = false;
+        boolean result = instance.getCargado();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of getPlayer method, of class Game.
+     */
+    @Test
+    public void testGetPlayer() {
+        System.out.println("getPlayer");
+        Game instance = new Game();
+        Jugador j = new Jugador();
+        j.login("dani", "1213");
+        instance.setPlayer(j);
+        Jugador result = instance.getPlayer();
+        assertEquals(j, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of getMode method, of class Game.
+     */
+    @Test
+    public void testGetMode() {
+        System.out.println("getMode");
+        Game instance = new Game();
+        String expResult = "";
+        String result = instance.getMode();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of setCargado method, of class Game.
+     */
+    @Test
+    public void testSetCargado() {
+        System.out.println("setCargado");
+        boolean b = true;
+        Game instance = new Game();
+        instance.setCargado(b);
+        boolean result = instance.getCargado();
+        assertEquals(b, result);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of setGameP method, of class Game.
+     */
+    @Test
+    public void testSetGameP() {
+        System.out.println("setGameP");
+        GamePersistencia gamePer = new GamePersistencia();
+        Game instance = new Game();
+        instance.setGameP(gamePer);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+    
+    /**
+     * Test of setPlayer method, of class Game.
+     */
+    @Test
+    public void testSetPlayer() {
+        System.out.println("setPlayer");
+        Jugador j = new Jugador();
+        j.login("dani", "1213");
+        Game instance = new Game();
+        instance.setPlayer(j);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of setCB method, of class Game.
+     */
+    @Test
+    public void testSetCB() {
+        System.out.println("setCB");
+        CodeBreaker cb = new CodeBreaker(false, 3, 3);
+        Game instance = new Game();
+        instance.setCB(cb);
         // TODO review the generated test code and remove the default call to fail.
     }
 
@@ -89,8 +186,11 @@ public class GameTest {
     @Test
     public void testFinishGame() {
         System.out.println("finishGame");
-        boolean ganado = false;
+        boolean ganado = true;
+        Jugador j = new Jugador();
+        j.login("dani", "1213");
         Game instance = new Game();
+        instance.setPlayer(j);
         instance.finishGame(ganado);
         // TODO review the generated test code and remove the default call to fail.
     }
@@ -107,45 +207,24 @@ public class GameTest {
     }
 
     /**
-     * Test of juega method, of class Game.
+     * Test of MostrarOutput method, of class Game.
      */
     @Test
-    public void testJuega() {
-        System.out.println("juega");
-        Jugador playerN = null;
-        String ident = "";
-        String dif = "";
-        String mod = "";
-        int num = 0;
-        int ran = 0;
+    public void testMostrarOutput() {
+        System.out.println("MostrarOutput");
         Game instance = new Game();
-        instance.juega(playerN, ident, dif, mod, num, ran);
+        instance.MostrarOutput();
         // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
-     * Test of finder method, of class Game.
+     * Test of comenzarPartida method, of class Game.
      */
     @Test
-    public void testFinder() {
-        System.out.println("finder");
-        String dirName = "";
+    public void testComenzarPartida() {
+        System.out.println("comenzarPartida");
         Game instance = new Game();
-        File[] expResult = null;
-        File[] result = instance.finder(dirName);
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    }
-
-    /**
-     * Test of LoadGame method, of class Game.
-     */
-    @Test
-    public void testLoadGame() {
-        System.out.println("LoadGame");
-        Jugador playerP = null;
-        Game instance = new Game();
-        instance.LoadGame(playerP);
+        instance.comenzarPartida();
         // TODO review the generated test code and remove the default call to fail.
     }
     

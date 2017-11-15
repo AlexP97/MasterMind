@@ -1,20 +1,7 @@
 package domain;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
-import static java.lang.System.out;
 import java.util.ArrayList;
-import java.util.Scanner;
 import persistence.GamePersistencia;
 
 /**
@@ -46,8 +33,9 @@ public class Game implements Serializable{
     GamePersistencia gameP;
     
     public Game () {
-        this.id = null;
-        this.difficulty = null;
+        this.id = "";
+        this.difficulty = "";
+        this.mode = "";
         this.points = 150;
         this.player = null;
         this.IA = null;
@@ -107,6 +95,10 @@ public class Game implements Serializable{
         this.codeB = cb;
     }
     
+    public void setPlayer(Jugador j){
+        this.player = j;
+    }
+    
     private ArrayList<CodePeg> conversorCode (ArrayList<Integer> arrayList) {
         
         ArrayList<CodePeg> lista = new ArrayList<CodePeg>();
@@ -132,25 +124,26 @@ public class Game implements Serializable{
     }
     
     public void SaveGame() {
-                
-        boolean b = gameP.SaveGame(player.getName(), id);
-        boolean b2 = true;
-        
-        if (mode.equals("codemaker")){
+           
+        if (player != null){
+            boolean b = gameP.SaveGame(player.getName(), id);
+            boolean b2 = true;
 
-            b2 = gameP.SaveCodeB(player.getName(), id);
-            
+            if (mode.equals("codemaker")){
+
+                b2 = gameP.SaveCodeB(player.getName(), id);
+
+            }
+
+            if (b && b2) {
+                gameSaved = true;
+                System.out.println("Se ha guardado la partida." + "\n");
+            }
+            else {
+                gameSaved = false;
+                return;
+            }
         }
-        
-        if (b && b2) {
-            gameSaved = true;
-            System.out.println("Se ha guardado la partida." + "\n");
-        }
-        else {
-            gameSaved = false;
-            return;
-        }
-        
     }
     
     /**
