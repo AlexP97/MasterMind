@@ -1,0 +1,271 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package domain;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import utils.Pair;
+
+/**
+ *
+ * @author Usuario
+ */
+public class MasterMind {
+
+    /**
+     * @param args the command line arguments
+     */
+    
+    static ArrayList<ArrayList<Integer> > compatiblesPrimer;
+    static ArrayList<ArrayList<Integer> > noUsados;
+    static ArrayList<ArrayList<Integer> > combinaciones;
+    static boolean primeraOpcio = true;
+    static int nFichas = 5;
+    
+    public static ArrayList<Integer> donaSolucio(ArrayList<Integer> tirada, ArrayList<Integer> solucio) {
+        
+        ArrayList<Integer> linea = new ArrayList<>();
+        ArrayList<Boolean> visitats = new ArrayList<>();
+        ArrayList<Boolean> visitats2 = new ArrayList<>();
+        for(int i = 0; i < nFichas; i++) {
+            visitats.add(false);
+            visitats2.add(false);
+        }
+        
+        for(int i = 0; i < tirada.size(); i++) {
+            if(tirada.get(i) == solucio.get(i)) {
+                linea.add(2);
+                visitats.set(i,true);
+                visitats2.set(i,true);
+            }   
+        }
+        
+        for(int i = 0; i < tirada.size(); i++) {
+            for(int j = 0; j < solucio.size() && !visitats.get(i); j++) {
+                if(tirada.get(i) == solucio.get(j) && !visitats2.get(j)) {
+                    linea.add(1);
+                    visitats2.set(j,true);
+                    visitats.set(i,true);
+                }
+            }
+        }
+        while(linea.size() < nFichas) {
+            linea.add(0);
+        }  
+        return linea;
+    }
+    
+    
+    private static void conjunt(int i, ArrayList<Integer> aux, ArrayList<Integer> pos) {
+            if(i == nFichas) {
+                    ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
+                    compatiblesPrimer.add(añadir);
+            }
+            else {
+                for(int j = 0; j < pos.size(); j++) {
+                    aux.set(i, pos.get(j));
+                    conjunt(i+1, aux, pos); 
+                }
+            }
+    }
+    
+    
+    private static void ordenar(ArrayList<Integer> aux){
+        int temp;
+        for(int i = 1; i < aux.size(); i++){
+            for(int j = i; j > 0; j--){
+                if(aux.get(j) > aux.get(j-1)){
+                    temp = aux.get(j);
+                    aux.set(j,aux.get(j-1));
+                    aux.set(j-1,temp);
+                }
+            }
+        }
+    }
+    
+    private static ArrayList<Integer> creaArray(int... args){
+        ArrayList<Integer> aux = new ArrayList<>();
+        for(int arg : args){
+            aux.add(arg);
+        }
+        return aux;
+    }
+    
+    //code es un posible codigo inconsistente
+    public static boolean compare(ArrayList<Integer> tirada, ArrayList<Integer> solucio, ArrayList<Integer> code){
+        int nblancas = 0;
+        int nnegras = 0;
+        ArrayList<Integer> aux = donaSolucio(code, tirada);
+        for(int i = 0; i < aux.size(); i++){
+            if(aux.get(i) == 2) nblancas++;
+            else if(aux.get(i) == 1) nnegras++;
+        }
+        
+        int blancasSolucio = 0;
+        int negrasSolucio = 0;
+        for(int i = 0; i < solucio.size(); i++){
+            if (solucio.get(i) == 2) blancasSolucio++;
+            else if(solucio.get(i) == 1) negrasSolucio++;
+        }
+        if(nblancas == blancasSolucio && nnegras == negrasSolucio) return true;
+        return false;   
+    }
+    
+    private static ArrayList<Integer> miraSolucio(ArrayList<Integer> candidat, ArrayList<Integer> descartat){
+        return donaSolucio(candidat, descartat);
+    }
+    
+    private static boolean miraDescartes(ArrayList<Integer> candidat, ArrayList<Integer> descartat, ArrayList<Integer> combinacio) {
+        ArrayList<Integer> aux = miraSolucio(candidat,descartat);
+        return combinacio.equals(aux);
+    }
+    
+    private static ArrayList<Integer> millorOpcio(ArrayList<ArrayList<Integer> > compatibles) {
+        int min = Integer.MAX_VALUE;
+        int indice = 0;
+        boolean compatible = false;
+        for(int i = 0; i < noUsados.size(); i++){
+            //algoritmo de posibilidades
+            
+            int count = 0;
+            for(int j = 0; j < combinaciones.size(); j++) {
+                int max = 0;
+                for(int k = 0; k < compatibles.size(); k++) {
+                    boolean b = miraDescartes(noUsados.get(i), compatibles.get(k), combinaciones.get(j));
+                    if(b) max++;
+                }
+                if(max > count) count = max;
+            }
+                    
+            boolean comp = (compatibles.contains(noUsados.get(i)));
+            if(count < min) {
+                indice = i;
+                min = count;
+                if(comp)
+                    compatible = true;
+                }
+                if(count == min && !compatible && comp) {
+                    indice = i;
+                    compatible = comp;
+                }
+        }
+        return noUsados.get(indice);
+    }
+    
+    private static void creaCombinaciones(int i, ArrayList<Integer> aux){
+        if(i == nFichas){
+            ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
+            ordenar(añadir);
+            if(!combinaciones.contains(añadir)) combinaciones.add(añadir);
+        }
+        else{
+            for(int j = 2; j >= 0; j--){
+                aux.set(i,j);
+                creaCombinaciones(i+1,aux);
+            }
+        }
+    }
+    
+    
+    public static void main(String[] args) {
+        compatiblesPrimer = new ArrayList<>();
+        noUsados = new ArrayList<>();
+        combinaciones = new ArrayList<>();
+        ArrayList<Integer> aux = new ArrayList<>();
+        ArrayList<Integer> aux3 = new ArrayList<>();
+        for(int i = 0; i < nFichas; i++){
+            aux.add(1);
+            aux3.add(1);
+        }
+        ArrayList<Integer> pos = new ArrayList<>();
+        for(int i = 0; i < 6; i++){
+            pos.add(i+1);
+        }
+        conjunt(0,aux, pos);
+        noUsados = (ArrayList<ArrayList<Integer>>) compatiblesPrimer.clone();
+        creaCombinaciones(0,aux3);
+        ArrayList<Integer> imposible = new ArrayList<>();
+        for(int i = 0; i < nFichas; i++){
+            if(i == (nFichas-1)) imposible.add(1);
+            else imposible.add(2);
+        }
+        combinaciones.remove(imposible);
+        
+        ArrayList<Integer> validesa = new ArrayList<>();
+        for(int j = 0; j < nFichas; j++){
+            validesa.add(2);
+        }
+        ArrayList<Integer> tirada = new ArrayList();
+        ArrayList<Integer> solucio;
+        ArrayList<ArrayList<Integer> > opciones = (ArrayList<ArrayList<Integer> >) noUsados.clone();
+        int turno1 = 0;
+        int turno2 = 0;
+        int turno3 = 0;
+        int turno4 = 0;
+        int turno5 = 0;
+        int turno6omas = 0;
+        for(int i = 0; i < opciones.size(); i++) {
+            int count = 0;
+            primeraOpcio = true;
+            ArrayList<ArrayList<Integer> > compatibles = (ArrayList<ArrayList<Integer> >) compatiblesPrimer.clone();
+            solucio = new ArrayList<>();
+            for(int j = 0; j < nFichas; j++){
+                solucio.add(0);
+            }
+            while(!solucio.equals(validesa)) {
+                if(!primeraOpcio){
+                /*remove from S any code that would not give the same response if it (the guess) were the code
+                	* A code is inconsistent if the answer from comparing 'tirada' and a
+                        * code from 'S' is not the same as the answer from comparing
+                        * 'tirada' and the secret code given by the game.               
+                */
+                
+                    for(int j = 0; j < compatibles.size(); j++){
+                        if(!compare(tirada,solucio,compatibles.get(j))){
+                            compatibles.remove(j);
+                            j--;
+                        }
+                    }            
+              
+                    tirada = millorOpcio(compatibles);
+                }
+                else{
+                    ArrayList<Integer> aux2 = millorOpcio(compatibles);
+                    primeraOpcio = false;
+                    compatibles.remove(aux2);
+                    tirada = aux2;
+                }
+                solucio = donaSolucio(tirada, opciones.get(i));
+                count++;
+            }
+            for(int k = 0; k < opciones.get(i).size(); k++){
+                System.out.print(opciones.get(i).get(k));
+            }
+            System.out.println(" "+count+" "+i);
+            if(count == 1)
+                turno1++;
+            else if(count == 2)
+                turno2++;
+            else if(count == 3)
+                turno3++;
+            else if(count == 4)
+                turno4++;
+            else if(count == 5)
+                turno5++;
+            else
+                turno6omas++;
+        }
+        int total = turno1+turno2+turno3+turno4+turno5+turno6omas;
+        System.out.println("Resueltos en 1 turno: "+turno1);
+        System.out.println("Resueltos en 2 turnos: "+turno2);
+        System.out.println("Resueltos en 3 turnos: "+turno3);
+        System.out.println("Resueltos en 4 turnos: "+turno4);
+        System.out.println("Resueltos en 5 turnos: "+turno5);
+        System.out.println("Resueltos en 6 o más turnos: "+turno6omas);
+        System.out.println("Total: "+total);
+    }
+      
+}
