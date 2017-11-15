@@ -4,7 +4,7 @@ package utils;
  *
  * @author Espejo Saldaña, Adrián
  */
-public class PairDriver {
+public final class PairDriver {
     Pair<String,Integer> p;
     
     public PairDriver(){

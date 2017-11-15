@@ -6,7 +6,7 @@ import utils.Pair;
  *
  * @author Pérez Ortiz, Alejandro
  */
-public class JugadorPersistenciaDriver {
+public final class JugadorPersistenciaDriver {
     JugadorPersistencia jugador;
     
     public JugadorPersistenciaDriver() {

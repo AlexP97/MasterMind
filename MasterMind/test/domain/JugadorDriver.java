@@ -7,7 +7,7 @@ import utils.Pair;
  *
  * @author Pérez Ortiz, Alejandro
  */
-public class JugadorDriver {
+public final class JugadorDriver {
     Jugador jugador;
     CodePegStub codePeg;
     

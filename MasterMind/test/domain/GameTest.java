@@ -15,7 +15,7 @@ import persistence.GamePersistencia;
 
 /**
  *
- * @author Daniel
+ * @author Martínez Martínez, Daniel
  */
 public class GameTest {
     

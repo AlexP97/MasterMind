@@ -21,7 +21,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Daniel
+ * @author Martínez Martínez, Daniel
  */
 public class GamePersistencia implements Serializable{
     
