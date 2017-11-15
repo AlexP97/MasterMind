@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author Espejo Saldaña, Adrián
  */
-public class FuncionesDriver {
+public final class FuncionesDriver {
     
     public FuncionesDriver(){
         testOrdenar();

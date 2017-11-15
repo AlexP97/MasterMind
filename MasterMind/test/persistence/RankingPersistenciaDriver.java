@@ -7,7 +7,7 @@ import utils.Pair;
  *
  * @author Espejo Saldaña, Adrián
  */
-public class RankingPersistenciaDriver {
+public final class RankingPersistenciaDriver {
     RankingPersistencia rp;
     
     public RankingPersistenciaDriver(){

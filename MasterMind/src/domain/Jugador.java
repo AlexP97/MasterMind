@@ -1,10 +1,6 @@
 package domain;
 
 import utils.Pair;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import persistence.JugadorPersistencia;
