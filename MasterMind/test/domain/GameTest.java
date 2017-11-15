@@ -84,7 +84,8 @@ public class GameTest {
     public void testGetCargado() {
         System.out.println("getCargado");
         Game instance = new Game();
-        boolean expResult = false;
+        boolean expResult = true;
+        instance.setCargado(expResult);
         boolean result = instance.getCargado();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -97,11 +98,11 @@ public class GameTest {
     public void testGetPlayer() {
         System.out.println("getPlayer");
         Game instance = new Game();
-        Jugador j = new Jugador();
-        j.login("dani", "1213");
-        instance.setPlayer(j);
+        Jugador expResult = new Jugador();
+        expResult.register("dani", "1213");
+        instance.setPlayer(expResult);
         Jugador result = instance.getPlayer();
-        assertEquals(j, result);
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
 
@@ -124,7 +125,7 @@ public class GameTest {
     @Test
     public void testSetCargado() {
         System.out.println("setCargado");
-        boolean b = true;
+        boolean b = false;
         Game instance = new Game();
         instance.setCargado(b);
         boolean result = instance.getCargado();
@@ -138,22 +139,9 @@ public class GameTest {
     @Test
     public void testSetGameP() {
         System.out.println("setGameP");
-        GamePersistencia gamePer = new GamePersistencia();
+        GamePersistencia gamePer = null;
         Game instance = new Game();
         instance.setGameP(gamePer);
-        // TODO review the generated test code and remove the default call to fail.
-    }
-    
-    /**
-     * Test of setPlayer method, of class Game.
-     */
-    @Test
-    public void testSetPlayer() {
-        System.out.println("setPlayer");
-        Jugador j = new Jugador();
-        j.login("dani", "1213");
-        Game instance = new Game();
-        instance.setPlayer(j);
         // TODO review the generated test code and remove the default call to fail.
     }
 
@@ -163,9 +151,24 @@ public class GameTest {
     @Test
     public void testSetCB() {
         System.out.println("setCB");
-        CodeBreaker cb = new CodeBreaker(false, 3, 3);
+        CodeBreaker cb = null;
         Game instance = new Game();
         instance.setCB(cb);
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of setPlayer method, of class Game.
+     */
+    @Test
+    public void testSetPlayer() {
+        System.out.println("setPlayer");
+        Game instance = new Game();
+        Jugador expResult = new Jugador();
+        expResult.register("dani", "1213");
+        instance.setPlayer(expResult);
+        Jugador result = instance.getPlayer();
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
     }
 
@@ -187,9 +190,9 @@ public class GameTest {
     public void testFinishGame() {
         System.out.println("finishGame");
         boolean ganado = true;
-        Jugador j = new Jugador();
-        j.login("dani", "1213");
         Game instance = new Game();
+        Jugador j = new Jugador();
+        j.register("dani", "1213");
         instance.setPlayer(j);
         instance.finishGame(ganado);
         // TODO review the generated test code and remove the default call to fail.
@@ -204,6 +207,24 @@ public class GameTest {
         Game instance = new Game();
         instance.baja_Puntuacion();
         // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of juega method, of class Game.
+     */
+    @Test
+    public void testJuega() {
+        System.out.println("juega");
+        Jugador playerN = null;
+        String ident = "";
+        String dif = "";
+        String mod = "";
+        int num = 0;
+        int ran = 0;
+        Game instance = new Game();
+        // Como los parametros estan vacios, game no podra crear la partida, de modo que no dara ningun error.
+        instance.juega(playerN, ident, dif, mod, num, ran);
+        
     }
 
     /**
