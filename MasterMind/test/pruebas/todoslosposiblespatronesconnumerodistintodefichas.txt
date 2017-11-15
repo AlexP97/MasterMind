@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
 import java.util.ArrayList;
@@ -11,7 +6,7 @@ import utils.Pair;
 
 /**
  *
- * @author Pérez Ortiz, Alejandro
+ * @author Perez Ortiz, Alejandro
  */
 public class MasterMind {
 
@@ -264,7 +259,7 @@ public class MasterMind {
         System.out.println("Resueltos en 3 turnos: "+turno3);
         System.out.println("Resueltos en 4 turnos: "+turno4);
         System.out.println("Resueltos en 5 turnos: "+turno5);
-        System.out.println("Resueltos en 6 o más turnos: "+turno6omas);
+        System.out.println("Resueltos en 6 o mas turnos: "+turno6omas);
         System.out.println("Total: "+total);
     }
       

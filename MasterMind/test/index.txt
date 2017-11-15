@@ -7,3 +7,5 @@ Contiene las diferentes carpetas, donde se encuentran los distintos drivers, tes
 - persistence = Contiene todos los drivers de la Capa de Persistencia.
 
 - utils = Carpeta que contiene los drivers de las clases complementarias para el proyecto, como la classe PairDriver o FuncionesDriver.
+
+- pruebas = Carpeta que contiene los diferentes juegos de pruebas para el proyecto.

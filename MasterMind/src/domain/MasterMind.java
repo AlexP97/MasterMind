@@ -136,15 +136,20 @@ public class MasterMind {
     /**
      *
      * @param jugador el jugador que está jugando
+     * @return si el usuario se ha eliminado o no
      */
-    protected static void eliminaUsuario(Jugador jugador){
+    protected static boolean eliminaUsuario(Jugador jugador){
         Scanner input = new Scanner(System.in);
         System.out.println("El jugador va a ser eliminado de forma definitiva, ¿estás seguro?");
         System.out.println("Escribe si o no");
         String respuesta = input.nextLine();
-        if(respuesta.equals("si")) jugador.elimina();
-        else if(respuesta.equals("no")) return;
-        else eliminaUsuario(jugador);
+        if(respuesta.equals("si")){
+            jugador.elimina();
+            return true;
+        }
+        else if(respuesta.equals("no")) System.out.println("Se ha cancelado la eliminación del usuario");
+        else System.out.println("Entrada no válida");
+        return false;
     }
     
     public static void main(String[] args) {
@@ -189,7 +194,6 @@ public class MasterMind {
                     else if (jugar.equals("modificar")){
                         System.out.println("Escribe usuario para modificar tu nombre de usuario, contrasena para modificar tu contraseña, eliminar para darte de baja o salir para volver al menú anterior");
                         String modificar = input.nextLine();
-                        System.out.println(modificar);
                         if(modificar.equals("usuario")){
                             cambiaNombre(jugador);
                         }
@@ -197,8 +201,7 @@ public class MasterMind {
                             cambiaContraseña(jugador);
                         }
                         else if(modificar.equals("eliminar")){
-                            eliminaUsuario(jugador);
-                            estado = 0;
+                            if (eliminaUsuario(jugador)) estado = 0;
                         }
                         else if(modificar.equals("salir")) estado = 1;
                         else{

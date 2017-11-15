@@ -297,7 +297,7 @@ public class Game implements Serializable{
                     outputB = codeB.jugar("IA", codeBAnt, codeMAnt);
                     codeBAnt = conversorCode(outputB);
                 }
-                while (outputM.contains(-1) || outputM.contains(-2) || outputB.size() != numero) {
+                while (outputM.contains(-1) || outputM.contains(-2) || outputM.size() != numero) {
                     outputM = codeM.jugar("Player", codeBAnt, codeIni);
                     if (outputM.contains(-1)) {
                         SaveGame();
