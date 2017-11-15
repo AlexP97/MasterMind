@@ -1,0 +1,11 @@
+Carpeta docs
+
+Esta carpeta contiene toda la documentacion de nuestro proyecto.
+
+- Diagrama de clases.
+
+- Diagrama de casos de uso.
+
+- Manual de usuario
+
+- Descripcion de los casos de uso.

@@ -1,0 +1,11 @@
+Carpeta persistence
+
+Contiene todos los drivers de la Capa de Persistencia.
+
+- GamePersistenciaDriver.java = este archivo contiene la clase de testeo de GamePersistencia y sus funciones. Se encarga de probar que todas las funciones de GamePersistencia funcionan.
+
+- JugadorPersistenciaDriver.java = este archivo contiene la clase de testeo de JugadorPersistencia y sus funciones. Se encarga de probar que todas las funciones de JugadorPersistencia
+funcionan.
+
+- RankingPersistenciaDriver.java = este archivo contiene la clase de testeo de RankingPersistencia y sus funciones. Se encarga de probar que todas las funciones de RankingPeristencia
+funcionan.
