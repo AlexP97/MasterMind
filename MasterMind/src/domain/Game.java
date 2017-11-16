@@ -103,18 +103,35 @@ public class Game implements Serializable{
         this.cargado = b;
     }
     
+    /**
+     *
+     * @param gamePer asigna el GamePersistencia que se encargará de interaccionar con el sistema de ficheros
+     */
     public void setGameP(GamePersistencia gamePer){
         this.gameP = gamePer;
     }
     
+    /**
+     *
+     * @param cb asigna el CodeBreaker de la partida
+     */
     public void setCB(CodeBreaker cb){
         this.codeB = cb;
     }
     
+    /**
+     *
+     * @param j asigna el Jugador de la partida
+     */
     public void setPlayer(Jugador j){
         this.player = j;
     }
     
+    /**
+     *
+     * @param arrayList es el ArrayList<Integer> que se quiere traducir
+     * @return el arrayList traducido a ArrayList<CodePeg>
+     */
     private ArrayList<CodePeg> conversorCode (ArrayList<Integer> arrayList) {
         
         ArrayList<CodePeg> lista = new ArrayList<CodePeg>();
@@ -127,6 +144,11 @@ public class Game implements Serializable{
         return lista;
     }
     
+    /**
+     *
+     * @param arrayList es el ArrayList<Integer> que se quiere traducir
+     * @return el arrayList traducido a ArrayList<KeyPeg>
+     */
     private ArrayList<KeyPeg> conversorKey (ArrayList<Integer> arrayList) {
         
         ArrayList<KeyPeg> lista = new ArrayList<KeyPeg>();
@@ -193,6 +215,15 @@ public class Game implements Serializable{
         else this.points -= 10;
     }
     
+    /**
+     *
+     * @param playerN jugador que juega la partida
+     * @param ident identificador de la partida
+     * @param dif dificultad de la partida
+     * @param mod modo de la partida
+     * @param num número de fichas para la partida
+     * @param ran rango de colores para la partida
+     */
     private boolean SetAtributos(Jugador playerN, String ident, String dif, String mod, int num, int ran){
         
         if (cargado) {
@@ -242,6 +273,12 @@ public class Game implements Serializable{
         return true;
     }
     
+    /**
+     *
+     * @param outputM es el output del CodeMaker
+     * @param outputB es el output del CodeBreaker
+     * @return la fila completa en el tablero
+     */
     private String GenerarLinea( ArrayList<KeyPeg> outputM, ArrayList<CodePeg> outputB){
         
         String linea = "";
@@ -355,7 +392,7 @@ public class Game implements Serializable{
 
         finishGame(false);        
     }
-    
+
     public void MostrarOutput() {
         
         if(mode.equals("codemaker")) {

@@ -9,3 +9,7 @@ Contiene las diferentes carpetas, donde se encuentran los distintos drivers, tes
 - utils = Carpeta que contiene los drivers de las clases complementarias para el proyecto, como la classe PairDriver o FuncionesDriver.
 
 - pruebas = Carpeta que contiene los diferentes juegos de pruebas para el proyecto.
+
+- junit-4.12.jar = .jar necesario para compilar las funciones que utilizan JUnit.
+
+- Tests.java = Clase que llama a los juegos de prueba de todas las funciones.

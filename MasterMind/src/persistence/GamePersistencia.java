@@ -63,6 +63,12 @@ public class GamePersistencia implements Serializable{
         this.cb = codeB;
     }
     
+    /**
+     *
+     * @param username el nombre de usuario
+     * @param id el id de la partida
+     * @return si se ha guardado la partida correctamente
+     */
     public boolean SaveGame(String username, String id){
                         
         try {
@@ -119,6 +125,11 @@ public class GamePersistencia implements Serializable{
         }
     }    
     
+    /**
+     *
+     * @param dirName es el directorio donde buscar los archivos
+     * @return el listado de archivos de ese directorio
+     */
     public File[] finder( String dirName){
         File dir = new File(dirName);
 
