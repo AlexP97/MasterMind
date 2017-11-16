@@ -6,6 +6,8 @@ Esta carpeta contiene toda la documentacion de nuestro proyecto.
 
 - Diagrama de casos de uso.
 
-- Manual de usuario
+- Manual de usuario.
 
 - Descripcion de los casos de uso.
+
+- Javadoc de nuestro juego.
