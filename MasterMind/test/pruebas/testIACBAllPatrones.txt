@@ -18,7 +18,7 @@ public class MasterMind {
     static ArrayList<ArrayList<Integer> > noUsados;
     static ArrayList<ArrayList<Integer> > combinaciones;
     static boolean primeraOpcio = true;
-    static int nFichas = 5;
+    static int nFichas = 2;
     
     public static ArrayList<Integer> donaSolucio(ArrayList<Integer> tirada, ArrayList<Integer> solucio) {
         
@@ -236,10 +236,13 @@ public class MasterMind {
                 solucio = donaSolucio(tirada, opciones.get(i));
                 count++;
             }
+            System.out.println("Jugada Turnos");
+            System.out.print(" ");
+            
             for(int k = 0; k < opciones.get(i).size(); k++){
                 System.out.print(opciones.get(i).get(k));
             }
-            System.out.println(" "+count+" "+i);
+            System.out.println("     "+count);
             if(count == 1)
                 turno1++;
             else if(count == 2)
