@@ -53,6 +53,10 @@ run: build/domain/MasterMind.class
 
 run_tests: build/Tests.class 
 	$(JVM) -cp ./$(CLASSPATH) $(MAINTEST)
+	
+run_junit: build/domain/GameTest.class
+	java -cp ./test/junit-4.12.jar org.junit.runner.JUnitCore domain.GameTest
+
 
 clean:
 	$(RM) $(CLASSPATH)/domain/*.class
