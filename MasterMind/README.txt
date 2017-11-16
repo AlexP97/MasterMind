@@ -17,3 +17,6 @@ Para jugar al juego una vez compilado, se debe introducir:
 Para ejecutar los tests (drivers), debe introducir:
 
 	$ make run_tests
+
+Para ejecutar el test JUnit, debe introducir:
+	$ make run_junit

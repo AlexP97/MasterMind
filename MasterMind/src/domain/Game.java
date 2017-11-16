@@ -36,7 +36,7 @@ public class Game implements Serializable{
         this.id = "";
         this.difficulty = "";
         this.mode = "";
-        this.points = 150;
+        this.points = 120;
         this.player = null;
         this.IA = null;
         this.turn = 0;
@@ -189,8 +189,8 @@ public class Game implements Serializable{
     public void baja_Puntuacion(){
         if (this.difficulty == null) return;
         else if (this.difficulty.equals("facil")) points -= 15;
-        else if (this.difficulty.equals("medio")) this.points -= 10;
-        else this.points -= 5;
+        else if (this.difficulty.equals("medio")) this.points -= 12;
+        else this.points -= 10;
     }
     
     private boolean SetAtributos(Jugador playerN, String ident, String dif, String mod, int num, int ran){
@@ -218,7 +218,7 @@ public class Game implements Serializable{
             this.difficulty = dif;
             this.player = playerN;
             this.mode = mod;
-            this.points = 150;
+            this.points = 120;
             this.turn = 1;
             this.codeBAnt = new ArrayList<CodePeg>();
             this.codeMAnt = new ArrayList<KeyPeg>();
