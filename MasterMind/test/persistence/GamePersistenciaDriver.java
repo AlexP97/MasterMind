@@ -21,6 +21,14 @@ public class GamePersistenciaDriver {
     public GamePersistenciaDriver() {
         
         gameP = new GamePersistencia();
+	testSetGame();
+	testSetCB();
+	testSaveGame();
+	testSaveCodeB();
+	testFinder();
+	testLoadGame();
+	testCheckAvailability() ;
+	testCrearPartida();
         
     }
     
@@ -41,11 +49,11 @@ public class GamePersistenciaDriver {
         
     }
     
-    public boolean testSaveCodeP(){
+    public boolean testSaveCodeB(){
         
         testSetGame();
         testSetCB();
-        return gameP.SaveGame("dani", "1213");
+        return gameP.SaveCodeB("dani", "1213");
         
     }
     
