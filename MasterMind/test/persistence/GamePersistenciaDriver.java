@@ -26,9 +26,7 @@ public class GamePersistenciaDriver {
 	testSaveGame();
 	testSaveCodeB();
 	testFinder();
-	testLoadGame();
 	testCheckAvailability() ;
-	testCrearPartida();
         
     }
     
@@ -63,24 +61,10 @@ public class GamePersistenciaDriver {
         
     }
     
-    public void testLoadGame() {
-        
-        Jugador j = new Jugador();
-        j.register("dani", "1213");
-        gameP.LoadGame(j);
-        
-    }
-    
     public boolean testCheckAvailability() {
         
         return gameP.CheckAvailability("ident", "dani");
         
     }
-    public void testCrearPartida(){
-        
-        Jugador j = new Jugador();
-        j.register("dani", "1213");
-        gameP.CrearPartida(j, "ident", "facil", "codemaker", 3, 3);
-        
-    }
+
 }
