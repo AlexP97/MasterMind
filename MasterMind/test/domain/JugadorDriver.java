@@ -16,7 +16,7 @@ public final class JugadorDriver {
         boolean salir = false;
         while(!salir) {
             Scanner input = new Scanner(System.in);
-            System.out.println("Escoge que operación quieres probar(introduce el numero) o introduce -1 para salir:");
+            System.out.println("¿Qué método quieres probar?");
             System.out.println("1- Register.");
             System.out.println("2- Login.");
             System.out.println("3- Mirar el nombre.");
@@ -29,6 +29,7 @@ public final class JugadorDriver {
             System.out.println("10- Cambiar el nombre.");
             System.out.println("11- Cambiar la contraseña.");
             System.out.println("12- Eliminar jugador.");
+            System.out.println("Escribe salir para probar otra clase.");
             
             String test = input.nextLine();
             if(test.equals("1"))
@@ -55,10 +56,10 @@ public final class JugadorDriver {
                 testSetPassword();
             else if(test.equals("12"))
                 testElimina();
-            else if(test.equals("-1"))
+            else if(test.equals("salir"))
                 salir = true;
             else
-                System.out.println("El valor introducido no es válido");
+                System.out.println("Entrada no válida");
         }
     }
     
@@ -139,7 +140,7 @@ public final class JugadorDriver {
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce tu nuevo nombre de usuario.");
         String s = input.nextLine();
-        String l = jugador.setName(s);
+        jugador.setName(s);
         System.out.println("Has cambiado correctamente de nombre.");
         jugador.elimina();
     }
@@ -150,7 +151,7 @@ public final class JugadorDriver {
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce tu nueva contraseña.");
         String s = input.nextLine();
-        String l = jugador.setPassword(s);
+        jugador.setPassword(s);
         System.out.println("Has cambiado correctamente de contraseña.");
         jugador.elimina();
     }
@@ -158,7 +159,7 @@ public final class JugadorDriver {
     public void testElimina() {
         Jugador jugador = new Jugador();
         Pair<Boolean, String> p = jugador.register("Dummy", "123");
-        String s = jugador.elimina();
+        jugador.elimina();
         System.out.println("El jugador ha sido eliminado correctamente.");
     }
     

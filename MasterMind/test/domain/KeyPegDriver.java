@@ -13,17 +13,22 @@ public final class KeyPegDriver {
     
     public KeyPegDriver(){
         Scanner input = new Scanner(System.in);
-        System.out.println("Creación de una KeyPeg");
-        System.out.println("Escribe el color, posición y total de fichas, por orden y separados de un espacio");
-        String keypeg = input.nextLine();
-        String cp[] = keypeg.split(" ");
-        nC = 2;
-        nF = Integer.parseInt(cp[2]);
-        try{
-            keyPeg = new KeyPeg(Integer.parseInt(cp[0]),Integer.parseInt(cp[1]),Integer.parseInt(cp[2]));
-        } catch(IllegalArgumentException ex){
-            
+        boolean creado = false;
+        while(!creado){
+            creado = true;
+            System.out.println("Creación de una KeyPeg");
+            System.out.println("Escribe el color, posición y total de fichas, por orden y separados de un espacio");
+            String keypeg = input.nextLine();
+            String cp[] = keypeg.split(" ");
+            nC = 2;
+            nF = Integer.parseInt(cp[2]);
+            try{
+                keyPeg = new KeyPeg(Integer.parseInt(cp[0]),Integer.parseInt(cp[1]),Integer.parseInt(cp[2]));
+            } catch(IllegalArgumentException ex){
+                creado = false;
+            }
         }
+
         String metodo = "prueba";
         while(!metodo.equals("salir")){
             System.out.println("¿Qué método quieres probar?");

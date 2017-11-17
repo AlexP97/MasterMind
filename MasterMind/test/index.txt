@@ -10,6 +10,6 @@ Contiene las diferentes carpetas, donde se encuentran los distintos drivers, tes
 
 - pruebas = Carpeta que contiene los diferentes juegos de pruebas para el proyecto.
 
-- junit-4.12.jar = .jar necesario para compilar las funciones que utilizan JUnit.
+- lib = Carpeta que contiene las diferentes librerias que se usan.
 
 - Tests.java = Clase que llama a los juegos de prueba de todas las funciones.

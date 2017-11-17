@@ -17,12 +17,8 @@ public final class RankingPersistenciaDriver {
     
     public RankingPersistenciaDriver(){
         this.ranking = Ranking.getInstance();
-        rp = new RankingPersistencia();
         Scanner input = new Scanner(System.in);
-        System.out.println("Introduce un nombre de usuario");
-        nombre = input.nextLine();
-        System.out.println("Introduce unos puntos");
-        puntos = Integer.parseInt(input.nextLine());
+        rp = new RankingPersistencia();
         String metodo = "prueba";
         while(!metodo.equals("salir")){
             System.out.println("¿Qué método quieres probar?");
@@ -41,6 +37,11 @@ public final class RankingPersistenciaDriver {
             System.out.println(result.get(i).getLeft()+' '+result.get(i).getRight());
     }
     public void testActualizaRanking(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Introduce un nombre de usuario");
+        nombre = input.nextLine();
+        System.out.println("Introduce unos puntos");
+        puntos = Integer.parseInt(input.nextLine());
         ranking.actualizaRanking(nombre, puntos);
         ArrayList<Pair<String, Integer>> result = ranking.muestraRanking();
         rp.actualizaRanking(result);

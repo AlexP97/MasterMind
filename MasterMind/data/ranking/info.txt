@@ -1,1 +1,1 @@
-adri 120 adri2 108 adri2 105 alex2 90 dani 36 alex 10
+adri 120 dani2 110 adri2 108 adri2 105 alex2 90 dani 36 adri 12 alex 10

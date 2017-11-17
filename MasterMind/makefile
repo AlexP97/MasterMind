@@ -52,7 +52,7 @@ run: src/domain/MasterMind.class
 	$(JVM) -cp ./src/ $(MAIN)
 
 run_tests: test/Tests.class 
-	$(JVM) -cp ./test/ $(MAINTEST)
+	$(JVM) -cp ./test/:./src/ $(MAINTEST)
 	
 run_junit: test/domain/GameTest.class
 	java -cp ./test/lib/junit-4.12.jar:./test/lib/hamcrest-1.10.jar:./test/:./src/ org.junit.runner.JUnitCore domain.GameTest

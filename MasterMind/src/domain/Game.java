@@ -199,10 +199,13 @@ public class Game implements Serializable{
             }
         }
         else {
-            System.out.print("Game Over..." + "\n" + "El código correcto era:");
-            for(int i = 0; i < codeIni.size(); i++) {
-                System.out.print(" " + codeIni.get(i).getColour());
+            if (codeIni != null) {
+                System.out.print("Game Over..." + "\n" + "El código correcto era:");
+                for(int i = 0; i < codeIni.size(); i++) {
+                    System.out.print(" " + codeIni.get(i).getColour());
+                }
             }
+            else System.out.print("Game Over...");
             System.out.println();
         }
         

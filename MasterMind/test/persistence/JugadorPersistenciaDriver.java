@@ -14,12 +14,13 @@ public final class JugadorPersistenciaDriver {
         boolean salir = false;
         while(!salir) {
             Scanner input = new Scanner(System.in);
-            System.out.println("Escoge que operación quieres probar(introduce el numero) o introduce -1 para salir:");
+            System.out.println("¿Qué método quieres probar?");
             System.out.println("1- Register.");
             System.out.println("2- Login.");
             System.out.println("3- Cambiar el nombre.");
             System.out.println("4- Cambiar la contraseña.");
             System.out.println("5- Eliminar jugador.");
+            System.out.println("Escribe salir para probar otra clase.");
             String test = input.nextLine();
             if(test.equals("1")) 
                 testRegister();
@@ -31,10 +32,10 @@ public final class JugadorPersistenciaDriver {
                 testSetPassword();
             else if(test.equals("5"))
                 testElimina();
-            else if(test.equals("-1"))
+            else if(test.equals("salir"))
                 salir = true;
             else
-                System.out.println("El valor introducido no es válido");
+                System.out.println("Entrada no válida");
         }
     }
     

@@ -21,3 +21,15 @@ Para ejecutar los tests (drivers), debe introducir:
 Para ejecutar el test JUnit, debe introducir:
 
 	$ make run_junit
+
+
+
+-------------------------------------------------------------------
+
+Reparto
+
+Espejo Saldana, Adrian --> Casilla, KeyPeg, CodePeg, Ranking, RankingPersistencia, MasterMind, Funciones, Pair y sus respectivos drivers y stubs.
+
+Martinez Martinez, Daniel --> Game, GamePersistencia y sus respectivos drivers, stubs y tests junit.
+
+Perez Ortiz, Alejandro --> CodeBreaker, CodeMaker, Jugador, JugadorPersistencia y sus respectivos drivers y stubs.

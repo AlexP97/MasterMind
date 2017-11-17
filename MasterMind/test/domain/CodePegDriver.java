@@ -13,17 +13,22 @@ public final class CodePegDriver {
     
     public CodePegDriver(){
         Scanner input = new Scanner(System.in);
-        System.out.println("Creación de una CodePeg");
-        System.out.println("Escribe el color, posición, total de fichas y total de colores, por orden y separados de un espacio");
-        String codepeg = input.nextLine();
-        String cp[] = codepeg.split(" ");
-        nC = Integer.parseInt(cp[3]);
-        nF = Integer.parseInt(cp[2]);
-        try{
-            codePeg = new CodePeg(Integer.parseInt(cp[0]),Integer.parseInt(cp[1]),Integer.parseInt(cp[2]),Integer.parseInt(cp[3]));
-        } catch(IllegalArgumentException ex){
-            
+        boolean creado = false;
+        while(!creado){
+            creado = true;
+            System.out.println("Creación de una CodePeg");
+            System.out.println("Escribe el color, posición, total de fichas y total de colores, por orden y separados de un espacio");
+            String codepeg = input.nextLine();
+            String cp[] = codepeg.split(" ");
+            nC = Integer.parseInt(cp[3]);
+            nF = Integer.parseInt(cp[2]);
+            try{
+                codePeg = new CodePeg(Integer.parseInt(cp[0]),Integer.parseInt(cp[1]),Integer.parseInt(cp[2]),Integer.parseInt(cp[3]));
+            } catch(IllegalArgumentException ex){
+                creado = false;
+            }
         }
+    
         String metodo = "prueba";
         while(!metodo.equals("salir")){
             System.out.println("¿Qué método quieres probar?");

@@ -21,7 +21,7 @@ public final class CodeBreakerDriver {
         boolean salir = false;
         while(!salir) {
             Scanner input = new Scanner(System.in);
-            System.out.println("Escoge que operación quieres probar(introduce el numero) o introduce -1 para salir:");
+            System.out.println("¿Qué método quieres probar?");
             System.out.println("1- Crear conjunto de opciones.");
             System.out.println("2- Crear conjunto de pistas posibles.");
             System.out.println("3- Constructor.");
@@ -31,6 +31,7 @@ public final class CodeBreakerDriver {
             System.out.println("7- Mirar si se descarta una solución.");
             System.out.println("8- Mirar la mejor opción.");
             System.out.println("9- Mirar si funciona la función jugar.");
+            System.out.println("Escribe salir para probar otra clase.");
             String test = input.nextLine();
             if(test.equals("1"))
                 testConjunt();
@@ -50,10 +51,10 @@ public final class CodeBreakerDriver {
                 testMillorOpcio();
             else if(test.equals("9"))
                 testJugar();
-            else if(test.equals("-1"))
+            else if(test.equals("salir"))
                 salir = true;
             else 
-                System.out.println("El valor introducido no es válido");
+                System.out.println("Entrada no válida");
         }
     }
     
@@ -63,6 +64,7 @@ public final class CodeBreakerDriver {
             a.add(1);
         }
         codebreaker.conjunt(0,a);
+        System.out.println("Se ha realizado correctamente.");
     }
     
     private void testCreaCombinaciones() {

@@ -19,10 +19,11 @@ public class CodeMakerDriver {
         boolean salir = false;
         while(!salir) {
             Scanner input = new Scanner(System.in);
-            System.out.println("Escoge que operación quieres probar(introduce el numero) o introduce -1 para salir:");
+            System.out.println("¿Qué método quieres probar?");
             System.out.println("1- Constructor.");
             System.out.println("2- Dar patrón.");
             System.out.println("3- Jugar.");
+            System.out.println("Escribe salir para probar otra clase.");
             String test = input.nextLine();
             if(test.equals("1"))
                 testConstructor();
@@ -30,10 +31,10 @@ public class CodeMakerDriver {
                 testDonaPatro();
             else if(test.equals("3"))
                 testJugar();
-            else if(test.equals("-1"))
+            else if(test.equals("salir"))
                 salir = true;
             else
-                System.out.println("El valor introducido no es válido");
+                System.out.println("Entrada no válida");
         }
     }
     

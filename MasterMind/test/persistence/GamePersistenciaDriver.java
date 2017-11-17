@@ -55,14 +55,17 @@ public final class GamePersistenciaDriver {
     }
     
     public boolean testSaveGame(){
-        testSetGame();
+        Game game = new Game();
+        gameP.setGame(game);
         System.out.println("Se ha realizado correctamente");
         return gameP.SaveGame("dani", "1213");
     }
     
     public boolean testSaveCodeB(){
-        testSetGame();
-        testSetCB();
+        Game game = new Game();
+        gameP.setGame(game);
+        CodeBreaker cb = new CodeBreaker(false, 2, 2);
+        gameP.setCB(cb);
         System.out.println("Se ha realizado correctamente");
         return gameP.SaveCodeB("dani", "1213");  
     }

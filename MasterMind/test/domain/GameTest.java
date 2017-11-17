@@ -71,7 +71,7 @@ public class GameTest {
     public void testGetPoints() {
         System.out.println("getPoints");
         Game instance = new Game();
-        int expResult = 150;
+        int expResult = 120;
         int result = instance.getPoints();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -189,7 +189,7 @@ public class GameTest {
     @Test
     public void testFinishGame() {
         System.out.println("finishGame");
-        boolean ganado = true;
+        boolean ganado = false;
         Game instance = new Game();
         Jugador j = new Jugador();
         j.register("dani", "1213");

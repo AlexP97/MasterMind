@@ -27,6 +27,7 @@ public final class FuncionesDriver {
     }
     
     public void testOrdenar(){
+        testCreaArray();
         Funciones.ordenar(a);
         for(int i = 0; i < a.size(); i++) System.out.print(a.get(i)+" ");
     }
