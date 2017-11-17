@@ -19,8 +19,14 @@ public final class CodePeg extends Casilla implements Serializable{
      * @throws IllegalArgumentException si el color no está dentro del rango o la posición no es válida
      */
     public CodePeg(int col, int pos, int total, int rango) throws IllegalArgumentException{
-        if(!colourValid(col,rango) || !posValid(pos,total)) 
+        if(!colourValid(col,rango)){
+            System.out.println("El color no está dentro del rango");
             throw new IllegalArgumentException("Invalid argument");
+        }
+        if(!posValid(pos,total)){
+            System.out.println("La posición no está dentro del rango");
+            throw new IllegalArgumentException("Invalid argument");
+        }
         this.colourCode = col;
         this.position = pos;
     }

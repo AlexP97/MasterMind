@@ -18,8 +18,14 @@ public final class KeyPeg extends Casilla implements Serializable{
      * @throws IllegalArgumentException si el color no está dentro del rango o la posición no es válida
      */
     public KeyPeg(int col, int pos,int total) throws IllegalArgumentException {
-        if(!colourValid(col,2) || !posValid(pos,total)) 
+        if(!colourValid(col,2)){
+            System.out.println("El color no está dentro del rango");
             throw new IllegalArgumentException("Invalid argument");
+        }
+        if(!posValid(pos,total)){
+            System.out.println("La posición no está dentro del rango");
+            throw new IllegalArgumentException("Invalid argument");
+        }
         this.colourKey = col;
         this.position = pos;
     }
