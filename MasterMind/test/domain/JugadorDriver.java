@@ -71,6 +71,7 @@ public final class JugadorDriver {
         String contraseña = input.nextLine();
         Pair<Boolean, String> p = jugador.register(usuario, contraseña);
         System.out.println(p.getRight());
+        jugador.elimina();
     }
     
     public void testLogin() {
@@ -80,8 +81,9 @@ public final class JugadorDriver {
         String usuario = input.nextLine();
         System.out.println("Introduce la contraseña");
         String contraseña = input.nextLine();
-        Pair<Boolean, String> p = jugador.login(usuario, contraseña);
-        System.out.println(p.getRight());
+        Pair<Boolean, String> p = jugador.register(usuario, contraseña);
+        Pair<Boolean, String> p2 = jugador.login(usuario, contraseña);
+        System.out.println(p2.getRight());
         jugador.elimina();
     }
     
