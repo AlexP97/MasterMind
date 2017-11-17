@@ -120,7 +120,8 @@ public class MasterMind {
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce tu nuevo nombre de usuario");
         String name = input.nextLine();
-        jugador.setName(name);
+        String s = jugador.setName(name);
+        System.out.println(s);
     }
     
     /**
@@ -131,7 +132,8 @@ public class MasterMind {
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce tu nueva contraseña");
         String password = input.nextLine();
-        jugador.setPassword(password);
+        String s = jugador.setPassword(password);
+        System.out.println(s);
     }
     
     /**
@@ -145,7 +147,8 @@ public class MasterMind {
         System.out.println("Escribe si o no");
         String respuesta = input.nextLine();
         if(respuesta.equals("si")){
-            jugador.elimina();
+            String s = jugador.elimina();
+            System.out.println(s);
             return true;
         }
         else if(respuesta.equals("no")) System.out.println("Se ha cancelado la eliminación del usuario");

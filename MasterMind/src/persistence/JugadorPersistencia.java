@@ -86,26 +86,30 @@ public class JugadorPersistencia {
      * @param c contraseña del usuario
      * @return si se ha cambiado el nombre correctamente
      */
-    public boolean setName(String n1,String n2, String c) {
+    public Pair<Boolean, String> setName(String n1,String n2, String c) {
         File dir = new File("data/players/"+n1);
         File dir2 = new File("data/players/"+n2);
         boolean success = dir.renameTo(dir2);
+        Pair<Boolean, String> p = new Pair<>();
         if(!success) {
-            System.out.println("El nombre de usuario ya está en uso.");
-            return false;
+            p.setRight("El nombre de usuario ya está en uso.");
+            p.setLeft(false);
         }
-        File info = new File("data/players/"+n2+"/info.txt");
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-            bw.write(n2+" "+c);
-            bw.close();
-            System.out.println("Has cambiado tu nombre de usuario correctamente.");
-            return true;
+        else {
+            File info = new File("data/players/"+n2+"/info.txt");
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(info));
+                bw.write(n2+" "+c);
+                bw.close();
+                p.setRight("Has cambiado tu nombre de usuario correctamente.");
+                p.setLeft(true);
+            }
+            catch (IOException e) {
+                p.setRight("Error al cambiar de nombre");
+                p.setLeft(false);
+            }
         }
-        catch (IOException e) {
-            System.out.println("Error al cambiar de nombre");
-            return false;
-        }
+        return p;
     }
     
     /**
@@ -114,19 +118,21 @@ public class JugadorPersistencia {
      * @param c la contraseña
      * @return si se ha cambiado la contraseña correctamente
      */
-    public boolean setPassword(String n, String c) {
+    public Pair<Boolean, String> setPassword(String n, String c) {
         File info = new File("data/players/"+n+"/info.txt");
+        Pair<Boolean, String> p = new Pair<>();
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(info));
             bw.write(n+" "+c);
             bw.close();
-            System.out.println("Has cambiado tu contraseña correctamente.");
-            return true;
+            p.setRight("Has cambiado tu contraseña correctamente.");
+            p.setLeft(true);
         }
         catch (IOException e) {
-            System.out.println("Error al cambiar de contraseña");
-            return false;
+            p.setRight("Error al cambiar de contraseña");
+            p.setLeft(false);
         }
+        return p;
     }
     
     private void borrarDirectorio(File f) {
@@ -142,12 +148,12 @@ public class JugadorPersistencia {
      *
      * @param n nombre del usuario
      */
-    public void elimina(String n) {
+    public String elimina(String n) {
         File f = new File("data/players/"+n);
         borrarDirectorio(f);
         if(f.delete()) 
-            System.out.println("El usuario se ha eliminado correctamente");
+            return "El usuario se ha eliminado correctamente";
         else
-            System.out.println("No se ha podido eliminar el usuario");
+            return "No se ha podido eliminar el usuario";
     }
 }

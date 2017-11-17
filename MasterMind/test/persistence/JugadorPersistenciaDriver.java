@@ -70,8 +70,8 @@ public final class JugadorPersistenciaDriver {
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce el nuevo nombre de usuario.");
         String n = input.nextLine();
-        Boolean b = jugador.setName("Dummy", n, "123");
-        if(b) {
+        Pair<Boolean, String> p2 = jugador.setName("Dummy", n, "123");
+        if(p2.getLeft()) {
             System.out.println("Se ha cambiado de nombre correctamente.");
             jugador.elimina(n);
         }
@@ -89,8 +89,8 @@ public final class JugadorPersistenciaDriver {
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce la nueva contraseña.");
         String c = input.nextLine();
-        Boolean b = jugador.setPassword("Dummy", c);
-        if(b) 
+        Pair<Boolean, String> p2 = jugador.setPassword("Dummy", c);
+        if(p2.getLeft()) 
             System.out.println("Se ha cambiado la contraseña correctamente.");
         else 
             System.out.println("No se ha podido cambiar de contraseña.");
@@ -100,7 +100,7 @@ public final class JugadorPersistenciaDriver {
     public void testElimina() {
         jugador = new JugadorPersistencia();
         Pair<Boolean, String> p = jugador.register("Dummy", "123");
-        jugador.elimina("Dummy");
+        String s = jugador.elimina("Dummy");
         System.out.println("El jugador ha sido eliminado correctamente.");
     }
     
