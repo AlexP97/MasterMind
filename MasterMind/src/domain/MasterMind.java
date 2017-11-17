@@ -105,6 +105,7 @@ public class MasterMind {
     protected static void muestraRanking(){
         Ranking ranking = Ranking.getInstance();
         ArrayList<Pair<String, Integer>> output = ranking.muestraRanking();
+        System.out.println("El ranking no incluye a los jugadores CodeMaker ni a la IA");
         for(int i = 0; i < output.size(); i++){
             System.out.println(output.get(i).getLeft()+' '+output.get(i).getRight());
         }
