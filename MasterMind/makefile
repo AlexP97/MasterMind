@@ -1,11 +1,12 @@
 JFLAGS = -g
-JC = javac src/domain/*.java src/persistence/*.java src/utils/*.java test/domain/*.java test/persistence/*.java test/utils/*.java -classpath test/*.jar -d $(CLASSPATH)
+JC = javac src/domain/*.java src/persistence/*.java src/utils/*.java test/domain/*.java test/persistence/*.java test/utils/*.java -cp test/lib/junit-4.12.jar
 JVM= java
 
 .SUFFIXES: .java .class
 
 .java.class:
 	$(JC) $(JFLAGS) $*.java
+	
 
 CLASSES = \
         src/domain/MasterMind.java \
@@ -29,7 +30,6 @@ CLASSES = \
         test/domain/CodeMakerDriver.java \
         test/domain/CodePegDriver.java \
 	test/domain/CodePegStub.java \
-	test/domain/GameTest.java \
 	test/domain/JugadorDriver.java \
 	test/domain/JugadorStub.java \
 	test/domain/KeyPegDriver.java \
@@ -48,17 +48,21 @@ default: classes
 
 classes: $(CLASSES:.java=.class)
 
-run: build/domain/MasterMind.class 
-	$(JVM) -cp ./$(CLASSPATH) $(MAIN)
+run: src/domain/MasterMind.class 
+	$(JVM) -cp ./src/ $(MAIN)
 
-run_tests: build/Tests.class 
-	$(JVM) -cp ./$(CLASSPATH) $(MAINTEST)
+run_tests: test/Tests.class 
+	$(JVM) -cp ./test/ $(MAINTEST)
 	
-run_junit: build/domain/GameTest.class
-	java -cp ./test/junit-4.12.jar org.junit.runner.JUnitCore domain.GameTest
+run_junit: test/domain/GameTest.class
+	java -cp ./test/lib/junit-4.12.jar:./test/lib/hamcrest-1.10.jar:./test/:./src/ org.junit.runner.JUnitCore domain.GameTest
 
 
 clean:
-	$(RM) $(CLASSPATH)/domain/*.class
-	$(RM) $(CLASSPATH)/persistence/*.class
-	$(RM) $(CLASSPATH)/utils/*.class
+	$(RM) src/domain/*.class
+	$(RM) src/persistence/*.class
+	$(RM) src/utils/*.class
+	$(RM) test/domain/*.class
+	$(RM) test/persistence/*.class
+	$(RM) test/utils/*.class
+	$(RM) test/*.class
