@@ -31,8 +31,8 @@ public final class RankingPersistenciaDriver {
             System.out.println("Escribe salir para probar otra clase");
             metodo = input.nextLine();
             if(metodo.equals("1")) testActualizaRanking();
-            if(metodo.equals("2")) testGetRanking();
-            if(!metodo.equals("prueba")) System.out.println("Entrada no válida");
+            else if(metodo.equals("2")) testGetRanking();
+            else if(!metodo.equals("prueba")) System.out.println("Entrada no válida");
         }
     }
     public void testGetRanking(){
