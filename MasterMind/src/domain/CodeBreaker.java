@@ -198,7 +198,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
         ArrayList<Integer> linea;
         linea = new ArrayList<Integer>();
         if(s.equals("IA")) {
-            ArrayList<Integer> aux = millorOpcio();
+            
             
             if(!primeraOpcio){
                 /*remove from S any code that would not give the same response if it (the guess) were the code
@@ -217,6 +217,13 @@ public final class CodeBreaker extends Jugador implements Serializable{
                 return linea;
             }
             else{
+                ArrayList<Integer> aux = new ArrayList<>();
+                aux.add(1);
+                for(int i = 1; i < super.getNFichas(); i++)
+                    if(i == 1)
+                        aux.add(1);
+                    else
+                        aux.add(2);
                 primeraOpcio = false;
                 compatibles.remove(aux);
                 return aux;
