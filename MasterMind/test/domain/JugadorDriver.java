@@ -139,7 +139,7 @@ public final class JugadorDriver {
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce tu nuevo nombre de usuario.");
         String s = input.nextLine();
-        jugador.setName(s);
+        String l = jugador.setName(s);
         System.out.println("Has cambiado correctamente de nombre.");
         jugador.elimina();
     }
@@ -150,7 +150,7 @@ public final class JugadorDriver {
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce tu nueva contraseña.");
         String s = input.nextLine();
-        jugador.setPassword(s);
+        String l = jugador.setPassword(s);
         System.out.println("Has cambiado correctamente de contraseña.");
         jugador.elimina();
     }
@@ -158,7 +158,7 @@ public final class JugadorDriver {
     public void testElimina() {
         Jugador jugador = new Jugador();
         Pair<Boolean, String> p = jugador.register("Dummy", "123");
-        jugador.elimina();
+        String s = jugador.elimina();
         System.out.println("El jugador ha sido eliminado correctamente.");
     }
     

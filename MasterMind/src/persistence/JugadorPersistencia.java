@@ -84,7 +84,7 @@ public class JugadorPersistencia {
      * @param n1 nombre actual del usuario
      * @param n2 nombre que se quiere poner el usuario
      * @param c contraseña del usuario
-     * @return si se ha cambiado el nombre correctamente
+     * @return si se ha cambiado el nombre correctamente y el mensaje de si lo ha hecho bien o no
      */
     public Pair<Boolean, String> setName(String n1,String n2, String c) {
         File dir = new File("data/players/"+n1);
@@ -116,7 +116,7 @@ public class JugadorPersistencia {
      *
      * @param n el nombre del usuario
      * @param c la contraseña
-     * @return si se ha cambiado la contraseña correctamente
+     * @return si se ha cambiado la contraseña correctamente y el mensaje de si lo ha hecho bien o no
      */
     public Pair<Boolean, String> setPassword(String n, String c) {
         File info = new File("data/players/"+n+"/info.txt");
@@ -147,6 +147,7 @@ public class JugadorPersistencia {
     /**
      *
      * @param n nombre del usuario
+     * @return el mensaje de si lo ha hecho bien o no
      */
     public String elimina(String n) {
         File f = new File("data/players/"+n);

@@ -113,6 +113,7 @@ public class Jugador implements Serializable{
     /**
      *
      * @param n el nombre de usuario
+     * @return el mensaje de si lo ha hecho bien o no
      */
     public String setName(String n) {
         JugadorPersistencia j = new JugadorPersistencia();
@@ -125,6 +126,7 @@ public class Jugador implements Serializable{
     /**
      *
      * @param c la contraseña
+     * @return el mensaje de si lo ha hecho bien o no
      */
     public String setPassword(String c) {
         JugadorPersistencia j = new JugadorPersistencia();
@@ -136,6 +138,7 @@ public class Jugador implements Serializable{
     
     /**
      *
+     * @return el mensaje de si lo ha hecho bien o no
      */
     public String elimina() {
         JugadorPersistencia j = new JugadorPersistencia();
