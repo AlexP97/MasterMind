@@ -6,6 +6,7 @@
 package presentation;
 
 import domain.CtrlDominioJugador;
+import exception.ExceptionAcabaPrograma;
 import java.util.ArrayList;
 import utils.Pair;
 
@@ -22,13 +23,13 @@ public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
         this.CDj = CDj;
     }
     
-    public boolean loginRegister(){
+    public boolean loginRegister() throws ExceptionAcabaPrograma {
         int opcion = -1;
         Vg.mostrarMensaje("¡Bienvenido a Mastermind!");
         while(opcion != 0){
             opcion = Vg.obtenerOpcion();
             switch(opcion){
-                case 0: return false;
+                case 0: throw new ExceptionAcabaPrograma();
                 case 1: return login();
                 case 2: return register();
             }

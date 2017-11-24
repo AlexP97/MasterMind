@@ -9,6 +9,7 @@ import domain.CtrlDominio;
 import domain.CtrlDominioJugador;
 import domain.CtrlDominioPartida;
 import domain.CtrlDominioRanking;
+import exception.ExceptionAcabaPrograma;
 
 /**
  *
@@ -29,9 +30,9 @@ public class CtrlPresentacion {
         CDr = CD.getCtrlDominioRanking();
     }
     
-    private void iniciarRegistroLogin(){
+    private void iniciarRegistroLogin() throws ExceptionAcabaPrograma {
         CPlr = new CtrlPresentacionLoginRegister(CDj);
-        if (CPlr.loginRegister()){
+        while(!CPlr.loginRegister()){
             iniciarCrearCargarRanking();
         }
     }
@@ -43,7 +44,16 @@ public class CtrlPresentacion {
         }
     }
     
-    public void iniciarMastermind(){
-        iniciarRegistroLogin();
+    public void iniciarMasterMind(){
+        boolean continua = true;
+        while(continua){
+            try{
+                iniciarRegistroLogin();
+            }
+            catch(ExceptionAcabaPrograma ex){
+                continua = false;
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 }

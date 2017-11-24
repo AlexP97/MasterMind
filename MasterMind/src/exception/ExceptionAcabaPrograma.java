@@ -1,21 +1,16 @@
-
-import presentation.CtrlPresentacion;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package exception;
 
 /**
  *
  * @author Usuario
  */
-public class Main {
-    private static CtrlPresentacion CP;
-    
-    public static void main(String[] args){
-        CP = new CtrlPresentacion();    
-        CP.iniciarMasterMind();
+public class ExceptionAcabaPrograma extends Exception{
+    public ExceptionAcabaPrograma(){
+        super("El juego ha finalizado su ejecución.");
     }
 }

@@ -20,7 +20,7 @@ public class VistaLoginRegister extends VistaGenerica {
     
     @Override
     public void mostrarVista(){
-        System.out.println("0 - Salir");
+        System.out.println("0 - Finalizar la ejecución del juego");
         System.out.println("1 - Login");
         System.out.println("2 - Register");
     }

@@ -23,7 +23,7 @@ public class MasterMind {
         System.out.print("Introduce la contraseña:" + "\n");
         String contraseña = input.nextLine();
         Pair<Boolean, String> p = new Pair();
-        p = jugador.login(usuario,contraseña);
+        //p = jugador.login(usuario,contraseña);
         System.out.println(p.getRight());
         return p.getLeft();
     }
@@ -40,7 +40,7 @@ public class MasterMind {
         System.out.print("Introduce la contraseña:" + "\n");
         String contraseña = input.nextLine();
         Pair<Boolean, String> p = new Pair();
-        p = jugador.register(usuario,contraseña);
+        //p = jugador.register(usuario,contraseña);
         System.out.println(p.getRight());
         return p.getLeft();
     }
