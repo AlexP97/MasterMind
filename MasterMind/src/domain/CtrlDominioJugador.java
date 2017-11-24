@@ -5,6 +5,7 @@
  */
 package domain;
 
+import persistence.CtrlPersistenciaJugador;
 import utils.Pair;
 
 /**
@@ -12,18 +13,28 @@ import utils.Pair;
  * @author Daniel
  */
 public class CtrlDominioJugador {
+    
+    private final CtrlPersistenciaJugador CPmj;
  
-    public CtrlDominioJugador() {
-        
+    public CtrlDominioJugador(CtrlPersistenciaJugador c) {
+        CPmj = c;
     }
     
     public Pair<Boolean, String> login(String s1, String s2) {
-        Jugador j = new Jugador();
-        return j.login(s1, s2);
+        Pair<Boolean, String> p = CPmj.login(s1,s2);
+        if(p.getLeft()) {
+            Jugador j = new Jugador();
+            j.login(s1, s2);
+        }
+       return p;
     }
     
     public Pair<Boolean, String> register(String s1, String s2) {
-        Jugador j = new Jugador();
-        return j.register(s1,s2);
+        Pair<Boolean, String> p = CPmj.register(s1, s2);
+        if(p.getLeft()) {
+            Jugador j = new Jugador();
+            j.register(s1,s2);
+        }
+        return p;
     }
 }

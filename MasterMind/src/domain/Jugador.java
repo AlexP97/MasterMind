@@ -36,34 +36,22 @@ public class Jugador implements Serializable{
      *
      * @param n nombre de usuario
      * @param c contraseña
-     * @return si se ha registrado con éxito
      */
-    public Pair<Boolean, String> register(String n, String c) {
-        JugadorPersistencia j = new JugadorPersistencia();
-        Pair<Boolean, String> p = j.register(n,c);
-        if(p.getLeft()) {      
-            this.name = n;
-            this.password = c;
-            this.IA = false;
-        }
-        return p;
+    public void register(String n, String c) {
+        this.name = n;
+        this.password = c;
+        this.IA = false;
     }
     
     /**
      *
      * @param n nombre de usuario
      * @param c contraseña
-     * @return si ha hecho login con éxito
      */
-    public Pair<Boolean, String> login(String n, String c) {
-        JugadorPersistencia j = new JugadorPersistencia();
-        Pair<Boolean, String> p = j.login(n,c);
-        if(p.getLeft()) {
-            this.name = n;
-            this.password = c;
-            this.IA = false;
-        }
-        return p;
+    public void login(String n, String c) {
+        this.name = n;
+        this.password = c;
+        this.IA = false;
     }
     
     /**

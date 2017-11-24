@@ -5,21 +5,36 @@
  */
 package domain;
 
+import persistence.CtrlPersistencia;
+import persistence.CtrlPersistenciaJugador;
+
 /**
  *
  * @author Daniel
  */
 public class CtrlDominio {
     
+    private final CtrlPersistencia CP;
     private final CtrlDominioJugador CDmj;
     private final CtrlDominioPartida CDmp;
     private final CtrlDominioRanking CDmr;
+    private final CtrlPersistenciaJugador CPj;
+    private final CtrlPersistenciaPartida CPp;
+    private final CtrlPersistenciaRanking CPr;
+    
            
     
     public CtrlDominio(){
-        CDmj = new CtrlDominioJugador();
-        CDmp = new CtrlDominioPartida();
-        CDmr = new CtrlDominioRanking();
+        
+        CP = new CtrlPersistencia();
+        CPj = CP.getCtrlPersistenciaJugador();
+        CPp = CP.getCtrlPersistenciaPartida();
+        CPr = CP.getCtrlPersistenciaRanking();
+        CDmj = new CtrlDominioJugador(CPj);
+        CDmp = new CtrlDominioPartida(CPp);
+        CDmr = new CtrlDominioRanking(CPr);
+        
+        
     }
     
     public CtrlDominioJugador getCtrlDominioJugador() {
