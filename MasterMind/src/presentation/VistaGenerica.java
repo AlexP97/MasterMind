@@ -14,11 +14,15 @@ import utils.Pair;
  * @author User
  */
 public abstract class VistaGenerica {
-    protected Scanner input = new Scanner(System.in);
+    protected Scanner input;
     abstract void mostrarVista();
     abstract int getOpciones();
     abstract void obtenerDatos(ArrayList<String> datos);
     void mostrarRanking(ArrayList<Pair<String, Integer>> ranking){ }
+    
+    public VistaGenerica(){
+        input = new Scanner(System.in);
+    }
     
     public void mostrarMensaje(String mensaje){
         System.out.println(mensaje);
@@ -30,7 +34,7 @@ public abstract class VistaGenerica {
     
     public int obtenerOpcion(){
         int opcion = -1;
-        while(opcion < 0 && opcion > this.getOpciones()){
+        while(opcion == -1 || opcion >= this.getOpciones()){
             mostrarVista();
             opcion = Integer.parseInt(input.nextLine());
         }

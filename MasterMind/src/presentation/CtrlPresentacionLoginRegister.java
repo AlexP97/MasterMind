@@ -24,8 +24,8 @@ public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
     
     public boolean loginRegister(){
         int opcion = -1;
+        Vg.mostrarMensaje("¡Bienvenido a Mastermind!");
         while(opcion != 0){
-            Vg.mostrarMensaje("¡Bienvenido a Mastermind!");
             opcion = Vg.obtenerOpcion();
             switch(opcion){
                 case 0: return false;
@@ -42,6 +42,7 @@ public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
         Pair<Boolean, String> p = new Pair();
         if(datos != null) p = CDj.login(datos.get(0),datos.get(1));
         if(!p.getLeft()) Vg.mostrarError(p.getRight());
+        else Vg.mostrarMensaje(p.getRight());
         return p.getLeft();
     }
     private boolean register(){
@@ -50,6 +51,7 @@ public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
         Pair<Boolean, String> p = new Pair();
         if(datos != null) p = CDj.register(datos.get(0),datos.get(1));
         if(!p.getLeft()) Vg.mostrarError(p.getRight());
+        else Vg.mostrarMensaje(p.getRight());
         return p.getLeft();
     }
 }
