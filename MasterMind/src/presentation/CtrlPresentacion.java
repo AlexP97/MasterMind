@@ -13,7 +13,7 @@ import exception.ExceptionAcabaPrograma;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class CtrlPresentacion {
     private final CtrlDominio CD;
@@ -38,8 +38,8 @@ public class CtrlPresentacion {
     }
     
     private void iniciarCrearCargarRanking(){
-        CPm = new CtrlPresentacionMenu(CDp,CDr);
-        if(CPm.crearCargarRanking()){
+        CPm = new CtrlPresentacionMenu(CDp,CDr,CDj);
+        if(CPm.crearCargarRankingModificar()){
             
         }
     }

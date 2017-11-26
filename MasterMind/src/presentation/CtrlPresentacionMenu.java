@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import domain.CtrlDominioJugador;
 import domain.CtrlDominioPartida;
 import domain.CtrlDominioRanking;
 import java.util.ArrayList;
@@ -12,20 +13,22 @@ import utils.Pair;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class CtrlPresentacionMenu extends CtrlPresentacion {
     private final VistaGenerica Vg;
     private final CtrlDominioPartida CDp;
     private final CtrlDominioRanking CDr;
+    private final CtrlDominioJugador CDj;
     
-    public CtrlPresentacionMenu(CtrlDominioPartida CDp, CtrlDominioRanking CDr){
+    public CtrlPresentacionMenu(CtrlDominioPartida CDp, CtrlDominioRanking CDr, CtrlDominioJugador CDj){
         this.Vg = new VistaMenu();
         this.CDp = CDp;
         this.CDr = CDr;
+        this.CDj = CDj;
     }
     
-    public boolean crearCargarRanking(){
+    public boolean crearCargarRankingModificar(){
         int opcion = -1;
         while(opcion != 0){
             opcion = Vg.obtenerOpcion();
@@ -34,14 +37,16 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
                 case 1: return crearPartida();
                 case 2: return cargarPartida();
                 case 3: return muestraRanking();
+                case 4: return modificarDatos();
             }
         }
         return false;
     }
     
     private boolean crearPartida(){
+        VistaCrearPartida Vcrear = new VistaCrearPartida();
         ArrayList<String> datos = null;
-        Vg.obtenerDatos(datos);
+        Vcrear.obtenerDatos(datos);
         boolean b = false;
         if(datos != null) CDp.crearPartida(datos.get(0),datos.get(1),datos.get(2));
         if(!b) Vg.mostrarError("No se ha podido crear partida correctamente");
@@ -49,10 +54,11 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
     }
     
     private boolean cargarPartida(){
+        VistaCargarPartida Vcargar = new VistaCargarPartida();
         ArrayList<String> datos = null;
-        Vg.obtenerDatos(datos);
+        Vcargar.obtenerDatos(datos);
         boolean b = false;
-        if(datos != null) CDp.cargarPartida(datos.get(0),datos.get(1));
+        
         if(!b) Vg.mostrarError("No se ha podido cargar partida correctamente");
         return b;
     }
@@ -61,11 +67,15 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
         ArrayList<Pair<String, Integer>> ranking = CDr.muestraRanking();
         if(ranking.isEmpty()){
             Vg.mostrarMensaje("El ranking está vacío");
-            return false;
         }
         else{
             Vg.mostrarRanking(ranking);
-            return true;
         }
+        return true;
+    }
+
+    private boolean modificarDatos() {
+        CtrlPresentacionModificarDatos CPmd = new CtrlPresentacionModificarDatos(CDj);
+        return CPmd.modificarDatos();
     }
 }

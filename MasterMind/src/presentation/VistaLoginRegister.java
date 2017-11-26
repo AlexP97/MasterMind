@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class VistaLoginRegister extends VistaGenerica {
-    int nOpciones = 3;
+    final int nOpciones = 3;
     
     public VistaLoginRegister(){
         super();

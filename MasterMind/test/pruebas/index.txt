@@ -1,8 +1,0 @@
-Carpeta pruebas
-
-Contiene diferentes archivos de pruebas que hemos hecho para ver que nuestro programa funciona realmente como esperamos.
-
-- testIACBAllPatrones = Este archivo contiene un main con todas las funciones utilizadas por la IA que realiza automáticamente una partida con dos IAs y probando cada patron para
-ver si lo soluciona correctamente y en cuantos turnos. Cambiando la variable global nFichas podremos hacer el test para diferentes numeros de fichas.
-
-- tests = Este archivo contiene diversos juegos de pruebas, al menos uno por funcion para ver si realmente funcionan y responden de la manera que queremos.

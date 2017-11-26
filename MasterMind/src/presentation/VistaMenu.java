@@ -10,10 +10,10 @@ import utils.Pair;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class VistaMenu extends VistaGenerica {
-    int nOpciones = 4;
+    final int nOpciones = 5;
     
     public VistaMenu(){
         super();
@@ -21,10 +21,11 @@ public class VistaMenu extends VistaGenerica {
     
     @Override
     public void mostrarVista(){
-        System.out.println("0 - Salir");
+        System.out.println("0 - Volver atrás");
         System.out.println("1 - Crear partida");
         System.out.println("2 - Cargar partida");
         System.out.println("3 - Ranking");
+        System.out.println("4 - Modificar datos de usuario");
     }
     
     @Override
@@ -34,13 +35,7 @@ public class VistaMenu extends VistaGenerica {
     
     @Override
     public void obtenerDatos(ArrayList<String> datos){
-        datos = new ArrayList<>();
-        System.out.print("Escribe el id de la partida" + "\n");
-        datos.add(input.nextLine());
-        System.out.print("Escribe la dificultad de la partida (facil, medio o dificil)" + "\n");
-        datos.add(input.nextLine());
-        System.out.print("Escribe el modo de la partida (codebreaker o codemaker)" + "\n");
-        datos.add(input.nextLine());
+       
     }
     
     @Override

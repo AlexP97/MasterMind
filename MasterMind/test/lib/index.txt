@@ -1,7 +1,0 @@
-Carpeta lib
-
-Esta carpeta contiene todos los archivos .jar, que son las librerias utilizadas en nuestro proyecto.
-
-- junit-4.12.jar = .jar necesario para compilar las funciones que utilizan JUnit.
-
-- hamcrest-1.10.jar = .jar necesario para compilar las funciones que utilizan JUnit.
