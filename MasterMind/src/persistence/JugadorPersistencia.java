@@ -149,12 +149,19 @@ public class JugadorPersistencia {
      * @param n nombre del usuario
      * @return el mensaje de si lo ha hecho bien o no
      */
-    public String elimina(String n) {
+    public Pair<Boolean,String> elimina(String n) {
         File f = new File("data/players/"+n);
         borrarDirectorio(f);
-        if(f.delete()) 
-            return "El usuario se ha eliminado correctamente";
-        else
-            return "No se ha podido eliminar el usuario";
+        Pair<Boolean,String> p = new Pair<>();
+        if(f.delete()) {
+            p.setLeft(true);
+            p.setRight("El usuario se ha eliminado correctamente");
+            return p;
+        }
+        else {
+            p.setLeft(false);
+            p.setRight("No se ha podido eliminar el usuario");
+            return p;
+        }
     }
 }

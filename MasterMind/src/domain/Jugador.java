@@ -103,12 +103,8 @@ public class Jugador implements Serializable{
      * @param n el nombre de usuario
      * @return el mensaje de si lo ha hecho bien o no
      */
-    public String setName(String n) {
-        JugadorPersistencia j = new JugadorPersistencia();
-        Pair<Boolean, String> p = j.setName(this.name, n, this.password);
-        if(p.getLeft())
-            this.name = n;
-        return p.getRight();
+    public void setName(String n) {
+        this.name = n;
     }
     
     /**
@@ -116,21 +112,8 @@ public class Jugador implements Serializable{
      * @param c la contraseña
      * @return el mensaje de si lo ha hecho bien o no
      */
-    public String setPassword(String c) {
-        JugadorPersistencia j = new JugadorPersistencia();
-        Pair<Boolean, String> p = j.setPassword(this.name, c);
-        if(p.getLeft())
-            this.password = c;
-        return p.getRight();
-    }
-    
-    /**
-     *
-     * @return el mensaje de si lo ha hecho bien o no
-     */
-    public String elimina() {
-        JugadorPersistencia j = new JugadorPersistencia();
-        return j.elimina(this.name);
+    public void setPassword(String c) {
+        this.password = c;
     }
     
     /**

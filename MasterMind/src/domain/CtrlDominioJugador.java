@@ -15,15 +15,16 @@ import utils.Pair;
 public class CtrlDominioJugador {
     
     private final CtrlPersistenciaJugador CPmj;
- 
+    private Jugador j;
+
     public CtrlDominioJugador(CtrlPersistenciaJugador c) {
         CPmj = c;
+        j = new Jugador();
     }
     
     public Pair<Boolean, String> login(String s1, String s2) {
         Pair<Boolean, String> p = CPmj.login(s1,s2);
         if(p.getLeft()) {
-            Jugador j = new Jugador();
             j.login(s1, s2);
         }
        return p;
@@ -32,9 +33,29 @@ public class CtrlDominioJugador {
     public Pair<Boolean, String> register(String s1, String s2) {
         Pair<Boolean, String> p = CPmj.register(s1, s2);
         if(p.getLeft()) {
-            Jugador j = new Jugador();
             j.register(s1,s2);
         }
         return p;
     }
+    
+    public Pair<Boolean, String> elimina() {
+        Pair<Boolean, String> p = CPmj.elimina(j.getName());
+        return p;
+    }
+    
+    public Pair<Boolean, String> setName(String n) {
+        Pair<Boolean, String> p = CPmj.setName(j.getName(), n, j.getPassword());
+        if(p.getLeft())
+            j.setName(n);
+        return p;
+    }
+    
+    public Pair<Boolean, String> setPassword(String c) {
+        Pair<Boolean, String> p = CPmj.setPassword(j.getName(), c);
+        if(p.getLeft())
+            j.setPassword(c);
+        return p;
+    }
+    
+    
 }

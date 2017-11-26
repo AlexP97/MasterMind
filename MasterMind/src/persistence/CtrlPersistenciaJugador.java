@@ -28,8 +28,18 @@ public class CtrlPersistenciaJugador {
         return j.register(s1,s2);
     }
     
-    public String elimina(String n) {
+    public Pair<Boolean, String> elimina(String n) {
         JugadorPersistencia j = new JugadorPersistencia();
         return j.elimina(n);
+    }
+    
+    public Pair<Boolean, String> setName(String n1, String n2, String c) {
+        JugadorPersistencia j = new JugadorPersistencia();
+        return j.setName(n1,n2,c);
+    }
+    
+    public Pair<Boolean, String> setPassword(String n, String c) {
+        JugadorPersistencia j = new JugadorPersistencia();
+        return j.setPassword(n,c);
     }
 }
