@@ -11,13 +11,13 @@ package persistence;
  */
 public class CtrlPersistencia {
     private final CtrlPersistenciaJugador CPmj;
-    private final CtrlPersistenciaPartida CPmp;
+    private final CtrlPersistenciaGame CPmp;
     private final CtrlPersistenciaRanking CPmr;
            
     
     public CtrlPersistencia(){
         CPmj = new CtrlPersistenciaJugador();
-        CPmp = new CtrlPersistenciaPartida();
+        CPmp = new CtrlPersistenciaGame();
         CPmr = new CtrlPersistenciaRanking();
     }
     
@@ -25,7 +25,7 @@ public class CtrlPersistencia {
         return CPmj;
     }
     
-    public CtrlPersistenciaPartida getCtrlPersistenciaPartida() {
+    public CtrlPersistenciaGame getCtrlPersistenciaPartida() {
         return CPmp;
     }
     

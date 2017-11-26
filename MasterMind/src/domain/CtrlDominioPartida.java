@@ -5,6 +5,8 @@
  */
 package domain;
 
+import persistence.CtrlPersistenciaGame;
+
 /**
  *
  * @author Daniel
@@ -12,10 +14,19 @@ package domain;
 public class CtrlDominioPartida {
     
     private final Game game;
+    private final CtrlPersistenciaGame CPG;
     
     public CtrlDominioPartida() {
         
         game = new Game();
+        CPG = null;
+        
+    }
+    
+    public CtrlDominioPartida(CtrlPersistenciaGame cpg) {
+        
+        game = new Game();
+        CPG = cpg;
         
     }
     
