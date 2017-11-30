@@ -7,7 +7,7 @@ package persistence;
 
 /**
  *
- * @author aleja
+ * @author Pérez Ortiz, Alejandro
  */
 public class CtrlPersistencia {
     private final CtrlPersistenciaJugador CPmj;

@@ -11,7 +11,7 @@ import persistence.CtrlPersistenciaJugador;
 
 /**
  *
- * @author Daniel
+ * @author Pérez Ortiz, Alejandro
  */
 public class CtrlDominio {
     

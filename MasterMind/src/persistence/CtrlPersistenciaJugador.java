@@ -9,7 +9,7 @@ import utils.Pair;
 
 /**
  *
- * @author aleja
+ * @author Pérez Ortiz, Alejandro
  */
 public class CtrlPersistenciaJugador {
     

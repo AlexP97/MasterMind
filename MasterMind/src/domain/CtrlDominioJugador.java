@@ -10,7 +10,7 @@ import utils.Pair;
 
 /**
  *
- * @author Daniel
+ * @author Pérez Ortiz, Alejandro
  */
 public class CtrlDominioJugador {
     
