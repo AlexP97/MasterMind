@@ -24,6 +24,9 @@ public class Ranking {
         return INSTANCE;
     }
     
+    public void setRanking(ArrayList<Pair<String, Integer>> ranking){
+        this.ranking = ranking;
+    }
     /**
      *
      * @return el ranking

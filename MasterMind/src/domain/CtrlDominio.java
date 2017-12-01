@@ -8,6 +8,7 @@ package domain;
 import persistence.CtrlPersistencia;
 import persistence.CtrlPersistenciaGame;
 import persistence.CtrlPersistenciaJugador;
+import persistence.CtrlPersistenciaRanking;
 
 /**
  *

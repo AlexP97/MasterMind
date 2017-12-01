@@ -55,7 +55,7 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
     
     private boolean cargarPartida(){
         VistaCargarPartida Vcargar = new VistaCargarPartida();
-        ArrayList<String> datos = null;
+        ArrayList<String> datos = new ArrayList<>();
         Vcargar.obtenerDatos(datos);
         boolean b = false;
         

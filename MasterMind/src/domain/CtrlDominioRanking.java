@@ -6,6 +6,7 @@
 package domain;
 
 import java.util.ArrayList;
+import persistence.CtrlPersistenciaRanking;
 import utils.Pair;
 
 /**
@@ -13,13 +14,24 @@ import utils.Pair;
  * @author Daniel
  */
 public class CtrlDominioRanking {
+    CtrlPersistenciaRanking CPr;
+    Ranking r;
     
-    public CtrlDominioRanking() {
-        
+    public CtrlDominioRanking(CtrlPersistenciaRanking CPr) {
+        this.r = Ranking.getInstance();
+        this.CPr = CPr;
+        r.setRanking(CPr.getRanking());
     }
     
     public ArrayList<Pair<String, Integer>> muestraRanking() {
-        Ranking r = Ranking.getInstance();
         return r.muestraRanking();
+    }
+    public void actualizaRanking(String nombre, int puntos){
+        r.actualizaRanking(nombre, puntos);
+        CPr.actualizaRanking(r.muestraRanking());
+    }
+    public ArrayList<Pair<String, Integer>> getRanking(){
+        CtrlPersistenciaRanking ctrlPR = new CtrlPersistenciaRanking();
+        return ctrlPR.getRanking();
     }
 }

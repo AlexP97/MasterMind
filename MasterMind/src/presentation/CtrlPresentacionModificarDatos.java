@@ -37,29 +37,29 @@ public class CtrlPresentacionModificarDatos {
     }
     public boolean modificarUsuario(){
         VistaModificarUsuario Vmu = new VistaModificarUsuario();
-        ArrayList<String> datos = null;
+        ArrayList<String> datos = new ArrayList<>();
         Vmu.obtenerDatos(datos);        
         Pair<Boolean, String> p = new Pair();
-        if(datos != null) p = CDj.setName(datos.get(0));
+        p = CDj.setName(datos.get(0));
         if(!p.getLeft()) Vg.mostrarError(p.getRight());
         else Vg.mostrarMensaje(p.getRight());
         return p.getLeft();
     }
     public boolean modificarContraseña(){
         VistaModificarContraseña Vmc = new VistaModificarContraseña();
-        ArrayList<String> datos = null;
+        ArrayList<String> datos = new ArrayList<>();
         Vmc.obtenerDatos(datos);
         Pair<Boolean, String> p = new Pair();
-        if(datos != null) p = CDj.setPassword(datos.get(0));
+        p = CDj.setPassword(datos.get(0));
         if(!p.getLeft()) Vg.mostrarError(p.getRight());
         else Vg.mostrarMensaje(p.getRight());
         return p.getLeft();
     }
     public boolean eliminar(){
         VistaEliminar Ve = new VistaEliminar();
-        ArrayList<String> datos = null;
+        ArrayList<String> datos = new ArrayList<>();
         Ve.obtenerDatos(datos);
-        if(datos != null && datos.get(0).equals("1")){
+        if(datos.get(0).equals("1")){
             Pair<Boolean, String> p = new Pair();
             p = CDj.elimina();
             if(!p.getLeft()) Vg.mostrarError(p.getRight());

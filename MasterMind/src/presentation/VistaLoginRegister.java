@@ -32,7 +32,6 @@ public class VistaLoginRegister extends VistaGenerica {
     
     @Override
     public void obtenerDatos(ArrayList<String> datos){
-        datos = new ArrayList<>();
         System.out.println("Introduce el nombre de usuario:");
         datos.add(input.nextLine());
         System.out.println("Introduce la contraseña:");

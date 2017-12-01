@@ -19,7 +19,6 @@ public class VistaCrearPartida extends VistaGenerica {
     
     @Override
     public void obtenerDatos(ArrayList<String> datos){
-        datos = new ArrayList<>();
         System.out.print("Escribe el id de la partida" + "\n");
         datos.add(input.nextLine());
         System.out.print("Escribe la dificultad de la partida (facil, medio o dificil)" + "\n");

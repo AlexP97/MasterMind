@@ -38,19 +38,19 @@ public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
     }
     
     private boolean login(){
-        ArrayList<String> datos = null;
+        ArrayList<String> datos = new ArrayList<>();
         Vg.obtenerDatos(datos);
         Pair<Boolean, String> p = new Pair();
-        if(datos != null) p = CDj.login(datos.get(0),datos.get(1));
+        p = CDj.login(datos.get(0),datos.get(1));
         if(!p.getLeft()) Vg.mostrarError(p.getRight());
         else Vg.mostrarMensaje(p.getRight());
         return p.getLeft();
     }
     private boolean register(){
-        ArrayList<String> datos = null;
+        ArrayList<String> datos = new ArrayList<>();
         Vg.obtenerDatos(datos);
         Pair<Boolean, String> p = new Pair();
-        if(datos != null) p = CDj.register(datos.get(0),datos.get(1));
+        p = CDj.register(datos.get(0),datos.get(1));
         if(!p.getLeft()) Vg.mostrarError(p.getRight());
         else Vg.mostrarMensaje(p.getRight());
         return p.getLeft();
