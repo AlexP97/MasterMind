@@ -34,7 +34,7 @@ public abstract class VistaGenerica {
     
     public int obtenerOpcion(){
         int opcion = -1;
-        while(opcion == -1 || opcion >= this.getOpciones()){
+        while(opcion <= -1 || opcion >= this.getOpciones()){
             mostrarVista();
             opcion = Integer.parseInt(input.nextLine());
         }

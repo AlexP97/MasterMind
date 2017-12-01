@@ -38,6 +38,7 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
                 case 2: return cargarPartida();
                 case 3: return muestraRanking();
                 case 4: return modificarDatos();
+                default: System.out.println("Entrada no válida");
             }
         }
         return false;
@@ -45,10 +46,10 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
     
     private boolean crearPartida(){
         VistaCrearPartida Vcrear = new VistaCrearPartida();
-        ArrayList<String> datos = null;
+        ArrayList<String> datos = new ArrayList<>();
         Vcrear.obtenerDatos(datos);
         boolean b = false;
-        if(datos != null) CDp.crearPartida(datos.get(0),datos.get(1),datos.get(2));
+        CDp.crearPartida(datos.get(0),datos.get(1),datos.get(2));
         if(!b) Vg.mostrarError("No se ha podido crear partida correctamente");
         return b;
     }

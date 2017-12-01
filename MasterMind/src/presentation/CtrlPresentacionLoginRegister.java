@@ -32,6 +32,7 @@ public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
                 case 0: throw new ExceptionAcabaPrograma();
                 case 1: return login();
                 case 2: return register();
+                default: System.out.println("Entrada no válida");
             }
         }
         return false;

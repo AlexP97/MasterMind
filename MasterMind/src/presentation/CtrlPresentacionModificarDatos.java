@@ -31,6 +31,7 @@ public class CtrlPresentacionModificarDatos {
                 case 1: return modificarUsuario();
                 case 2: return modificarContraseña();
                 case 3: return eliminar();
+                default: System.out.println("Entrada no válida");
             }
         }
         return false;
