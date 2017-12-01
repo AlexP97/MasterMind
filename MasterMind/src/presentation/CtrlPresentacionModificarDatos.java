@@ -64,9 +64,12 @@ public class CtrlPresentacionModificarDatos {
             p = CDj.elimina();
             if(!p.getLeft()) Vg.mostrarError(p.getRight());
             else Vg.mostrarMensaje(p.getRight());
-            return p.getLeft();
+            return false;
         }
-        else if (datos.get(0).equals("2")) Vg.mostrarMensaje("Se ha cancelado la eliminación del usuario");
+        else if (datos.get(0).equals("2")){
+            Vg.mostrarMensaje("Se ha cancelado la eliminación del usuario");
+            return true;
+        }
         return true;
     }
 }

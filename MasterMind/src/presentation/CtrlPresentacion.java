@@ -32,14 +32,14 @@ public class CtrlPresentacion {
     
     private void iniciarRegistroLogin() throws ExceptionAcabaPrograma {
         CPlr = new CtrlPresentacionLoginRegister(CDj);
-        while(!CPlr.loginRegister()){
+        while(CPlr.loginRegister()){
             iniciarCrearCargarRanking();
         }
     }
     
     private void iniciarCrearCargarRanking(){
         CPm = new CtrlPresentacionMenu(CDp,CDr,CDj);
-        if(CPm.crearCargarRankingModificar()){
+        while(CPm.crearCargarRankingModificar()){
             
         }
     }
