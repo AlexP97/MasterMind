@@ -57,5 +57,8 @@ public class CtrlDominioJugador {
         return p;
     }
     
+    public String getName() {
+        return j.getName();
+    }
     
 }

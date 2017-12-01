@@ -101,7 +101,6 @@ public class Jugador implements Serializable{
     /**
      *
      * @param n el nombre de usuario
-     * @return el mensaje de si lo ha hecho bien o no
      */
     public void setName(String n) {
         this.name = n;
@@ -110,7 +109,6 @@ public class Jugador implements Serializable{
     /**
      *
      * @param c la contraseña
-     * @return el mensaje de si lo ha hecho bien o no
      */
     public void setPassword(String c) {
         this.password = c;
