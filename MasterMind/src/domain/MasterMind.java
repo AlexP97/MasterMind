@@ -90,7 +90,7 @@ public class MasterMind {
             }
         } 
         GamePersistencia gameP = new GamePersistencia();
-        gameP.CrearPartida(jugador,id,dif,mod, num, ran);
+        gameP.CrearPartida(jugador.getName(),id,dif,mod, num, ran);
     }
     
     /**

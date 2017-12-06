@@ -49,7 +49,7 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
         ArrayList<String> datos = new ArrayList<>();
         Vcrear.obtenerDatos(datos);
         boolean b = false;
-        CDp.crearPartida(datos.get(0),datos.get(1),datos.get(2));
+        b = CDp.crearPartida(datos.get(0),datos.get(1),datos.get(2),datos.get(3),Integer.parseInt(datos.get(4)), Integer.parseInt(datos.get(5)));
         if(!b) Vg.mostrarError("No se ha podido crear partida correctamente");
         return b;
     }

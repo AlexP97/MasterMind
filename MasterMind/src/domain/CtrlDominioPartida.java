@@ -36,8 +36,9 @@ public class CtrlDominioPartida {
         return false;
     }
     
-    public boolean crearPartida(String s1, String s2, String s3) {
+    public boolean crearPartida(String userName, String id, String dif, String mod, int num, int ran) {
         
-        return false;
+        return CPG.crearPartida(userName, id, dif, mod, num, ran);
+        
     }
 }

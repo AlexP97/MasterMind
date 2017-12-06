@@ -11,4 +11,18 @@ package persistence;
  */
 public class CtrlPersistenciaGame {
     
+    private GamePersistencia gameP;
+    
+    public CtrlPersistenciaGame() {
+        
+        gameP = new GamePersistencia();
+        
+    }
+    
+    public boolean crearPartida(String userName, String id, String dif, String mod, int num, int ran) {
+        
+        return gameP.CrearPartida(userName, id, dif, mod, num, ran);
+        
+    }
+    
 }

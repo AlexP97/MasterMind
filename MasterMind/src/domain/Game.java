@@ -12,9 +12,9 @@ public class Game implements Serializable{
     
     String id;
     String difficulty;
+    String userName;
     int points;
     String mode;
-    Jugador player;
     Jugador IA;
     int turn;
     int totalTurns;
@@ -36,8 +36,8 @@ public class Game implements Serializable{
         this.id = "";
         this.difficulty = "";
         this.mode = "";
+        this.userName = "";
         this.points = 120;
-        this.player = null;
         this.IA = null;
         this.turn = 0;
         this.output = null;
@@ -81,14 +81,6 @@ public class Game implements Serializable{
     
     /**
      *
-     * @return el jugador de la partida
-     */
-    public Jugador getPlayer() {
-        return this.player;
-    }
-    
-    /**
-     *
      * @return el modo de juego (CodeBreaker o CodeMaker)
      */
     public String getMode() {
@@ -117,14 +109,6 @@ public class Game implements Serializable{
      */
     public void setCB(CodeBreaker cb){
         this.codeB = cb;
-    }
-    
-    /**
-     *
-     * @param j asigna el Jugador de la partida
-     */
-    public void setPlayer(Jugador j){
-        this.player = j;
     }
     
     /**
@@ -163,13 +147,13 @@ public class Game implements Serializable{
     
     public void SaveGame() {
            
-        if (player != null){
-            boolean b = gameP.SaveGame(player.getName(), id);
+        if (!userName.equals("")){
+            boolean b = gameP.SaveGame(userName, id);
             boolean b2 = true;
 
             if (mode.equals("codemaker")){
 
-                b2 = gameP.SaveCodeB(player.getName(), id);
+                b2 = gameP.SaveCodeB(userName, id);
 
             }
 
@@ -195,7 +179,7 @@ public class Game implements Serializable{
             else {
                 System.out.print("¡Has ganado la partida!" + "\n" + "Tu puntuación es: "+ points + "\n");
                 Ranking ranking = Ranking.getInstance();
-                ranking.actualizaRanking(player.getName(), points);
+                ranking.actualizaRanking(userName, points);
             }
         }
         else {
@@ -227,7 +211,7 @@ public class Game implements Serializable{
      * @param num número de fichas para la partida
      * @param ran rango de colores para la partida
      */
-    private boolean SetAtributos(Jugador playerN, String ident, String dif, String mod, int num, int ran){
+    private boolean SetAtributos(String userN, String ident, String dif, String mod, int num, int ran){
         
         if (cargado) {
             if (mode.equals("codemaker")) {
@@ -250,8 +234,8 @@ public class Game implements Serializable{
             if (output == null) this.output = new String[totalTurns+1];
             this.output[0] = "--------------";
             this.difficulty = dif;
-            this.player = playerN;
             this.mode = mod;
+            this.userName = userN;
             this.points = 120;
             this.turn = 1;
             this.codeBAnt = new ArrayList<CodePeg>();
@@ -312,12 +296,12 @@ public class Game implements Serializable{
      * @param num número de fichas para la partida
      * @param ran rango de colores para la partida
      */
-    public void juega(Jugador playerN, String ident, String dif, String mod, int num, int ran) {
+    public boolean juega(String userN, String ident, String dif, String mod, int num, int ran) {
                 
         boolean primerTurnoCargado = cargado;
 
-        boolean b = SetAtributos(playerN, ident, dif, mod, num, ran);
-        if (!b) return;
+        boolean b = SetAtributos(userN, ident, dif, mod, num, ran);
+        if (!b) return false;
 
         while (turn <= totalTurns){
 
@@ -341,9 +325,9 @@ public class Game implements Serializable{
                     outputM = codeM.jugar("Player", codeBAnt, codeIni);
                     if (outputM.contains(-1)) {
                         SaveGame();
-                        if (this.gameSaved) return;
+                        if (this.gameSaved) return true;
                     }
-                    else if (outputM.contains(-2)) return; 
+                    else if (outputM.contains(-2)) return true; 
                 }
                 codeMAnt = conversorKey(outputM);
             }
@@ -352,9 +336,9 @@ public class Game implements Serializable{
                     outputB = codeB.jugar("Player", codeBAnt, codeMAnt);
                     if (outputB.contains(-1)) {
                         SaveGame();
-                        if (this.gameSaved) return;
+                        if (this.gameSaved) return true;
                     }
-                    else if (outputB.contains(-2)) return; 
+                    else if (outputB.contains(-2)) return true; 
                 }
                 codeBAnt = conversorCode(outputB);
                 outputM = codeM.jugar("IA", codeBAnt, codeIni);
@@ -387,13 +371,14 @@ public class Game implements Serializable{
 
             if (acierto) {
                 finishGame(true);
-                return;
+                return true;
             }
             ++turn;
             baja_Puntuacion();
         }
 
-        finishGame(false);        
+        finishGame(false); 
+        return true;
     }
 
     public void MostrarOutput() {
@@ -417,7 +402,7 @@ public class Game implements Serializable{
     
     public void comenzarPartida() {
         
-        juega(player, id, difficulty, mode, numero, rango);
+        juega(userName, id, difficulty, mode, numero, rango);
         
     }
     

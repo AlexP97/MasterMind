@@ -256,9 +256,9 @@ public class GamePersistencia implements Serializable{
      * @param num el número de fichas de la partida
      * @param ran el rango de colores de la partida
      */
-    public void CrearPartida(Jugador playerN, String ident, String dif, String mod, int num, int ran){
+    public boolean CrearPartida(String userName, String ident, String dif, String mod, int num, int ran){
         
-        if (playerN != null && !ident.equals("") && CheckAvailability(ident, playerN.getName())){
+        if (!userName.equals("") && !ident.equals("") && CheckAvailability(ident, userName)){
             
             game.setGameP(this);
             
@@ -267,13 +267,11 @@ public class GamePersistencia implements Serializable{
                 game.setCB(cb);
             }
             
-            game.juega(playerN, ident, dif, mod, num, ran);
+            return game.juega(userName, ident, dif, mod, num, ran);
             
         }
         else {
-            System.out.print("No se ha podido crear la partida. Este id ya está en uso." + "\n");
-            return;
+            return false;
         }
-    }
-    
+    }    
 }
