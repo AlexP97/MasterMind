@@ -17,8 +17,7 @@ public class VistaCargarPartida extends VistaGenerica{
         super();
     }
     
-    @Override
-    public void obtenerDatos(ArrayList<String> datos){
+    public void obtenerDatos(ArrayList<String> datos, ArrayList<String> partidas){
         datos = new ArrayList<>();//aqui habra que pedir el id de la partida
         System.out.println("");
         datos.add(input.nextLine());
@@ -32,5 +31,10 @@ public class VistaCargarPartida extends VistaGenerica{
     @Override
     int getOpciones() {
         return 1;
+    }
+
+    @Override
+    void obtenerDatos(ArrayList<String> datos) {
+        
     }
 }

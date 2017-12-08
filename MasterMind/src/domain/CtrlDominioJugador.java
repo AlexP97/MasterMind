@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.util.ArrayList;
 import persistence.CtrlPersistenciaJugador;
 import utils.Pair;
 
@@ -59,6 +60,10 @@ public class CtrlDominioJugador {
     
     public String getName() {
         return j.getName();
+    }
+
+    public ArrayList<String> obtenerPartidas() {
+        return CPmj.obtenerPartidas();
     }
     
 }

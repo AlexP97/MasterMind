@@ -48,20 +48,21 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
         VistaCrearPartida Vcrear = new VistaCrearPartida();
         ArrayList<String> datos = new ArrayList<>();
         Vcrear.obtenerDatos(datos);
-        boolean b = false;
-        b = CDp.crearPartida(CDj.getName(),datos.get(0),datos.get(1),datos.get(2),Integer.parseInt(datos.get(3)), Integer.parseInt(datos.get(4)));
-        if(!b) Vg.mostrarError("No se ha podido crear partida correctamente");
-        return b;
+        Pair<Boolean, String> p = new Pair();
+        p = CDp.crearPartida(CDj.getName(),datos.get(0),datos.get(1),datos.get(2),Integer.parseInt(datos.get(3)), Integer.parseInt(datos.get(4)));
+        if(!p.getLeft()) Vg.mostrarError(p.getRight());
+        return p.getLeft();
     }
     
     private boolean cargarPartida(){
         VistaCargarPartida Vcargar = new VistaCargarPartida();
+        ArrayList<String> partidas = CDj.obtenerPartidas();
         ArrayList<String> datos = new ArrayList<>();
-        Vcargar.obtenerDatos(datos);
-        boolean b = false;
-        
-        if(!b) Vg.mostrarError("No se ha podido cargar partida correctamente");
-        return b;
+        Vcargar.obtenerDatos(datos,partidas);
+        Pair<Boolean, String> p = new Pair();
+        p = CDp.cargarPartida(CDj.getName(),datos.get(0));
+        if(!p.getLeft()) Vg.mostrarError(p.getRight());
+        return p.getLeft();
     }
     
     private boolean muestraRanking(){

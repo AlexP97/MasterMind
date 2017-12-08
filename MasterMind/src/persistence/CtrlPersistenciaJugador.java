@@ -5,6 +5,7 @@
  */
 package persistence;
 
+import java.util.ArrayList;
 import utils.Pair;
 
 /**
@@ -36,5 +37,11 @@ public class CtrlPersistenciaJugador {
     
     public Pair<Boolean, String> setPassword(String n, String c) {
         return j.setPassword(n,c);
+    }
+
+    public ArrayList<String> obtenerPartidas() {
+        ArrayList<String> partidas = new ArrayList<>();
+        //haz tus cositas aca
+       return partidas;
     }
 }
