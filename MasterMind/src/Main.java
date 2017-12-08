@@ -1,5 +1,6 @@
 
 import presentation.CtrlPresentacion;
+import presentation.VistaPresentacion;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,7 +16,14 @@ public class Main {
     private static CtrlPresentacion CP;
     
     public static void main(String[] args){
-        CP = new CtrlPresentacion();    
-        CP.iniciarMasterMind();
+        javax.swing.SwingUtilities.invokeLater (
+            new Runnable(){
+                @Override
+                public void run(){
+                    new VistaPresentacion();
+                    CP = new CtrlPresentacion();    
+                    CP.iniciarMasterMind();
+                }
+            });
     }
 }
