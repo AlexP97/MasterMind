@@ -18,6 +18,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import static java.lang.System.out;
 import java.util.Scanner;
+import utils.Pair;
 
 /**
  *
@@ -249,14 +250,14 @@ public class GamePersistencia implements Serializable{
     
     /**
      *
-     * @param playerN el jugador de la partida
+     * @param userName el jugador de la partida
      * @param ident el identificador de la partida
      * @param dif la dificultad de la partida
      * @param mod el modo de la partida
      * @param num el número de fichas de la partida
      * @param ran el rango de colores de la partida
      */
-    public boolean CrearPartida(String userName, String ident, String dif, String mod, int num, int ran){
+    public Pair<Boolean, String> CrearPartida(String userName, String ident, String dif, String mod, int num, int ran){
         
         if (!userName.equals("") && !ident.equals("") && CheckAvailability(ident, userName)){
             
@@ -271,7 +272,7 @@ public class GamePersistencia implements Serializable{
             
         }
         else {
-            return false;
+            return new Pair(false, "No se ha podido crear la partida");
         }
     }    
 }

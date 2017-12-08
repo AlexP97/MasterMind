@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import utils.Pair;
 
 /**
@@ -163,5 +164,17 @@ public class JugadorPersistencia {
             p.setRight("No se ha podido eliminar el usuario");
             return p;
         }
+    }
+    
+    public ArrayList<String> obtenerPartidas(String n) {
+        ArrayList<String> res = new ArrayList<>();
+        File dir = new File("data/players/"+n+"/games");
+        if(dir.exists()) {
+            File[] ficheros = dir.listFiles();
+            for(int i = 0; i < ficheros.length; i++) {
+                res.add(ficheros[i].getName());
+            }
+        }
+        return res;
     }
 }

@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import persistence.GamePersistencia;
+import utils.Pair;
 
 /**
  *
@@ -296,12 +297,12 @@ public class Game implements Serializable{
      * @param num número de fichas para la partida
      * @param ran rango de colores para la partida
      */
-    public boolean juega(String userN, String ident, String dif, String mod, int num, int ran) {
+    public Pair<Boolean, String> juega(String userN, String ident, String dif, String mod, int num, int ran) {
                 
         boolean primerTurnoCargado = cargado;
 
         boolean b = SetAtributos(userN, ident, dif, mod, num, ran);
-        if (!b) return false;
+        if (!b) return new Pair(false, "No se han podido introducir los datos correctamente.");
 
         while (turn <= totalTurns){
 
@@ -325,9 +326,9 @@ public class Game implements Serializable{
                     outputM = codeM.jugar("Player", codeBAnt, codeIni);
                     if (outputM.contains(-1)) {
                         SaveGame();
-                        if (this.gameSaved) return true;
+                        if (this.gameSaved) return new Pair(true, "Volviendo al menú.");
                     }
-                    else if (outputM.contains(-2)) return true; 
+                    else if (outputM.contains(-2)) return new Pair(true, "Volviendo al menú."); 
                 }
                 codeMAnt = conversorKey(outputM);
             }
@@ -336,9 +337,9 @@ public class Game implements Serializable{
                     outputB = codeB.jugar("Player", codeBAnt, codeMAnt);
                     if (outputB.contains(-1)) {
                         SaveGame();
-                        if (this.gameSaved) return true;
+                        if (this.gameSaved) return new Pair(true, "Volviendo al menú.");
                     }
-                    else if (outputB.contains(-2)) return true; 
+                    else if (outputB.contains(-2)) return new Pair(true, "Volviendo al menú."); 
                 }
                 codeBAnt = conversorCode(outputB);
                 outputM = codeM.jugar("IA", codeBAnt, codeIni);
@@ -371,14 +372,14 @@ public class Game implements Serializable{
 
             if (acierto) {
                 finishGame(true);
-                return true;
+                return new Pair(true, "Volviendo al menú.");
             }
             ++turn;
             baja_Puntuacion();
         }
 
         finishGame(false); 
-        return true;
+        return new Pair(true, "Volviendo al menú.");
     }
 
     public void MostrarOutput() {

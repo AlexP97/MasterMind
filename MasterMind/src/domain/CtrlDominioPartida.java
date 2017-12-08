@@ -6,6 +6,7 @@
 package domain;
 
 import persistence.CtrlPersistenciaGame;
+import utils.Pair;
 
 /**
  *
@@ -30,13 +31,13 @@ public class CtrlDominioPartida {
         
     }
     
-    public boolean cargarPartida(String userName, String pass) {
+    public Pair<Boolean,String> cargarPartida(String userName, String pass) {
         
         //return game.LoadGame(userName, pass);
-        return false;
+        return new Pair(false, "Falta cargarla.");
     }
     
-    public boolean crearPartida(String userName, String id, String dif, String mod, int num, int ran) {
+    public Pair<Boolean, String> crearPartida(String userName, String id, String dif, String mod, int num, int ran) {
         
         return CPG.crearPartida(userName, id, dif, mod, num, ran);
         
