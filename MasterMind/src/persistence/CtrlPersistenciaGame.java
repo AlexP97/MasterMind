@@ -5,6 +5,8 @@
  */
 package persistence;
 
+import utils.Pair;
+
 /**
  *
  * @author dissi
@@ -19,7 +21,7 @@ public class CtrlPersistenciaGame {
         
     }
     
-    public boolean crearPartida(String userName, String id, String dif, String mod, int num, int ran) {
+    public Pair<Boolean, String> crearPartida(String userName, String id, String dif, String mod, int num, int ran) {
         
         return gameP.CrearPartida(userName, id, dif, mod, num, ran);
         
