@@ -59,6 +59,11 @@ public class CtrlPresentacion {
         return CPm.eliminaPerfil();
     }
     
+    public Pair <Boolean,String> crearPartida(String id, String dif, String mod, int num, int ran){
+        String userName = "Dani";
+        return CDp.crearPartida(userName,id,dif,mod,num,ran);
+    }
+    
     private void iniciarRegistroLogin() {
         CPlr = new CtrlPresentacionLoginRegister(CDj,this);
         CPlr.loginRegister();

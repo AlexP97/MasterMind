@@ -152,7 +152,7 @@ public class Game implements Serializable{
             boolean b = gameP.SaveGame(userName, id);
             boolean b2 = true;
 
-            if (mode.equals("codemaker")){
+            if (mode.equals("Codemaker")){
 
                 b2 = gameP.SaveCodeB(userName, id);
 
@@ -176,7 +176,7 @@ public class Game implements Serializable{
     public void finishGame(boolean ganado) {
         
         if (ganado) {
-            if (mode.equals("codemaker")) System.out.print("¡La IA ha acertado la combinación!" + "\n");
+            if (mode.equals("Codemaker")) System.out.print("¡La IA ha acertado la combinación!" + "\n");
             else {
                 System.out.print("¡Has ganado la partida!" + "\n" + "Tu puntuación es: "+ points + "\n");
                 Ranking ranking = Ranking.getInstance();
@@ -215,19 +215,19 @@ public class Game implements Serializable{
     private boolean SetAtributos(String userN, String ident, String dif, String mod, int num, int ran){
         
         if (cargado) {
-            if (mode.equals("codemaker")) {
+            if (mode.equals("Codemaker")) {
                 this.codeM = new CodeMaker(false, numero, rango);
             }
-            else if (mode.equals("codebreaker")) {
+            else if (mode.equals("Codebreaker")) {
                 this.codeM = new CodeMaker(true, numero, rango);
                 this.codeB = new CodeBreaker(false, numero, rango);
             }   
         }
         else {
             this.id = ident;
-            if (dif.equals("facil")) this.totalTurns = 12;
-            else if (dif.equals("medio")) this.totalTurns = 10;
-            else if (dif.equals("dificil")) this.totalTurns = 8;
+            if (dif.equals("Facil")) this.totalTurns = 12;
+            else if (dif.equals("Medio")) this.totalTurns = 10;
+            else if (dif.equals("Dificil")) this.totalTurns = 8;
             else {
                 System.out.print("Esta dificultad no existe" + "\n");
                 return false;
@@ -244,11 +244,11 @@ public class Game implements Serializable{
             this.numero = num;
             this.rango = ran;
 
-            if (mode.equals("codemaker")) {
+            if (mode.equals("Codemaker")) {
                 this.codeM = new CodeMaker(false, numero, rango);
                 this.codeIni = conversorCode(codeM.dona_patro("Player"));
             }
-            else if (mode.equals("codebreaker")) {
+            else if (mode.equals("Codebreaker")) {
                 this.codeB = new CodeBreaker(false, numero, rango);
                 this.codeM = new CodeMaker(true, numero, rango);
                 this.codeIni = conversorCode(codeM.dona_patro("IA"));
@@ -317,7 +317,7 @@ public class Game implements Serializable{
             outputB.add(-1);
             outputB.add(-2);
 
-            if (mode.equals("codemaker")) {
+            if (mode.equals("Codemaker")) {
                 if (!primerTurnoCargado) {
                     outputB = codeB.jugar("IA", codeBAnt, codeMAnt);
                     codeBAnt = conversorCode(outputB);
@@ -332,7 +332,7 @@ public class Game implements Serializable{
                 }
                 codeMAnt = conversorKey(outputM);
             }
-            else if (mode.equals("codebreaker")) {
+            else if (mode.equals("Codebreaker")) {
                 while (outputB.contains(-1) || outputB.contains(-2) || outputB.size() != numero) {
                     outputB = codeB.jugar("Player", codeBAnt, codeMAnt);
                     if (outputB.contains(-1)) {
@@ -352,7 +352,7 @@ public class Game implements Serializable{
 
             output[turn] = linea;
 
-            if(mode.equals("codemaker")) {
+            if(mode.equals("Codemaker")) {
             
                 System.out.print("Codigo a adivinar: ");
                 for (int i = 0; i < codeIni.size(); ++i) {
@@ -384,7 +384,7 @@ public class Game implements Serializable{
 
     public void MostrarOutput() {
         
-        if(mode.equals("codemaker")) {
+        if(mode.equals("Codemaker")) {
             
             System.out.print("Codigo a adivinar: ");
             for (int i = 0; i < codeIni.size(); ++i) {
