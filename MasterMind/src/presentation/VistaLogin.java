@@ -6,6 +6,7 @@
 package presentation;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import utils.Pair;
 
 /**
@@ -19,7 +20,6 @@ public class VistaLogin extends javax.swing.JFrame {
      */
     public VistaLogin() {
         initComponents();
-        jLabel4.setText("");
         
         setLocationRelativeTo(null);
         setTitle("MasterMind");
@@ -48,7 +48,6 @@ public class VistaLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,8 +65,6 @@ public class VistaLogin extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jLabel4.setText("jLabel4");
 
         jButton2.setText("Atrás");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -98,10 +95,6 @@ public class VistaLogin extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(82, 82, 82))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,9 +109,7 @@ public class VistaLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -149,14 +140,14 @@ public class VistaLogin extends javax.swing.JFrame {
         String user = jTextField1.getText();
         String pass = new String(jPasswordField1.getPassword());
         if(user.equals("")){
-            jLabel4.setText("El usuario no puede estar vacío.");
+            JOptionPane.showMessageDialog(null, "El usuario no puede estar vacío.");
         }
         else if(pass.equals("")){
-            jLabel4.setText("La contraseña no puede estar vacía");
+            JOptionPane.showMessageDialog(null, "La contraseña no puede estar vacía");
         }
         else{
             Pair<Boolean,String> p = CP.login(user,pass);
-            if(!p.getLeft()) jLabel4.setText(p.getRight());
+            if(!p.getLeft()) JOptionPane.showMessageDialog(null, p.getRight());
             else{
                 VistaMenuPartida Vmp = new VistaMenuPartida();
                 Vmp.setCP(CP);
@@ -214,7 +205,6 @@ public class VistaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;

@@ -6,6 +6,7 @@
 package presentation;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import utils.Pair;
 
 /**
@@ -19,7 +20,6 @@ public class VistaRegister extends javax.swing.JFrame {
      */
     public VistaRegister() {
         initComponents();
-        jLabel4.setText("");
         
         setLocationRelativeTo(null);
         setTitle("MasterMind");
@@ -46,7 +46,6 @@ public class VistaRegister extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPasswordField2 = new javax.swing.JPasswordField();
@@ -59,8 +58,6 @@ public class VistaRegister extends javax.swing.JFrame {
         jLabel2.setText("Usuario");
 
         jLabel3.setText("Contraseña");
-
-        jLabel4.setText("jLabel4");
 
         jButton1.setText("Registro");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +85,6 @@ public class VistaRegister extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
@@ -116,9 +112,7 @@ public class VistaRegister extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -149,14 +143,14 @@ public class VistaRegister extends javax.swing.JFrame {
         String user = jTextField1.getText();
         String pass = new String(jPasswordField2.getPassword());
         if(user.equals("")){
-            jLabel4.setText("El usuario no puede estar vacío.");
+            JOptionPane.showMessageDialog(null, "El usuario no puede estar vacío.");
         }
         else if(pass.equals("")){
-            jLabel4.setText("La contraseña no puede estar vacía");
+            JOptionPane.showMessageDialog(null, "La contraseña no puede estar vacía");
         }
         else{
             Pair<Boolean,String> p = CP.register(user,pass);
-            if(!p.getLeft()) jLabel4.setText(p.getRight());
+            if(!p.getLeft()) JOptionPane.showMessageDialog(null, p.getRight());
             else{
                 VistaMenuPartida Vmp = new VistaMenuPartida();
                 Vmp.setCP(CP);
@@ -214,7 +208,6 @@ public class VistaRegister extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField1;
