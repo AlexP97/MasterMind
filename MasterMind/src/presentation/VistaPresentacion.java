@@ -6,9 +6,6 @@
 package presentation;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -24,14 +21,9 @@ public class VistaPresentacion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("MasterMind");
         
-        setIconImage(new ImageIcon(getClass().getResource("iconomastermind.jpg")).getImage());
-        ((JPanel)getContentPane()).setOpaque(false);
-        ImageIcon MyImgCustom = new ImageIcon(this.getClass().getResource("imagenmastermind.jpg"));
-        JLabel fondo = new JLabel();
+        ImageIcon imgicon = new ImageIcon("resources/iconomastermind.jpg");
+        this.setIconImage(imgicon.getImage());
         
-        fondo.setIcon(MyImgCustom);
-        getLayeredPane().add(fondo,JLayeredPane.FRAME_CONTENT_LAYER);
-        fondo.setBounds(0,0,MyImgCustom.getIconWidth(),MyImgCustom.getIconHeight());
     }
 
     /**
@@ -89,7 +81,7 @@ public class VistaPresentacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaPresentacion().setVisible(true);
+                
             }
         });
     }
