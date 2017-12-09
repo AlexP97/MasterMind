@@ -16,32 +16,16 @@ import utils.Pair;
  * @author Espejo Saldaña, Adrián
  */
 public class CtrlPresentacionMenu extends CtrlPresentacion {
-    private final VistaGenerica Vg;
     private final CtrlDominioPartida CDp;
     private final CtrlDominioRanking CDr;
     private final CtrlDominioJugador CDj;
+    private final CtrlPresentacion CP;
     
-    public CtrlPresentacionMenu(CtrlDominioPartida CDp, CtrlDominioRanking CDr, CtrlDominioJugador CDj){
-        this.Vg = new VistaMenu();
+    public CtrlPresentacionMenu(CtrlDominioPartida CDp, CtrlDominioRanking CDr, CtrlDominioJugador CDj, CtrlPresentacion CP){
         this.CDp = CDp;
         this.CDr = CDr;
         this.CDj = CDj;
-    }
-    
-    public boolean crearCargarRankingModificar(){
-        int opcion = -1;
-        while(opcion != 0){
-            opcion = Vg.obtenerOpcion();
-            switch(opcion){
-                case 0: return false;
-                case 1: return crearPartida();
-                case 2: return cargarPartida();
-                case 3: return muestraRanking();
-                case 4: return modificarDatos();
-                default: System.out.println("Entrada no válida");
-            }
-        }
-        return false;
+        this.CP = CP;
     }
     
     private boolean crearPartida(){
@@ -50,7 +34,6 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
         Vcrear.obtenerDatos(datos);
         Pair<Boolean, String> p = new Pair();
         p = CDp.crearPartida(CDj.getName(),datos.get(0),datos.get(1),datos.get(2),Integer.parseInt(datos.get(3)), Integer.parseInt(datos.get(4)));
-        if(!p.getLeft()) Vg.mostrarError(p.getRight());
         return p.getLeft();
     }
     
@@ -61,23 +44,32 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
         Vcargar.obtenerDatos(datos,partidas);
         Pair<Boolean, String> p = new Pair();
         p = CDp.cargarPartida(CDj.getName(),datos.get(0));
-        if(!p.getLeft()) Vg.mostrarError(p.getRight());
         return p.getLeft();
     }
     
     private boolean muestraRanking(){
         ArrayList<Pair<String, Integer>> ranking = CDr.muestraRanking();
         if(ranking.isEmpty()){
-            Vg.mostrarMensaje("El ranking está vacío");
+            //Vg.mostrarMensaje("El ranking está vacío");
         }
         else{
-            Vg.mostrarRanking(ranking);
+            //Vg.mostrarRanking(ranking);
         }
         return true;
     }
 
-    private boolean modificarDatos() {
+    public Pair<Boolean,String> modificarNombre(String user) {
         CtrlPresentacionModificarDatos CPmd = new CtrlPresentacionModificarDatos(CDj);
-        return CPmd.modificarDatos();
+        return CPmd.modificarUsuario(user);
+    }
+    
+    public Pair<Boolean,String> modificarPass(String pass) {
+        CtrlPresentacionModificarDatos CPmd = new CtrlPresentacionModificarDatos(CDj);
+        return CPmd.modificarContraseña(pass);
+    }
+    
+    public Pair<Boolean,String> eliminaPerfil(){
+        CtrlPresentacionModificarDatos CPmd = new CtrlPresentacionModificarDatos(CDj);
+        return CPmd.eliminar();
     }
 }

@@ -20,7 +20,6 @@ public class Main {
             new Runnable(){
                 @Override
                 public void run(){
-                    new VistaPresentacion().setVisible(true);
                     CP = new CtrlPresentacion();    
                     CP.iniciarMasterMind();
                 }

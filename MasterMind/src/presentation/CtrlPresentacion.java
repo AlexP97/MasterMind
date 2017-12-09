@@ -9,7 +9,7 @@ import domain.CtrlDominio;
 import domain.CtrlDominioJugador;
 import domain.CtrlDominioPartida;
 import domain.CtrlDominioRanking;
-import exception.ExceptionAcabaPrograma;
+import utils.Pair;
 
 /**
  *
@@ -30,30 +30,41 @@ public class CtrlPresentacion {
         CDr = CD.getCtrlDominioRanking();
     }
     
-    private void iniciarRegistroLogin() throws ExceptionAcabaPrograma {
-        CPlr = new CtrlPresentacionLoginRegister(CDj);
-        while(CPlr.loginRegister()){
-            iniciarCrearCargarRanking();
-        }
+    public Pair <Boolean,String> login(String user, String pass){
+        CPlr = new CtrlPresentacionLoginRegister(CDj,this);
+        return CPlr.login(user,pass);
     }
     
-    private void iniciarCrearCargarRanking(){
-        CPm = new CtrlPresentacionMenu(CDp,CDr,CDj);
-        while(CPm.crearCargarRankingModificar()){
-            
-        }
+    public Pair <Boolean,String> register(String user, String pass){
+        CPlr = new CtrlPresentacionLoginRegister(CDj,this);
+        return CPlr.register(user,pass);
+    }
+    
+    public String getName(){
+        return CDj.getName();
+    }
+    
+    public Pair <Boolean,String> modificaUsuario(String user){
+        CPm = new CtrlPresentacionMenu(CDp,CDr,CDj,this);
+        return CPm.modificarNombre(user);
+    }
+    
+    public Pair <Boolean,String> modificaContraseña(String pass){
+        CPm = new CtrlPresentacionMenu(CDp,CDr,CDj,this);
+        return CPm.modificarPass(pass);
+    }
+    
+    public Pair <Boolean,String> eliminar(){
+        CPm = new CtrlPresentacionMenu(CDp,CDr,CDj,this);
+        return CPm.eliminaPerfil();
+    }
+    
+    private void iniciarRegistroLogin() {
+        CPlr = new CtrlPresentacionLoginRegister(CDj,this);
+        CPlr.loginRegister();
     }
     
     public void iniciarMasterMind(){
-        boolean continua = true;
-        while(continua){
-            try{
-                iniciarRegistroLogin();
-            }
-            catch(ExceptionAcabaPrograma ex){
-                continua = false;
-                System.out.println(ex.getMessage());
-            }
-        }
+        iniciarRegistroLogin();
     }
 }

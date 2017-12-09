@@ -17,44 +17,29 @@ import utils.Pair;
 public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
     private final VistaGenerica Vg;
     private final CtrlDominioJugador CDj;
+    private final CtrlPresentacion CP;
     
-    public CtrlPresentacionLoginRegister(CtrlDominioJugador CDj){
+    public CtrlPresentacionLoginRegister(CtrlDominioJugador CDj, CtrlPresentacion CP){
         this.Vg = new VistaLoginRegister();
         this.CDj = CDj;
+        this.CP = CP;
     }
     
-    public boolean loginRegister() throws ExceptionAcabaPrograma {
-        int opcion = -1;
-        Vg.mostrarMensaje("¡Bienvenido a Mastermind!");
-        while(opcion != 0){
-            opcion = Vg.obtenerOpcion();
-            switch(opcion){
-                case 0: throw new ExceptionAcabaPrograma();
-                case 1: return login();
-                case 2: return register();
-                default: System.out.println("Entrada no válida");
-            }
-        }
-        return false;
+    public void loginRegister() {
+        VistaPresentacion Vp = new VistaPresentacion();
+        Vp.setCP(CP);
+        Vp.setVisible(true);
     }
     
-    private boolean login(){
-        ArrayList<String> datos = new ArrayList<>();
-        Vg.obtenerDatos(datos);
-        Pair<Boolean, String> p = new Pair();
-        p = CDj.login(datos.get(0),datos.get(1));
-        if(!p.getLeft()) Vg.mostrarError(p.getRight());
-        else Vg.mostrarMensaje(p.getRight());
-        return p.getLeft();
+    @Override
+    public Pair<Boolean,String> login(String user, String password){
+        Pair<Boolean, String> p = CDj.login(user,password);
+        return p;
     }
-    private boolean register(){
-        ArrayList<String> datos = new ArrayList<>();
-        Vg.obtenerDatos(datos);
-        Pair<Boolean, String> p = new Pair();
-        p = CDj.register(datos.get(0),datos.get(1));
-        if(!p.getLeft()) Vg.mostrarError(p.getRight());
-        else Vg.mostrarMensaje(p.getRight());
-        return p.getLeft();
+    @Override
+    public Pair<Boolean,String> register(String user, String password){
+        Pair<Boolean, String> p = CDj.register(user,password);
+        return p;
     }
 }
 
