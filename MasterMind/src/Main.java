@@ -16,14 +16,8 @@ public class Main {
     private static CtrlPresentacion CP;
     
     public static void main(String[] args){
-        javax.swing.SwingUtilities.invokeLater (
-            new Runnable(){
-                @Override
-                public void run(){
-                    new VistaPresentacion().setVisible(true);
-                    CP = new CtrlPresentacion();    
-                    CP.iniciarMasterMind();
-                }
-            });
+        CP = new CtrlPresentacion();    
+        CP.iniciarMasterMind();
+      
     }
 }
