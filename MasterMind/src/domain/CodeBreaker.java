@@ -2,6 +2,8 @@ package domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
 import utils.Funciones;
 
@@ -12,7 +14,7 @@ import utils.Funciones;
 public final class CodeBreaker extends Jugador implements Serializable{
     ArrayList<ArrayList<Integer> > compatibles;
     ArrayList<ArrayList<Integer> > noUsados;
-    ArrayList<ArrayList<Integer> > combinaciones;
+    HashMap<ArrayList<Integer>, Integer> combinaciones;
          
     boolean primeraOpcio = true;
     
@@ -43,7 +45,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
         if(i == super.getNFichas()){
             ArrayList<Integer> añadir = (ArrayList<Integer>) aux.clone();
             Funciones.ordenar(añadir);
-            if(!combinaciones.contains(añadir)) combinaciones.add(añadir);
+            if(!combinaciones.containsKey(añadir)) combinaciones.put(añadir,0);
         }
         else{
             for(int j = 2; j >= 0; j--){
@@ -63,7 +65,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
         super(nfichas,ncolores);
         this.compatibles = new ArrayList<>();
         this.noUsados = new ArrayList<>();
-        this.combinaciones = new ArrayList<>();
+        this.combinaciones = new HashMap<>();
         
         if(IA)
             super.setIA();
@@ -141,18 +143,6 @@ public final class CodeBreaker extends Jugador implements Serializable{
     
     /**
      *
-     * @param candidat código candidato a ser el mejor intento
-     * @param descartat código que posiblemente quede descartado si intentamos adivinar el patrón con candidat
-     * @param combinacio código de colores que podría dar el CodeMaker como pista
-     * @return devuelve si la pista que obtendriamos de tirar candidat siendo descartat la solucion sería igual a la pista dada en combinació
-     */
-    protected boolean miraDescartes(ArrayList<Integer> candidat, ArrayList<Integer> descartat, ArrayList<Integer> combinacio) {
-        ArrayList<Integer> aux = miraSolucio(candidat,descartat);
-        return combinacio.equals(aux);
-    }
-    
-    /**
-     *
      * @return el mejor intento para el actual turno
      */
     protected ArrayList<Integer> millorOpcio() {
@@ -161,15 +151,20 @@ public final class CodeBreaker extends Jugador implements Serializable{
         boolean compatible = false;
         for(int i = 0; i < noUsados.size(); i++){
             //algoritmo de posibilidades
+            HashMap<ArrayList<Integer>, Integer> combinacionesAux = (HashMap<ArrayList<Integer>, Integer>) combinaciones.clone();
+            for(int j = 0; j < compatibles.size(); j++) {
+                ArrayList<Integer> aux = miraSolucio(noUsados.get(i), compatibles.get(j));
+                Integer value = combinacionesAux.get(aux);
+                combinacionesAux.put(aux,value+1);
+            }
             
-            int count = 0;
-            for(int j = 0; j < combinaciones.size(); j++) {
-                int max = 0;
-                for(int k = 0; k < compatibles.size(); k++) {
-                    boolean b = miraDescartes(noUsados.get(i), compatibles.get(k), combinaciones.get(j));
-                    if(b) max++;
-                }
-                if(max > count) count = max;
+            int count = -1;
+            Iterator it = combinacionesAux.keySet().iterator();
+            while(it.hasNext()) {
+                ArrayList<Integer> key = (ArrayList<Integer>) it.next();
+                Integer val = combinacionesAux.get(key);
+                if(val > count)
+                    count = val;
             }
                     
             boolean comp = (compatibles.contains(noUsados.get(i)));
@@ -233,7 +228,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
             boolean jugadaHecha = false;
             boolean guardar = false;
             while (!jugadaHecha && !guardar){
-                linea = new ArrayList<Integer>();
+                linea = new ArrayList<>();
                 Scanner input = new Scanner(System.in);
                 System.out.println("Introduce tu jugada poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al "+super.getNColores()+" separada de un espacio."
                         + "\n(Introduce -1 para guardar partida, -2 para salir de la partida sin guardar):\n");
