@@ -109,11 +109,22 @@ public final class CodeMaker extends Jugador implements Serializable{
                         int num = Integer.parseInt(fichas[i]);
                         if (num >= 0 && num <= 2) linea.add(num);
                     }
-                    if(linea.size() == super.getNFichas()) jugadaHecha = true;
+                    boolean pistaCorrecta = true;
+                    if(linea.size() == super.getNFichas()) {
+                        ArrayList<Integer> pistaBuena = super.donaSolucio(tirada,solucio);
+                        for(int i = 0; i < super.getNFichas(); i++) {
+                            if(pistaBuena.get(i) != linea.get(i))
+                                pistaCorrecta = false;
+                        }
+                        if(pistaCorrecta)
+                            jugadaHecha = true;
+                    }
                     if(fichasNoValid) 
                         System.out.println("El número de fichas introducido es incorrecto.");
-                    if (!jugadaHecha) 
+                    if (!jugadaHecha && pistaCorrecta && !fichasNoValid) 
                         System.out.println("Has introducido un valor incorrecto.");
+                    if(!pistaCorrecta)
+                        System.out.println("La pista dada no es correcta.");
                 }
             }
             Funciones.ordenar(linea);
