@@ -38,7 +38,7 @@ public class VistaCargarPart extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("MasterMind");
         
-        ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.jpg");
+        ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         this.setIconImage(imgicon.getImage());
     }
     
@@ -123,6 +123,7 @@ public class VistaCargarPart extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         VistaMenuPartida Vmp = new VistaMenuPartida();
+        Vmp.setCP(CP);
         Vmp.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

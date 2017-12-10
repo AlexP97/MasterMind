@@ -41,7 +41,7 @@ public class VistaRegister extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("MasterMind");
         
-        ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.jpg");
+        ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         this.setIconImage(imgicon.getImage());
     }
     

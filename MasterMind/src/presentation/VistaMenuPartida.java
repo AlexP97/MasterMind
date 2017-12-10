@@ -40,7 +40,7 @@ public class VistaMenuPartida extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("MasterMind");
         
-        ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.jpg");
+        ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         this.setIconImage(imgicon.getImage());
     }
     
@@ -64,6 +64,7 @@ public class VistaMenuPartida extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,7 +81,7 @@ public class VistaMenuPartida extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(43, 146, 0, 151);
+        gridBagConstraints.insets = new java.awt.Insets(34, 73, 0, 0);
         jPanel1.add(jButton1, gridBagConstraints);
 
         jButton2.setText("Cargar partida");
@@ -93,7 +94,7 @@ public class VistaMenuPartida extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 146, 0, 151);
+        gridBagConstraints.insets = new java.awt.Insets(38, 73, 0, 0);
         jPanel1.add(jButton2, gridBagConstraints);
 
         jButton3.setText("Ver ranking");
@@ -107,7 +108,7 @@ public class VistaMenuPartida extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 16;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 146, 0, 151);
+        gridBagConstraints.insets = new java.awt.Insets(33, 73, 0, 0);
         jPanel1.add(jButton3, gridBagConstraints);
 
         jButton4.setText("Editar perfil");
@@ -121,7 +122,7 @@ public class VistaMenuPartida extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 16;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 146, 0, 151);
+        gridBagConstraints.insets = new java.awt.Insets(33, 73, 71, 0);
         jPanel1.add(jButton4, gridBagConstraints);
 
         jButton5.setText("Cerrar sesión");
@@ -131,12 +132,26 @@ public class VistaMenuPartida extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 146, 70, 151);
+        gridBagConstraints.insets = new java.awt.Insets(33, 49, 71, 72);
         jPanel1.add(jButton5, gridBagConstraints);
+
+        jButton6.setText("Guía del juego");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(38, 49, 0, 0);
+        jPanel1.add(jButton6, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,6 +204,13 @@ public class VistaMenuPartida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        VistaInfo Vi = new VistaInfo();
+        Vi.setCP(CP);
+        Vi.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -230,6 +252,7 @@ public class VistaMenuPartida extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
