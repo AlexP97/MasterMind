@@ -6,6 +6,7 @@
 package presentation;
 
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 
 /**
  *
@@ -19,6 +20,21 @@ public class VistaTablero extends javax.swing.JFrame {
      * Creates new form VistaTablero
      */
     public VistaTablero() {
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            try {
+                UIManager.setLookAndFeel(
+                UIManager.getSystemLookAndFeelClassName());
+            } catch(Exception ex){
+                
+            }
+        }
         initComponents();
         
         setLocationRelativeTo(null);

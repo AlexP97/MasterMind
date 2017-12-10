@@ -47,15 +47,8 @@ public class CtrlPresentacionMenu extends CtrlPresentacion {
         return p.getLeft();
     }
     
-    private boolean muestraRanking(){
-        ArrayList<Pair<String, Integer>> ranking = CDr.muestraRanking();
-        if(ranking.isEmpty()){
-            //Vg.mostrarMensaje("El ranking está vacío");
-        }
-        else{
-            //Vg.mostrarRanking(ranking);
-        }
-        return true;
+    public ArrayList<Pair<String, Integer>> mostrarRanking(){
+        return CDr.muestraRanking();
     }
 
     public Pair<Boolean,String> modificarNombre(String user) {

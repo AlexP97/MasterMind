@@ -9,6 +9,7 @@ import domain.CtrlDominio;
 import domain.CtrlDominioJugador;
 import domain.CtrlDominioPartida;
 import domain.CtrlDominioRanking;
+import java.util.ArrayList;
 import utils.Pair;
 
 /**
@@ -69,6 +70,11 @@ public class CtrlPresentacion {
     
     public Pair <Boolean, String> eliminarPartida(String userName, String id){
         return CDp.eliminarPartida(userName, id);
+    }
+    
+    public ArrayList<Pair<String, Integer>> muestraRanking(){
+        CPm = new CtrlPresentacionMenu(CDp,CDr,CDj,this);
+        return CPm.mostrarRanking();
     }
     
     private void iniciarRegistroLogin() {

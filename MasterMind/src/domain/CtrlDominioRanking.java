@@ -19,6 +19,7 @@ public class CtrlDominioRanking {
     
     public CtrlDominioRanking(CtrlPersistenciaRanking CPr) {
         this.r = Ranking.getInstance();
+        r.setRanking(this.getRanking());
         this.CPr = CPr;
         r.setRanking(CPr.getRanking());
     }
@@ -30,7 +31,7 @@ public class CtrlDominioRanking {
         r.actualizaRanking(nombre, puntos);
         CPr.actualizaRanking(r.muestraRanking());
     }
-    public ArrayList<Pair<String, Integer>> getRanking(){
+    public final ArrayList<Pair<String, Integer>> getRanking(){
         CtrlPersistenciaRanking ctrlPR = new CtrlPersistenciaRanking();
         return ctrlPR.getRanking();
     }

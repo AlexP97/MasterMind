@@ -19,8 +19,6 @@ public class Ranking {
      * @return la única instancia de Ranking
      */
     public static Ranking getInstance(){
-        RankingPersistencia rp = new RankingPersistencia();
-        ranking = rp.getRanking();
         return INSTANCE;
     }
     
@@ -77,8 +75,6 @@ public class Ranking {
             }
             
         }
-        RankingPersistencia rp = new RankingPersistencia();
-        rp.actualizaRanking(ranking);
     }
     
 }
