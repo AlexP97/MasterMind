@@ -23,7 +23,7 @@ public class VistaModificar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("MasterMind");
         
-        ImageIcon imgicon = new ImageIcon("resources/iconomastermind.jpg");
+        ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.jpg");
         this.setIconImage(imgicon.getImage());
     }
     

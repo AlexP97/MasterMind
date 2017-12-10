@@ -24,7 +24,7 @@ public class VistaNuevaPart extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("MasterMind");
         
-        ImageIcon imgicon = new ImageIcon("resources/iconomastermind.jpg");
+        ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.jpg");
         this.setIconImage(imgicon.getImage());
     }
     
@@ -251,18 +251,21 @@ public class VistaNuevaPart extends javax.swing.JFrame {
         if (jTextField1.getText().equals("")) 
             JOptionPane.showMessageDialog(null, "El id de la partida no puede estar vacío.");
         else {
+            String userName = CP.getName();
             String id = jTextField1.getText();
             String dif = (String)jComboBox1.getSelectedItem();
             String mod = (String)jComboBox2.getSelectedItem();
             int num = jSlider1.getValue();
             int ran = jSlider2.getValue();
-            Pair<Boolean,String> p = CP.crearPartida(id,dif,mod,num,ran);
+            Pair<Boolean,String> p = CP.crearPartida(userName,id,dif,mod,num,ran);
             if(!p.getLeft()) JOptionPane.showMessageDialog(null, p.getRight());
             else{
-                VistaMenuPartida Vmp = new VistaMenuPartida();
-                Vmp.setCP(CP);
-                Vmp.setVisible(true);
-                dispose();
+                if (mod.equals("Codemaker")) {
+                    VistaCodigoInicial Vci = new VistaCodigoInicial();
+                    Vci.setCP(CP);
+                    Vci.setVisible(true);
+                    dispose();
+                }
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

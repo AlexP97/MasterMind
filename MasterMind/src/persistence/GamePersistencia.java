@@ -259,20 +259,16 @@ public class GamePersistencia implements Serializable{
      */
     public Pair<Boolean, String> CrearPartida(String userName, String ident, String dif, String mod, int num, int ran){
         
-        if (!userName.equals("") && !ident.equals("") && CheckAvailability(ident, userName)){
-            
-            game.setGameP(this);
-            
-            if (mod.equals("codemaker")) {
-                this.cb = new CodeBreaker(true, num, ran);
-                game.setCB(cb);
-            }
-            
-            return game.juega(userName, ident, dif, mod, num, ran);
-            
+        if (!userName.equals("") && !ident.equals("") && CheckAvailability(ident, userName)){ 
+            return new Pair(true, "La partida es correcta");
         }
         else {
             return new Pair(false, "No se ha podido crear la partida");
         }
-    }    
+    }   
+    
+    public Pair <Boolean, String> eliminarPartida(String userName, String id){
+        return new Pair(false, "Aun no está implementado.");
+    }
+    
 }

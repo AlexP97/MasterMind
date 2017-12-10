@@ -27,4 +27,8 @@ public class CtrlPersistenciaGame {
         
     }
     
+    public Pair <Boolean, String> eliminarPartida(String userName, String id){
+        return gameP.eliminarPartida(userName, id);
+    }
+    
 }

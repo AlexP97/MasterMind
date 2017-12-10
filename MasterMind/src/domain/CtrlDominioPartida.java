@@ -39,7 +39,18 @@ public class CtrlDominioPartida {
     
     public Pair<Boolean, String> crearPartida(String userName, String id, String dif, String mod, int num, int ran) {
         
-        return CPG.crearPartida(userName, id, dif, mod, num, ran);
+        Pair<Boolean,String> p = CPG.crearPartida(userName, id, dif, mod, num, ran);
+        if (p.getLeft())
+        return game.crearPartida(userName, id, dif, mod, num, ran);
+        else return p;
         
+    }
+    
+    public String getId() {
+        return game.getId();
+    }
+    
+    public Pair <Boolean, String> eliminarPartida(String userName, String id){
+        return CPG.eliminarPartida(userName, id);
     }
 }

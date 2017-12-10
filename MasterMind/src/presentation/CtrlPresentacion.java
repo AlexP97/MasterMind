@@ -44,6 +44,10 @@ public class CtrlPresentacion {
         return CDj.getName();
     }
     
+    public String getId(){
+        return CDp.getId();
+    }
+    
     public Pair <Boolean,String> modificaUsuario(String user){
         CPm = new CtrlPresentacionMenu(CDp,CDr,CDj,this);
         return CPm.modificarNombre(user);
@@ -59,9 +63,12 @@ public class CtrlPresentacion {
         return CPm.eliminaPerfil();
     }
     
-    public Pair <Boolean,String> crearPartida(String id, String dif, String mod, int num, int ran){
-        String userName = "Dani";
+    public Pair <Boolean,String> crearPartida(String userName, String id, String dif, String mod, int num, int ran){
         return CDp.crearPartida(userName,id,dif,mod,num,ran);
+    }
+    
+    public Pair <Boolean, String> eliminarPartida(String userName, String id){
+        return CDp.eliminarPartida(userName, id);
     }
     
     private void iniciarRegistroLogin() {

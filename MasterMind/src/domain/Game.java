@@ -225,13 +225,11 @@ public class Game implements Serializable{
         }
         else {
             this.id = ident;
+            
             if (dif.equals("Facil")) this.totalTurns = 12;
             else if (dif.equals("Medio")) this.totalTurns = 10;
             else if (dif.equals("Dificil")) this.totalTurns = 8;
-            else {
-                System.out.print("Esta dificultad no existe" + "\n");
-                return false;
-            }
+            
             if (output == null) this.output = new String[totalTurns+1];
             this.output[0] = "--------------";
             this.difficulty = dif;
@@ -246,16 +244,10 @@ public class Game implements Serializable{
 
             if (mode.equals("Codemaker")) {
                 this.codeM = new CodeMaker(false, numero, rango);
-                this.codeIni = conversorCode(codeM.dona_patro("Player"));
             }
             else if (mode.equals("Codebreaker")) {
                 this.codeB = new CodeBreaker(false, numero, rango);
                 this.codeM = new CodeMaker(true, numero, rango);
-                this.codeIni = conversorCode(codeM.dona_patro("IA"));
-            }
-            else {
-                    System.out.print("Este modo de juego no existe" + "\n");
-                    return false;
             }
         }
         return true;
@@ -297,13 +289,17 @@ public class Game implements Serializable{
      * @param num número de fichas para la partida
      * @param ran rango de colores para la partida
      */
-    public Pair<Boolean, String> juega(String userN, String ident, String dif, String mod, int num, int ran) {
-                
-        boolean primerTurnoCargado = cargado;
+    public Pair<Boolean, String> crearPartida(String userN, String ident, String dif, String mod, int num, int ran) {
 
         boolean b = SetAtributos(userN, ident, dif, mod, num, ran);
         if (!b) return new Pair(false, "No se han podido introducir los datos correctamente.");
+        else return new Pair(true, "Partida creada.");
+    }
 
+    public Pair<Boolean, String> juega() {
+        
+        boolean primerTurnoCargado = cargado;
+        
         while (turn <= totalTurns){
 
             acierto = true;
@@ -403,7 +399,7 @@ public class Game implements Serializable{
     
     public void comenzarPartida() {
         
-        juega(userName, id, difficulty, mode, numero, rango);
+        juega();
         
     }
     
