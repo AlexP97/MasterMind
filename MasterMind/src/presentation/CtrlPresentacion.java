@@ -23,6 +23,7 @@ public class CtrlPresentacion {
     private final CtrlDominioRanking CDr;
     private CtrlPresentacionLoginRegister CPlr;
     private CtrlPresentacionMenu CPm;
+    private CtrlPresentacionGame CPg;
     
     public CtrlPresentacion() {
         CD = new CtrlDominio();
@@ -65,11 +66,18 @@ public class CtrlPresentacion {
     }
     
     public Pair <Boolean,String> crearPartida(String userName, String id, String dif, String mod, int num, int ran){
-        return CDp.crearPartida(userName,id,dif,mod,num,ran);
+        CPg = new CtrlPresentacionGame(CDp);
+        return CPg.crearPartida(userName,id,dif,mod,num,ran);
     }
     
     public Pair <Boolean, String> eliminarPartida(String userName, String id){
-        return CDp.eliminarPartida(userName, id);
+        CPg = new CtrlPresentacionGame(CDp);
+        return CPg.eliminarPartida(userName, id);
+    }
+    
+    public Pair <Boolean, String> setCodIni(ArrayList<Integer> cods){
+        CPg = new CtrlPresentacionGame(CDp);
+        return CPg.setCodIni(cods);
     }
     
     public ArrayList<Pair<String, Integer>> muestraRanking(){

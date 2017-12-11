@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.util.ArrayList;
 import persistence.CtrlPersistenciaGame;
 import utils.Pair;
 
@@ -52,5 +53,9 @@ public class CtrlDominioPartida {
     
     public Pair <Boolean, String> eliminarPartida(String userName, String id){
         return CPG.eliminarPartida(userName, id);
+    }
+    
+    public Pair <Boolean, String> setCodIni(ArrayList<Integer> cods){
+        return game.setCodIni(cods);
     }
 }

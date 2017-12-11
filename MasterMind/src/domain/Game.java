@@ -146,6 +146,14 @@ public class Game implements Serializable{
         return lista;
     }
     
+    public Pair<Boolean,String> setCodIni(ArrayList<Integer> cods){
+        
+        this.codeIni = conversorCode(cods);
+        System.out.println(cods);
+        return new Pair(true, "Codigo inicial aplicado");
+        
+    }
+    
     public void SaveGame() {
            
         if (!userName.equals("")){
