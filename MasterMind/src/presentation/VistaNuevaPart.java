@@ -309,10 +309,21 @@ public class VistaNuevaPart extends javax.swing.JFrame {
             Pair<Boolean,String> p = CP.crearPartida(userName,id,dif,mod,num,ran);
             if(!p.getLeft()) JOptionPane.showMessageDialog(null, p.getRight());
             else{
+                int i = 12;
+                if (dif.equals("Medio")) i = 10;
+                else if (dif.equals("Dificil")) i = 8;
                 if (mod.equals("Codemaker")) {
                     VistaCodigoInicial Vci = new VistaCodigoInicial();
                     Vci.setCP(CP);
+                    Vci.setParams(num,ran,i);
                     Vci.setVisible(true);
+                    dispose();
+                }
+                else {
+                    VistaTableroCopia Vt = new VistaTableroCopia();
+                    Vt.setCP(CP);
+                    Vt.setParams(num,ran,i);
+                    Vt.setVisible(true);
                     dispose();
                 }
             }

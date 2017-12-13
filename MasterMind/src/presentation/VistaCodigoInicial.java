@@ -8,6 +8,7 @@ package presentation;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import utils.Pair;
@@ -22,6 +23,10 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
     int state;
     Icon iconoVacio;
     ArrayList<Integer> cods;
+    int num;
+    int ran;
+    int dif;
+    JLabel[] label;
     
     /**
      * Creates new form VistaCodigoInicial
@@ -59,6 +64,13 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
     }
+    
+    public void setParams(int n, int r, int d){
+        this.num = n;
+        this.ran = r;
+        this.dif = d;
+        labelsMethod();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,11 +88,7 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,12 +109,15 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
             }
         });
 
+        jLayeredPane1.setLayout(new java.awt.GridBagLayout());
+
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/red_icon.png"))); // NOI18N
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
+        jLayeredPane1.add(jButton6, new java.awt.GridBagConstraints());
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/green_icon.png"))); // NOI18N
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +125,7 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
+        jLayeredPane1.add(jButton7, new java.awt.GridBagConstraints());
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/blue_icon.png"))); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -121,43 +133,9 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
+        jLayeredPane1.add(jButton8, new java.awt.GridBagConstraints());
 
-        jLayeredPane1.setLayer(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jButton7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jButton8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84))
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 7, Short.MAX_VALUE))
-        );
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/0.png"))); // NOI18N
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/0.png"))); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/0.png"))); // NOI18N
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/0.png"))); // NOI18N
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/0.png"))); // NOI18N
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,38 +152,25 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLayeredPane1)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addContainerGap(98, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLayeredPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(26, 26, 26))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -218,112 +183,33 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
             Vnp.setVisible(true);
             dispose();
         }
-        else if (state == 2) {
-            jLabel2.setIcon(iconoVacio);
+        else {
             --state;
-            cods.remove(cods.size()-1);
-        }
-        else if (state == 3) {
-            jLabel3.setIcon(iconoVacio);
-            --state;
-            cods.remove(cods.size()-1);
-        }
-        else if (state == 4) {
-            jLabel4.setIcon(iconoVacio);
-            --state;
-            cods.remove(cods.size()-1);
-        }
-        else if (state == 5) {
-            jLabel5.setIcon(iconoVacio);
-            --state;
-            cods.remove(cods.size()-1);
-        }
-        else if (state == 6) {
-            jLabel6.setIcon(iconoVacio);
-            --state;
+            label[state-1].setIcon(iconoVacio);
             cods.remove(cods.size()-1);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if (state == 1) {
-            jLabel2.setIcon(jButton6.getIcon());
+        if (state <= num) {
+            label[state-1].setIcon(jButton6.getIcon());
             cods.add(1);
             ++state;
         }
-        else if (state == 2) {
-            jLabel3.setIcon(jButton6.getIcon());
-            cods.add(1);
-            ++state;
-        }
-        else if (state == 3) {
-            jLabel4.setIcon(jButton6.getIcon());
-            cods.add(1);
-            ++state;
-        }
-        else if (state == 4) {
-            jLabel5.setIcon(jButton6.getIcon());
-            cods.add(1);
-            ++state;
-        }
-        else if (state == 5) {
-            jLabel6.setIcon(jButton6.getIcon());
-            cods.add(1);
-            ++state;
-        }
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if (state == 1) {
-            jLabel2.setIcon(jButton7.getIcon());
-            cods.add(2);
-            ++state;
-        }
-        else if (state == 2) {
-            jLabel3.setIcon(jButton7.getIcon());
-            cods.add(2);
-            ++state;
-        }
-        else if (state == 3) {
-            jLabel4.setIcon(jButton7.getIcon());
-            cods.add(2);
-            ++state;
-        }
-        else if (state == 4) {
-            jLabel5.setIcon(jButton7.getIcon());
-            cods.add(2);
-            ++state;
-        }
-        else if (state == 5) {
-            jLabel6.setIcon(jButton7.getIcon());
+        if (state <= num) {
+            label[state-1].setIcon(jButton7.getIcon());
             cods.add(2);
             ++state;
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if (state == 1) {
-            jLabel2.setIcon(jButton8.getIcon());
-            cods.add(3);
-            ++state;
-        }
-        else if (state == 2) {
-            jLabel3.setIcon(jButton8.getIcon());
-            cods.add(3);
-            ++state;
-        }
-        else if (state == 3) {
-            jLabel4.setIcon(jButton8.getIcon());
-            cods.add(3);
-            ++state;
-        }
-        else if (state == 4) {
-            jLabel5.setIcon(jButton8.getIcon());
-            cods.add(3);
-            ++state;
-        }
-        else if (state == 5) {
-            jLabel6.setIcon(jButton8.getIcon());
+        if (state <= num) {
+            label[state-1].setIcon(jButton8.getIcon());
             cods.add(3);
             ++state;
         }
@@ -337,8 +223,9 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
             Pair<Boolean,String> p = CP.setCodIni(cods);
             if(!p.getLeft()) JOptionPane.showMessageDialog(null, p.getRight());
             else{
-                VistaTablero Vt = new VistaTablero();
+                VistaTableroCopia Vt = new VistaTableroCopia();
                 Vt.setCP(CP);
+                Vt.setParams(num,ran,dif);
                 Vt.setVisible(true);
                 dispose();
             }
@@ -388,11 +275,26 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    public void labelsMethod() {
+    
+        label = new JLabel[num];
+        int x = 5;
+        
+        for(int row = 0; row < num; row++) {
+
+            label[row] = new JLabel();
+            label[row].setOpaque(false);
+            label[row].setBounds(x, 0, 32, 32);
+            label[row].setIcon(iconoVacio);
+            jPanel1.add(label[row]);
+
+            x += 35;
+        }
+    }
+
+
 }
