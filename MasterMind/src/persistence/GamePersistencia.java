@@ -200,11 +200,9 @@ public class GamePersistencia implements Serializable{
                             
                             System.out.print("Partida cargada!" + "\n");
 
-                            game.MostrarOutput();
                             
                             game.setGameP(this);
                             
-                            game.comenzarPartida();
 
                         }
 

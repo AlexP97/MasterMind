@@ -71,18 +71,19 @@ public class CtrlPresentacion {
     }
     
     public Pair <Boolean, String> eliminarPartida(String userName, String id){
-        CPg = new CtrlPresentacionGame(CDp);
         return CPg.eliminarPartida(userName, id);
     }
     
     public Pair <Boolean, String> setCodIni(ArrayList<Integer> cods){
-        CPg = new CtrlPresentacionGame(CDp);
         return CPg.setCodIni(cods);
     }
     
     public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
-        CPg = new CtrlPresentacionGame(CDp);
         return CPg.jugadaCodeB(cods);
+    }
+    
+    public Pair <Boolean, String> finishGame(boolean b){
+        return CPg.finishGame(b);
     }
     
     public ArrayList<Pair<String, Integer>> muestraRanking(){

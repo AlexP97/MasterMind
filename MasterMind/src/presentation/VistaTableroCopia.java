@@ -357,21 +357,46 @@ public class VistaTableroCopia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debes introducir todas las fichas.","Faltan fichas",JOptionPane.WARNING_MESSAGE);
         else {
             
+            boolean victory = true;
             ArrayList<Integer> a = CP.jugadaCodeB(cods);
             if (a != null){
              
                 for (int i = 0; i < a.size(); ++i){
                  
                     if (a.get(i) == 2) keyPegs[turno-1][i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2K.png")));
-                    else if (a.get(i) == 1) keyPegs[turno-1][i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/1K.png")));
+                    else if (a.get(i) == 1) {
+                        victory = false;
+                        keyPegs[turno-1][i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/1K.png")));
+                    }
+                    else victory = false;
                     
                 }
+                if (victory) finishGame(true);
             }
             turno++;
             state = 1;
+            cods = new ArrayList<Integer>();
+            if (turno > dif) finishGame(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void finishGame(boolean victory) {
+        
+        if (!victory) {
+            JOptionPane.showMessageDialog(null, "Game over :(");
+            jButton4ActionPerformed(null);
+        }
+        else {
+            Pair<Boolean,String> p = CP.finishGame(victory);
+            if (p.getLeft()){
+                JOptionPane.showMessageDialog(null, "¡Has acertado la combinación!\nHas ganado: "+p.getRight()+" puntos.");
+                jButton4ActionPerformed(null);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ha habido un error actualizando el ranking.","Error",JOptionPane.WARNING_MESSAGE);
+            } 
+        }
+    }
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         if (state <= num && introducirJugada) {
          

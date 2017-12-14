@@ -181,14 +181,17 @@ public class Game implements Serializable{
      *
      * @param ganado si el jugador ha ganado o no
      */
-    public void finishGame(boolean ganado) {
+    public Pair<Boolean,String> finishGame(boolean ganado) {
         
+        Pair<Boolean,String> p = new Pair<Boolean,String>(false, "");
         if (ganado) {
             if (mode.equals("Codemaker")) System.out.print("¡La IA ha acertado la combinación!" + "\n");
             else {
                 System.out.print("¡Has ganado la partida!" + "\n" + "Tu puntuación es: "+ points + "\n");
                 Ranking ranking = Ranking.getInstance();
                 ranking.actualizaRanking(userName, points);
+                p.setLeft(true);
+                p.setRight(Integer.toString(points));
             }
         }
         else {
@@ -201,6 +204,7 @@ public class Game implements Serializable{
             else System.out.print("Game Over...");
             System.out.println();
         }
+        return p;
         
     }
     
@@ -256,36 +260,10 @@ public class Game implements Serializable{
             else if (mode.equals("Codebreaker")) {
                 this.codeB = new CodeBreaker(false, numero, rango);
                 this.codeM = new CodeMaker(true, numero, rango);
+                this.codeIni = conversorCode(this.codeM.dona_patro("IA"));
             }
         }
         return true;
-    }
-    
-    /**
-     *
-     * @param outputM es el output del CodeMaker
-     * @param outputB es el output del CodeBreaker
-     * @return la fila completa en el tablero
-     */
-    private String GenerarLinea( ArrayList<KeyPeg> outputM, ArrayList<CodePeg> outputB){
-        
-        String linea = "";
-        
-        for (int i = 0; i < outputB.size(); ++i) {
-            int color = outputB.get(i).getColour();
-            linea += Integer.toString(color) + " ";
-        }
-
-        linea += " ";
-
-        for (int i = 0; i < outputM.size(); ++i) {
-            int color = outputM.get(i).getColour();
-            if (color != 2) acierto = false;
-            linea += Integer.toString(color);
-        }
-        
-        return linea;
-        
     }
     
     /**
@@ -303,112 +281,12 @@ public class Game implements Serializable{
         if (!b) return new Pair(false, "No se han podido introducir los datos correctamente.");
         else return new Pair(true, "Partida creada.");
     }
-
-    public Pair<Boolean, String> juega() {
-        
-        boolean primerTurnoCargado = cargado;
-        
-        while (turn <= totalTurns){
-
-            acierto = true;
-
-            ArrayList<Integer> outputM = new ArrayList<Integer>();
-            ArrayList<Integer> outputB = new ArrayList<Integer>();
-
-            outputM.add(-1);
-            outputM.add(-2);
-
-            outputB.add(-1);
-            outputB.add(-2);
-
-            if (mode.equals("Codemaker")) {
-                if (!primerTurnoCargado) {
-                    outputB = codeB.jugar("IA", codeBAnt, codeMAnt);
-                    codeBAnt = conversorCode(outputB);
-                }
-                while (outputM.contains(-1) || outputM.contains(-2) || outputM.size() != numero) {
-                    outputM = codeM.jugar("Player", codeBAnt, codeIni);
-                    if (outputM.contains(-1)) {
-                        SaveGame();
-                        if (this.gameSaved) return new Pair(true, "Volviendo al menú.");
-                    }
-                    else if (outputM.contains(-2)) return new Pair(true, "Volviendo al menú."); 
-                }
-                codeMAnt = conversorKey(outputM);
-            }
-            else if (mode.equals("Codebreaker")) {
-                while (outputB.contains(-1) || outputB.contains(-2) || outputB.size() != numero) {
-                    outputB = codeB.jugar("Player", codeBAnt, codeMAnt);
-                    if (outputB.contains(-1)) {
-                        SaveGame();
-                        if (this.gameSaved) return new Pair(true, "Volviendo al menú.");
-                    }
-                    else if (outputB.contains(-2)) return new Pair(true, "Volviendo al menú."); 
-                }
-                codeBAnt = conversorCode(outputB);
-                outputM = codeM.jugar("IA", codeBAnt, codeIni);
-                codeMAnt = conversorKey(outputM);
-            }
-
-            primerTurnoCargado = false;
-
-            String linea = GenerarLinea(codeMAnt, codeBAnt);
-
-            output[turn] = linea;
-
-            if(mode.equals("Codemaker")) {
-            
-                System.out.print("Codigo a adivinar: ");
-                for (int i = 0; i < codeIni.size(); ++i) {
-                    System.out.print(codeIni.get(i).getColour() + " ");
-                }
-                System.out.println();
-
-            }
-            
-            for (int i = 0; i <= turn; ++i) {
-
-                    System.out.print(output[i] + "\n");
-
-            }
-
-            System.out.println("--------------");
-
-            if (acierto) {
-                finishGame(true);
-                return new Pair(true, "Volviendo al menú.");
-            }
-            ++turn;
-            baja_Puntuacion();
-        }
-
-        finishGame(false); 
-        return new Pair(true, "Volviendo al menú.");
-    }
-
-    public void MostrarOutput() {
-        
-        if(mode.equals("Codemaker")) {
-            
-            System.out.print("Codigo a adivinar: ");
-            for (int i = 0; i < codeIni.size(); ++i) {
-                System.out.print(codeIni.get(i).getColour() + " ");
-            }
-            System.out.println();
-          
-        }
-        for (int i = 0; i < turn; ++i) {
-
-            System.out.print(output[i] + "\n");
-
-        }
-        
-    }
     
-    public void comenzarPartida() {
+    public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
         
-        juega();
-        
+        ArrayList<Integer> outputM = new ArrayList<Integer>();
+        outputM = codeM.jugar("IA", conversorCode(cods), codeIni);
+        if (outputM.contains(1) || outputM.contains(0)) baja_Puntuacion();
+        return outputM;
     }
-    
 }
