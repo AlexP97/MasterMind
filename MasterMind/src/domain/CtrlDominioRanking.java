@@ -27,9 +27,10 @@ public class CtrlDominioRanking {
     public ArrayList<Pair<String, Integer>> muestraRanking() {
         return r.muestraRanking();
     }
-    public void actualizaRanking(String nombre, int puntos){
-        r.actualizaRanking(nombre, puntos);
+    public Pair<Boolean,Integer> actualizaRanking(String nombre, int puntos){
+        Pair<Boolean,Integer> p = r.actualizaRanking(nombre, puntos);
         CPr.actualizaRanking(r.muestraRanking());
+        return p;
     }
     public final ArrayList<Pair<String, Integer>> getRanking(){
         CtrlPersistenciaRanking ctrlPR = new CtrlPersistenciaRanking();

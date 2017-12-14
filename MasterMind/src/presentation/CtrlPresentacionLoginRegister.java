@@ -6,15 +6,13 @@
 package presentation;
 
 import domain.CtrlDominioJugador;
-import exception.ExceptionAcabaPrograma;
-import java.util.ArrayList;
 import utils.Pair;
 
 /**
  *
  * @author Espejo Saldaña, Adrián
  */
-public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
+public class CtrlPresentacionLoginRegister {
     private final VistaGenerica Vg;
     private final CtrlDominioJugador CDj;
     private final CtrlPresentacion CP;
@@ -31,12 +29,10 @@ public class CtrlPresentacionLoginRegister extends CtrlPresentacion {
         Vp.setVisible(true);
     }
     
-    @Override
     public Pair<Boolean,String> login(String user, String password){
         Pair<Boolean, String> p = CDj.login(user,password);
         return p;
     }
-    @Override
     public Pair<Boolean,String> register(String user, String password){
         Pair<Boolean, String> p = CDj.register(user,password);
         return p;

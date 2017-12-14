@@ -15,17 +15,17 @@ import utils.Pair;
  *
  * @author Espejo Saldaña, Adrián
  */
-public class CtrlPresentacionMenu extends CtrlPresentacion {
+public class CtrlPresentacionMenuBorrarPronto {
     private final CtrlDominioPartida CDp;
     private final CtrlDominioRanking CDr;
     private final CtrlDominioJugador CDj;
-    private final CtrlPresentacion CP;
+
     
-    public CtrlPresentacionMenu(CtrlDominioPartida CDp, CtrlDominioRanking CDr, CtrlDominioJugador CDj, CtrlPresentacion CP){
+    public CtrlPresentacionMenuBorrarPronto(CtrlDominioPartida CDp, CtrlDominioRanking CDr, CtrlDominioJugador CDj){
         this.CDp = CDp;
         this.CDr = CDr;
         this.CDj = CDj;
-        this.CP = CP;
+
     }
     
     private boolean crearPartida(){

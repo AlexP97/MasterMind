@@ -22,8 +22,9 @@ public class CtrlPresentacion {
     private final CtrlDominioPartida CDp;
     private final CtrlDominioRanking CDr;
     private CtrlPresentacionLoginRegister CPlr;
-    private CtrlPresentacionMenu CPm;
+    private CtrlPresentacionModificarDatos CPm;
     private CtrlPresentacionGame CPg;
+    private CtrlPresentacionRanking CPr;
     
     public CtrlPresentacion() {
         CD = new CtrlDominio();
@@ -51,18 +52,18 @@ public class CtrlPresentacion {
     }
     
     public Pair <Boolean,String> modificaUsuario(String user){
-        CPm = new CtrlPresentacionMenu(CDp,CDr,CDj,this);
-        return CPm.modificarNombre(user);
+        CPm = new CtrlPresentacionModificarDatos(CDj);
+        return CPm.modificarUsuario(user);
     }
     
     public Pair <Boolean,String> modificaContraseña(String pass){
-        CPm = new CtrlPresentacionMenu(CDp,CDr,CDj,this);
-        return CPm.modificarPass(pass);
+        CPm = new CtrlPresentacionModificarDatos(CDj);
+        return CPm.modificarContraseña(pass);
     }
     
     public Pair <Boolean,String> eliminar(){
-        CPm = new CtrlPresentacionMenu(CDp,CDr,CDj,this);
-        return CPm.eliminaPerfil();
+        CPm = new CtrlPresentacionModificarDatos(CDj);
+        return CPm.eliminar();
     }
     
     public Pair <Boolean,String> crearPartida(String userName, String id, String dif, String mod, int num, int ran){
@@ -87,8 +88,8 @@ public class CtrlPresentacion {
     }
     
     public ArrayList<Pair<String, Integer>> muestraRanking(){
-        CPm = new CtrlPresentacionMenu(CDp,CDr,CDj,this);
-        return CPm.mostrarRanking();
+        CPr = new CtrlPresentacionRanking(CDr);
+        return CPr.mostrarRanking();
     }
     
     private void iniciarRegistroLogin() {

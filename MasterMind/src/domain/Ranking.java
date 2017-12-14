@@ -2,7 +2,6 @@ package domain;
 
 import utils.Pair;
 import java.util.ArrayList;
-import persistence.RankingPersistencia;
 
 /**
  *
@@ -37,8 +36,10 @@ public class Ranking {
      *
      * @param nombre el nombre del jugador que puede entrar en el ranking
      * @param puntos los puntos del jugador que puede entrar en el ranking
+     * @return 
      */
-    public void actualizaRanking(String nombre, int puntos){
+    public Pair<Boolean,Integer> actualizaRanking(String nombre, int puntos){
+        Pair<Boolean,Integer> entradoPosicion = new Pair();
         Pair<String, Integer> p = new Pair(nombre,puntos);
         Pair aux;
         if(ranking.size() < 10) {
@@ -66,15 +67,15 @@ public class Ranking {
                         ranking.set(j,p);
                         p = new Pair(aux);
                     }
-                    System.out.print("¡Te has colocado en " + i+1 + "a posición!" + "\n");
+                    entradoPosicion.setLeft(true);
+                    entradoPosicion.setRight(i+1);
                 }
             }
             if(!b) {
                 System.out.print("No has entrado en el ranking" + "\n");
-                return;
+                entradoPosicion.setLeft(false);
             }
-            
         }
+        return entradoPosicion;
     }
-    
 }
