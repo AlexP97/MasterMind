@@ -37,7 +37,7 @@ public class CtrlPresentacionGame {
         return CDp.jugadaCodeB(cods);
     }
     
-    public Pair <Boolean, String> finishGame(boolean b){
+    public Pair <Boolean,Integer> finishGame(boolean b){
         return CDp.finishGame(b);
     }
 }

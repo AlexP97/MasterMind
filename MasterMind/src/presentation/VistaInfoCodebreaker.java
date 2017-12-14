@@ -40,6 +40,8 @@ public class VistaInfoCodebreaker extends javax.swing.JFrame {
         ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         this.setIconImage(imgicon.getImage());
         
+        setResizable(false);
+        
         initText();
     }
     

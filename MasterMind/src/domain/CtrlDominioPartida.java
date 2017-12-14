@@ -63,7 +63,7 @@ public class CtrlDominioPartida {
         return game.jugadaCodeB(cods);
     }
     
-    public Pair <Boolean, String> finishGame(boolean b){
+    public Pair <Boolean,Integer> finishGame(boolean b){
         return game.finishGame(b);
     }
 }

@@ -83,13 +83,18 @@ public class CtrlPresentacion {
         return CPg.jugadaCodeB(cods);
     }
     
-    public Pair <Boolean, String> finishGame(boolean b){
+    public Pair <Boolean,Integer> finishGame(boolean b){
         return CPg.finishGame(b);
     }
     
     public ArrayList<Pair<String, Integer>> muestraRanking(){
         CPr = new CtrlPresentacionRanking(CDr);
         return CPr.mostrarRanking();
+    }
+    
+    public Pair<Boolean, Integer> actualizaRanking(String nombre, int puntos){
+        CPr = new CtrlPresentacionRanking(CDr);
+        return CPr.actualizaRanking(nombre,puntos);
     }
     
     private void iniciarRegistroLogin() {

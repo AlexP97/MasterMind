@@ -180,21 +180,21 @@ public class Game implements Serializable{
     /**
      *
      * @param ganado si el jugador ha ganado o no
+     * @return 
      */
-    public Pair<Boolean,String> finishGame(boolean ganado) {
+    public Pair<Boolean,Integer> finishGame(boolean ganado) {
         
-        Pair<Boolean,String> p = new Pair<Boolean,String>(false, "");
+        Pair<Boolean,Integer> p = new Pair();
         if (ganado) {
             if (mode.equals("Codemaker")) System.out.print("¡La IA ha acertado la combinación!" + "\n");
             else {
                 System.out.print("¡Has ganado la partida!" + "\n" + "Tu puntuación es: "+ points + "\n");
-                Ranking ranking = Ranking.getInstance();
-                ranking.actualizaRanking(userName, points);
                 p.setLeft(true);
-                p.setRight(Integer.toString(points));
+                p.setRight(points);
             }
         }
         else {
+            p.setLeft(false);
             if (codeIni != null) {
                 System.out.print("Game Over..." + "\n" + "El código correcto era:");
                 for(int i = 0; i < codeIni.size(); i++) {

@@ -387,8 +387,9 @@ public class VistaTableroCopia extends javax.swing.JFrame {
             jButton4ActionPerformed(null);
         }
         else {
-            Pair<Boolean,String> p = CP.finishGame(victory);
+            Pair<Boolean,Integer> p = CP.finishGame(victory);
             if (p.getLeft()){
+                CP.actualizaRanking(CP.getName(),p.getRight());
                 JOptionPane.showMessageDialog(null, "¡Has acertado la combinación!\nHas ganado: "+p.getRight()+" puntos.");
                 jButton4ActionPerformed(null);
             }
