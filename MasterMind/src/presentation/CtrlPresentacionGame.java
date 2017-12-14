@@ -32,4 +32,8 @@ public class CtrlPresentacionGame {
     public Pair <Boolean, String> setCodIni(ArrayList<Integer> cods){
         return CDp.setCodIni(cods);
     }
+    
+    public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
+        return CDp.jugadaCodeB(cods);
+    }
 }

@@ -80,6 +80,11 @@ public class CtrlPresentacion {
         return CPg.setCodIni(cods);
     }
     
+    public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
+        CPg = new CtrlPresentacionGame(CDp);
+        return CPg.jugadaCodeB(cods);
+    }
+    
     public ArrayList<Pair<String, Integer>> muestraRanking(){
         CPm = new CtrlPresentacionMenu(CDp,CDr,CDj,this);
         return CPm.mostrarRanking();

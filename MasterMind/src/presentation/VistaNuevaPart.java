@@ -187,7 +187,7 @@ public class VistaNuevaPart extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(11, 22, 0, 76);
         jPanel1.add(jComboBox1, gridBagConstraints);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codemaker", "Codebreaker" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codebreaker", "Codemaker" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -298,7 +298,7 @@ public class VistaNuevaPart extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (jTextField1.getText().equals("")) 
-            JOptionPane.showMessageDialog(null, "El id de la partida no puede estar vacío.","id vacío",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El id de la partida no puede estar vacío.","Id vacío",JOptionPane.WARNING_MESSAGE);
         else {
             String userName = CP.getName();
             String id = jTextField1.getText();

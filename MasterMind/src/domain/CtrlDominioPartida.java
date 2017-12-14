@@ -58,4 +58,15 @@ public class CtrlDominioPartida {
     public Pair <Boolean, String> setCodIni(ArrayList<Integer> cods){
         return game.setCodIni(cods);
     }
+    
+    public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        a.add(2);
+        a.add(1);
+        a.add(1);
+        a.add(0);
+        a.add(0);
+        a.add(0);
+        return a;
+    }
 }
