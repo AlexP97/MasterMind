@@ -19,7 +19,7 @@ import utils.Pair;
  *
  * @author Daniel
  */
-public class VistaTableroCopia extends javax.swing.JFrame {
+public class VistaTableroCodeM extends javax.swing.JFrame {
 
     CtrlPresentacion CP;
     int num;
@@ -37,7 +37,7 @@ public class VistaTableroCopia extends javax.swing.JFrame {
     /**
      * Creates new form VistaTablero
      */
-    public VistaTableroCopia() {
+    public VistaTableroCodeM() {
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -88,13 +88,6 @@ public class VistaTableroCopia extends javax.swing.JFrame {
 
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -108,7 +101,7 @@ public class VistaTableroCopia extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/1.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2K.png"))); // NOI18N
         jButton6.setPreferredSize(new java.awt.Dimension(35, 35));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,67 +109,11 @@ public class VistaTableroCopia extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2.png"))); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/1K.png"))); // NOI18N
         jButton7.setPreferredSize(new java.awt.Dimension(35, 35));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/3.png"))); // NOI18N
-        jButton8.setPreferredSize(new java.awt.Dimension(35, 35));
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/4.png"))); // NOI18N
-        jButton9.setPreferredSize(new java.awt.Dimension(35, 35));
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/5.png"))); // NOI18N
-        jButton10.setPreferredSize(new java.awt.Dimension(35, 35));
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/6.png"))); // NOI18N
-        jButton11.setPreferredSize(new java.awt.Dimension(35, 35));
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/7.png"))); // NOI18N
-        jButton12.setPreferredSize(new java.awt.Dimension(35, 35));
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/8.png"))); // NOI18N
-        jButton13.setPreferredSize(new java.awt.Dimension(35, 35));
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/9.png"))); // NOI18N
-        jButton14.setPreferredSize(new java.awt.Dimension(35, 35));
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
             }
         });
 
@@ -337,8 +274,8 @@ public class VistaTableroCopia extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (state <= num && introducirJugada) {
          
-            cods.add(1);
-            codePegs[turno-1][state-1].setIcon(jButton6.getIcon());
+            cods.add(2);
+            keyPegs[turno-1][state-1].setIcon(jButton6.getIcon());
             ++state;
             
         }
@@ -353,8 +290,10 @@ public class VistaTableroCopia extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (state <= num) 
-            JOptionPane.showMessageDialog(null, "Debes introducir todas las fichas.","Faltan fichas",JOptionPane.WARNING_MESSAGE);
+        if (state <= num) {
+            
+//JOptionPane.showMessageDialog(null, "Debes introducir todas las fichas.","Faltan fichas",JOptionPane.WARNING_MESSAGE);
+        }
         else {
             
             boolean victory = true;
@@ -401,82 +340,12 @@ public class VistaTableroCopia extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         if (state <= num && introducirJugada) {
          
-            cods.add(2);
-            codePegs[turno-1][state-1].setIcon(jButton7.getIcon());
+            cods.add(1);
+            keyPegs[turno-1][state-1].setIcon(jButton7.getIcon());
             ++state;
             
         }
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if (state <= num && introducirJugada) {
-         
-            cods.add(3);
-            codePegs[turno-1][state-1].setIcon(jButton8.getIcon());
-            ++state;
-            
-        }
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        if (state <= num && introducirJugada) {
-         
-            cods.add(4);
-            codePegs[turno-1][state-1].setIcon(jButton9.getIcon());
-            ++state;
-            
-        }
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if (state <= num && introducirJugada) {
-         
-            cods.add(5);
-            codePegs[turno-1][state-1].setIcon(jButton10.getIcon());
-            ++state;
-            
-        }
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        if (state <= num && introducirJugada) {
-         
-            cods.add(6);
-            codePegs[turno-1][state-1].setIcon(jButton11.getIcon());
-            ++state;
-            
-        }
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        if (state <= num && introducirJugada) {
-         
-            cods.add(7);
-            codePegs[turno-1][state-1].setIcon(jButton12.getIcon());
-            ++state;
-            
-        }
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        if (state <= num && introducirJugada) {
-         
-            cods.add(8);
-            codePegs[turno-1][state-1].setIcon(jButton13.getIcon());
-            ++state;
-            
-        }
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        if (state <= num && introducirJugada) {
-         
-            cods.add(9);
-            codePegs[turno-1][state-1].setIcon(jButton14.getIcon());
-            ++state;
-            
-        }
-    }//GEN-LAST:event_jButton14ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -495,39 +364,32 @@ public class VistaTableroCopia extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaTablero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTableroCodeM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaTablero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTableroCodeM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaTablero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTableroCodeM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaTablero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTableroCodeM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaTablero().setVisible(true);
+                new VistaTableroCodeM().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -563,13 +425,6 @@ public class VistaTableroCopia extends javax.swing.JFrame {
                 
         if (ran >= 1) jPanel4.add(jButton6);
         if (ran >= 2) jPanel4.add(jButton7);
-        if (ran >= 3) jPanel4.add(jButton8);
-        if (ran >= 4) jPanel4.add(jButton9);
-        if (ran >= 5) jPanel4.add(jButton10);
-        if (ran >= 6) jPanel4.add(jButton11);
-        if (ran >= 7) jPanel4.add(jButton12);
-        if (ran >= 8) jPanel4.add(jButton13);
-        if (ran == 9) jPanel4.add(jButton14);
         
         x = 0;
         y = 0;

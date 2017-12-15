@@ -322,7 +322,7 @@ public class VistaNuevaPart extends javax.swing.JFrame {
                     dispose();
                 }
                 else {
-                    VistaTableroCopia Vt = new VistaTableroCopia();
+                    VistaTableroCodeB Vt = new VistaTableroCodeB();
                     Vt.setCP(CP);
                     Vt.setParams(num,ran,i);
                     Vt.setVisible(true);

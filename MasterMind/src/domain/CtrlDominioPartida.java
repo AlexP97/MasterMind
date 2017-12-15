@@ -66,4 +66,17 @@ public class CtrlDominioPartida {
     public Pair <Boolean,Integer> finishGame(boolean b){
         return game.finishGame(b);
     }
+    
+    public Pair <Boolean,String> saveGame(String userName){
+        Pair <Boolean,String> p = new Pair<Boolean,String>();
+        byte[] b = game.SaveGame();
+        if (b != null) {
+            p = CPG.write(b, "data/players/"+userName+"/games/"+game.getId());
+        }
+        else {
+            p.setLeft(false);
+            p.setRight("No se ha podido guardar la partida.");
+        }
+        return p;
+    }
 }

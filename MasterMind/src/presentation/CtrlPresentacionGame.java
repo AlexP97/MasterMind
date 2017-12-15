@@ -33,6 +33,10 @@ public class CtrlPresentacionGame {
         return CDp.setCodIni(cods);
     }
     
+    public Pair <Boolean, String> saveGame(String s){
+        return CDp.saveGame(s);
+    }
+    
     public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
         return CDp.jugadaCodeB(cods);
     }

@@ -10,7 +10,9 @@ import domain.Game;
 import domain.Jugador;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,6 +20,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import static java.lang.System.out;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utils.Pair;
 
 /**
@@ -26,105 +30,30 @@ import utils.Pair;
  */
 public class GamePersistencia implements Serializable{
     
-    Game game;
-    CodeBreaker cb;
-    
-    /**
-     *
-     * @param gameC la partida a guardar
-     * @param codeB el CodeBreaker de la partida a guardar
-     */
-    public GamePersistencia(Game gameC, CodeBreaker codeB){
+    public Pair <Boolean, String> write(byte[] b, String s) {
         
-        this.game = gameC;
-        this.cb = codeB;
+        Pair <Boolean,String> p = new Pair<Boolean,String>(true, "La partida se ha guardado correctamente");
         
-    }
-    
-    public GamePersistencia(){
-        
-        this.game = new Game();
-        this.cb = null;
-        
-    }
-    
-    /**
-     *
-     * @param gameS la partida a guardar
-     */
-    public void setGame(Game gameS){
-        this.game = gameS;
-    }
-    
-    /**
-     *
-     * @param codeB el CodeBreaker de la partida a guardar
-     */
-    public void setCB(CodeBreaker codeB){
-        this.cb = codeB;
-    }
-    
-    /**
-     *
-     * @param username el nombre de usuario
-     * @param id el id de la partida
-     * @return si se ha guardado la partida correctamente
-     */
-    public boolean SaveGame(String username, String id){
-                        
+        FileOutputStream out;
         try {
-
-            if (game.getCargado()) {
-                File file = new File("data/players/"+username+"/games/"+id+"Game");
-                file.delete();
+            out = new FileOutputStream(s);
+            try {
+                
+                out.write(b);
+                out.close();
+            
+            } catch (IOException ex) {
+               p.setLeft(false);
+               p.setRight("No se ha podido guardar la partida.");
             }
-            FileOutputStream fout = new FileOutputStream("data/players/"+username+"/games/"+id+"Game");
-            ObjectOutputStream oos = new ObjectOutputStream(fout);
-            oos.writeObject(game);
-            oos.close();
-
-            return true;
-
-        } catch (IOException ex) {
-
-            File file = new File("data/players/"+username+"/games/"+id+"Game");
-            file.delete();
-            out.println("No se ha podido guardar la partida." + "\n");
-            return false;
-
+            
+        } catch (FileNotFoundException ex) {
+            p.setLeft(false);
+            p.setRight("No se ha podido guardar la partida.");
         }
-    }
         
-    /**
-     *
-     * @param username el nombre de usuario
-     * @param id el id de la partida
-     * @return si se ha guardado la partida correctamente
-     */
-    public boolean SaveCodeB(String username, String id){
-                                
-        try {
-
-            if (game.getCargado()) {
-                File file = new File("data/players/"+username+"/games/"+id+"CB");
-                file.delete();
-            }
-            FileOutputStream fout = new FileOutputStream("data/players/"+username+"/games/"+id+"CB");
-            ObjectOutputStream oos = new ObjectOutputStream(fout);
-            oos.writeObject(cb);    
-            oos.close();
-
-            return true;
-
-        } catch (IOException ex) {
-
-            out.println("No se ha podido guardar la partida." + "\n");
-            File file = new File("data/players/"+username+"/games/"+id+"CB");
-            file.delete();
-            return false;
-
-        }
-    }    
+        return p;
+    }
     
     /**
      *
@@ -147,76 +76,7 @@ public class GamePersistencia implements Serializable{
      */
     public void LoadGame(Jugador playerP){
         
-        if (playerP != null) {
-            File[] listOfFiles = finder("data/players/"+playerP.getName()+"/games/");
-
-            if (listOfFiles != null){
-                for (int i = 0; i < listOfFiles.length; i++) {
-
-                    String fileNameWithOutExt = listOfFiles[i].getName();
-                    fileNameWithOutExt = fileNameWithOutExt.substring(0, fileNameWithOutExt.length()-4);
-                    Integer num = i + 1;
-                    System.out.println(num.toString() + " - " + fileNameWithOutExt);
-
-                }
-
-                //Leer datos de la partida y cargar el Game
-
-                boolean cargado = false;
-
-                while (!cargado){            
-                    try {
-
-                        System.out.print("Introduce el número de la partida o -1 para salir." + "\n");
-
-                        Scanner input = new Scanner(System.in);
-
-                        int num = Integer.parseInt(input.nextLine());
-
-                        if (num > listOfFiles.length) {
-                            System.out.print("Esta partida no existe. Introduce otro número." + "\n");
-                        }
-                        else if (num == -1) return;
-                        else {
-                            input = new Scanner(listOfFiles[num-1]);
-
-                            FileInputStream fout = new FileInputStream(listOfFiles[num-1]);
-                            ObjectInputStream oos = new ObjectInputStream(fout);
-                            game = (Game) oos.readObject();
-                            oos.close();
-
-                            if (game.getMode().equals("codemaker")){
-
-                                FileInputStream foutCB = new FileInputStream("data/players/"+playerP.getName()+"/games/"+game.getId()+"CB");
-                                ObjectInputStream oosCB = new ObjectInputStream(foutCB);
-                                cb = (CodeBreaker) oosCB.readObject();
-                                oosCB.close();
-                                game.setCB(cb);
-
-                            }
-                            cargado = true;
-                            
-                            game.setCargado(true);
-                            
-                            System.out.print("Partida cargada!" + "\n");
-
-                            
-                            game.setGameP(this);
-                            
-
-                        }
-
-                    } catch (Exception ex) {
-                        System.out.print("No se ha podido cargar la partida." + "\n");
-                        return;
-                    }
-                }
-            }
-            else {
-                System.out.print("No hay ninguna partida guardada." + "\n");
-                return;
-            }
-        }
+        
     }
     
     /**

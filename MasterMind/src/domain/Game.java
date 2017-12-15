@@ -1,5 +1,9 @@
 package domain;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import persistence.GamePersistencia;
@@ -154,27 +158,27 @@ public class Game implements Serializable{
         
     }
     
-    public void SaveGame() {
+    public byte[] SaveGame() {
            
+        byte[] gameBytes = null;
+        
         if (!userName.equals("")){
-            boolean b = gameP.SaveGame(userName, id);
-            boolean b2 = true;
-
-            if (mode.equals("Codemaker")){
-
-                b2 = gameP.SaveCodeB(userName, id);
-
-            }
-
-            if (b && b2) {
-                gameSaved = true;
-                System.out.println("Se ha guardado la partida." + "\n");
-            }
-            else {
-                gameSaved = false;
-                return;
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutput out = null;
+            try {
+                
+                out = new ObjectOutputStream(bos);   
+                out.writeObject(this);
+                out.flush();
+                gameBytes = bos.toByteArray();
+                bos.close();
+                
+            } catch (IOException ex) {
+              // ignore close exception
             }
         }
+        
+        return gameBytes;
     }
     
     /**

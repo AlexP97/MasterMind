@@ -79,6 +79,10 @@ public class CtrlPresentacion {
         return CPg.setCodIni(cods);
     }
     
+    public Pair <Boolean, String> saveGame(){
+        return CPg.saveGame(getName());
+    }
+    
     public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
         return CPg.jugadaCodeB(cods);
     }

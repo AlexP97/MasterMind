@@ -291,7 +291,11 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
             Pair<Boolean,String> p = CP.setCodIni(cods);
             if(!p.getLeft()) JOptionPane.showMessageDialog(null, p.getRight());
             else{
-                JOptionPane.showMessageDialog(null, "El codigo incial se ha configurado correctamente, pero la vista para ste modo aún no está creada.");
+                VistaTableroCodeM Vt = new VistaTableroCodeM();
+                Vt.setCP(CP);
+                Vt.setParams(num,ran,dif);
+                Vt.setVisible(true);
+                dispose();
             }
             
         }

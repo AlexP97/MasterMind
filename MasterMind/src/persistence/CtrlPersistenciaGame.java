@@ -31,4 +31,8 @@ public class CtrlPersistenciaGame {
         return gameP.eliminarPartida(userName, id);
     }
     
+    public Pair <Boolean, String> write(byte[] b, String s){
+        return gameP.write(b,s);
+    }
+    
 }
