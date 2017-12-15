@@ -126,6 +126,7 @@ public class VistaRanking extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(239, 207, 167));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -136,7 +137,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 27;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(27, 41, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(26, 61, 0, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
 
         jButton1.setText("Atrás");
@@ -157,7 +158,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(40, 76, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(41, 76, 0, 0);
         jPanel1.add(jLabel2, gridBagConstraints);
 
         jLabel3.setText("2 - ");
@@ -239,7 +240,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(40, 69, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(41, 69, 0, 0);
         jPanel1.add(jLabel12, gridBagConstraints);
 
         jLabel13.setText("Vacío");
@@ -319,7 +320,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(40, 40, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(41, 20, 0, 0);
         jPanel1.add(jLabel22, gridBagConstraints);
 
         jLabel23.setText("Vacío");
@@ -327,7 +328,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 0);
         jPanel1.add(jLabel23, gridBagConstraints);
 
         jLabel24.setText("Vacío");
@@ -335,7 +336,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 0);
         jPanel1.add(jLabel24, gridBagConstraints);
 
         jLabel25.setText("Vacío");
@@ -343,7 +344,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 0);
         jPanel1.add(jLabel25, gridBagConstraints);
 
         jLabel26.setText("Vacío");
@@ -351,7 +352,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 0);
         jPanel1.add(jLabel26, gridBagConstraints);
 
         jLabel27.setText("Vacío");
@@ -359,7 +360,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 0);
         jPanel1.add(jLabel27, gridBagConstraints);
 
         jLabel28.setText("Vacío");
@@ -367,7 +368,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 0);
         jPanel1.add(jLabel28, gridBagConstraints);
 
         jLabel29.setText("Vacío");
@@ -375,7 +376,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 0);
         jPanel1.add(jLabel29, gridBagConstraints);
 
         jLabel30.setText("Vacío");
@@ -383,7 +384,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 0);
         jPanel1.add(jLabel30, gridBagConstraints);
 
         jLabel31.setText("Vacío");
@@ -391,7 +392,7 @@ public class VistaRanking extends javax.swing.JFrame {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 40, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 0);
         jPanel1.add(jLabel31, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

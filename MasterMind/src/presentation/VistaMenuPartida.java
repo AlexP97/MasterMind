@@ -68,6 +68,7 @@ public class VistaMenuPartida extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(239, 207, 167));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jButton1.setText("Nueva partida");

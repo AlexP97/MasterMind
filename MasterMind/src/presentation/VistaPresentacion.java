@@ -39,7 +39,10 @@ public class VistaPresentacion extends javax.swing.JFrame {
         setTitle("MasterMind");
         
         ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
-        this.setIconImage(imgicon.getImage());   
+        this.setIconImage(imgicon.getImage());
+        
+        ImageIcon icon = new ImageIcon("src/resources/fondo3.png");
+        jLabel1.setIcon(icon);
     }
 
     public void setCP(CtrlPresentacion CP){
@@ -63,18 +66,18 @@ public class VistaPresentacion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(239, 207, 167));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Bienvenido a MasterMind");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 22;
-        gridBagConstraints.ipady = 48;
+        gridBagConstraints.ipadx = 249;
+        gridBagConstraints.ipady = 70;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(48, 171, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(50, 102, 0, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
 
         jButton1.setLabel("Login");
@@ -89,7 +92,7 @@ public class VistaPresentacion extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 23;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(70, 157, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(68, 157, 0, 0);
         jPanel1.add(jButton1, gridBagConstraints);
 
         jButton2.setLabel("Register");
@@ -101,10 +104,11 @@ public class VistaPresentacion extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 18;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(70, 92, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(68, 92, 0, 141);
         jPanel1.add(jButton2, gridBagConstraints);
 
         jButton3.setText("Salir");
@@ -118,7 +122,7 @@ public class VistaPresentacion extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(143, 138, 52, 133);
+        gridBagConstraints.insets = new java.awt.Insets(40, 110, 155, 0);
         jPanel1.add(jButton3, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
