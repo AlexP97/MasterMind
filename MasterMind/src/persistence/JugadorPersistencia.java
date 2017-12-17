@@ -166,15 +166,17 @@ public class JugadorPersistencia {
         }
     }
     
-    public ArrayList<String> obtenerPartidas(String n) {
-        ArrayList<String> res = new ArrayList<>();
+    public String[] obtenerPartidas(String n) {
+        String[] res1 = {"No hay partidas"};
         File dir = new File("data/players/"+n+"/games");
         if(dir.exists()) {
             File[] ficheros = dir.listFiles();
+            String[] res2 = new String[ficheros.length];
             for(int i = 0; i < ficheros.length; i++) {
-                res.add(ficheros[i].getName());
+                res2[i] = ficheros[i].getName();
             }
+            if (res2.length > 0) return res2;
         }
-        return res;
+        return res1;
     }
 }

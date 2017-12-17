@@ -202,8 +202,10 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(239, 207, 167));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
+        jPanel3.setBackground(new java.awt.Color(239, 207, 167));
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -294,6 +296,7 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
                 VistaTableroCodeM Vt = new VistaTableroCodeM();
                 Vt.setCP(CP);
                 Vt.setParams(num,ran,dif);
+                Vt.PopUpSolucion(cods);
                 Vt.setVisible(true);
                 dispose();
             }

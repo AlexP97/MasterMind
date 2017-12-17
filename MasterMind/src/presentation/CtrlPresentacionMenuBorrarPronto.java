@@ -9,6 +9,7 @@ import domain.CtrlDominioJugador;
 import domain.CtrlDominioPartida;
 import domain.CtrlDominioRanking;
 import java.util.ArrayList;
+import java.util.Arrays;
 import utils.Pair;
 
 /**
@@ -39,7 +40,7 @@ public class CtrlPresentacionMenuBorrarPronto {
     
     private boolean cargarPartida(){
         VistaCargarPartida Vcargar = new VistaCargarPartida();
-        ArrayList<String> partidas = CDj.obtenerPartidas();
+        ArrayList<String> partidas = new ArrayList<String>(Arrays.asList(CDj.obtenerPartidas()));
         ArrayList<String> datos = new ArrayList<>();
         Vcargar.obtenerDatos(datos,partidas);
         Pair<Boolean, String> p = new Pair();

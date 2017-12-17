@@ -6,7 +6,9 @@
 
 package presentation;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -44,6 +46,7 @@ public class VistaCargarPart extends javax.swing.JFrame {
     
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
+        loadGames();
     }
 
     /** This method is called from within the constructor to
@@ -64,12 +67,8 @@ public class VistaCargarPart extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-<<<<<<< Updated upstream
         jPanel1.setBackground(new java.awt.Color(239, 207, 167));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-=======
->>>>>>> Stashed changes
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cargando partida");
@@ -78,6 +77,11 @@ public class VistaCargarPart extends javax.swing.JFrame {
         jLabel2.setText("Partidas disponibles");
 
         jButton1.setText("Cargar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Atrás");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -113,15 +117,15 @@ public class VistaCargarPart extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addGap(51, 51, 51)
+                .addGap(31, 31, 31)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,7 +136,7 @@ public class VistaCargarPart extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -144,6 +148,16 @@ public class VistaCargarPart extends javax.swing.JFrame {
         Vmp.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String s = (String)jComboBox1.getSelectedItem();
+        if (!s.equals("No hay partidas")){
+            
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "No hay ninguna partida para cargar.","No hay partidas",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,7 +205,8 @@ public class VistaCargarPart extends javax.swing.JFrame {
 
     private void loadGames() {
         
-        jComboBox1.setModel();
+        String[] parts = CP.obtenerPartidas();
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(parts));
         
     }
 }

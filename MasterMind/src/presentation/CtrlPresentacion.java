@@ -51,6 +51,10 @@ public class CtrlPresentacion {
         return CDp.getId();
     }
     
+    public String[] obtenerPartidas() {
+        return CDj.obtenerPartidas();
+    }
+    
     public Pair <Boolean,String> modificaUsuario(String user){
         CPm = new CtrlPresentacionModificarDatos(CDj);
         return CPm.modificarUsuario(user);
@@ -85,6 +89,10 @@ public class CtrlPresentacion {
     
     public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
         return CPg.jugadaCodeB(cods);
+    }
+    
+    public ArrayList<Integer> jugadaCodeM(ArrayList<Integer> cods){
+        return CPg.jugadaCodeM(cods);
     }
     
     public Pair <Boolean,Integer> finishGame(boolean b){

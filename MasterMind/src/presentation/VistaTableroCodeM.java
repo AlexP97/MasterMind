@@ -6,12 +6,15 @@
 package presentation;
 
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import utils.Pair;
 
@@ -33,6 +36,7 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
     ArrayList<Integer> cods;
     JLabel[][] codePegs;
     JLabel[][] keyPegs;
+    JFrame solucion;
     
     /**
      * Creates new form VistaTablero
@@ -100,6 +104,7 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2K.png"))); // NOI18N
         jButton6.setPreferredSize(new java.awt.Dimension(35, 35));
@@ -165,6 +170,11 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         });
 
         jButton3.setText("Guardar partida");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Salir del juego");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -176,37 +186,32 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         jButton5.setText("Ayuda");
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jButton8.setText("Ver solución");
+        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(jLabel1)))
-                .addGap(25, 25, 25))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButton5)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addComponent(jButton3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(37, 37, 37)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4)
@@ -214,6 +219,18 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(76, 76, 76))))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 10, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,19 +243,16 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton5)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addComponent(jButton8))
                 .addGap(0, 22, Short.MAX_VALUE))
         );
 
@@ -267,6 +281,7 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         VistaMenuPartida Vmp = new VistaMenuPartida();
         Vmp.setCP(CP);
+        solucion.setVisible(false);
         Vmp.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -284,39 +299,36 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (state != 1) {
             --state;
-            codePegs[turno-1][state-1].setIcon(iconoVacio);
+            keyPegs[turno-1][state-1].setIcon(iconoVacioK);
             cods.remove(cods.size()-1);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (state <= num) {
-            
-//JOptionPane.showMessageDialog(null, "Debes introducir todas las fichas.","Faltan fichas",JOptionPane.WARNING_MESSAGE);
-        }
-        else {
-            
-            boolean victory = true;
-            ArrayList<Integer> a = CP.jugadaCodeB(cods);
-            if (a != null){
-             
-                for (int i = 0; i < a.size(); ++i){
-                 
-                    if (a.get(i) == 2) keyPegs[turno-1][i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2K.png")));
-                    else if (a.get(i) == 1) {
-                        victory = false;
-                        keyPegs[turno-1][i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/1K.png")));
-                    }
-                    else victory = false;
-                    
-                }
-                if (victory) finishGame(true);
-            }
-            turno++;
-            state = 1;
-            cods = new ArrayList<Integer>();
-            if (turno > dif) finishGame(false);
-        }
+        
+        jButton6.setEnabled(false);
+        jButton7.setEnabled(false);
+        jLabel1.setText("Esperando la jugada del Codebreaker...");
+
+        rellenarCods();
+
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        
+        boolean victory = true;
+        if (cods.contains(1) || cods.contains(0)) victory = false;
+        if (victory) finishGame(true);
+        else a = CP.jugadaCodeB(cods);
+
+        turno++;
+
+        if (a != null) setJugadaCodeB(a);
+
+        state = 1;
+        cods = new ArrayList<Integer>();
+        if (turno > dif) finishGame(false);
+        jButton6.setEnabled(true);
+        jButton7.setEnabled(true);
+        jLabel1.setText("Introduce tu jugada");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void finishGame(boolean victory) {
@@ -326,15 +338,10 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
             jButton4ActionPerformed(null);
         }
         else {
-            Pair<Boolean,Integer> p = CP.finishGame(victory);
-            if (p.getLeft()){
-                CP.actualizaRanking(CP.getName(),p.getRight());
-                JOptionPane.showMessageDialog(null, "¡Has acertado la combinación!\nHas ganado: "+p.getRight()+" puntos.");
-                jButton4ActionPerformed(null);
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Ha habido un error actualizando el ranking.","Error",JOptionPane.WARNING_MESSAGE);
-            } 
+            
+            JOptionPane.showMessageDialog(null, "¡La IA ha acertado la combinación!");
+            jButton4ActionPerformed(null);
+            
         }
     }
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -346,6 +353,22 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Pair<Boolean,String> p = CP.saveGame();
+        if (p.getLeft()){
+            JOptionPane.showMessageDialog(null, "Has guardado la partida.");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Ha habido un error guardando la partida.","Error",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        
+        solucion.setVisible(true);
+        
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -390,6 +413,7 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -461,6 +485,55 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
             }
             x = 0;
             y += 18;
+        }
+        
+        jButton6.setEnabled(false);
+        jButton7.setEnabled(false);
+        jLabel1.setText("Esperando la jugada del Codebreaker...");
+
+        ArrayList<Integer> a = CP.jugadaCodeB(cods);
+
+        if (a != null) setJugadaCodeB(a);
+
+        jButton6.setEnabled(true);
+        jButton7.setEnabled(true);
+        jLabel1.setText("Introduce tu jugada");
+    }
+    
+    private void setJugadaCodeB(ArrayList<Integer> a) {
+        
+        for (int i = 0; i < a.size(); ++i){
+            codePegs[turno-1][i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/"+Integer.toString(a.get(i))+".png")));
+        }
+    }
+    
+    private void rellenarCods() {
+        
+        while(cods.size() < num){
+            cods.add(0);
+        }
+    }
+    
+    public void PopUpSolucion(ArrayList<Integer> a){
+        
+        solucion = new JFrame();
+        solucion.setSize(400,115);
+        solucion.setTitle("Solución de la partida " +CP.getId());
+        
+        ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
+        
+        solucion.setIconImage(imgicon.getImage());
+        
+        JPanel p = new JPanel();
+        p.setLayout(new GridBagLayout());
+        
+        solucion.add(p);
+        
+        for (int i = 0; i < a.size(); ++i) {
+            JLabel l = new JLabel();
+            l.setText("");
+            l.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/"+Integer.toString(a.get(i))+".png")));
+            p.add(l);
         }
     }
 }

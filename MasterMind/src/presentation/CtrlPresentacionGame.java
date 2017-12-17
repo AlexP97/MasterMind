@@ -41,6 +41,10 @@ public class CtrlPresentacionGame {
         return CDp.jugadaCodeB(cods);
     }
     
+    public ArrayList<Integer> jugadaCodeM(ArrayList<Integer> cods){
+        return CDp.jugadaCodeM(cods);
+    }
+    
     public Pair <Boolean,Integer> finishGame(boolean b){
         return CDp.finishGame(b);
     }

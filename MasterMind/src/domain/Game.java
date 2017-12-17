@@ -260,6 +260,7 @@ public class Game implements Serializable{
 
             if (mode.equals("Codemaker")) {
                 this.codeM = new CodeMaker(false, numero, rango);
+                this.codeB = new CodeBreaker(true, numero, rango);
             }
             else if (mode.equals("Codebreaker")) {
                 this.codeB = new CodeBreaker(false, numero, rango);
@@ -288,9 +289,18 @@ public class Game implements Serializable{
     
     public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
         
-        ArrayList<Integer> outputM = new ArrayList<Integer>();
-        outputM = codeM.jugar("IA", conversorCode(cods), codeIni);
+        if (cods.size() > 0) codeMAnt = conversorKey(cods);
+        ArrayList<Integer> outputB = codeB.jugar("IA", codeBAnt, codeMAnt);
+        if (outputB.contains(1) || outputB.contains(0)) baja_Puntuacion();
+        codeBAnt = conversorCode(outputB);
+        return outputB;
+    }
+    
+    public ArrayList<Integer> jugadaCodeM(ArrayList<Integer> cods){
+        
+        ArrayList<Integer> outputM = codeM.jugar("IA", conversorCode(cods), codeIni);
         if (outputM.contains(1) || outputM.contains(0)) baja_Puntuacion();
+        codeBAnt = conversorCode(cods);
         return outputM;
     }
 }

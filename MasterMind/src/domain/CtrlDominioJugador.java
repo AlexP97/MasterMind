@@ -62,7 +62,7 @@ public class CtrlDominioJugador {
         return j.getName();
     }
 
-    public ArrayList<String> obtenerPartidas() {
+    public String[] obtenerPartidas() {
         return CPmj.obtenerPartidas(j.getName());
     }
     

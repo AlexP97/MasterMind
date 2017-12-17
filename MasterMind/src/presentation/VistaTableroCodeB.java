@@ -363,7 +363,7 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         else {
             
             boolean victory = true;
-            ArrayList<Integer> a = CP.jugadaCodeB(cods);
+            ArrayList<Integer> a = CP.jugadaCodeM(cods);
             if (a != null){
              
                 for (int i = 0; i < a.size(); ++i){

@@ -39,7 +39,7 @@ public class CtrlPersistenciaJugador {
         return j.setPassword(n,c);
     }
 
-    public ArrayList<String> obtenerPartidas(String n) {
+    public String[] obtenerPartidas(String n) {
        return j.obtenerPartidas(n);
     }
 }

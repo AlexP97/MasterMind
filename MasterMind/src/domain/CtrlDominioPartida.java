@@ -63,6 +63,10 @@ public class CtrlDominioPartida {
         return game.jugadaCodeB(cods);
     }
     
+    public ArrayList<Integer> jugadaCodeM(ArrayList<Integer> cods){
+        return game.jugadaCodeM(cods);
+    }
+    
     public Pair <Boolean,Integer> finishGame(boolean b){
         return game.finishGame(b);
     }
