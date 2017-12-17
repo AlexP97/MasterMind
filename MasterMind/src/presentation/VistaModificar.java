@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -42,6 +43,8 @@ public class VistaModificar extends javax.swing.JFrame {
         
         ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         this.setIconImage(imgicon.getImage());
+        
+        setListeners();
     }
     
     public void setCP(CtrlPresentacion CP){
@@ -50,6 +53,19 @@ public class VistaModificar extends javax.swing.JFrame {
     
     public void setName(String name){
         jTextField2.setText(CP.getName());
+    }
+    
+    public final void setListeners(){
+        KeyListenerPers kl = new KeyListenerPers(jButton1, KeyEvent.VK_ENTER);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl);
+        jTextField2.addKeyListener(kl);
+        jPasswordField1.addKeyListener(kl);
+        
+        KeyListenerPers kl2 = new KeyListenerPers(jButton2, KeyEvent.VK_ESCAPE);
+        jPanel1.addKeyListener(kl2);
+        jTextField2.addKeyListener(kl2);
+        jPasswordField1.addKeyListener(kl2);
     }
 
     /**

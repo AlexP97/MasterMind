@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -45,10 +46,18 @@ public class VistaRanking extends javax.swing.JFrame {
         
         ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         this.setIconImage(imgicon.getImage());
+        
+        setListeners();
     }
     
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
+    }
+    
+    public final void setListeners(){
+        KeyListenerPers kl2 = new KeyListenerPers(jButton1, KeyEvent.VK_ESCAPE);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl2);
     }
     
     public void initRanking(){

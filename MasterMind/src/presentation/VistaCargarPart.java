@@ -6,6 +6,7 @@
 
 package presentation;
 
+import java.awt.event.KeyEvent;
 import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -42,11 +43,24 @@ public class VistaCargarPart extends javax.swing.JFrame {
         
         ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         this.setIconImage(imgicon.getImage());
+        
+        setListeners();
     }
     
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
         loadGames();
+    }
+    
+    public final void setListeners(){
+        KeyListenerPers kl = new KeyListenerPers(jButton1, KeyEvent.VK_ENTER);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl);
+        jComboBox1.addKeyListener(kl);
+        
+        KeyListenerPers kl2 = new KeyListenerPers(jButton2, KeyEvent.VK_ESCAPE);
+        jPanel1.addKeyListener(kl2);
+        jComboBox1.addKeyListener(kl);
     }
 
     /** This method is called from within the constructor to
@@ -91,6 +105,11 @@ public class VistaCargarPart extends javax.swing.JFrame {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,6 +177,10 @@ public class VistaCargarPart extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No hay ninguna partida para cargar.","No hay partidas",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

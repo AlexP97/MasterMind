@@ -6,6 +6,7 @@
 package presentation;
 
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -61,6 +62,8 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
         state = 1;
         iconoVacio = new javax.swing.ImageIcon(getClass().getResource("/resources/0.png"));
         cods = new ArrayList<Integer>();
+        
+        setListeners();
     }
     
     public void setCP(CtrlPresentacion CP){
@@ -72,6 +75,45 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
         this.ran = r;
         this.dif = d;
         labelsMethod();
+    }
+    
+    public final void setListeners(){
+        KeyListenerPers kl = new KeyListenerPers(jButton1, KeyEvent.VK_ENTER);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl);
+        jButton3.addKeyListener(kl);
+        jButton4.addKeyListener(kl);
+        jButton5.addKeyListener(kl);
+        jButton6.addKeyListener(kl);
+        jButton7.addKeyListener(kl);
+        jButton8.addKeyListener(kl);
+        jButton9.addKeyListener(kl);
+        jButton10.addKeyListener(kl);
+        jButton11.addKeyListener(kl);
+        
+        KeyListenerPers kl2 = new KeyListenerPers(jButton2, KeyEvent.VK_ESCAPE);  
+        jPanel1.addKeyListener(kl2);
+        jButton3.addKeyListener(kl2);
+        jButton4.addKeyListener(kl2);
+        jButton5.addKeyListener(kl2);
+        jButton6.addKeyListener(kl2);
+        jButton7.addKeyListener(kl2);
+        jButton8.addKeyListener(kl2);
+        jButton9.addKeyListener(kl2);
+        jButton10.addKeyListener(kl2);
+        jButton11.addKeyListener(kl2);
+        
+        KeyListenerPers kl3 = new KeyListenerPers(jButton2, KeyEvent.VK_BACK_QUOTE);  
+        jPanel1.addKeyListener(kl3);
+        jButton3.addKeyListener(kl3);
+        jButton4.addKeyListener(kl3);
+        jButton5.addKeyListener(kl3);
+        jButton6.addKeyListener(kl3);
+        jButton7.addKeyListener(kl3);
+        jButton8.addKeyListener(kl3);
+        jButton9.addKeyListener(kl3);
+        jButton10.addKeyListener(kl3);
+        jButton11.addKeyListener(kl3);
     }
 
     /**

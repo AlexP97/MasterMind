@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
@@ -43,10 +44,18 @@ public class VistaInfo extends javax.swing.JFrame {
         setResizable(false);
         
         initText();
+        
+        setListeners();
     }
     
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
+    }
+    
+    public final void setListeners(){
+        KeyListenerPers kl2 = new KeyListenerPers(jButton3, KeyEvent.VK_ESCAPE);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl2);
     }
 
     public final void initText(){

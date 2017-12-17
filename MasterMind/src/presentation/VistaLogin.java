@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -14,7 +15,7 @@ import utils.Pair;
  *
  * @author Usuario
  */
-public class VistaLogin extends javax.swing.JFrame {
+public class VistaLogin extends javax.swing.JFrame{
     CtrlPresentacion CP;
     /**
      * Creates new form VistaLogin
@@ -43,12 +44,26 @@ public class VistaLogin extends javax.swing.JFrame {
         
         ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         this.setIconImage(imgicon.getImage());
+        
+        setListeners();
     }
     
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
     }
 
+    public final void setListeners(){
+        KeyListenerPers kl = new KeyListenerPers(jButton1, KeyEvent.VK_ENTER);
+        jTextField1.addKeyListener(kl);
+        jPasswordField1.addKeyListener(kl);
+        
+        KeyListenerPers kl2 = new KeyListenerPers(jButton2, KeyEvent.VK_ESCAPE);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl2);
+        jTextField1.addKeyListener(kl2);
+        jPasswordField1.addKeyListener(kl2);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -186,6 +201,15 @@ public class VistaLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void actionPerformed(KeyEvent event){
+        if(event.getSource() == jPasswordField1 || event.getSource() == jTextField1){
+            if(event.getKeyCode() == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+        }
+    }
+
+    
     /**
      * @param args the command line arguments
      */
@@ -231,4 +255,6 @@ public class VistaLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+
 }

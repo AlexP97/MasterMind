@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -43,10 +44,24 @@ public class VistaRegister extends javax.swing.JFrame {
         
         ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         this.setIconImage(imgicon.getImage());
+        
+        setListeners();
     }
     
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
+    }
+    
+    public final void setListeners(){
+        KeyListenerPers kl = new KeyListenerPers(jButton1, KeyEvent.VK_ENTER);
+        jTextField1.addKeyListener(kl);
+        jPasswordField2.addKeyListener(kl);
+        
+        KeyListenerPers kl2 = new KeyListenerPers(jButton2, KeyEvent.VK_ESCAPE);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl2);
+        jTextField1.addKeyListener(kl2);
+        jPasswordField2.addKeyListener(kl2);
     }
 
     /**

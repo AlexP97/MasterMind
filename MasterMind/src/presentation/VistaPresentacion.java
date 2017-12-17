@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -43,10 +44,18 @@ public class VistaPresentacion extends javax.swing.JFrame {
         
         ImageIcon icon = new ImageIcon("src/resources/fondo3.png");
         jLabel1.setIcon(icon);
+        
+        setListeners();
     }
 
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
+    }
+    
+    public final void setListeners(){
+        KeyListenerPers kl = new KeyListenerPers(jButton3, KeyEvent.VK_ESCAPE);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl);
     }
     /**
      * This method is called from within the constructor to initialize the form.

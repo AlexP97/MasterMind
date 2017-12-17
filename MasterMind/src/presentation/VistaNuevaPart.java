@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -43,10 +44,36 @@ public class VistaNuevaPart extends javax.swing.JFrame {
         
         ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         this.setIconImage(imgicon.getImage());
+        
+        setListeners();
     }
     
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
+    }
+    
+    public final void setListeners(){
+        KeyListenerPers kl2 = new KeyListenerPers(jButton2, KeyEvent.VK_ESCAPE);
+        jComboBox1.addKeyListener(kl2);
+        jComboBox2.addKeyListener(kl2);
+        jSlider1.addKeyListener(kl2);
+        jSlider2.addKeyListener(kl2);
+        jSpinner1.addKeyListener(kl2);
+        jSpinner2.addKeyListener(kl2);
+        jTextField1.addKeyListener(kl2);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl2);
+        
+        KeyListenerPers kl = new KeyListenerPers(jButton1, KeyEvent.VK_ENTER);
+        jComboBox1.addKeyListener(kl);
+        jComboBox2.addKeyListener(kl);
+        jSlider1.addKeyListener(kl);
+        jSlider2.addKeyListener(kl);
+        jSpinner1.addKeyListener(kl);
+        jSpinner2.addKeyListener(kl);
+        jTextField1.addKeyListener(kl);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl);
     }
 
     /**
@@ -173,6 +200,12 @@ public class VistaNuevaPart extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(44, 107, 18, 0);
         jPanel1.add(jButton2, gridBagConstraints);
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -183,6 +216,11 @@ public class VistaNuevaPart extends javax.swing.JFrame {
         jPanel1.add(jTextField1, gridBagConstraints);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Facil", "Medio", "Dificil" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
@@ -336,6 +374,14 @@ public class VistaNuevaPart extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

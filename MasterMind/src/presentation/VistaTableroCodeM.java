@@ -7,6 +7,7 @@ package presentation;
 
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -68,10 +69,22 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         turno = state = 1;
         cods = new ArrayList<Integer>();
         this.setIconImage(imgicon.getImage());
+        
+        setListeners();
     }
     
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
+    }
+    
+    public final void setListeners(){
+        KeyListenerPers kl2 = new KeyListenerPers(jButton4, KeyEvent.VK_ESCAPE);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl2);
+        
+        KeyListenerPers kl = new KeyListenerPers(jButton2, KeyEvent.VK_BACK_SPACE);
+        jPanel1.setFocusable(true);
+        jPanel1.addKeyListener(kl);
     }
     
     public void setParams(int n, int r, int d){
@@ -517,6 +530,7 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
     public void PopUpSolucion(ArrayList<Integer> a){
         
         solucion = new JFrame();
+        solucion.setLocationRelativeTo(null);
         solucion.setSize(400,115);
         solucion.setTitle("Solución de la partida " +CP.getId());
         
