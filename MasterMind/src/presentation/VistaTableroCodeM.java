@@ -81,10 +81,35 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         KeyListenerPers kl2 = new KeyListenerPers(jButton4, KeyEvent.VK_ESCAPE);
         jPanel1.setFocusable(true);
         jPanel1.addKeyListener(kl2);
+        jPanel2.setFocusable(true);
+        jPanel2.addKeyListener(kl2);
+        jPanel3.setFocusable(true);
+        jPanel3.addKeyListener(kl2);
+        jPanel4.setFocusable(true);
+        jPanel4.addKeyListener(kl2);
+        jButton1.addKeyListener(kl2);
+        jButton2.addKeyListener(kl2);
+        jButton3.addKeyListener(kl2);
+        jButton4.addKeyListener(kl2);
+        jButton5.addKeyListener(kl2);
+        jButton6.addKeyListener(kl2);
+        jButton7.addKeyListener(kl2);
+        jButton8.addKeyListener(kl2);
+        
         
         KeyListenerPers kl = new KeyListenerPers(jButton2, KeyEvent.VK_BACK_SPACE);
-        jPanel1.setFocusable(true);
         jPanel1.addKeyListener(kl);
+        jPanel2.addKeyListener(kl);
+        jPanel3.addKeyListener(kl);
+        jPanel4.addKeyListener(kl);
+        jButton1.addKeyListener(kl);
+        jButton2.addKeyListener(kl);
+        jButton3.addKeyListener(kl);
+        jButton4.addKeyListener(kl);
+        jButton5.addKeyListener(kl);
+        jButton6.addKeyListener(kl);
+        jButton7.addKeyListener(kl);
+        jButton8.addKeyListener(kl);
     }
     
     public void setParams(int n, int r, int d){

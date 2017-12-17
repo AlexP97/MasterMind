@@ -75,10 +75,47 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         KeyListenerPers kl2 = new KeyListenerPers(jButton4, KeyEvent.VK_ESCAPE);
         jPanel1.setFocusable(true);
         jPanel1.addKeyListener(kl2);
+        jPanel2.setFocusable(true);
+        jPanel2.addKeyListener(kl2);
+        jPanel3.setFocusable(true);
+        jPanel3.addKeyListener(kl2);
+        jPanel4.setFocusable(true);
+        jPanel4.addKeyListener(kl2);
+        jButton1.addKeyListener(kl2);
+        jButton2.addKeyListener(kl2);
+        jButton3.addKeyListener(kl2);
+        jButton4.addKeyListener(kl2);
+        jButton5.addKeyListener(kl2);
+        jButton6.addKeyListener(kl2);
+        jButton7.addKeyListener(kl2);
+        jButton8.addKeyListener(kl2);
+        jButton9.addKeyListener(kl2);
+        jButton10.addKeyListener(kl2);
+        jButton11.addKeyListener(kl2);
+        jButton12.addKeyListener(kl2);
+        jButton13.addKeyListener(kl2);
+        jButton14.addKeyListener(kl2);
         
         KeyListenerPers kl = new KeyListenerPers(jButton2, KeyEvent.VK_BACK_SPACE);
         jPanel1.setFocusable(true);
         jPanel1.addKeyListener(kl);
+        jPanel2.addKeyListener(kl);
+        jPanel3.addKeyListener(kl);
+        jPanel4.addKeyListener(kl);
+        jButton1.addKeyListener(kl);
+        jButton2.addKeyListener(kl);
+        jButton3.addKeyListener(kl);
+        jButton4.addKeyListener(kl);
+        jButton5.addKeyListener(kl);
+        jButton6.addKeyListener(kl);
+        jButton7.addKeyListener(kl);
+        jButton8.addKeyListener(kl);
+        jButton9.addKeyListener(kl);
+        jButton10.addKeyListener(kl);
+        jButton11.addKeyListener(kl);
+        jButton12.addKeyListener(kl);
+        jButton13.addKeyListener(kl);
+        jButton14.addKeyListener(kl);
     }
     
     public void setParams(int n, int r, int d){
@@ -405,8 +442,15 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         else {
             Pair<Boolean,Integer> p = CP.finishGame(victory);
             if (p.getLeft()){
-                CP.actualizaRanking(CP.getName(),p.getRight());
-                JOptionPane.showMessageDialog(null, "¡Has acertado la combinación!\nHas ganado: "+p.getRight()+" puntos.");
+                Pair<Boolean,Integer> p2 = CP.actualizaRanking(CP.getName(),p.getRight());
+                if(p2.getLeft()){
+                    JOptionPane.showMessageDialog(null, "¡Has acertado la combinación!\nHas ganado: "+p.getRight()+" puntos."
+                            + " Además, !te has colocado "+p2.getRight()+"o/a en el ranking!");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "¡Has acertado la combinación!\nHas ganado: "+p.getRight()+" puntos,"
+                            + " pero no has entrado en el ranking.");
+                }
                 jButton4ActionPerformed(null);
             }
             else {

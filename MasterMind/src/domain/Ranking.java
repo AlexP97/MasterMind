@@ -39,9 +39,10 @@ public class Ranking {
      * @return 
      */
     public Pair<Boolean,Integer> actualizaRanking(String nombre, int puntos){
-        Pair<Boolean,Integer> entradoPosicion = new Pair();
+        Pair<Boolean,Integer> entradoPosicion = new Pair(false,"");
         Pair<String, Integer> p = new Pair(nombre,puntos);
         Pair aux;
+        boolean primer = true;
         if(ranking.size() < 10) {
             int i;
             boolean b = false;
@@ -49,6 +50,11 @@ public class Ranking {
                 b = ranking.get(i).getRight() < puntos;
             }
             if(b) {
+                if(primer){
+                    primer = false;
+                    entradoPosicion.setLeft(true);
+                    entradoPosicion.setRight(i);
+                }
                 for(int j = i-1; j < ranking.size(); j++) {
                     aux = new Pair(ranking.get(j));
                     ranking.set(j,p);
@@ -72,7 +78,6 @@ public class Ranking {
                 }
             }
             if(!b) {
-                System.out.print("No has entrado en el ranking" + "\n");
                 entradoPosicion.setLeft(false);
             }
         }

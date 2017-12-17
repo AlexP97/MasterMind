@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import utils.Pair;
 
@@ -85,7 +84,7 @@ public class VistaRanking extends javax.swing.JFrame {
         jLabels.add(jLabel31);
         for(int i = 0; i < ranking.size(); i++){
             jLabels.get(i*2).setText(ranking.get(i).getLeft());
-            jLabels.get(i*2+1).setText(Integer.toString(ranking.get(0).getRight()));
+            jLabels.get(i*2+1).setText(Integer.toString(ranking.get(i).getRight()));
         }
     }
 
