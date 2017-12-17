@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
@@ -346,7 +347,10 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         
         jButton6.setEnabled(false);
         jButton7.setEnabled(false);
-        jLabel1.setText("Esperando la jugada del Codebreaker...");
+        //jLabel1.setText("Esperando la jugada del Codebreaker...");
+        setCursor(Cursor.WAIT_CURSOR);
+        VistaEsperandoIA Vespera = new VistaEsperandoIA();
+        Vespera.setVisible(true);
 
         rellenarCods();
 
@@ -367,6 +371,9 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         jButton6.setEnabled(true);
         jButton7.setEnabled(true);
         jLabel1.setText("Introduce tu jugada");
+        
+        Vespera.dispose();
+        setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void finishGame(boolean victory) {

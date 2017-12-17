@@ -13,12 +13,10 @@ import utils.Pair;
  * @author Espejo Saldaña, Adrián
  */
 public class CtrlPresentacionLoginRegister {
-    private final VistaGenerica Vg;
     private final CtrlDominioJugador CDj;
     private final CtrlPresentacion CP;
     
     public CtrlPresentacionLoginRegister(CtrlDominioJugador CDj, CtrlPresentacion CP){
-        this.Vg = new VistaLoginRegister();
         this.CDj = CDj;
         this.CP = CP;
     }
