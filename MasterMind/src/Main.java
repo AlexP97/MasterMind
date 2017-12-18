@@ -1,6 +1,5 @@
 
 import presentation.CtrlPresentacion;
-import presentation.VistaPresentacion;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

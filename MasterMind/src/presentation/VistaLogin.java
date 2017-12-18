@@ -201,15 +201,6 @@ public class VistaLogin extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void actionPerformed(KeyEvent event){
-        if(event.getSource() == jPasswordField1 || event.getSource() == jTextField1){
-            if(event.getKeyCode() == KeyEvent.VK_ENTER){
-                jButton1.doClick();
-            }
-        }
-    }
-
-    
     /**
      * @param args the command line arguments
      */
