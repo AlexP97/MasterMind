@@ -11,6 +11,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import utils.Pair;
 
 /**
  *
@@ -171,7 +172,8 @@ public class VistaCargarPart extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String s = (String)jComboBox1.getSelectedItem();
         if (!s.equals("No hay partidas")){
-            
+            Pair<Boolean,String> p = CP.loadGame(s);
+            JOptionPane.showMessageDialog(null, p.getRight());
         }
         else {
             JOptionPane.showMessageDialog(null, "No hay ninguna partida para cargar.","No hay partidas",JOptionPane.WARNING_MESSAGE);

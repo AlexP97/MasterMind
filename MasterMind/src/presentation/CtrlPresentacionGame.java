@@ -37,6 +37,10 @@ public class CtrlPresentacionGame {
         return CDp.saveGame(s);
     }
     
+    public Pair <Boolean, String> loadGame(String s, String id){
+        return CDp.loadGame(s,id);
+    }
+    
     public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
         return CDp.jugadaCodeB(cods);
     }

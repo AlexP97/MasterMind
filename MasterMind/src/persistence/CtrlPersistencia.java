@@ -5,31 +5,15 @@
  */
 package persistence;
 
+import utils.Pair;
+
 /**
  *
  * @author Pérez Ortiz, Alejandro
  */
-public class CtrlPersistencia {
-    private final CtrlPersistenciaJugador CPmj;
-    private final CtrlPersistenciaGame CPmp;
-    private final CtrlPersistenciaRanking CPmr;
-           
+public abstract class CtrlPersistencia {
     
-    public CtrlPersistencia(){
-        CPmj = new CtrlPersistenciaJugador();
-        CPmp = new CtrlPersistenciaGame();
-        CPmr = new CtrlPersistenciaRanking();
-    }
+    public abstract Pair<Boolean,String> write(byte[] serial, String path);
     
-    public CtrlPersistenciaJugador getCtrlPersistenciaJugador() {
-        return CPmj;
-    }
-    
-    public CtrlPersistenciaGame getCtrlPersistenciaPartida() {
-        return CPmp;
-    }
-    
-    public CtrlPersistenciaRanking getCtrlPersistenciaRanking() {
-        return CPmr;
-    }
+    public abstract byte[] read(String path);
 }

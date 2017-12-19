@@ -16,7 +16,6 @@ import persistence.CtrlPersistenciaRanking;
  */
 public class CtrlDominio {
     
-    private final CtrlPersistencia CP;
     private final CtrlDominioJugador CDmj;
     private final CtrlDominioPartida CDmp;
     private final CtrlDominioRanking CDmr;
@@ -28,14 +27,12 @@ public class CtrlDominio {
     
     public CtrlDominio(){
         
-        CP = new CtrlPersistencia();
-        CPj = CP.getCtrlPersistenciaJugador();
-        CPg = CP.getCtrlPersistenciaPartida();
-        CPr = CP.getCtrlPersistenciaRanking();
+        CPj = new CtrlPersistenciaJugador();
+        CPg = new CtrlPersistenciaGame();
+        CPr = new CtrlPersistenciaRanking();
         CDmj = new CtrlDominioJugador(CPj);
         CDmp = new CtrlDominioPartida(CPg);
         CDmr = new CtrlDominioRanking(CPr);
-        
         
     }
     

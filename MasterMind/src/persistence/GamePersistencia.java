@@ -5,23 +5,15 @@
  */
 package persistence;
 
-import domain.CodeBreaker;
-import domain.Game;
-import domain.Jugador;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import static java.lang.System.out;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import utils.Pair;
 
 /**
@@ -72,15 +64,6 @@ public class GamePersistencia implements Serializable{
     
     /**
      *
-     * @param playerP el jugador que intenta cargar partida
-     */
-    public void LoadGame(Jugador playerP){
-        
-        
-    }
-    
-    /**
-     *
      * @param ident el identificador de la partida
      * @param userName el nombre de usuario del jugador
      * @return si el jugador puede crear una partida con ese identificador
@@ -106,24 +89,10 @@ public class GamePersistencia implements Serializable{
         
     }
     
-    /**
-     *
-     * @param userName el jugador de la partida
-     * @param ident el identificador de la partida
-     * @param dif la dificultad de la partida
-     * @param mod el modo de la partida
-     * @param num el número de fichas de la partida
-     * @param ran el rango de colores de la partida
-     */
-    public Pair<Boolean, String> CrearPartida(String userName, String ident, String dif, String mod, int num, int ran){
-        
-        if (!userName.equals("") && !ident.equals("") && CheckAvailability(ident, userName)){ 
-            return new Pair(true, "La partida es correcta");
-        }
-        else {
-            return new Pair(false, "No se ha podido crear la partida");
-        }
-    }   
+    public byte[] read (String path) throws IOException{
+        Path p = Paths.get(path);
+        return Files.readAllBytes(p);
+    }
     
     public Pair <Boolean, String> eliminarPartida(String userName, String id){
         return new Pair(false, "Aun no está implementado.");

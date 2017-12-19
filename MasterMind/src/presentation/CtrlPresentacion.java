@@ -87,6 +87,11 @@ public class CtrlPresentacion {
         return CPg.saveGame(getName());
     }
     
+     public Pair<Boolean, String> loadGame(String id){
+        CPg = new CtrlPresentacionGame(CDp);
+        return CPg.loadGame(getName(), id);
+    }
+    
     public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
         return CPg.jugadaCodeB(cods);
     }

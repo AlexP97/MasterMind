@@ -11,7 +11,7 @@ import utils.Pair;
  *
  * @author dissi
  */
-public class CtrlPersistenciaGame {
+public class CtrlPersistenciaGame extends CtrlPersistencia{
     
     private GamePersistencia gameP;
     
@@ -21,9 +21,9 @@ public class CtrlPersistenciaGame {
         
     }
     
-    public Pair<Boolean, String> crearPartida(String userName, String id, String dif, String mod, int num, int ran) {
+    public boolean crearPartida(String userName, String id) {
         
-        return gameP.CrearPartida(userName, id, dif, mod, num, ran);
+        return gameP.CheckAvailability(id, userName);
         
     }
     
@@ -31,8 +31,14 @@ public class CtrlPersistenciaGame {
         return gameP.eliminarPartida(userName, id);
     }
     
-    public Pair <Boolean, String> write(byte[] b, String s){
-        return gameP.write(b,s);
+    @Override
+    public Pair <Boolean, String> write(byte[] serial, String path){
+        return gameP.write(serial,path);
+    }
+    
+    @Override
+    public byte[] read (String path) {
+        return gameP.read(path);
     }
     
 }

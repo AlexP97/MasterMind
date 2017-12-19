@@ -5,7 +5,13 @@
  */
 package domain;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import persistence.CtrlPersistenciaGame;
 import utils.Pair;
 
@@ -15,7 +21,7 @@ import utils.Pair;
  */
 public class CtrlDominioPartida {
     
-    private final Game game;
+    private Game game;
     private final CtrlPersistenciaGame CPG;
     
     public CtrlDominioPartida() {
@@ -32,18 +38,42 @@ public class CtrlDominioPartida {
         
     }
     
-    public Pair<Boolean,String> cargarPartida(String userName, String pass) {
+    public Pair<Boolean,String> loadGame(String userName, String id) {
         
-        //return game.LoadGame(userName, pass);
-        return new Pair(false, "Falta cargarla.");
+        Pair<Boolean,String> p = null;
+        ByteArrayInputStream bis = new ByteArrayInputStream(CPG.read("data/players/"+userName+"/games/"+id));
+        ObjectInput in = null;
+        try {
+                
+            in = new ObjectInputStream(bis);
+            
+            try {
+
+                game = (Game)in.readObject();
+
+            } catch (ClassNotFoundException ex) {
+                p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
+            } 
+        }catch (IOException ex) {
+            p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
+        } finally {
+          try {
+            if (in != null) {
+              in.close();
+              p = new Pair<Boolean,String>(true, "Se ha cargado la partida correctamente");
+            }
+          } catch (IOException ex) {
+            p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
+          }
+        }
+        return p;
     }
     
     public Pair<Boolean, String> crearPartida(String userName, String id, String dif, String mod, int num, int ran) {
         
-        Pair<Boolean,String> p = CPG.crearPartida(userName, id, dif, mod, num, ran);
-        if (p.getLeft())
+        if (CPG.crearPartida(userName, id))
         return game.crearPartida(userName, id, dif, mod, num, ran);
-        else return p;
+        else return new Pair (false, "No se ha podido crear la partida, el id ya está en uso.");
         
     }
     
