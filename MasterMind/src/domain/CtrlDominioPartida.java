@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import persistence.CtrlPersistenciaGame;
 import utils.Pair;
 
@@ -41,31 +39,35 @@ public class CtrlDominioPartida {
     public Pair<Boolean,String> loadGame(String userName, String id) {
         
         Pair<Boolean,String> p = null;
-        ByteArrayInputStream bis = new ByteArrayInputStream(CPG.read("data/players/"+userName+"/games/"+id));
-        ObjectInput in = null;
-        try {
-                
-            in = new ObjectInputStream(bis);
-            
+        byte[] b = CPG.read("data/players/"+userName+"/games/"+id, null);
+        if (b != null){
+            ByteArrayInputStream bis = new ByteArrayInputStream(b);
+            ObjectInput in = null;
             try {
 
-                game = (Game)in.readObject();
+                in = new ObjectInputStream(bis);
 
-            } catch (ClassNotFoundException ex) {
+                try {
+
+                    game = (Game)in.readObject();
+
+                } catch (ClassNotFoundException ex) {
+                    p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
+                } 
+            }catch (IOException ex) {
                 p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
-            } 
-        }catch (IOException ex) {
-            p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
-        } finally {
-          try {
-            if (in != null) {
-              in.close();
-              p = new Pair<Boolean,String>(true, "Se ha cargado la partida correctamente");
+            } finally {
+              try {
+                if (in != null) {
+                  in.close();
+                  p = new Pair<Boolean,String>(true, "Se ha cargado la partida correctamente");
+                }
+              } catch (IOException ex) {
+                p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
+              }
             }
-          } catch (IOException ex) {
-            p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
-          }
         }
+        else p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
         return p;
     }
     
@@ -85,6 +87,14 @@ public class CtrlDominioPartida {
         return CPG.eliminarPartida(userName, id);
     }
     
+    public boolean validarJugadaCodeM (ArrayList<Integer> cods){
+        return game.validarJugadaCodeM(cods);
+    }
+    
+    public ArrayList<Integer> getCodeIni() {
+        return game.getCodeIni();
+    }
+    
     public Pair <Boolean, String> setCodIni(ArrayList<Integer> cods){
         return game.setCodIni(cods);
     }
@@ -93,8 +103,20 @@ public class CtrlDominioPartida {
         return game.jugadaCodeB(cods);
     }
     
+    public ArrayList<ArrayList<Integer>> getJugadasCodeB(){
+        return game.getJugadasCodeB();
+    }
+    
     public ArrayList<Integer> jugadaCodeM(ArrayList<Integer> cods){
         return game.jugadaCodeM(cods);
+    }
+    
+    public ArrayList<ArrayList<Integer>> getJugadasCodeM(){
+        return game.getJugadasCodeM();
+    }
+    
+    public ArrayList<String> getStatsPartida() {
+        return game.getStatsPartida();
     }
     
     public Pair <Boolean,Integer> finishGame(boolean b){

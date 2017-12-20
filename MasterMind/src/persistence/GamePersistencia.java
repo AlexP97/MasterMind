@@ -14,6 +14,8 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utils.Pair;
 
 /**
@@ -89,9 +91,13 @@ public class GamePersistencia implements Serializable{
         
     }
     
-    public byte[] read (String path) throws IOException{
-        Path p = Paths.get(path);
-        return Files.readAllBytes(p);
+    public byte[] read (String path) {
+        try {
+            Path p = Paths.get(path);
+            return Files.readAllBytes(p);
+        } catch (IOException ex) {
+            return null;
+        }
     }
     
     public Pair <Boolean, String> eliminarPartida(String userName, String id){

@@ -133,5 +133,18 @@ public final class CodeMaker extends Jugador implements Serializable{
         return linea;
     }
     
+    public boolean validar_pista(ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio, ArrayList<Integer> linea){
+        
+        boolean pistaCorrecta = true;
+        if(linea.size() == super.getNFichas()) {
+            ArrayList<Integer> pistaBuena = super.donaSolucio(tirada,solucio);
+            Funciones.ordenar(linea);
+            for(int i = 0; i < super.getNFichas(); i++) {
+                if(pistaBuena.get(i) != linea.get(i))
+                    pistaCorrecta = false;
+            }
+        }
+        return pistaCorrecta;        
+    }
     
 }

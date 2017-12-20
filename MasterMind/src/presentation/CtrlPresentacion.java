@@ -79,6 +79,14 @@ public class CtrlPresentacion {
         return CPg.eliminarPartida(userName, id);
     }
     
+    public boolean validarJugadaCodeM (ArrayList<Integer> cods){
+        return CPg.validarJugadaCodeM(cods);
+    }
+    
+    public ArrayList<Integer> getCodeIni() {
+        return CPg.getCodeIni();
+    }
+    
     public Pair <Boolean, String> setCodIni(ArrayList<Integer> cods){
         return CPg.setCodIni(cods);
     }
@@ -87,17 +95,29 @@ public class CtrlPresentacion {
         return CPg.saveGame(getName());
     }
     
-     public Pair<Boolean, String> loadGame(String id){
+    public Pair<Boolean, String> loadGame(String id){
         CPg = new CtrlPresentacionGame(CDp);
         return CPg.loadGame(getName(), id);
+    }
+    
+    public ArrayList<String> getStatsPartida() {
+        return CPg.getStatsPartida();
     }
     
     public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
         return CPg.jugadaCodeB(cods);
     }
     
+    public ArrayList<ArrayList<Integer>> getJugadasCodeB(){
+        return CPg.getJugadasCodeB();
+    }
+    
     public ArrayList<Integer> jugadaCodeM(ArrayList<Integer> cods){
         return CPg.jugadaCodeM(cods);
+    }
+    
+    public ArrayList<ArrayList<Integer>> getJugadasCodeM(){
+        return CPg.getJugadasCodeM();
     }
     
     public Pair <Boolean,Integer> finishGame(boolean b){

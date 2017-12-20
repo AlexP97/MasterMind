@@ -15,5 +15,5 @@ public abstract class CtrlPersistencia {
     
     public abstract Pair<Boolean,String> write(byte[] serial, String path);
     
-    public abstract byte[] read(String path);
+    public abstract byte[] read(String s1, String s2);
 }

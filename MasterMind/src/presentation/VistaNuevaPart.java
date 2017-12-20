@@ -383,7 +383,7 @@ public class VistaNuevaPart extends javax.swing.JFrame {
                 else {
                     VistaTableroCodeB Vt = new VistaTableroCodeB();
                     Vt.setCP(CP);
-                    Vt.setParams(num,ran,i);
+                    Vt.setParams(num,ran,i,1,false);
                     Vt.setVisible(true);
                     dispose();
                 }

@@ -6,7 +6,6 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import persistence.GamePersistencia;
 import utils.Pair;
 
 /**
@@ -23,19 +22,15 @@ public class Game implements Serializable{
     Jugador IA;
     int turn;
     int totalTurns;
-    String[] output;
+    ArrayList<ArrayList<Integer>> logJugadasB;
+    ArrayList<ArrayList<Integer>> logJugadasM;
     ArrayList<CodePeg> codeIni;
     ArrayList<CodePeg> codeBAnt;
     ArrayList<KeyPeg> codeMAnt;
     CodeMaker codeM;
     CodeBreaker codeB;
-    boolean gameSaved;
-    boolean cargado;
-    boolean acierto;
     int numero;
     int rango;
-    boolean jugando;
-    GamePersistencia gameP;
     
     public Game () {
         this.id = "";
@@ -45,11 +40,9 @@ public class Game implements Serializable{
         this.points = 120;
         this.IA = null;
         this.turn = 0;
-        this.output = null;
         this.codeIni = null;
-        this.gameSaved = false;
-        this.cargado = false;
-        this.jugando = false;
+        this.logJugadasB = new ArrayList<ArrayList<Integer>>();
+        this.logJugadasM = new ArrayList<ArrayList<Integer>>();
     }
     
     /**
@@ -78,44 +71,46 @@ public class Game implements Serializable{
     
     /**
      *
-     * @return si la partida ha cargado
-     */
-    public boolean getCargado() {
-        return this.cargado;
-    }
-    
-    /**
-     *
      * @return el modo de juego (CodeBreaker o CodeMaker)
      */
     public String getMode() {
         return this.mode;
     }
-    
-    /**
-     *
-     * @param b asigna si se ha cargado la partida
-     */
-    public void setCargado(boolean b) {
-        this.cargado = b;
+
+    public int getTurn() {
+        return this.turn;
     }
     
-    /**
-     *
-     * @param gamePer asigna el GamePersistencia que se encargará de interaccionar con el sistema de ficheros
-     */
-    public void setGameP(GamePersistencia gamePer){
-        this.gameP = gamePer;
+    public ArrayList<ArrayList<Integer>> getJugadasCodeB (){
+        return this.logJugadasB;
     }
     
-    /**
-     *
-     * @param cb asigna el CodeBreaker de la partida
-     */
-    public void setCB(CodeBreaker cb){
-        this.codeB = cb;
+    public ArrayList<ArrayList<Integer>> getJugadasCodeM (){
+        return this.logJugadasM;
     }
     
+    public ArrayList<Integer> getCodeIni() {
+        return codeToInt(codeIni);
+    }
+    
+    
+    public ArrayList<String> getStatsPartida() {
+        ArrayList<String> a = new ArrayList<String>();
+        a.add(this.mode);
+        a.add(Integer.toString(numero));
+        a.add(Integer.toString(rango));
+        a.add(Integer.toString(totalTurns));
+        a.add(Integer.toString(turn));
+        return a;
+    }
+    
+    private ArrayList<Integer> codeToInt(ArrayList<CodePeg> array){
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        for (int i = 0; i < array.size(); ++i){
+            a.add(array.get(i).getColour());
+        }
+        return a;
+    }
     /**
      *
      * @param arrayList es el ArrayList<Integer> que se quiere traducir
@@ -230,43 +225,32 @@ public class Game implements Serializable{
      */
     private boolean SetAtributos(String userN, String ident, String dif, String mod, int num, int ran){
         
-        if (cargado) {
-            if (mode.equals("Codemaker")) {
-                this.codeM = new CodeMaker(false, numero, rango);
-            }
-            else if (mode.equals("Codebreaker")) {
-                this.codeM = new CodeMaker(true, numero, rango);
-                this.codeB = new CodeBreaker(false, numero, rango);
-            }   
-        }
-        else {
-            this.id = ident;
-            
-            if (dif.equals("Facil")) this.totalTurns = 12;
-            else if (dif.equals("Medio")) this.totalTurns = 10;
-            else if (dif.equals("Dificil")) this.totalTurns = 8;
-            
-            if (output == null) this.output = new String[totalTurns+1];
-            this.output[0] = "--------------";
-            this.difficulty = dif;
-            this.mode = mod;
-            this.userName = userN;
-            this.points = 120;
-            this.turn = 1;
-            this.codeBAnt = new ArrayList<CodePeg>();
-            this.codeMAnt = new ArrayList<KeyPeg>();
-            this.numero = num;
-            this.rango = ran;
+        this.id = ident;
 
-            if (mode.equals("Codemaker")) {
-                this.codeM = new CodeMaker(false, numero, rango);
-                this.codeB = new CodeBreaker(true, numero, rango);
-            }
-            else if (mode.equals("Codebreaker")) {
-                this.codeB = new CodeBreaker(false, numero, rango);
-                this.codeM = new CodeMaker(true, numero, rango);
-                this.codeIni = conversorCode(this.codeM.dona_patro("IA"));
-            }
+        if (dif.equals("Facil")) this.totalTurns = 12;
+        else if (dif.equals("Medio")) this.totalTurns = 10;
+        else if (dif.equals("Dificil")) this.totalTurns = 8;
+
+        this.difficulty = dif;
+        this.mode = mod;
+        this.userName = userN;
+        this.points = 120;
+        this.turn = 1;
+        this.codeBAnt = new ArrayList<CodePeg>();
+        this.codeMAnt = new ArrayList<KeyPeg>();
+        this.logJugadasB = new ArrayList<ArrayList<Integer>>();
+        this.logJugadasM = new ArrayList<ArrayList<Integer>>();
+        this.numero = num;
+        this.rango = ran;
+
+        if (mode.equals("Codemaker")) {
+            this.codeM = new CodeMaker(false, numero, rango);
+            this.codeB = new CodeBreaker(true, numero, rango);
+        }
+        else if (mode.equals("Codebreaker")) {
+            this.codeB = new CodeBreaker(false, numero, rango);
+            this.codeM = new CodeMaker(true, numero, rango);
+            this.codeIni = conversorCode(this.codeM.dona_patro("IA"));
         }
         return true;
     }
@@ -293,6 +277,7 @@ public class Game implements Serializable{
         ArrayList<Integer> outputB = codeB.jugar("IA", codeBAnt, codeMAnt);
         if (outputB.contains(1) || outputB.contains(0)) baja_Puntuacion();
         codeBAnt = conversorCode(outputB);
+        logJugadasB.add(outputB);
         return outputB;
     }
     
@@ -301,6 +286,19 @@ public class Game implements Serializable{
         ArrayList<Integer> outputM = codeM.jugar("IA", conversorCode(cods), codeIni);
         if (outputM.contains(1) || outputM.contains(0)) baja_Puntuacion();
         codeBAnt = conversorCode(cods);
+        ++turn;
+        logJugadasB.add(cods);
+        logJugadasM.add(outputM);
         return outputM;
+    }
+    
+    public boolean validarJugadaCodeM(ArrayList<Integer> cods){
+        boolean b = codeM.validar_pista(codeBAnt, codeIni, cods);
+        if (b) {
+            codeMAnt = conversorKey(cods);
+            ++turn;
+            logJugadasM.add(cods);
+        }
+        return b;
     }
 }

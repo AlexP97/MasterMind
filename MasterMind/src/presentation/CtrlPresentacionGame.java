@@ -29,6 +29,14 @@ public class CtrlPresentacionGame {
         return CDp.eliminarPartida(userName, id);
     }
     
+    public boolean validarJugadaCodeM (ArrayList<Integer> cods){
+        return CDp.validarJugadaCodeM(cods);
+    }
+    
+    public ArrayList<Integer> getCodeIni() {
+        return CDp.getCodeIni();
+    }
+    
     public Pair <Boolean, String> setCodIni(ArrayList<Integer> cods){
         return CDp.setCodIni(cods);
     }
@@ -45,8 +53,20 @@ public class CtrlPresentacionGame {
         return CDp.jugadaCodeB(cods);
     }
     
+    public ArrayList<ArrayList<Integer>> getJugadasCodeB(){
+        return CDp.getJugadasCodeB();
+    }
+    
     public ArrayList<Integer> jugadaCodeM(ArrayList<Integer> cods){
         return CDp.jugadaCodeM(cods);
+    }
+    
+    public ArrayList<ArrayList<Integer>> getJugadasCodeM(){
+        return CDp.getJugadasCodeM();
+    }
+    
+    public ArrayList<String> getStatsPartida() {
+        return CDp.getStatsPartida();
     }
     
     public Pair <Boolean,Integer> finishGame(boolean b){

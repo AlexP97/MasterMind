@@ -67,7 +67,7 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         iconoVacio = new javax.swing.ImageIcon(getClass().getResource("/resources/0.png"));
         iconoVacioK = new javax.swing.ImageIcon(getClass().getResource("/resources/0K.png"));
-        turno = state = 1;
+        state = 1;
         cods = new ArrayList<Integer>();
         this.setIconImage(imgicon.getImage());
         
@@ -113,11 +113,17 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         jButton8.addKeyListener(kl);
     }
     
-    public void setParams(int n, int r, int d){
+    public void setParams(int n, int r, int d, int t, boolean cargado){
         this.num = n;
         this.ran = r;
-        this.dif = d;             
+        this.dif = d;  
+        this.turno = t;
         labelsMethod();
+        if (cargado) {
+            cargarTableroB(CP.getJugadasCodeB());
+            cargarTableroM(CP.getJugadasCodeM());
+        }
+        else primeraJugada();
     }
 
     /**
@@ -347,33 +353,42 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         
         jButton6.setEnabled(false);
         jButton7.setEnabled(false);
-        //jLabel1.setText("Esperando la jugada del Codebreaker...");
-        setCursor(Cursor.WAIT_CURSOR);
-        VistaEsperandoIA Vespera = new VistaEsperandoIA();
-        Vespera.setVisible(true);
-
+        
         rellenarCods();
-
-        ArrayList<Integer> a = new ArrayList<Integer>();
         
-        boolean victory = true;
-        if (cods.contains(1) || cods.contains(0)) victory = false;
-        if (victory) finishGame(true);
-        else a = CP.jugadaCodeB(cods);
+        if (CP.validarJugadaCodeM(cods)){
+            //jLabel1.setText("Esperando la jugada del Codebreaker...");
+            setCursor(Cursor.WAIT_CURSOR);
+            VistaEsperandoIA Vespera = new VistaEsperandoIA();
+            Vespera.setVisible(true);
+            
+            ArrayList<Integer> a = new ArrayList<Integer>();
 
-        turno++;
+            boolean victory = true;
+            if (cods.contains(1) || cods.contains(0)) victory = false;
+            if (victory) finishGame(true);
+            else a = CP.jugadaCodeB(cods);
 
-        if (a != null) setJugadaCodeB(a);
+            turno++;
 
-        state = 1;
-        cods = new ArrayList<Integer>();
-        if (turno > dif) finishGame(false);
-        jButton6.setEnabled(true);
-        jButton7.setEnabled(true);
-        jLabel1.setText("Introduce tu jugada");
-        
-        Vespera.dispose();
-        setCursor(Cursor.getDefaultCursor());
+            if (a != null) setJugadaCodeB(a);
+
+            state = 1;
+            cods = new ArrayList<Integer>();
+            if (turno > dif) finishGame(false);
+            jButton6.setEnabled(true);
+            jButton7.setEnabled(true);
+            jLabel1.setText("Introduce tu jugada");
+
+            Vespera.dispose();
+            setCursor(Cursor.getDefaultCursor());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "La pista que has introducido no es correcta.","Pista incorrecta",JOptionPane.WARNING_MESSAGE);
+            jButton6.setEnabled(true);
+            jButton7.setEnabled(true);
+            resetFila();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void finishGame(boolean victory) {
@@ -531,7 +546,9 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
             x = 0;
             y += 18;
         }
-        
+    }
+    
+    private void primeraJugada() {
         jButton6.setEnabled(false);
         jButton7.setEnabled(false);
         jLabel1.setText("Esperando la jugada del Codebreaker...");
@@ -580,6 +597,37 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
             l.setText("");
             l.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/"+Integer.toString(a.get(i))+".png")));
             p.add(l);
+        }
+    }
+    
+    private void cargarTableroB(ArrayList<ArrayList<Integer>> log) {
+        
+        for (int i = 0; i < log.size(); ++i){
+            
+            for (int j = 0; j < log.get(i).size(); ++j){
+                
+                codePegs[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/"+Integer.toString(log.get(i).get(j))+".png")));
+            }
+        }
+    }
+    
+    private void cargarTableroM(ArrayList<ArrayList<Integer>> log) {
+        
+        for (int i = 0; i < log.size(); ++i){
+            
+            for (int j = 0; j < log.get(i).size(); ++j){
+                
+                keyPegs[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/"+Integer.toString(log.get(i).get(j))+"K.png")));
+            }
+        }
+    }
+    
+    private void resetFila() {
+        
+        state = 1;
+        cods = new ArrayList<Integer>();
+        for (int i = 0; i < num; ++i){
+            keyPegs[turno-1][i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/0K.png")));
         }
     }
 }

@@ -5,12 +5,10 @@
  */
 package presentation;
 
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -337,7 +335,7 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
             else{
                 VistaTableroCodeM Vt = new VistaTableroCodeM();
                 Vt.setCP(CP);
-                Vt.setParams(num,ran,dif);
+                Vt.setParams(num,ran,dif,1,false);
                 Vt.PopUpSolucion(cods);
                 Vt.setVisible(true);
                 dispose();

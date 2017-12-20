@@ -37,7 +37,7 @@ public class CtrlPersistenciaGame extends CtrlPersistencia{
     }
     
     @Override
-    public byte[] read (String path) {
+    public byte[] read (String path, String s2) {
         return gameP.read(path);
     }
     

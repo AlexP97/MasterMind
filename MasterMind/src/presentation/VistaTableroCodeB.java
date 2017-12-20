@@ -118,11 +118,16 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         jButton14.addKeyListener(kl);
     }
     
-    public void setParams(int n, int r, int d){
+    public void setParams(int n, int r, int d, int t, boolean cargado){
         this.num = n;
         this.ran = r;
-        this.dif = d;             
+        this.dif = d;  
+        this.turno = t;
         labelsMethod();
+        if (cargado) {
+            cargarTableroB(CP.getJugadasCodeB());
+            cargarTableroM(CP.getJugadasCodeM());
+        }
     }
 
     /**
@@ -444,12 +449,12 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
             if (p.getLeft()){
                 Pair<Boolean,Integer> p2 = CP.actualizaRanking(CP.getName(),p.getRight());
                 if(p2.getLeft()){
-                    JOptionPane.showMessageDialog(null, "¡Has acertado la combinación!\nHas ganado: "+p.getRight()+" puntos."
-                            + " Además, !te has colocado "+p2.getRight()+"o/a en el ranking!");
+                    JOptionPane.showMessageDialog(null, "¡Has acertado la combinación!\nHas ganado: "+p.getRight()+" puntos.\n"
+                            + "¡Te has colocado en la "+p2.getRight()+"a posición en el ranking!");
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "¡Has acertado la combinación!\nHas ganado: "+p.getRight()+" puntos,"
-                            + " pero no has entrado en el ranking.");
+                    JOptionPane.showMessageDialog(null, "¡Has acertado la combinación!\nHas ganado: "+p.getRight()+" puntos.\n"
+                            + "No has logrado entrar en el ranking.");
                 }
                 jButton4ActionPerformed(null);
             }
@@ -676,6 +681,28 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
             }
             x = 0;
             y += 18;
+        }
+    }
+    
+    private void cargarTableroB(ArrayList<ArrayList<Integer>> log) {
+        
+        for (int i = 0; i < log.size(); ++i){
+            
+            for (int j = 0; j < log.get(i).size(); ++j){
+                
+                codePegs[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/"+Integer.toString(log.get(i).get(j))+".png")));
+            }
+        }
+    }
+    
+    private void cargarTableroM(ArrayList<ArrayList<Integer>> log) {
+        
+        for (int i = 0; i < log.size(); ++i){
+            
+            for (int j = 0; j < log.get(i).size(); ++j){
+                
+                keyPegs[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/"+Integer.toString(log.get(i).get(j))+"K.png")));
+            }
         }
     }
 }

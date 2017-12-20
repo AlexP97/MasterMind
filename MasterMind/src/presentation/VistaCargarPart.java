@@ -7,7 +7,7 @@
 package presentation;
 
 import java.awt.event.KeyEvent;
-import javax.swing.ComboBoxModel;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -174,6 +174,32 @@ public class VistaCargarPart extends javax.swing.JFrame {
         if (!s.equals("No hay partidas")){
             Pair<Boolean,String> p = CP.loadGame(s);
             JOptionPane.showMessageDialog(null, p.getRight());
+            if (p.getLeft()){
+                ArrayList<String> stats = CP.getStatsPartida();
+                if (stats.get(0).equals("Codemaker")){
+                    VistaTableroCodeM Vt = new VistaTableroCodeM();
+                    Vt.setCP(CP);
+                    Vt.setParams(Integer.parseInt(stats.get(1)),
+                                Integer.parseInt(stats.get(2)),
+                                Integer.parseInt(stats.get(3)),
+                                Integer.parseInt(stats.get(4)),
+                                true);
+                    Vt.PopUpSolucion(CP.getCodeIni());
+                    Vt.setVisible(true);
+                    dispose();
+                }
+                else {
+                    VistaTableroCodeB Vt = new VistaTableroCodeB();
+                    Vt.setCP(CP);
+                    Vt.setParams(Integer.parseInt(stats.get(1)),
+                                Integer.parseInt(stats.get(2)),
+                                Integer.parseInt(stats.get(3)),
+                                Integer.parseInt(stats.get(4)),
+                                true);
+                    Vt.setVisible(true);
+                    dispose();
+                }
+            }
         }
         else {
             JOptionPane.showMessageDialog(null, "No hay ninguna partida para cargar.","No hay partidas",JOptionPane.WARNING_MESSAGE);
