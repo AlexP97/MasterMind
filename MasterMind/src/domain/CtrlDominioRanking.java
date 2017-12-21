@@ -23,29 +23,11 @@ public class CtrlDominioRanking {
     
     public CtrlDominioRanking(CtrlPersistenciaRanking CPr) {
         this.CPr = CPr;
+        this.r = Ranking.getInstance();
         byte[] b = CPr.read("data/ranking/info", null);
         if (b != null){
-            ByteArrayInputStream bis = new ByteArrayInputStream(b);
-            ObjectInput in = null;
-            try {
-
-                in = new ObjectInputStream(bis);
-
-                try {
-
-                    this.r = (Ranking)in.readObject();
-
-                } catch (ClassNotFoundException ex) {} 
-            }catch (IOException ex) {} 
-            finally {
-              try {
-                if (in != null) {
-                  in.close();
-                }
-              } catch (IOException ex) {}
-            }
+            r.cargarRanking(b);
         }
-        if (this.r == null) this.r = Ranking.getInstance();
     }  
     
     public ArrayList<Pair<String, Integer>> muestraRanking() {
