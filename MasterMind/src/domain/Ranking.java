@@ -1,5 +1,10 @@
 package domain;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import utils.Pair;
 import java.util.ArrayList;
 
@@ -7,11 +12,13 @@ import java.util.ArrayList;
  *
  * @author Espejo Saldaña, Adrián
  */
-public class Ranking {
+public class Ranking implements Serializable{
     private static final Ranking INSTANCE = new Ranking();
     private static ArrayList<Pair<String, Integer>> ranking;
     
-    private Ranking(){}
+    private Ranking(){
+        ranking = new ArrayList<Pair<String, Integer>>();
+    }
     
     /**
      *
@@ -30,6 +37,26 @@ public class Ranking {
      */
     public ArrayList<Pair<String, Integer>> muestraRanking(){
         return ranking;
+    }
+    
+    public byte[] guardarRanking() {
+        byte[] rankingBytes = null;
+        
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutput out = null;
+        try {
+
+            out = new ObjectOutputStream(bos);   
+            out.writeObject(this);
+            out.flush();
+            rankingBytes = bos.toByteArray();
+            bos.close();
+
+        } catch (IOException ex) {
+          // ignore close exception
+        }
+        
+        return rankingBytes;
     }
     
     /**

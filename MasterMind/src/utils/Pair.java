@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.Serializable;
 
 
 /**
@@ -8,7 +9,7 @@ package utils;
  * @param <F>
  * @param <S>
  */
-public class Pair<F,S> {
+public class Pair<F,S> implements Serializable{
     private F left;
     private S right;
     

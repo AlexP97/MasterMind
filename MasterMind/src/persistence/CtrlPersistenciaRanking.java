@@ -12,7 +12,7 @@ import utils.Pair;
  *
  * @author User
  */
-public class CtrlPersistenciaRanking {
+public class CtrlPersistenciaRanking extends CtrlPersistencia{
     RankingPersistencia rP;
     
     public CtrlPersistenciaRanking(){
@@ -22,7 +22,14 @@ public class CtrlPersistenciaRanking {
     public ArrayList<Pair<String, Integer>> getRanking(){
         return rP.getRanking();
     }
-    public void actualizaRanking(ArrayList<Pair<String, Integer>> ranking){
-        rP.actualizaRanking(ranking);
+    
+    @Override
+    public Pair <Boolean, String> write(byte[] ranking, String path){
+        return rP.write(ranking,path);
+    }
+    
+    @Override
+    public byte[] read(String path, String s2){
+        return rP.read(path);
     }
 }

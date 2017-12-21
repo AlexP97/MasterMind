@@ -5,6 +5,10 @@
  */
 package domain;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import persistence.CtrlPersistenciaRanking;
 import utils.Pair;
@@ -18,22 +22,38 @@ public class CtrlDominioRanking {
     Ranking r;
     
     public CtrlDominioRanking(CtrlPersistenciaRanking CPr) {
-        this.r = Ranking.getInstance();
-        r.setRanking(this.getRanking());
         this.CPr = CPr;
-        r.setRanking(CPr.getRanking());
-    }
+        byte[] b = CPr.read("data/ranking/info", null);
+        if (b != null){
+            ByteArrayInputStream bis = new ByteArrayInputStream(b);
+            ObjectInput in = null;
+            try {
+
+                in = new ObjectInputStream(bis);
+
+                try {
+
+                    this.r = (Ranking)in.readObject();
+
+                } catch (ClassNotFoundException ex) {} 
+            }catch (IOException ex) {} 
+            finally {
+              try {
+                if (in != null) {
+                  in.close();
+                }
+              } catch (IOException ex) {}
+            }
+        }
+        if (this.r == null) this.r = Ranking.getInstance();
+    }  
     
     public ArrayList<Pair<String, Integer>> muestraRanking() {
         return r.muestraRanking();
     }
     public Pair<Boolean,Integer> actualizaRanking(String nombre, int puntos){
         Pair<Boolean,Integer> p = r.actualizaRanking(nombre, puntos);
-        CPr.actualizaRanking(r.muestraRanking());
+        CPr.write(r.guardarRanking(), "data/ranking/info");
         return p;
-    }
-    public final ArrayList<Pair<String, Integer>> getRanking(){
-        CtrlPersistenciaRanking ctrlPR = new CtrlPersistenciaRanking();
-        return ctrlPR.getRanking();
     }
 }

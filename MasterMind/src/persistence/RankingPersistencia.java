@@ -3,9 +3,14 @@ package persistence;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import utils.Pair;
 
@@ -64,6 +69,43 @@ public class RankingPersistencia {
         bw.close();
         } catch (IOException ex) {
             System.out.println("Error actualizando el ranking");
+        }
+    }
+    
+    public Pair <Boolean, String> write(byte[] b, String s){
+        Pair <Boolean,String> p = new Pair<Boolean,String>(true, "La partida se ha guardado correctamente");
+        
+        File file = new File(s);
+        if (file.exists() && !file.isDirectory()) file.delete();
+                
+        FileOutputStream out;
+        try {
+            out = new FileOutputStream(s);
+            try {
+                
+                out.write(b);
+                out.close();
+            
+            } catch (IOException ex) {
+               p.setLeft(false);
+               p.setRight("No se ha podido guardar la partida.");
+            }
+            
+        } catch (FileNotFoundException ex) {
+            p.setLeft(false);
+            p.setRight("No se ha podido guardar la partida.");
+        }
+        
+        return p;
+    }
+    
+    public byte[] read(String path){
+        try {
+            Path p = Paths.get(path);
+            if (p == null) return null;
+            else return Files.readAllBytes(p);
+        } catch (IOException ex) {
+            return null;
         }
     }
 }
