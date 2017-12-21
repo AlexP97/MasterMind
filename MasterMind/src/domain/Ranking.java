@@ -13,29 +13,26 @@ import java.util.ArrayList;
  * @author Espejo Saldaña, Adrián
  */
 public class Ranking implements Serializable{
-    private static final Ranking INSTANCE = new Ranking();
+    private static Ranking INSTANCE = null;
     private static ArrayList<Pair<String, Integer>> ranking;
     
-    private Ranking(){
-        ranking = new ArrayList<Pair<String, Integer>>();
-    }
+    private Ranking(){}
     
     /**
      *
      * @return la única instancia de Ranking
      */
     public static Ranking getInstance(){
+        if(INSTANCE == null) INSTANCE = new Ranking();
+        if(ranking == null) ranking = new ArrayList();
         return INSTANCE;
-    }
-    
-    public void setRanking(ArrayList<Pair<String, Integer>> ranking){
-        this.ranking = ranking;
     }
     /**
      *
      * @return el ranking
      */
     public ArrayList<Pair<String, Integer>> muestraRanking(){
+        if(ranking == null) ranking = new ArrayList();
         return ranking;
     }
     
@@ -66,28 +63,31 @@ public class Ranking implements Serializable{
      * @return 
      */
     public Pair<Boolean,Integer> actualizaRanking(String nombre, int puntos){
+        if(ranking == null) ranking = new ArrayList();
         Pair<Boolean,Integer> entradoPosicion = new Pair(false,"");
         Pair<String, Integer> p = new Pair(nombre,puntos);
         Pair aux;
-        boolean primer = true;
-        if(ranking.size() < 10) {
+        if(ranking.isEmpty()){
+            entradoPosicion.setLeft(true);
+            entradoPosicion.setRight(1);
+            ranking.add(p);
+        }
+        else if(ranking.size() < 10) {
+            entradoPosicion.setLeft(true);
             int i;
             boolean b = false;
             for(i= 0; i < ranking.size() && !b; i++) {
                 b = ranking.get(i).getRight() < puntos;
             }
             if(b) {
-                if(primer){
-                    primer = false;
-                    entradoPosicion.setLeft(true);
-                    entradoPosicion.setRight(i);
-                }
+                entradoPosicion.setRight(i);
                 for(int j = i-1; j < ranking.size(); j++) {
                     aux = new Pair(ranking.get(j));
                     ranking.set(j,p);
                     p = new Pair(aux);
                 }
             }
+            if(!b) entradoPosicion.setRight(i+1);
             ranking.add(p);
         }
         else{
