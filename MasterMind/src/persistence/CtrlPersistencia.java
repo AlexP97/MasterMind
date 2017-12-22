@@ -5,6 +5,13 @@
  */
 package persistence;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import utils.Pair;
 
 /**
@@ -13,7 +20,40 @@ import utils.Pair;
  */
 public abstract class CtrlPersistencia {
     
-    public abstract Pair<Boolean,String> write(byte[] serial, String path);
+    public Pair<Boolean,String> write(Object object, String path){
+        Pair <Boolean,String> p = new Pair();
+        
+        File file = new File(path);
+        if (file.exists() && !file.isDirectory()) file.delete();
+                
+        try {
+         FileOutputStream fileOut = new FileOutputStream(path);
+         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+         out.writeObject(object);
+         out.close();
+         fileOut.close();
+        } catch (IOException i) {
+          
+      }
+        
+        return p;
+    }
     
-    public abstract byte[] read(String s1, String s2);
+    public Object read(String path) {
+      
+        Object object = null;
+        try {
+         FileInputStream fileIn = new FileInputStream(path);
+         ObjectInputStream in = new ObjectInputStream(fileIn);
+         object = in.readObject();
+         in.close();
+         fileIn.close();
+      } catch (IOException i) {
+         return null;
+      } catch (ClassNotFoundException c) {
+         return null;
+      }
+        
+        return object;
+    }
 }

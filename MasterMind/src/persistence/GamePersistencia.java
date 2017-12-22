@@ -24,31 +24,6 @@ import utils.Pair;
  */
 public class GamePersistencia implements Serializable{
     
-    public Pair <Boolean, String> write(byte[] b, String s) {
-        
-        Pair <Boolean,String> p = new Pair<Boolean,String>(true, "La partida se ha guardado correctamente");
-        
-        FileOutputStream out;
-        try {
-            out = new FileOutputStream(s);
-            try {
-                
-                out.write(b);
-                out.close();
-            
-            } catch (IOException ex) {
-               p.setLeft(false);
-               p.setRight("No se ha podido guardar la partida.");
-            }
-            
-        } catch (FileNotFoundException ex) {
-            p.setLeft(false);
-            p.setRight("No se ha podido guardar la partida.");
-        }
-        
-        return p;
-    }
-    
     /**
      *
      * @param dirName es el directorio donde buscar los archivos
@@ -89,15 +64,6 @@ public class GamePersistencia implements Serializable{
         
         return available;
         
-    }
-    
-    public byte[] read (String path) {
-        try {
-            Path p = Paths.get(path);
-            return Files.readAllBytes(p);
-        } catch (IOException ex) {
-            return null;
-        }
     }
     
     public Pair <Boolean, String> eliminarPartida(String userName, String id){

@@ -39,35 +39,9 @@ public class CtrlDominioPartida {
     public Pair<Boolean,String> loadGame(String userName, String id) {
         
         Pair<Boolean,String> p = null;
-        byte[] b = CPG.read("data/players/"+userName+"/games/"+id, null);
-        if (b != null){
-            ByteArrayInputStream bis = new ByteArrayInputStream(b);
-            ObjectInput in = null;
-            try {
-
-                in = new ObjectInputStream(bis);
-
-                try {
-
-                    game = (Game)in.readObject();
-
-                } catch (ClassNotFoundException ex) {
-                    p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
-                } 
-            }catch (IOException ex) {
-                p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
-            } finally {
-              try {
-                if (in != null) {
-                  in.close();
-                  p = new Pair<Boolean,String>(true, "Se ha cargado la partida correctamente");
-                }
-              } catch (IOException ex) {
-                p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
-              }
-            }
-        }
-        else p = new Pair<Boolean,String>(false, "No se ha podido cargar la partida");
+        game = CPG.read("data/players/"+userName+"/games/"+id);
+        if (game == null) p = new Pair(false, "No se ha podido cargar la partida");
+        else p = new Pair(true, "Partida cargada correctamente");
         return p;
     }
     
@@ -125,14 +99,7 @@ public class CtrlDominioPartida {
     
     public Pair <Boolean,String> saveGame(String userName){
         Pair <Boolean,String> p = new Pair<Boolean,String>();
-        byte[] b = game.SaveGame();
-        if (b != null) {
-            p = CPG.write(b, "data/players/"+userName+"/games/"+game.getId());
-        }
-        else {
-            p.setLeft(false);
-            p.setRight("No se ha podido guardar la partida.");
-        }
+        p = CPG.write(game, "data/players/"+userName+"/games/"+game.getId());
         return p;
     }
 }

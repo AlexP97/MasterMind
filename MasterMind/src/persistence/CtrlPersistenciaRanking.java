@@ -5,6 +5,7 @@
  */
 package persistence;
 
+import domain.Ranking;
 import java.util.ArrayList;
 import utils.Pair;
 
@@ -23,13 +24,11 @@ public class CtrlPersistenciaRanking extends CtrlPersistencia{
         return rP.getRanking();
     }
     
-    @Override
-    public Pair <Boolean, String> write(byte[] ranking, String path){
-        return rP.write(ranking,path);
+    public Pair <Boolean, String> write(Ranking ranking, String path){
+        return super.write(ranking,path);
     }
     
-    @Override
-    public byte[] read(String path, String s2){
-        return rP.read(path);
+    public Ranking read(String path){
+        return (Ranking)super.read(path);
     }
 }

@@ -5,6 +5,7 @@
  */
 package persistence;
 
+import domain.Game;
 import utils.Pair;
 
 /**
@@ -31,14 +32,12 @@ public class CtrlPersistenciaGame extends CtrlPersistencia{
         return gameP.eliminarPartida(userName, id);
     }
     
-    @Override
-    public Pair <Boolean, String> write(byte[] serial, String path){
-        return gameP.write(serial,path);
+    public Pair <Boolean, String> write(Game object, String path){
+        return super.write(object, path);
     }
     
-    @Override
-    public byte[] read (String path, String s2) {
-        return gameP.read(path);
+    public Game read (String path) {
+        return (Game)super.read(path);
     }
     
 }
