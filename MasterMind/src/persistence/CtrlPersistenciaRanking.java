@@ -28,7 +28,7 @@ public class CtrlPersistenciaRanking extends CtrlPersistencia{
         return super.write(ranking,path);
     }
     
-    public Ranking read(String path){
-        return (Ranking)super.read(path);
+    public ArrayList read(String path){
+        return (ArrayList)super.read(path);
     }
 }

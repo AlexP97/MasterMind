@@ -39,53 +39,8 @@ public class Ranking implements Serializable{
         return ranking;
     }
     
-    public Pair<Boolean,String> cargarRanking(byte[] b) {
-        ByteArrayInputStream bis = new ByteArrayInputStream(b);
-        ObjectInput in = null;
-        try {
-
-            in = new ObjectInputStream(bis);
-
-            try {
-
-                this.ranking = (ArrayList<Pair<String, Integer>>)in.readObject();
-
-            } catch (ClassNotFoundException ex) {
-                return new Pair<Boolean,String>(false, "Error cargando el ranking");
-            } 
-        }catch (IOException ex) {
-                return new Pair<Boolean,String>(false, "Error cargando el ranking");
-            }  
-        finally {
-          try {
-            if (in != null) {
-              in.close();
-            }
-          } catch (IOException ex) {
-                return new Pair<Boolean,String>(false, "Error cargando el ranking");
-            } 
-        }
-        return new Pair<Boolean,String>(true, "");
-    }
-    
-    public byte[] guardarRanking() {
-        byte[] rankingBytes = null;
-        
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutput out = null;
-        try {
-
-            out = new ObjectOutputStream(bos);   
-            out.writeObject(ranking);
-            out.flush();
-            rankingBytes = bos.toByteArray();
-            bos.close();
-
-        } catch (IOException ex) {
-          // ignore close exception
-        }
-        
-        return rankingBytes;
+    public void cargarRanking(ArrayList<Pair<String, Integer>> r) {
+        this.ranking = r;
     }
     
     /**

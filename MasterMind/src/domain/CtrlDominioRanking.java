@@ -20,10 +20,8 @@ public class CtrlDominioRanking {
     public CtrlDominioRanking(CtrlPersistenciaRanking CPr) {
         this.CPr = CPr;
         this.r = Ranking.getInstance();
-        byte[] b = CPr.read("data/ranking/info", null);
-        if (b != null){
-            r.cargarRanking(b);
-        }
+        ArrayList<Pair<String, Integer>> ran = CPr.read("data/ranking/info");
+        if (ran != null) this.r.cargarRanking(ran);
     }  
     
     public ArrayList<Pair<String, Integer>> muestraRanking() {
@@ -31,7 +29,7 @@ public class CtrlDominioRanking {
     }
     public Pair<Boolean,Integer> actualizaRanking(String nombre, int puntos){
         Pair<Boolean,Integer> p = r.actualizaRanking(nombre, puntos);
-        CPr.write(r.guardarRanking(), "data/ranking/info");
+        CPr.write(this.r.muestraRanking(), "data/ranking/info");
         return p;
     }
 }
