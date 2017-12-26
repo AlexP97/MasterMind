@@ -98,7 +98,7 @@ public class CtrlDominioPartida {
     }
     
     public Pair <Boolean,String> saveGame(String userName){
-        Pair <Boolean,String> p = new Pair<Boolean,String>();
+        Pair <Boolean,String> p;
         p = CPG.write(game, "data/players/"+userName+"/games/"+game.getId());
         return p;
     }

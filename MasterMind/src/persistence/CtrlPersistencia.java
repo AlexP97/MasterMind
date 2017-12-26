@@ -32,8 +32,10 @@ public abstract class CtrlPersistencia {
          out.writeObject(object);
          out.close();
          fileOut.close();
+         p = new Pair(true, "");
         } catch (IOException i) {
-          
+            System.out.println(i);
+            p = new Pair(false, "Problema en el guardado");
       }
         
         return p;

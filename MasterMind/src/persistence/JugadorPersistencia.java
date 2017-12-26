@@ -69,6 +69,8 @@ public class JugadorPersistencia {
                 p.setLeft(false);
                 return p;
             }
+            File dir2 = new File("data/players/"+n+"/games");
+            if (!dir2.exists()) dir2.mkdir();
             p.setRight("Has iniciado sesión correctamente");
             p.setLeft(true);
         }
