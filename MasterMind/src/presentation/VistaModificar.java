@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import utils.Pair;
 
 /**
  *
@@ -205,13 +206,15 @@ public class VistaModificar extends javax.swing.JFrame {
         String pass = new String(jPasswordField1.getPassword());
         if(user.equals("") && pass.equals("")) JOptionPane.showMessageDialog(null,"No has cambiado nada.","Mensaje",JOptionPane.WARNING_MESSAGE);
         else{
+            Pair<Boolean, String> p = new Pair<>();
             if(!user.equals("")){
-                CP.modificaUsuario(user); 
+                p = CP.modificaUsuario(user); 
+                
             }
             if(!pass.equals("")){
-                CP.modificaContraseña(pass);
+                p = CP.modificaContraseña(pass);
             }
-            JOptionPane.showMessageDialog(null,"El perfil ha sido modificado.");
+            JOptionPane.showMessageDialog(null,p.getRight());
             VistaMenuPartida Vmp = new VistaMenuPartida();
             Vmp.setCP(CP);
             Vmp.setVisible(true);
@@ -233,8 +236,8 @@ public class VistaModificar extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int reply = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Eliminar perfil",  JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION){
-            JOptionPane.showMessageDialog(null,"Perfil eliminado.");
-            CP.eliminar();
+            Pair<Boolean, String> p = CP.eliminar();
+            JOptionPane.showMessageDialog(null,p.getRight());
             VistaPresentacion Vp = new VistaPresentacion();
             Vp.setCP(CP);
             Vp.setVisible(true);

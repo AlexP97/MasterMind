@@ -1,9 +1,7 @@
 package domain;
 
-import utils.Pair;
 import java.io.Serializable;
 import java.util.ArrayList;
-import persistence.JugadorPersistencia;
 
 
 /**
@@ -19,7 +17,7 @@ public class Jugador implements Serializable{
     
     
     public Jugador() {
-      
+        
     }
     
     /**
@@ -149,8 +147,7 @@ public class Jugador implements Serializable{
         }
         while(linea.size() < nFichas) {
             linea.add(0);
-        }
-            
+        } 
         return linea;
     }
 }

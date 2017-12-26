@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Scanner;
 import utils.Funciones;
+import utils.Pair;
 
 /**
  *
@@ -16,7 +16,7 @@ public final class CodeBreaker extends Jugador implements Serializable{
     ArrayList<ArrayList<Integer> > noUsados;
     HashMap<ArrayList<Integer>, Integer> combinaciones;
          
-    boolean primeraOpcio = true;
+    boolean primeraTirada = true;
     
     /**
      *
@@ -72,7 +72,6 @@ public final class CodeBreaker extends Jugador implements Serializable{
         if(this.esIA()){
             ArrayList<Integer> aux = new ArrayList<>();
             ArrayList<Integer> aux2 = new ArrayList<>();
-            
             for(int i = 0; i < super.getNFichas(); i++) {
                 aux.add(1);
                 aux2.add(1);
@@ -112,21 +111,14 @@ public final class CodeBreaker extends Jugador implements Serializable{
     protected boolean compare(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio, ArrayList<Integer> code){
         int nblancas = 0;
         int nnegras = 0;
-        ArrayList<CodePeg> cambioCodePeg = convert(code);
-        ArrayList<Integer> aux = super.donaSolucio(cambioCodePeg, tirada);
-        for(int i = 0; i < aux.size(); i++){
-            if(aux.get(i) == 2) nblancas++;
-            else if(aux.get(i) == 1) nnegras++;
+        ArrayList<CodePeg> cambioCode = convert(code);
+        ArrayList<Integer> aux = super.donaSolucio(cambioCode, tirada);
+        Funciones.ordenar(aux);
+        for(int i = 0; i < aux.size(); i++) {
+            if(solucio.get(i).getColour() != aux.get(i))
+                return false;
         }
-        
-        int blancasSolucio = 0;
-        int negrasSolucio = 0;
-        for(int i = 0; i < solucio.size(); i++){
-            if (solucio.get(i).getColour() == 2) blancasSolucio++;
-            else if(solucio.get(i).getColour() == 1) negrasSolucio++;
-        }
-        if(nblancas == blancasSolucio && nnegras == negrasSolucio) return true;
-        return false;   
+        return true;
     }
     
     /**
@@ -139,6 +131,41 @@ public final class CodeBreaker extends Jugador implements Serializable{
         ArrayList<CodePeg> cambioCodePeg = convert(candidat);
         ArrayList<CodePeg> cambioCodePeg2 = convert(descartat);
         return donaSolucio(cambioCodePeg, cambioCodePeg2);
+    }
+    
+    public int compruebaMaximo(HashMap<ArrayList<Integer>, Integer> hm) {
+        int count = -1;
+        Iterator it = hm.keySet().iterator();
+        while(it.hasNext()) {
+            ArrayList<Integer> key = (ArrayList<Integer>) it.next();
+            Integer val = hm.get(key);
+            if(val > count)
+                count = val;
+        }
+        return count;
+    }
+    
+    public Pair<Pair<Boolean,Integer>,Integer> esSolucion(int count, int min, int i, Integer indice, boolean compatible) {
+        Pair<Boolean, Integer> p = new Pair<>();
+        Pair<Pair<Boolean,Integer>,Integer> sol = new Pair<>();
+        int m = -1;
+        boolean comp = (compatibles.contains(noUsados.get(i)));
+        if(count < min) {
+            p.setRight(i);
+            m = count;
+            if(comp)
+                p.setLeft(true);
+            else
+                p.setLeft(false);
+        }
+        if(count == min && !compatible && comp) {
+            m = count;
+            p.setRight(i);
+            p.setLeft(comp);
+        }
+        sol.setLeft(p);
+        sol.setRight(m);
+        return sol;
     }
     
     /**
@@ -157,29 +184,40 @@ public final class CodeBreaker extends Jugador implements Serializable{
                 Integer value = combinacionesAux.get(aux);
                 combinacionesAux.put(aux,value+1);
             }
-            
-            int count = -1;
-            Iterator it = combinacionesAux.keySet().iterator();
-            while(it.hasNext()) {
-                ArrayList<Integer> key = (ArrayList<Integer>) it.next();
-                Integer val = combinacionesAux.get(key);
-                if(val > count)
-                    count = val;
+            int count = compruebaMaximo(combinacionesAux);
+            Pair<Pair<Boolean,Integer>,Integer> p = esSolucion(count, min, i, indice, compatible);      
+            if(p.getRight() != -1) {
+                min = p.getRight();
+                compatible = p.getLeft().getLeft();
+                indice = p.getLeft().getRight();
             }
-                    
-            boolean comp = (compatibles.contains(noUsados.get(i)));
-            if(count < min) {
-                indice = i;
-                min = count;
-                if(comp)
-                    compatible = true;
-                }
-                if(count == min && !compatible && comp) {
-                    indice = i;
-                    compatible = comp;
-                }
         }
         return noUsados.get(indice);
+    }
+    
+    
+    
+    
+    public void eliminaCompatibles(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio) {
+        for(int i = 0; i < compatibles.size(); i++){
+                    if(!compare(tirada,solucio,compatibles.get(i))){
+                        compatibles.remove(i);
+                        i--;
+                    }
+                }     
+    }
+    
+    public ArrayList<Integer> primeraTirada() {
+        ArrayList<Integer> aux = new ArrayList<>();
+        aux.add(1);
+        for(int i = 1; i < super.getNFichas(); i++) {
+            if(i == 1)
+                aux.add(1);
+            else
+                aux.add(2);
+        }
+        return aux;
+        
     }
    
     /**
@@ -191,71 +229,17 @@ public final class CodeBreaker extends Jugador implements Serializable{
      */
     public ArrayList<Integer> jugar(String s, ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio) {
         ArrayList<Integer> linea;
-        linea = new ArrayList<Integer>();
+        linea = new ArrayList<>();
         if(s.equals("IA")) {
-            
-            
-            if(!primeraOpcio){
-                /*remove from S any code that would not give the same response if it (the guess) were the code
-                	* A code is inconsistent if the answer from comparing 'tirada' and a
-                        * code from 'S' is not the same as the answer from comparing
-                        * 'tirada' and the secret code given by the game.               
-                */
-                
-                for(int i = 0; i < compatibles.size(); i++){
-                    if(!compare(tirada,solucio,compatibles.get(i))){
-                        compatibles.remove(i);
-                        i--;
-                    }
-                }            
+            if(!primeraTirada){
+                eliminaCompatibles(tirada,solucio);
                 linea = millorOpcio();
-                return linea;
             }
             else{
-                ArrayList<Integer> aux = new ArrayList<>();
-                aux.add(1);
-                for(int i = 1; i < super.getNFichas(); i++)
-                    if(i == 1)
-                        aux.add(1);
-                    else
-                        aux.add(2);
-                primeraOpcio = false;
+                ArrayList<Integer> aux = primeraTirada();
+                primeraTirada = false;
                 compatibles.remove(aux);
                 return aux;
-            }
-        }
-        else {
-            boolean jugadaHecha = false;
-            boolean guardar = false;
-            while (!jugadaHecha && !guardar){
-                linea = new ArrayList<>();
-                Scanner input = new Scanner(System.in);
-                System.out.println("Introduce tu jugada poniendo "+super.getNFichas()+" fichas, poniendo cada ficha del 1 al "+super.getNColores()+" separada de un espacio."
-                        + "\n(Introduce -1 para guardar partida, -2 para salir de la partida sin guardar):\n");
-                String jugada = input.nextLine();
-                String fichas[] = jugada.split(" ");
-                if(fichas[0].equals("-1")) {
-                    guardar = true;
-                    linea.add(-1);
-                }
-                else if(fichas[0].equals("-2")) {
-                    guardar = true;
-                    linea.add(-2);
-                }
-                if(!guardar) {
-                    boolean fichasNoValid = false;
-                    if(fichas.length != super.getNFichas())
-                        fichasNoValid = true;
-                    for(int i = 0; i < fichas.length && !fichasNoValid; i++) {
-                        int num = Integer.parseInt(fichas[i]);
-                        if (num >= 1 && num <= super.getNColores()) linea.add(num);
-                    }
-                    if(linea.size() == super.getNFichas()) jugadaHecha = true;
-                    if(fichasNoValid) 
-                        System.out.println("El número de fichas introducido es incorrecto.");
-                    if (!jugadaHecha) 
-                        System.out.println("Has introducido un valor incorrecto.");
-                }
             }
         }
         return linea;

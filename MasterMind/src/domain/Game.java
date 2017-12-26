@@ -293,7 +293,7 @@ public class Game implements Serializable{
     }
     
     public boolean validarJugadaCodeM(ArrayList<Integer> cods){
-        boolean b = codeM.validar_pista(codeBAnt, codeIni, cods);
+        boolean b = codeM.validarPista(codeBAnt, codeIni, cods);
         if (b) {
             codeMAnt = conversorKey(cods);
             ++turn;

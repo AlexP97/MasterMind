@@ -15,6 +15,19 @@ import utils.Pair;
  */
 public class JugadorPersistencia {
 
+    
+    public boolean escribeFichero(String n, String c, File info) {
+        try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(info));
+                bw.write(n+" "+c);
+                bw.close();
+                return true;
+            }
+            catch(IOException e) {
+                return false;
+            }
+    }
+    
     /**
      *
      * @param n nombre de usuario
@@ -30,17 +43,13 @@ public class JugadorPersistencia {
             File dir2 = new File("data/players/"+n+"/games");
             dir2.mkdir();
             File info = new File("data/players/"+n+"/info.txt");
-            try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-                bw.write(n+" "+c);
-                bw.close();
-            }
-            catch(IOException e) {
+            if(escribeFichero(n,c,info))
+                p.setLeft(true);
+            else {
                 p.setRight("Error en el registro");
                 p.setLeft(false);
                 return p;
             }
-            p.setLeft(true);
         }
         else {
             p.setRight("El jugador ya existe");
@@ -100,14 +109,11 @@ public class JugadorPersistencia {
         }
         else {
             File info = new File("data/players/"+n2+"/info.txt");
-            try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-                bw.write(n2+" "+c);
-                bw.close();
+            if(escribeFichero(n2,c,info)) {
                 p.setRight("Has cambiado tu nombre de usuario correctamente.");
                 p.setLeft(true);
             }
-            catch (IOException e) {
+            else {
                 p.setRight("Error al cambiar de nombre");
                 p.setLeft(false);
             }
@@ -124,14 +130,11 @@ public class JugadorPersistencia {
     public Pair<Boolean, String> setPassword(String n, String c) {
         File info = new File("data/players/"+n+"/info.txt");
         Pair<Boolean, String> p = new Pair<>();
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(info));
-            bw.write(n+" "+c);
-            bw.close();
+        if(escribeFichero(n,c,info)) {
             p.setRight("Has cambiado tu contraseña correctamente.");
             p.setLeft(true);
         }
-        catch (IOException e) {
+        else {
             p.setRight("Error al cambiar de contraseña");
             p.setLeft(false);
         }

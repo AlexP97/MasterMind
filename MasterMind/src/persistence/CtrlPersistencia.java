@@ -16,7 +16,7 @@ import utils.Pair;
 
 /**
  *
- * @author Pérez Ortiz, Alejandro
+ * @author Martínez Martínez, Daniel
  */
 public abstract class CtrlPersistencia {
     
