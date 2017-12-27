@@ -56,7 +56,6 @@ public class GamePersistencia implements Serializable{
             for (int i = 0; i < listOfFiles.length && available; i++) {
 
                 String fileName = listOfFiles[i].getName().replaceFirst("[.][^.]+$", "");
-                ident += "Game";
                 if (fileName.equals(ident)) available = false;
 
             }
