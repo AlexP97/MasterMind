@@ -53,6 +53,7 @@ public class VistaCodigoInicial extends javax.swing.JFrame {
         
         setLocationRelativeTo(null);
         setTitle("MasterMind");
+        setResizable(false);
         
         ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         this.setIconImage(imgicon.getImage());

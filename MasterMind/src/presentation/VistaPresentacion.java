@@ -7,6 +7,7 @@ package presentation;
 
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -46,10 +47,20 @@ public class VistaPresentacion extends javax.swing.JFrame {
         jLabel1.setIcon(icon);
         
         setListeners();
+        
+        jScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        
+        setComponentListener();
     }
 
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
+    }
+    
+    public final void setComponentListener(){
+        WindowListener cl = new WindowListener(jScrollPane1);
+        getContentPane().addComponentListener(cl);
     }
     
     public final void setListeners(){
@@ -67,6 +78,7 @@ public class VistaPresentacion extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -86,7 +98,7 @@ public class VistaPresentacion extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 249;
         gridBagConstraints.ipady = 70;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(50, 102, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(88, 120, 0, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
 
         jButton1.setLabel("Login");
@@ -101,7 +113,7 @@ public class VistaPresentacion extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 23;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(68, 157, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(93, 156, 0, 0);
         jPanel1.add(jButton1, gridBagConstraints);
 
         jButton2.setLabel("Register");
@@ -113,11 +125,11 @@ public class VistaPresentacion extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipadx = 18;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(68, 92, 0, 141);
+        gridBagConstraints.insets = new java.awt.Insets(93, 97, 0, 161);
         jPanel1.add(jButton2, gridBagConstraints);
 
         jButton3.setText("Salir");
@@ -130,30 +142,31 @@ public class VistaPresentacion extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(40, 110, 155, 0);
+        gridBagConstraints.insets = new java.awt.Insets(74, 118, 159, 161);
         jPanel1.add(jButton3, gridBagConstraints);
+
+        jScrollPane1.setViewportView(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        VistaLogin Vl = new VistaLogin();
-        Vl.setCP(CP);
-        Vl.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         VistaRegister Vr = new VistaRegister();
@@ -162,9 +175,12 @@ public class VistaPresentacion extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        VistaLogin Vl = new VistaLogin();
+        Vl.setCP(CP);
+        Vl.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,5 +208,6 @@ public class VistaPresentacion extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

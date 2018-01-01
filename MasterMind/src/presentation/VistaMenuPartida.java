@@ -7,7 +7,7 @@ package presentation;
 
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 
 /**
@@ -45,10 +45,20 @@ public class VistaMenuPartida extends javax.swing.JFrame {
         this.setIconImage(imgicon.getImage());
         
         setListeners();
+        
+        jScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        
+        setComponentListener();
+    }
+
+    public void setCP(CtrlPresentacion CP){
+        this.CP = CP;
     }
     
-    public void setCP(CtrlPresentacion CP){
-       this.CP = CP;
+    public final void setComponentListener(){
+        WindowListener cl = new WindowListener(jScrollPane1);
+        getContentPane().addComponentListener(cl);
     }
    
     public final void setListeners(){
@@ -67,6 +77,7 @@ public class VistaMenuPartida extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -163,15 +174,17 @@ public class VistaMenuPartida extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(38, 49, 0, 0);
         jPanel1.add(jButton6, gridBagConstraints);
 
+        jScrollPane1.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
         );
 
         pack();
@@ -264,5 +277,6 @@ public class VistaMenuPartida extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

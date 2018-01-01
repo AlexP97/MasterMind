@@ -8,6 +8,7 @@ package presentation;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import utils.Pair;
 
@@ -46,10 +47,20 @@ public class VistaModificar extends javax.swing.JFrame {
         this.setIconImage(imgicon.getImage());
         
         setListeners();
+        
+        jScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        
+        setComponentListener();
     }
-    
+
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
+    }
+    
+    public final void setComponentListener(){
+        WindowListener cl = new WindowListener(jScrollPane1);
+        getContentPane().addComponentListener(cl);
     }
     
     public void setName(String name){
@@ -79,6 +90,7 @@ public class VistaModificar extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -187,15 +199,17 @@ public class VistaModificar extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(42, 29, 0, 70);
         jPanel1.add(jTextField2, gridBagConstraints);
 
+        jScrollPane1.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
         );
 
         pack();
@@ -234,7 +248,7 @@ public class VistaModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int reply = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Eliminar perfil",  JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Eliminar perfil",JOptionPane.WARNING_MESSAGE,JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION){
             Pair<Boolean, String> p = CP.eliminar();
             JOptionPane.showMessageDialog(null,p.getRight());
@@ -292,6 +306,7 @@ public class VistaModificar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
