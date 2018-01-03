@@ -1,0 +1,31 @@
+Espejo Saldana, Adrian
+Martinez Martinez, Daniel
+Perez Ortiz, Alejandro
+
+adrian.espejo@est.fib.upc.edu
+daniel.martinez.martinez@est.fib.upc.edu
+alejandro.perez.ortiz@est.fib.upc.edu
+
+Para compilar el juego, debe introducir:
+
+	$ make
+
+Para jugar al juego una vez compilado, se debe introducir:
+
+	$ make run
+
+
+
+-------------------------------------------------------------------
+
+Reparto
+
+Espejo Saldana, Adrian --> Casilla, KeyPeg, CodePeg, Ranking, MasterMind, Funciones, Pair, CtrlPresentacion, CtrlPresentacionLoginRegister, 
+CtrlPresentacionModificarDatos, CtrlPresentacionRanking, KeyListenerPers, VistaInfo, VistaInfoCodebreaker, VistaInfoCodemaker, VistaLogin,
+VistaMenuPartida, VistaModificar, VistaPresentacion, VistaRanking, VistaRegister, WindowListener, Main.
+
+Martinez Martinez, Daniel --> Game, GamePersistencia, CtrlDominioPartida, CtrlDominioRanking, CtrlPersistencia, CtrlPersistenciaGame,
+CtrlPersistenciaRanking, CtrlPresentacionGame, VistaCargarPart, VistaCodigoInicial, VistaNuevaPart, VistaTableroCodeB, VistaTableroCodeM.
+
+Perez Ortiz, Alejandro --> CodeBreaker, CodeMaker, CtrlDominio, CtrlDominioJugador, Jugador, CtrlPersistenciaJugador,
+JugadorPersistencia.

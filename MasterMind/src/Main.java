@@ -9,7 +9,7 @@ import presentation.CtrlPresentacion;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class Main {
     private static CtrlPresentacion CP;

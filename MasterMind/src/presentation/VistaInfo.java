@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation;
 
 import java.awt.event.KeyEvent;
@@ -11,7 +6,7 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class VistaInfo extends javax.swing.JFrame {
     CtrlPresentacion CP;
@@ -48,17 +43,21 @@ public class VistaInfo extends javax.swing.JFrame {
         setListeners();
     }
     
+    /**
+     *
+     * @param CP la capa de presentación
+     */
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
     }
     
-    public final void setListeners(){
+    private void setListeners(){
         KeyListenerPers kl2 = new KeyListenerPers(jButton3, KeyEvent.VK_ESCAPE);
         jPanel1.setFocusable(true);
         jPanel1.addKeyListener(kl2);
     }
 
-    public final void initText(){
+    private void initText(){
         String pt1 = "<html><body width='";
         String text =   "'><p style=\"text-align: justify;\">" +
                         "Mastermind es un juego de 2 jugadores basado en descifrar un" + 

@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import utils.Pair;
 
 /**
@@ -16,7 +15,7 @@ import utils.Pair;
 public class JugadorPersistencia {
 
     
-    public boolean escribeFichero(String n, String c, File info) {
+    private boolean escribeFichero(String n, String c, File info) {
         try {
                 BufferedWriter bw = new BufferedWriter(new FileWriter(info));
                 bw.write(n+" "+c);
@@ -32,7 +31,7 @@ public class JugadorPersistencia {
      *
      * @param n nombre de usuario
      * @param c contraseña
-     * @return si se ha registrado con éxito
+     * @return un booleano con si se ha podido registrar y un string con un mensaje de error si es necesario
      */
     public Pair<Boolean, String> register(String n, String c) {
         File dir = new File("data/players/"+n);
@@ -62,7 +61,7 @@ public class JugadorPersistencia {
      *
      * @param n nombre de usuario
      * @param c contraseña
-     * @return si ha hecho login con éxito
+     * @return un booleano con si se ha podido hacer login y un string con un mensaje de error si es necesario
      */
     public Pair<Boolean, String> login(String n, String c) {
         Pair<Boolean, String> p = new Pair();
@@ -96,7 +95,7 @@ public class JugadorPersistencia {
      * @param n1 nombre actual del usuario
      * @param n2 nombre que se quiere poner el usuario
      * @param c contraseña del usuario
-     * @return si se ha cambiado el nombre correctamente y el mensaje de si lo ha hecho bien o no
+     * @return un booleano con si se ha podido asignar el nombre y un string con un mensaje de error si es necesario
      */
     public Pair<Boolean, String> setName(String n1,String n2, String c) {
         File dir = new File("data/players/"+n1);
@@ -125,7 +124,7 @@ public class JugadorPersistencia {
      *
      * @param n el nombre del usuario
      * @param c la contraseña
-     * @return si se ha cambiado la contraseña correctamente y el mensaje de si lo ha hecho bien o no
+     * @return un booleano con si se ha podido asignar la contraseña y un string con un mensaje de error si es necesario
      */
     public Pair<Boolean, String> setPassword(String n, String c) {
         File info = new File("data/players/"+n+"/info.txt");
@@ -153,7 +152,7 @@ public class JugadorPersistencia {
     /**
      *
      * @param n nombre del usuario
-     * @return el mensaje de si lo ha hecho bien o no
+     * @return un booleano con si se ha podido eliminar y un string con un mensaje de error si es necesario
      */
     public Pair<Boolean,String> elimina(String n) {
         File f = new File("data/players/"+n);
@@ -171,6 +170,11 @@ public class JugadorPersistencia {
         }
     }
     
+    /**
+     *
+     * @param n el nombre del usuario que quiere ver sus partidas guardadas
+     * @return una lista de las partidas guardadas por el usuario
+     */
     public String[] obtenerPartidas(String n) {
         String[] res1 = {"No hay partidas"};
         File dir = new File("data/players/"+n+"/games");

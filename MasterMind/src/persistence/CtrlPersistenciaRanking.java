@@ -11,23 +11,25 @@ import utils.Pair;
 
 /**
  *
- * @author User
+ * @author Martínez Martínez, Daniel
  */
 public class CtrlPersistenciaRanking extends CtrlPersistencia{
-    RankingPersistencia rP;
     
-    public CtrlPersistenciaRanking(){
-        rP = new RankingPersistencia();
-    }
-    
-    public ArrayList<Pair<String, Integer>> getRanking(){
-        return rP.getRanking();
-    }
-    
+    /**
+     *
+     * @param ranking el objeto que se quiere escribir
+     * @param path la ruta del objetoque se quiere escribir
+     * @return un booleano con si se ha podido escribir y un string con un mensaje de error si es necesario
+     */
     public Pair <Boolean, String> write(Ranking ranking, String path){
         return super.write(ranking,path);
     }
     
+    /**
+     *
+     * @param path la ruta del objeto que se quiere leer
+     * @return el objeto que se quiere leer
+     */
     public ArrayList read(String path){
         return (ArrayList)super.read(path);
     }

@@ -34,10 +34,10 @@ public final class KeyPeg extends Casilla implements Serializable{
      *
      * @param col color del KeyPeg
      * @param rango rango de colores
-     * @return
+     * @return si el color está en el rango de colores de las pistas
      */
     @Override
-    public boolean colourValid(int col, int rango){    //0 nada, 1 blanco (color bien posición mal), 2 negro (color y posición bien)
+    public boolean colourValid(int col, int rango){    
         return (col >= 0 && col <= rango);
     }
 
@@ -45,7 +45,7 @@ public final class KeyPeg extends Casilla implements Serializable{
      *
      * @param pos posición del KeyPeg
      * @param total total de fichas
-     * @return
+     * @return si la posición es válida con el número de fichas
      */
     @Override
     public boolean posValid(int pos, int total){

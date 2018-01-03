@@ -77,23 +77,42 @@ public class Game implements Serializable{
         return this.mode;
     }
 
+    /**
+     *
+     * @return el turno actual de la partida
+     */
     public int getTurn() {
         return this.turn;
     }
     
+    /**
+     *
+     * @return devuelve todas las filas de la partida en el momento en el que se guardó
+     */
     public ArrayList<ArrayList<Integer>> getJugadasCodeB (){
         return this.logJugadasB;
     }
     
+    /**
+     *
+     * @return devuelve todas las filas de la partida en el momento en el que se guardó
+     */
     public ArrayList<ArrayList<Integer>> getJugadasCodeM (){
         return this.logJugadasM;
     }
     
+    /**
+     *
+     * @return el patrón a adivinar
+     */
     public ArrayList<Integer> getCodeIni() {
         return codeToInt(codeIni);
     }
     
-    
+    /**
+     *
+     * @return devuelve el id, dificultad, modo, número de fichas y rango de colores de la partida actual
+     */
     public ArrayList<String> getStatsPartida() {
         ArrayList<String> a = new ArrayList<String>();
         a.add(this.mode);
@@ -145,6 +164,11 @@ public class Game implements Serializable{
         return lista;
     }
     
+    /**
+     *
+     * @param cods el patrón a adivinar por el codebreaker
+     * @return un booleano con si se ha podido elegir el patrón y un string con un mensaje de error si es necesario
+     */
     public Pair<Boolean,String> setCodIni(ArrayList<Integer> cods){
         
         this.codeIni = conversorCode(cods);
@@ -153,6 +177,10 @@ public class Game implements Serializable{
         
     }
     
+    /**
+     *
+     * @return un array de bytes con el objeto de la partida
+     */
     public byte[] SaveGame() {
            
         byte[] gameBytes = null;
@@ -178,8 +206,8 @@ public class Game implements Serializable{
     
     /**
      *
-     * @param ganado si el jugador ha ganado o no
-     * @return 
+     * @param ganado si se ha ganado la partida
+     * @return un booleano con si se ha podido acabar la partida y un string con un mensaje de error si es necesario
      */
     public Pair<Boolean,Integer> finishGame(boolean ganado) {
         
@@ -257,12 +285,13 @@ public class Game implements Serializable{
     
     /**
      *
-     * @param playerN jugador que juega la partida
+     * @param userN jugador que juega la partida
      * @param ident identificador de la partida
      * @param dif dificultad de la partida
      * @param mod modo de la partida
      * @param num número de fichas para la partida
      * @param ran rango de colores para la partida
+     * @return un booleano con si se ha podido crear la partida y un string con un mensaje de error si es necesario
      */
     public Pair<Boolean, String> crearPartida(String userN, String ident, String dif, String mod, int num, int ran) {
 
@@ -271,6 +300,11 @@ public class Game implements Serializable{
         else return new Pair(true, "Partida creada.");
     }
     
+    /**
+     *
+     * @param cods pista del codemaker
+     * @return devuelve la jugada del codebreaker de el turno actual
+     */
     public ArrayList<Integer> jugadaCodeB(ArrayList<Integer> cods){
         
         if (cods.size() > 0) codeMAnt = conversorKey(cods);
@@ -281,6 +315,11 @@ public class Game implements Serializable{
         return outputB;
     }
     
+    /**
+     *
+     * @param cods intento de adivinar el patrón del codebreaker
+     * @return devuelve la jugada del codemaker de el turno actual
+     */
     public ArrayList<Integer> jugadaCodeM(ArrayList<Integer> cods){
         
         ArrayList<Integer> outputM = codeM.jugar("IA", conversorCode(cods), codeIni);
@@ -292,6 +331,11 @@ public class Game implements Serializable{
         return outputM;
     }
     
+    /**
+     *
+     * @param cods la pista dada por el codemaker
+     * @return cierto si la pista está bien dada
+     */
     public boolean validarJugadaCodeM(ArrayList<Integer> cods){
         boolean b = codeM.validarPista(codeBAnt, codeIni, cods);
         if (b) {

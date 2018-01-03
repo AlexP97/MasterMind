@@ -6,16 +6,8 @@
 package persistence;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FilenameFilter;
-import java.io.IOException;
 import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utils.Pair;
 
 /**
@@ -65,6 +57,12 @@ public class GamePersistencia implements Serializable{
         
     }
     
+    /**
+     *
+     * @param userName el nombre del usuario que quiere eliminar la partida
+     * @param id el id de la partida que se quiere eliminar
+     * @return un booleano con si se ha podido eliminar la partiday un string con un mensaje de error si es necesario
+     */
     public Pair <Boolean, String> eliminarPartida(String userName, String id){
         return new Pair(false, "Aun no está implementado.");
     }

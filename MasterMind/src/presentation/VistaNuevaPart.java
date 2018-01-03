@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation;
 
 import java.awt.event.KeyEvent;
@@ -14,7 +9,7 @@ import utils.Pair;
 
 /**
  *
- * @author Usuario
+ * @author Martínez Martínez, Daniel
  */
 public class VistaNuevaPart extends javax.swing.JFrame {
     CtrlPresentacion CP;
@@ -54,16 +49,20 @@ public class VistaNuevaPart extends javax.swing.JFrame {
         setComponentListener();
     }
 
+    /**
+     *
+     * @param CP la capa de presentación
+     */
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
     }
     
-    public final void setComponentListener(){
+    private void setComponentListener(){
         WindowListener cl = new WindowListener(jScrollPane1);
         getContentPane().addComponentListener(cl);
     }
     
-    public final void setListeners(){
+    private void setListeners(){
         KeyListenerPers kl2 = new KeyListenerPers(jButton2, KeyEvent.VK_ESCAPE);
         jComboBox1.addKeyListener(kl2);
         jComboBox2.addKeyListener(kl2);

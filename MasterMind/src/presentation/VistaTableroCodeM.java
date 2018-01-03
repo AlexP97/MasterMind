@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation;
 
 import java.awt.Cursor;
@@ -20,7 +15,7 @@ import utils.Pair;
 
 /**
  *
- * @author Daniel
+ * @author Martínez Martínez, Daniel
  */
 public class VistaTableroCodeM extends javax.swing.JFrame {
 
@@ -72,11 +67,15 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         setListeners();
     }
     
+    /**
+     *
+     * @param CP la capa de presentación
+     */
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
     }
     
-    public final void setListeners(){
+    private void setListeners(){
         KeyListenerPers kl2 = new KeyListenerPers(jButton4, KeyEvent.VK_ESCAPE);
         jPanel1.setFocusable(true);
         jPanel1.addKeyListener(kl2);
@@ -108,6 +107,14 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         jButton8.addKeyListener(kl);
     }
     
+    /**
+     *
+     * @param n el número de fichas de la partida
+     * @param r el rango de colores de la partida
+     * @param d la dificultad de la partida
+     * @param t el turno porque el que va la partida
+     * @param cargado si la partida se está cargando es cierto, si es una nueva partida es falso
+     */
     public void setParams(int n, int r, int d, int t, boolean cargado){
         this.num = n;
         this.ran = r;
@@ -329,10 +336,7 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         rellenarCods();
         
         if (CP.validarJugadaCodeM(cods)){
-            //jLabel1.setText("Esperando la jugada del Codebreaker...");
             setCursor(Cursor.WAIT_CURSOR);
-            VistaEsperandoIA Vespera = new VistaEsperandoIA();
-            Vespera.setVisible(true);
             
             ArrayList<Integer> a = new ArrayList<Integer>();
 
@@ -350,9 +354,7 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
             if (turno > dif) finishGame(false);
             jButton6.setEnabled(true);
             jButton7.setEnabled(true);
-            jLabel1.setText("Introduce tu jugada");
 
-            Vespera.dispose();
             setCursor(Cursor.getDefaultCursor());
         }
         else {
@@ -553,6 +555,10 @@ public class VistaTableroCodeM extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     * @param a el patrón a adivinar de la partida
+     */
     public void PopUpSolucion(ArrayList<Integer> a){
         
         solucion = new JFrame();

@@ -133,6 +133,13 @@ public final class CodeMaker extends Jugador implements Serializable{
         return linea;
     }
     
+    /**
+     *
+     * @param tirada la tirada del codebreaker
+     * @param solucio la solución de la partida
+     * @param linea la pista
+     * @return si la pista dada por el codemaker es la correcta
+     */
     public boolean validarPista(ArrayList<CodePeg> tirada, ArrayList<CodePeg> solucio, ArrayList<Integer> linea){
         
         boolean pistaCorrecta = true;

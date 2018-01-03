@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation;
 
 import java.awt.event.KeyEvent;
@@ -11,7 +6,7 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class VistaInfoCodebreaker extends javax.swing.JFrame {
     CtrlPresentacion CP;
@@ -48,17 +43,21 @@ public class VistaInfoCodebreaker extends javax.swing.JFrame {
         setListeners();
     }
     
+    /**
+     *
+     * @param CP la capa de presentación
+     */
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
     }
     
-    public final void setListeners(){
+    private final void setListeners(){
         KeyListenerPers kl2 = new KeyListenerPers(jButton1, KeyEvent.VK_ESCAPE);
         jPanel1.setFocusable(true);
         jPanel1.addKeyListener(kl2);
     }
     
-    public final void initText(){
+    private final void initText(){
         String pt1 = "<html><body width='";
         String text =   "'><p size=\"4\" style=\"line-height: 10;text-align: justify;\">" +
                         "El jugador codebreaker intenta adivinar un patrón," +

@@ -7,7 +7,6 @@ package persistence;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -20,6 +19,12 @@ import utils.Pair;
  */
 public abstract class CtrlPersistencia {
     
+    /**
+     *
+     * @param object el objeto que se quiere escribir
+     * @param path la ruta del objetoque se quiere escribir
+     * @return un booleano con si se ha podido escribir y un string con un mensaje de error si es necesario
+     */
     public Pair<Boolean,String> write(Object object, String path){
         Pair <Boolean,String> p = new Pair();
         
@@ -41,6 +46,11 @@ public abstract class CtrlPersistencia {
         return p;
     }
     
+    /**
+     *
+     * @param path la ruta del objeto que se quiere leer
+     * @return el objeto que se quiere leer
+     */
     public Object read(String path) {
       
         Object object = null;

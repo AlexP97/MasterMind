@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation;
 
 import java.awt.event.ComponentEvent;
@@ -11,15 +6,23 @@ import javax.swing.JScrollPane;
 
 /**
  *
- * @author Usuario
+ * @author Espejo Saldaña, Adrián
  */
 public class WindowListener implements ComponentListener {
     private final javax.swing.JScrollPane jScrollPane;
     
+    /**
+     *
+     * @param jScrollPane el panel de scroll que se quiere visibilizar
+     */
     public WindowListener(javax.swing.JScrollPane jScrollPane){
         this.jScrollPane = jScrollPane;
     }
     
+    /**
+     *
+     * @param ce un evento de bajo nivel que indica que un componente se movió, cambió de tamaño o cambió la visibilidad
+     */
     @Override
     public void componentResized(ComponentEvent ce) {
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);

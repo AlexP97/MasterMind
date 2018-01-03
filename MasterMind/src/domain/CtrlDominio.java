@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
-import persistence.CtrlPersistencia;
 import persistence.CtrlPersistenciaGame;
 import persistence.CtrlPersistenciaJugador;
 import persistence.CtrlPersistenciaRanking;
@@ -36,14 +30,26 @@ public class CtrlDominio {
         
     }
     
+    /**
+     *
+     * @return el controlador de dominio de la clase Jugador
+     */
     public CtrlDominioJugador getCtrlDominioJugador() {
         return CDmj;
     }
     
+    /**
+     *
+     * @return el controlador de dominio de la clase Game
+     */
     public CtrlDominioPartida getCtrlDominioPartida() {
         return CDmp;
     }
     
+    /**
+     *
+     * @return el controlador de dominio de la clase Ranking
+     */
     public CtrlDominioRanking getCtrlDominioRanking() {
         return CDmr;
     }

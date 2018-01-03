@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation;
 
 import java.awt.event.KeyEvent;
@@ -16,7 +11,7 @@ import utils.Pair;
 
 /**
  *
- * @author Daniel
+ * @author Martínez Martínez, Daniel
  */
 public class VistaTableroCodeB extends javax.swing.JFrame {
 
@@ -67,11 +62,15 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         setListeners();
     }
     
+    /**
+     *
+     * @param CP la capa de presentación
+     */
     public void setCP(CtrlPresentacion CP){
         this.CP = CP;
     }
     
-    public final void setListeners(){
+    private void setListeners(){
         KeyListenerPers kl2 = new KeyListenerPers(jButton4, KeyEvent.VK_ESCAPE);
         jPanel1.setFocusable(true);
         jPanel1.addKeyListener(kl2);
@@ -115,6 +114,14 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         jButton14.addKeyListener(kl);
     }
     
+    /**
+     *
+     * @param n el número de fichas de la partida
+     * @param r el rango de colores de la partida
+     * @param d la dificultad de la partida
+     * @param t el turno porque el que va la partida
+     * @param cargado si la partida se está cargando es cierto, si es una nueva partida es falso
+     */
     public void setParams(int n, int r, int d, int t, boolean cargado){
         this.num = n;
         this.ran = r;

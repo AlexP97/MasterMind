@@ -1,0 +1,6 @@
+- Editar perfil: cambiar nombre, contrasena y eliminar el usuario
+- Breve guia del juego dentro del mismo.
+- Se puede interactuar con el teclado:
+	- Al pulsar el escape se vuelve a la pantalla anterior.
+	- Al pulsar el retroceso en las partidas borra la última ficha colocada.
+	- Al pulsar enter se confirman las acciones.

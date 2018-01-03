@@ -6,8 +6,6 @@ import java.io.Serializable;
 /**
  *
  * @author Espejo Saldaña, Adrián
- * @param <F>
- * @param <S>
  */
 public class Pair<F,S> implements Serializable{
     private F left;
