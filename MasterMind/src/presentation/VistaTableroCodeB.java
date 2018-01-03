@@ -77,8 +77,6 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         jPanel1.addKeyListener(kl2);
         jPanel2.setFocusable(true);
         jPanel2.addKeyListener(kl2);
-        jPanel3.setFocusable(true);
-        jPanel3.addKeyListener(kl2);
         jPanel4.setFocusable(true);
         jPanel4.addKeyListener(kl2);
         jButton1.addKeyListener(kl2);
@@ -100,7 +98,6 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         jPanel1.setFocusable(true);
         jPanel1.addKeyListener(kl);
         jPanel2.addKeyListener(kl);
-        jPanel3.addKeyListener(kl);
         jPanel4.addKeyListener(kl);
         jButton1.addKeyListener(kl);
         jButton2.addKeyListener(kl);
@@ -151,8 +148,6 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -235,35 +230,26 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(239, 207, 167));
+
+        jPanel2.setBackground(new java.awt.Color(239, 207, 167));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 315, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 93, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 440, Short.MAX_VALUE)
         );
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Introduce tu jugada");
 
+        jPanel4.setBackground(new java.awt.Color(239, 207, 167));
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
         jButton1.setText("Confirmar");
@@ -301,55 +287,44 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(jLabel1)))
-                .addGap(25, 25, 25))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
+                        .addGap(55, 55, 55)
                         .addComponent(jButton3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jButton5)
-                .addGap(37, 37, 37)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4)
-                        .addGap(56, 56, 56))
+                        .addGap(55, 55, 55))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addGap(76, 76, 76))))
+                        .addGap(72, 72, 72))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jButton2))
@@ -360,7 +335,7 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jButton5)))
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -378,19 +353,12 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        VistaMenuPartida Vmp = new VistaMenuPartida();
-        Vmp.setCP(CP);
-        Vmp.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (state <= num && introducirJugada) {
@@ -401,42 +369,6 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (state != 1) {
-            --state;
-            codePegs[turno-1][state-1].setIcon(iconoVacio);
-            cods.remove(cods.size()-1);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (state <= num) 
-            JOptionPane.showMessageDialog(null, "Debes introducir todas las fichas.","Faltan fichas",JOptionPane.WARNING_MESSAGE);
-        else {
-            
-            boolean victory = true;
-            ArrayList<Integer> a = CP.jugadaCodeM(cods);
-            if (a != null){
-             
-                for (int i = 0; i < a.size(); ++i){
-                 
-                    if (a.get(i) == 2) keyPegs[turno-1][i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2K.png")));
-                    else if (a.get(i) == 1) {
-                        victory = false;
-                        keyPegs[turno-1][i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/1K.png")));
-                    }
-                    else victory = false;
-                    
-                }
-                if (victory) finishGame(true);
-            }
-            turno++;
-            state = 1;
-            cods = new ArrayList<Integer>();
-            if (turno > dif) finishGame(false);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void finishGame(boolean victory) {
         
@@ -543,6 +475,13 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton14ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        VistaMenuPartida Vmp = new VistaMenuPartida();
+        Vmp.setCP(CP);
+        Vmp.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Pair<Boolean,String> p = CP.saveGame();
         if (p.getLeft()){
@@ -552,6 +491,42 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ha habido un error guardando la partida.","Error",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (state != 1) {
+            --state;
+            codePegs[turno-1][state-1].setIcon(iconoVacio);
+            cods.remove(cods.size()-1);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (state <= num)
+        JOptionPane.showMessageDialog(null, "Debes introducir todas las fichas.","Faltan fichas",JOptionPane.WARNING_MESSAGE);
+        else {
+
+            boolean victory = true;
+            ArrayList<Integer> a = CP.jugadaCodeM(cods);
+            if (a != null){
+
+                for (int i = 0; i < a.size(); ++i){
+
+                    if (a.get(i) == 2) keyPegs[turno-1][i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/2K.png")));
+                    else if (a.get(i) == 1) {
+                        victory = false;
+                        keyPegs[turno-1][i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/1K.png")));
+                    }
+                    else victory = false;
+
+                }
+                if (victory) finishGame(true);
+            }
+            turno++;
+            state = 1;
+            cods = new ArrayList<Integer>();
+            if (turno > dif) finishGame(false);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -606,33 +581,32 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
     public void labelsMethod() {
     
         codePegs = new JLabel[dif][num];
-        int x = 0, y = 0;
+        int x = 10, y = 8, auxX = 10;
         
-        if(num < 9) x = (9 - num) * 35;
-        
+        if (num < 9) x = (9 - num) * 35 + 10;
+               
         for(int row = 0; row < dif; row++) {
 
             for(int col = 0; col < num; col++) {
 
                 codePegs[row][col] = new JLabel();
                 codePegs[row][col].setOpaque(false);
-                codePegs[row][col].setBounds(x, y, 30, 30);
+                codePegs[row][col].setBounds(x, y, 35, 35);
                 codePegs[row][col].setIcon(iconoVacio);
                 jPanel2.add(codePegs[row][col]);
                 
                 x += 35;
             }
-            x = 0;
-            if(num < 9) x = (9 - num) * 35;
+            auxX = x;
+            x = 10;
+            if (num < 9) x = (9 - num) * 35 + 10;
             y += 35;
         }
                 
@@ -646,8 +620,8 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         if (ran >= 8) jPanel4.add(jButton13);
         if (ran == 9) jPanel4.add(jButton14);
         
-        x = 0;
-        y = 0;
+        x = auxX;
+        y = 8;
         
         keyPegs = new JLabel[dif][num];
         
@@ -659,29 +633,35 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
 
                 keyPegs[row][col] = new JLabel();
                 keyPegs[row][col].setOpaque(false);
-                keyPegs[row][col].setBounds(x, y, 16, 16);
+                keyPegs[row][col].setBounds(x, y, 18, 18);
                 keyPegs[row][col].setIcon(iconoVacioK);
-                jPanel3.add(keyPegs[row][col]);
+                jPanel2.add(keyPegs[row][col]);
                 
-                x += 20;
+                x += 17;
             }
             
-            x = 0;
+            x = auxX;
             y += 17;
             
             for(; col < num; col++) {
 
                 keyPegs[row][col] = new JLabel();
                 keyPegs[row][col].setOpaque(false);
-                keyPegs[row][col].setBounds(x, y, 16, 16);
+                keyPegs[row][col].setBounds(x, y, 18, 18);
                 keyPegs[row][col].setIcon(iconoVacioK);
-                jPanel3.add(keyPegs[row][col]);
+                jPanel2.add(keyPegs[row][col]);
                 
-                x += 20;
+                x += 17;
             }
-            x = 0;
+            x = auxX;
             y += 18;
         }
+        
+        JLabel fondo = new JLabel();
+        fondo.setOpaque(false);
+        fondo.setBounds(0, 0, 424, 440);
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/tablero.png")));
+        jPanel2.add(fondo);
     }
     
     private void cargarTableroB(ArrayList<ArrayList<Integer>> log) {
