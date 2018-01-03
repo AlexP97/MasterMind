@@ -1,12 +1,5 @@
 package domain;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import utils.Pair;
 import java.util.ArrayList;
@@ -59,7 +52,7 @@ public class Ranking implements Serializable{
             entradoPosicion.setRight(1);
             ranking.add(p);
         }
-        else if(ranking.size() < 10) {
+        else if(ranking.size() < 8) {
             entradoPosicion.setLeft(true);
             int i;
             boolean b = false;
