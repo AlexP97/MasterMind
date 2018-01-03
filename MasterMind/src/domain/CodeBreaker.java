@@ -134,6 +134,11 @@ public final class CodeBreaker extends Jugador implements Serializable{
         return donaSolucio(cambioCodePeg, cambioCodePeg2);
     }
     
+    /**
+     *
+     * @param hm contiene las posibles soluciones que podría dar el codemaker, con sus respectivas cantidades de cuantas veces se da
+     * @return el máximo número de apariciones de una solución
+     */
     public int compruebaMaximo(HashMap<ArrayList<Integer>, Integer> hm) {
         int count = -1;
         Iterator it = hm.keySet().iterator();
@@ -146,6 +151,15 @@ public final class CodeBreaker extends Jugador implements Serializable{
         return count;
     }
     
+    /**
+     *
+     * @param count número máximo de apariciones de una solución
+     * @param min mínimo número de apariciones de una solución
+     * @param i posición del elemento actual que estamos tratando
+     * @param indice posición del elemento que se considera la mejor solución
+     * @param compatible dice si el elemento que se considera la mejor solución es compatible
+     * @return se devuelve el minimo, el indice y el booleano compatible actualizados con el nuevo elemento, si es mejor solución que la considerada anteriormente
+     */
     public Pair<Pair<Boolean,Integer>,Integer> esSolucion(int count, int min, int i, Integer indice, boolean compatible) {
         Pair<Boolean, Integer> p = new Pair<>();
         Pair<Pair<Boolean,Integer>,Integer> sol = new Pair<>();
@@ -196,9 +210,11 @@ public final class CodeBreaker extends Jugador implements Serializable{
         return noUsados.get(indice);
     }
     
-    
-    
-    
+    /**
+     *
+     * @param tirada el intento de este turno mirando la pista del turno anterior
+     * @param solucio pista a la tirada del turno anterior
+     */
     public void eliminaCompatibles(ArrayList<CodePeg> tirada, ArrayList<KeyPeg> solucio) {
         for(int i = 0; i < compatibles.size(); i++){
                     if(!compare(tirada,solucio,compatibles.get(i))){
@@ -208,6 +224,10 @@ public final class CodeBreaker extends Jugador implements Serializable{
                 }     
     }
     
+    /**
+     *
+     * @return devuelve un valor arbitrario compuesto por dos 1 y tantos 2 como espacios sobren
+     */
     public ArrayList<Integer> primeraTirada() {
         ArrayList<Integer> aux = new ArrayList<>();
         aux.add(1);
