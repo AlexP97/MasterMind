@@ -1,5 +1,7 @@
 package presentation;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -13,7 +15,7 @@ import utils.Pair;
  */
 public class VistaRanking extends javax.swing.JFrame {
     CtrlPresentacion CP;
-    ArrayList<JLabel> labels;
+    JLabel[] labels;
     /**
      * Creates new form VistaRanking
      */
@@ -69,36 +71,36 @@ public class VistaRanking extends javax.swing.JFrame {
     }
     
     private void setLabels(){
-        labels = new ArrayList();
-        labels.add(jLabel1);
-        labels.add(jLabel2);
-        labels.add(jLabel3);
-        labels.add(jLabel4);
-        labels.add(jLabel5);
-        labels.add(jLabel6);
-        labels.add(jLabel7);
-        labels.add(jLabel8);
-        labels.add(jLabel9);
-        labels.add(jLabel10);
-        labels.add(jLabel11);
-        labels.add(jLabel12);
-        labels.add(jLabel13);
-        labels.add(jLabel14);
-        labels.add(jLabel15);
-        labels.add(jLabel16);
+        labels = new JLabel[16];
+        int y = 0;
+        for(int i = 0; i < 8; i++){
+            labels[i] = new JLabel();
+            labels[i].setText("Vacío");
+            labels[i].setFont(new Font("Comic Sans MS", Font.BOLD, 22));
+            labels[i].setForeground(Color.white);
+            labels[i].setOpaque(false);
+            labels[i].setBounds(0,y,77,32);
+            jPanel2.add(labels[i]);
+            y += 40;
+        }
+        y = 0;
+        for(int i = 8; i < 16; i++){
+            labels[i] = new JLabel();
+            labels[i].setText("Vacío");
+            labels[i].setFont(new Font("Comic Sans MS", Font.BOLD, 22));
+            labels[i].setForeground(Color.white);
+            labels[i].setOpaque(false);
+            labels[i].setBounds(0,y,77,32);
+            jPanel2.add(labels[i]);
+            y += 40;
+        }
     }
     
     public final void initRanking(){
         ArrayList<Pair<String,Integer>> ranking = CP.muestraRanking();
         for(int i = 0; i < ranking.size(); i++){
-            labels.get(i).setText(ranking.get(i).getLeft());
-            labels.get(8+i).setText(Integer.toString(ranking.get(i).getRight()));
-        }
-        if(ranking.size() < 8){
-            for(int i = ranking.size(); i < 8; i++){
-                labels.get(i).setText("Vacío");
-                labels.get(8+i).setText("Vacío");
-            }
+            labels[i].setText(ranking.get(i).getLeft());
+            labels[8+i].setText(Integer.toString(ranking.get(i).getRight()));
         }
     }
     
@@ -113,22 +115,6 @@ public class VistaRanking extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -138,70 +124,6 @@ public class VistaRanking extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(239, 207, 167));
 
         jPanel2.setBackground(new java.awt.Color(239, 207, 167));
-
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("jLabel1");
-
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("jLabel2");
-
-        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("jLabel3");
-
-        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("jLabel4");
-
-        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("jLabel5");
-
-        jLabel6.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("jLabel6");
-
-        jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("jLabel7");
-
-        jLabel8.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("jLabel8");
-
-        jLabel9.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("jLabel9");
-
-        jLabel10.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("jLabel10");
-
-        jLabel11.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("jLabel11");
-
-        jLabel12.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("jLabel12");
-
-        jLabel13.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("jLabel13");
-
-        jLabel14.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("jLabel14");
-
-        jLabel15.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("jLabel15");
-
-        jLabel16.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("jLabel16");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -217,33 +139,10 @@ public class VistaRanking extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(138, 138, 138)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel8))
+                .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(109, 109, 109))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16))
-                        .addGap(134, 134, 134))))
+                .addComponent(jLabel18)
+                .addGap(109, 109, 109))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,39 +151,7 @@ public class VistaRanking extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jLabel18))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel10))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel13))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel16))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(430, Short.MAX_VALUE))
         );
 
         jButton1.setText("Atrás");
@@ -375,24 +242,8 @@ public class VistaRanking extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
