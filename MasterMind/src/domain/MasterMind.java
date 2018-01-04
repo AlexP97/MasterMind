@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import persistence.GamePersistencia;
 import persistence.JugadorPersistencia;
+import presentation.CtrlPresentacion;
 import utils.Pair;
 
 /**
@@ -11,48 +12,41 @@ import utils.Pair;
  * @author Espejo Saldaña, Adrián
  */
 public class MasterMind {   
-
+    static CtrlPresentacion CP;
     /**
      *
-     * @param jugador el jugador que está jugando
      * @return si el jugador ha hecho login con éxito
      */
-    protected static boolean login(Jugador jugador){
+    protected static boolean login(){
         Scanner input = new Scanner(System.in);
         System.out.print("Introduce el nombre de usuario:" + "\n");
         String usuario = input.nextLine();
         System.out.print("Introduce la contraseña:" + "\n");
         String contraseña = input.nextLine();
-        JugadorPersistencia jp = new JugadorPersistencia();
-        Pair<Boolean, String> p = jp.login(usuario, contraseña);
-        jugador.login(usuario,contraseña);
+        Pair<Boolean, String> p = CP.login(usuario, contraseña);
         System.out.println(p.getRight());
         return p.getLeft();
     }
     
     /**
      *
-     * @param jugador el jugador que está jugando
      * @return si el jugador se ha registrado con éxito
      */
-    protected static boolean register(Jugador jugador){
+    protected static boolean register(){
         Scanner input = new Scanner(System.in);
         System.out.print("Introduce el nombre de usuario:" + "\n");
         String usuario = input.nextLine();
         System.out.print("Introduce la contraseña:" + "\n");
         String contraseña = input.nextLine();
-        JugadorPersistencia jp = new JugadorPersistencia();
-        Pair<Boolean, String> p = jp.register(usuario,contraseña);
-        jugador.register(usuario,contraseña);
+        Pair<Boolean, String> p = CP.register(usuario,contraseña);
         System.out.println(p.getRight());
         return p.getLeft();
     }
     
     /**
      *
-     * @param jugador el jugador que está jugando
      */
-    protected static void crearPartida(Jugador jugador){
+    protected static void crearPartida(){
         Scanner input = new Scanner(System.in);
         int estado = 0;
         String id = null;
@@ -92,17 +86,32 @@ public class MasterMind {
                         break;
             }
         } 
-        GamePersistencia gameP = new GamePersistencia();
-        gameP.CrearPartida(jugador.getName(),id,dif,mod, num, ran);
+        CP.crearPartida(CP.getName(),id,dif,mod, num, ran);
     }
     
     /**
      *
-     * @param jugador el jugador que está jugando
      */
-    protected static void cargarPartida(Jugador jugador){
-        GamePersistencia gameP = new GamePersistencia();
-        gameP.LoadGame(jugador);
+    protected static void cargarPartida(){
+        String[] partidas = CP.obtenerPartidas();
+        Scanner input = new Scanner(System.in);
+        boolean cargado = false;
+        String partida = "aux";
+        while(!cargado && !partida.equals("salir")){
+            System.out.println("Lista de partidas disponibles:");
+            for(int i = 0; i < partidas.length; i++){
+                System.out.println(partidas[i]);
+            }
+            System.out.println("Introduce el id de la partida que quieres cargar o escribe salir para volver atrás.");
+            partida = input.nextLine();
+            for(int i = 0; i < partidas.length && !partidas.equals("salir"); i++){
+                if(partidas[i].equals(partida)) cargado = true;
+            }
+            if(!cargado && !partida.equals("salir")){
+                System.out.println("Entrada no válida.");
+            }
+        }
+        CP.loadGame(partida);
     }
     
     protected static void muestraRanking(){
@@ -117,47 +126,38 @@ public class MasterMind {
     
     /**
      *
-     * @param jugador el jugador que está jugando
      */
-    protected static void cambiaNombre(Jugador jugador){
+    protected static void cambiaNombre(){
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce tu nuevo nombre de usuario");
         String name = input.nextLine();
-        JugadorPersistencia jp = new JugadorPersistencia();
-        Pair<Boolean,String> p = jp.setName(jugador.getName(), name, jugador.getPassword());
-        jugador.setName(name);
+        Pair<Boolean,String> p = CP.modificaUsuario(name);
         System.out.println(p.getRight());
-        
     }
     
     /**
      *
-     * @param jugador el jugador que está jugando
      */
-    protected static void cambiaContraseña(Jugador jugador){
+    protected static void cambiaContraseña(){
         Scanner input = new Scanner(System.in);
         System.out.println("Introduce tu nueva contraseña");
         String password = input.nextLine();
-        JugadorPersistencia jp = new JugadorPersistencia();
-        Pair<Boolean,String> p = jp.setPassword(jugador.getName(), password);
-        jugador.setPassword(password);
+        Pair<Boolean,String> p = CP.modificaContraseña(password);
         System.out.println(p.getRight());
     }
     
     /**
      *
-     * @param jugador el jugador que está jugando
      * @return si el usuario se ha eliminado o no
      */
-    protected static boolean eliminaUsuario(Jugador jugador){
+    protected static boolean eliminaUsuario(){
         Scanner input = new Scanner(System.in);
         System.out.println("El jugador va a ser eliminado de forma definitiva, ¿estás seguro?");
         System.out.println("Escribe si o no");
         String respuesta = input.nextLine();
         if(respuesta.equals("si")){
-            JugadorPersistencia jp = new JugadorPersistencia();
-            Pair<Boolean,String> p = jp.elimina(jugador.getName());
-            System.out.println(p.getRight());
+            Pair<Boolean,String> p = CP.eliminar();
+        System.out.println(p.getRight());
             return true;
         }
         else if(respuesta.equals("no")) System.out.println("Se ha cancelado la eliminación del usuario");
@@ -166,7 +166,7 @@ public class MasterMind {
     }
     
     public static void main(String[] args) {
-        Jugador jugador = new Jugador();
+        CP = new CtrlPresentacion();
         int estado = 0;
         boolean fin = false;
         System.out.print("Bienvenido a MasterMind." + "\n");
@@ -178,10 +178,10 @@ public class MasterMind {
                     System.out.print("Escribe login para iniciar sesión, register para registrarte o salir para finalizar el juego." + "\n");
                     String start = input.nextLine();
                     if(start.equals("login")){
-                        if(!login(jugador)) estado = 0;
+                        if(!login()) estado = 0;
                     }
                     else if(start.equals("register")){
-                        if(!register(jugador)) estado = 0;
+                        if(!register()) estado = 0;
                     }
                     else if(start.equals("salir")) {
                         fin = true;
@@ -196,10 +196,10 @@ public class MasterMind {
                     System.out.print("Escribe crear para jugar una partida nueva, cargar para jugar una partida ya empezada, ranking para ver los records de puntuación, modificar para modificar tus datos o salir para volver al menú anterior." + "\n");
                     String jugar = input.nextLine();
                     if(jugar.equals("crear")){
-                        crearPartida(jugador);
+                        crearPartida();
                     }
                     else if (jugar.equals("cargar")){
-                        cargarPartida(jugador);
+                        cargarPartida();
                     }
                     else if (jugar.equals("ranking")){
                         muestraRanking();
@@ -208,13 +208,13 @@ public class MasterMind {
                         System.out.println("Escribe usuario para modificar tu nombre de usuario, contrasena para modificar tu contraseña, eliminar para darte de baja o salir para volver al menú anterior");
                         String modificar = input.nextLine();
                         if(modificar.equals("usuario")){
-                            cambiaNombre(jugador);
+                            cambiaNombre();
                         }
                         else if(modificar.equals("contrasena")){
-                            cambiaContraseña(jugador);
+                            cambiaContraseña();
                         }
                         else if(modificar.equals("eliminar")){
-                            if (eliminaUsuario(jugador)) estado = 0;
+                            if (eliminaUsuario()) estado = 0;
                         }
                         else if(modificar.equals("salir")) estado = 1;
                         else{
