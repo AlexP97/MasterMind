@@ -345,4 +345,8 @@ public class Game implements Serializable{
         }
         return b;
     }
+
+    public int getPuntuacion() {
+        return points; 
+    }
 }

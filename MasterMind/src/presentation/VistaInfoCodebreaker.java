@@ -66,9 +66,9 @@ public class VistaInfoCodebreaker extends javax.swing.JFrame {
                         " poniendo una cantidad antes decidida de fichas de" +
                         " código en el tablero. Entonces el jugador" +
                         " codemaker hace un comentario acerca de la jugada" +
-                        " poniendo fichas de pista: una negra por cada ficha" +
+                        " poniendo fichas de pista: una blanca por cada ficha" +
                         " de código correcta en color pero no en posición, y" +
-                        " una blanca por cada ficha de código correcta en" +
+                        " una negra por cada ficha de código correcta en" +
                         " color y posición. Habrá como mucho tantas fichas" +
                         " de pista como de código. Cuando se haya provisto" +
                         " el comentario se puede realizar otro intento," +

@@ -223,6 +223,10 @@ public class CtrlPresentacion {
         return CPg.finishGame(b);
     }
     
+    public void bajaPuntuacion(){
+        CPg.bajaPuntuacion();
+    }
+    
     /**
      *
      * @return una lista de pares que tienen un nombre de usuario y una puntuación ordenados por puntuación
@@ -230,6 +234,10 @@ public class CtrlPresentacion {
     public ArrayList<Pair<String, Integer>> muestraRanking(){
         CPr = new CtrlPresentacionRanking(CDr);
         return CPr.mostrarRanking();
+    }
+    
+    public int getPuntuacion(){
+        return CPg.getPuntuacion();
     }
     
     /**

@@ -144,4 +144,12 @@ public class CtrlPresentacionGame {
     public Pair <Boolean,Integer> finishGame(boolean b){
         return CDp.finishGame(b);
     }
+    
+    public void bajaPuntuacion(){
+        CDp.bajaPuntuacion();
+    }
+
+    public int getPuntuacion() {
+        return CDp.getPuntuacion();
+    }
 }

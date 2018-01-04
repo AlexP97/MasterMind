@@ -174,4 +174,11 @@ public class CtrlDominioPartida {
         p = CPG.write(game, "data/players/"+userName+"/games/"+game.getId());
         return p;
     }
+    public void bajaPuntuacion(){
+        game.baja_Puntuacion();
+    }
+
+    public int getPuntuacion() {
+        return game.getPuntuacion();
+    }
 }

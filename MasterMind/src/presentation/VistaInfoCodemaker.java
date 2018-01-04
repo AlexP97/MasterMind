@@ -64,9 +64,9 @@ public class VistaInfoCodemaker extends javax.swing.JFrame {
                         " donde pueden haber duplicados. El patrón escogido estará escondido" +
                         " al final del tablero. Cuando el jugador codebreaker hace un intento," +
                         " el jugador codemaker entonces tiene que proveer un comentario" +
-                        " el cual será un conjunto de fichas de pista: una negra por cada ficha" +
+                        " el cual será un conjunto de fichas de pista: una blanca por cada ficha" +
                         " de código correcta en color pero no en posición, y" +
-                        " una blanca por cada ficha de código correcta en" +
+                        " una negra por cada ficha de código correcta en" +
                         " color y posición. Habrá como mucho tantas fichas" +
                         " de pista como de código. Cuando el jugador codebreaker vuelva a hacer" +
                         " otro intento el jugador codemaker dará otra pista, hasta que" +
