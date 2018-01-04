@@ -1,5 +1,5 @@
 JFLAGS = -g
-JC = javac src/domain/*.java src/persistence/*.java src/utils/*.java test/domain/*.java test/persistence/*.java test/utils/*.java -cp test/lib/junit-4.12.jar
+JC = javac src/domain/*.java src/persistence/*.java src/presentation/*.java src/utils/*.java -cp test/lib/junit-4.12.jar
 JVM= java
 
 .SUFFIXES: .java .class
@@ -9,50 +9,63 @@ JVM= java
 	
 
 CLASSES = \
-        src/domain/MasterMind.java \
-        src/domain/Casilla.java \
-        src/domain/CodeBreaker.java \
-        src/domain/CodeMaker.java \
-        src/domain/CodePeg.java \
+	src/domain/MasterMind.java \
+	src/Main.java \
+	src/domain/Casilla.java \
+	src/domain/CodeBreaker.java \
+	src/domain/CodeMaker.java \
+	src/domain/CodePeg.java \
 	src/domain/Game.java \
 	src/domain/Jugador.java \
 	src/domain/KeyPeg.java \
 	src/domain/Ranking.java \
+	src/domain/CtrlDominio.java \
+	src/domain/CtrlDominioJugador.java \
+	src/domain/CtrlDominioPartida.java \
+	src/domain/CtrlDominioRanking.java \
 	src/utils/Funciones.java \
 	src/utils/Pair.java \
 	src/persistence/GamePersistencia.java \
 	src/persistence/JugadorPersistencia.java \
-	src/persistence/RankingPersistencia.java \
-	test/persistence/GamePersistenciaDriver.java \
-	test/persistence/JugadorPersistenciaDriver.java \
-	test/persistence/RankingPersistenciaDriver.java \
-        test/domain/CodeBreakerDriver.java \
-        test/domain/CodeMakerDriver.java \
-        test/domain/CodePegDriver.java \
-	test/domain/CodePegStub.java \
-	test/domain/JugadorDriver.java \
-	test/domain/JugadorStub.java \
-	test/domain/KeyPegDriver.java \
-	test/domain/KeyPegStub.java \
-	test/domain/RankingDriver.java \
-	test/domain/RankingStub.java \
-	test/utils/FuncionesDriver.java \
-	test/utils/PairDriver.java \
-	test/Tests.java
+	src/persistence/CtrlPersistencia.java \
+	src/persistence/CtrlPersistenciaGame.java \
+	src/persistence/CtrlPersistenciaJugador.java \
+	src/persistence/CtrlPersistenciaRanking.java \
+	src/presentation/CtrlPresentacion.java \
+	src/presentation/CtrlPresentacionGame.java \
+	src/presentation/CtrlPresentacionLoginRegister.java \
+	src/presentation/CtrlPresentacionModificarDatos.java \
+	src/presentation/CtrlPresentacionRanking.java \
+	src/presentation/KeyListenerPers.java \
+	src/presentation/VistaCargarPart.java \
+	src/presentation/VistaCodigoInicial.java \
+	src/presentation/VistaInfo.java \
+	src/presentation/VistaInfoCodebreaker.java \
+	src/presentation/VistaInfoCodemaker.java \
+	src/presentation/VistaLogin.java \
+	src/presentation/VistaMenuPartida.java \
+	src/presentation/VistaModificar.java \
+	src/presentation/VistaNuevaPart.java \
+	src/presentation/VistaPresentacion.java \
+	src/presentation/VistaRanking.java \
+	src/presentation/VistaRegister.java \
+	src/presentation/VistaTableroCodeB.java \
+	src/presentation/VistaTableroCodeM.java \
+	src/presentation/WindowListener.java
 
-MAIN = domain.MasterMind
-MAINTEST = Tests
+MAIN = Main
+MAINOLD = domain.MasterMind
 CLASSPATH = build
 
 default: classes
 
 classes: $(CLASSES:.java=.class)
 
-run: src/domain/MasterMind.class 
-	$(JVM) -cp ./src/ $(MAIN)
+run: src/Main.java
+	$(JVM) -cp ./src/:.src/presentation/:.src/resources/ $(MAIN)
 
-run_tests: test/Tests.class 
-	$(JVM) -cp ./test/:./src/ $(MAINTEST)
+run_old: src/domain/MasterMind.class 
+	$(JVM) -cp ./src/ $(MAINOLD)
 	
 run_junit: test/domain/GameTest.class
 	java -cp ./test/lib/junit-4.12.jar:./test/lib/hamcrest-1.10.jar:./test/:./src/ org.junit.runner.JUnitCore domain.GameTest
@@ -62,7 +75,4 @@ clean:
 	$(RM) src/domain/*.class
 	$(RM) src/persistence/*.class
 	$(RM) src/utils/*.class
-	$(RM) test/domain/*.class
-	$(RM) test/persistence/*.class
-	$(RM) test/utils/*.class
-	$(RM) test/*.class
+	$(RM) src/presentation/*.class
