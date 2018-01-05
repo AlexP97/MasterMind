@@ -287,7 +287,7 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Salir del juego");
+        jButton4.setText("Salir de la partida");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
