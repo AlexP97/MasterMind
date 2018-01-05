@@ -3,6 +3,7 @@ package presentation;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -18,6 +19,7 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
 
     CtrlPresentacion CP;
     int num;
+    ArrayList<Boolean> pistas;
     int ran;
     int dif;
     int turno;
@@ -58,7 +60,6 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         turno = state = 1;
         cods = new ArrayList<Integer>();
         this.setIconImage(imgicon.getImage());
-        
         setListeners();
     }
     
@@ -133,6 +134,11 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         this.ran = r;
         this.dif = d;  
         this.turno = t;
+        
+        this.pistas = new ArrayList();
+        for(int i = 0; i < num; i++) {
+            pistas.add(false);
+        }
         labelsMethod();
         if (cargado) {
             cargarTableroB(CP.getJugadasCodeB());
@@ -570,9 +576,16 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
                 , "Ver pista",JOptionPane.WARNING_MESSAGE,JOptionPane.YES_NO_OPTION);
         if(reply == JOptionPane.YES_OPTION){
             CP.bajaPuntuacion();
-            Random r = new Random();
             ArrayList<Integer> codeIni = CP.getCodeIni();
-            int random = r.nextInt(num);
+            int random = -1;
+            boolean pistaValida = false;
+            while(!pistaValida) {
+                random = ThreadLocalRandom.current().nextInt(1, num + 1);
+                if(!pistas.get(random-1)) {
+                    pistaValida = true;
+                    pistas.set(random, true);
+                }
+            }
             String color = "prueba";
             if(codeIni.get(random) == 1){
                 color = "roja";
@@ -601,7 +614,6 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
             if(codeIni.get(random) == 9){
                 color = "azul mar";
             }
-            random++;
             JOptionPane.showMessageDialog(null, "Hay una ficha "+color+" en la "+random+" posición.");
             actualizaPuntuacion();
         }
