@@ -13,6 +13,14 @@ proporcionar las pistas a las jugadas del CodeBreaker.
 - CodePeg.java = contiene la clase CodePeg y sus funciones. Un CodePeg corresponde a una ficha de la combinacion que proporciona
 el CodeBreaker en una jugada. Es una subclase de la clase Casilla.
 
+- CtrlDominio.java = permite a la capa de presentacion comunicarse con la capa de dominio.
+
+- CtrlDominioJugador.java = proporciona los datos/operaciones de jugador que son necesarios en la capa de presentacion.
+
+- CtrlDominioPartida = proporciona los datos/operaciones de game que son necesarios en la capa de presentacion.
+
+- CtrlDominioRanking = proporciona los datos/operaciones de ranking que son necesarios en la capa de presentacion.
+
 - Game.java = corresponde a la clase Game y sus funciones. Es la clase encargada de gestionar todas las jugadas de la partida,
 mostrarlas por pantalla y guardarlas.
 

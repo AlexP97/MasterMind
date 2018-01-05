@@ -6,4 +6,8 @@ Contiene las diferentes carpetas, donde se encuentran las distintas clases del p
 
 - persistence = Contiene todas las clases de la Capa de Persistencia.
 
+- presentation = Contiene todas las clases de la Capa de Presentacion
+
+- resources = Contiene el material utilizado para las vistas.
+
 - utils = Carpeta que contiene algunas clases complementarias para el proyecto, como la classe Pair o Funciones.

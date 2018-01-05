@@ -11,3 +11,9 @@ Esta carpeta contiene toda la documentacion de nuestro proyecto.
 - Descripcion de los casos de uso.
 
 - Javadoc de nuestro juego.
+
+- Explicacion funcionalidades extra que hemos añadido al enunciado.
+
+- Descripcion de las clases más importantes, de sus funcionalidades y estructuras de datos.
+
+- Reparto y datos del grupo.
