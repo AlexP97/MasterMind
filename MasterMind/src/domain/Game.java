@@ -237,9 +237,9 @@ public class Game implements Serializable{
     
     public void baja_Puntuacion(){
         if (this.difficulty == null) return;
-        else if (this.difficulty.equals("facil")) points -= 15;
-        else if (this.difficulty.equals("medio")) this.points -= 12;
-        else this.points -= 10;
+        else if (this.difficulty.equals("Facil")) points -= 10;
+        else if (this.difficulty.equals("Medio")) this.points -= 15;
+        else this.points -= 25;
     }
     
     /**
@@ -255,14 +255,22 @@ public class Game implements Serializable{
         
         this.id = ident;
 
-        if (dif.equals("Facil")) this.totalTurns = 12;
-        else if (dif.equals("Medio")) this.totalTurns = 10;
-        else if (dif.equals("Dificil")) this.totalTurns = 8;
+        if (dif.equals("Facil")){
+            this.totalTurns = 12;
+            this.points = 120;
+        }
+        else if (dif.equals("Medio")){
+            this.totalTurns = 10;
+            this.points = 150;
+        }
+        else if (dif.equals("Dificil")){
+            this.totalTurns = 8;
+            this.points = 200;
+        }
 
         this.difficulty = dif;
         this.mode = mod;
         this.userName = userN;
-        this.points = 120;
         this.turn = 1;
         this.codeBAnt = new ArrayList<CodePeg>();
         this.codeMAnt = new ArrayList<KeyPeg>();

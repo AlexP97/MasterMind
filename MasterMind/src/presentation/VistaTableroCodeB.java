@@ -562,8 +562,8 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         int points = 0;
-        if(dif == 8) points = 15;
-        else if(dif == 10) points = 12;
+        if(dif == 8) points = 25;
+        else if(dif == 10) points = 15;
         else if(dif == 12) points = 10;
         int reply = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres"
                 + " ver una pista? Serás penalizado con "+points+" puntos menos."
