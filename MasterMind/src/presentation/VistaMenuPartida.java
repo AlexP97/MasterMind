@@ -1,5 +1,7 @@
 package presentation;
 
+import utils.KeyListenerPers;
+import utils.WindowListener;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
