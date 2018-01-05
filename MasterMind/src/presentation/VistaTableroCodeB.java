@@ -51,7 +51,6 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         initComponents();
         
         setLocationRelativeTo(null);
-        setTitle("MasterMind - Puntuación: 120 puntos.");
         
         ImageIcon imgicon = new ImageIcon("src/resources/iconomastermind.png");
         iconoVacio = new javax.swing.ImageIcon(getClass().getResource("/resources/0.png"));
@@ -115,8 +114,10 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         jButton14.addKeyListener(kl);
     }
     
-    private void actualizaPuntuacion(){
-        setTitle("MasterMind - Puntuación: "+CP.getPuntuacion()+" puntos.");
+    public void actualizaPuntuacion(){
+        int points = CP.getPuntuacion();
+        if(points < 0) JOptionPane.showMessageDialog(null, "Te has quedado sin puntos, Game over :(");
+        setTitle("MasterMind - Puntuación: "+points+" puntos.");
     }
     
     /**
@@ -399,7 +400,7 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
     private void finishGame(boolean victory) {
         
         if (!victory) {
-            JOptionPane.showMessageDialog(null, "Game over :(");
+            JOptionPane.showMessageDialog(null, "Te has quedado sin turnos, Game over :(");
             jButton4ActionPerformed(null);
         }
         else {

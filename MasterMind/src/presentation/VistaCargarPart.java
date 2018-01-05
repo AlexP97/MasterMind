@@ -210,6 +210,7 @@ public class VistaCargarPart extends javax.swing.JFrame {
                                 Integer.parseInt(stats.get(3)),
                                 Integer.parseInt(stats.get(4)),
                                 true);
+                    Vt.actualizaPuntuacion();
                     Vt.setVisible(true);
                     dispose();
                 }

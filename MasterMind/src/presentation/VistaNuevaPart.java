@@ -361,6 +361,7 @@ public class VistaNuevaPart extends javax.swing.JFrame {
                     VistaTableroCodeB Vt = new VistaTableroCodeB();
                     Vt.setCP(CP);
                     Vt.setParams(num,ran,i,1,false);
+                    Vt.actualizaPuntuacion();
                     Vt.setVisible(true);
                     dispose();
                 }
