@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -341,7 +342,9 @@ public class VistaNuevaPart extends javax.swing.JFrame {
             String mod = (String)jComboBox2.getSelectedItem();
             int num = jSlider1.getValue();
             int ran = jSlider2.getValue();
+            setCursor(Cursor.WAIT_CURSOR);
             Pair<Boolean,String> p = CP.crearPartida(userName,id,dif,mod,num,ran);
+            setCursor(Cursor.getDefaultCursor());
             if(!p.getLeft()) JOptionPane.showMessageDialog(null, p.getRight());
             else{
                 int i = 12;

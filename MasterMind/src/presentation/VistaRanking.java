@@ -47,13 +47,6 @@ public class VistaRanking extends javax.swing.JFrame {
         
         setListeners();
         
-        JLabel fondo = new JLabel();
-        fondo.setOpaque(false);
-        fondo.setBounds(0, 0, 682, 487);
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ranking.png")));
-        jPanel2.add(fondo);
-        
-        setLabels();
     }
     
     /**
@@ -70,30 +63,35 @@ public class VistaRanking extends javax.swing.JFrame {
         jPanel1.addKeyListener(kl2);
     }
     
-    private void setLabels(){
+    public void setLabels(){
         labels = new JLabel[16];
-        int y = 0;
+        int y = 70;
         for(int i = 0; i < 8; i++){
             labels[i] = new JLabel();
             labels[i].setText("Vacío");
             labels[i].setFont(new Font("Comic Sans MS", Font.BOLD, 22));
             labels[i].setForeground(Color.white);
             labels[i].setOpaque(false);
-            labels[i].setBounds(0,y,77,32);
+            labels[i].setBounds(138,y,77,32);
             jPanel2.add(labels[i]);
-            y += 40;
+            y += 46;
         }
-        y = 0;
+        y = 70;
         for(int i = 8; i < 16; i++){
             labels[i] = new JLabel();
             labels[i].setText("Vacío");
             labels[i].setFont(new Font("Comic Sans MS", Font.BOLD, 22));
             labels[i].setForeground(Color.white);
             labels[i].setOpaque(false);
-            labels[i].setBounds(0,y,77,32);
+            labels[i].setBounds(455,y,77,32);
             jPanel2.add(labels[i]);
-            y += 40;
+            y += 46;
         }
+        JLabel fondo = new JLabel();
+        fondo.setOpaque(false);
+        fondo.setBounds(0, 0, 682, 487);
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ranking.png")));
+        jPanel2.add(fondo);
     }
     
     public final void initRanking(){
@@ -127,11 +125,15 @@ public class VistaRanking extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Usuario");
+        jLabel17.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Puntuación");
+        jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

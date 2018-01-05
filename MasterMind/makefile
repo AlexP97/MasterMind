@@ -66,10 +66,6 @@ run: src/Main.java
 
 run_old: src/domain/MasterMind.class 
 	$(JVM) -cp ./src/ $(MAINOLD)
-	
-run_junit: test/domain/GameTest.class
-	java -cp ./test/lib/junit-4.12.jar:./test/lib/hamcrest-1.10.jar:./test/:./src/ org.junit.runner.JUnitCore domain.GameTest
-
 
 clean:
 	$(RM) src/domain/*.class

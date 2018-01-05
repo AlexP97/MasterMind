@@ -213,6 +213,7 @@ public class VistaMenuPartida extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         VistaRanking Vr = new VistaRanking();
         Vr.setCP(CP);
+        Vr.setLabels();
         Vr.initRanking();
         Vr.setVisible(true);
         dispose();
