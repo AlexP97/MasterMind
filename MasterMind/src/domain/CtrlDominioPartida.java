@@ -181,4 +181,16 @@ public class CtrlDominioPartida {
     public int getPuntuacion() {
         return game.getPuntuacion();
     }
+    
+    public void setCodIni_old() {
+        game.setCodIni_old();
+    }
+    
+    public ArrayList<Integer> getJugadaCodeM_old() {
+        return game.getJugadaCodeM_old();
+    }
+    
+    public ArrayList<Integer> getJugadaCodeB_old() {
+        return game.getJugadaCodeB_old();
+    }
 }

@@ -259,4 +259,16 @@ public class CtrlPresentacion {
     public void iniciarMasterMind(){
         iniciarRegistroLogin();
     }
+    
+    public void setCodIni_old() {
+        CPg.setCodIni_old();
+    }
+    
+    public ArrayList<Integer> getJugadaCodeM_old() {
+        return CPg.getJugadaCodeM_old();
+    }
+    
+    public ArrayList<Integer> getJugadaCodeB_old() {
+        return CPg.getJugadaCodeB_old();
+    }
 }

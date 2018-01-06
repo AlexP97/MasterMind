@@ -1,9 +1,8 @@
-package domain;
 
+
+import domain.Ranking;
 import java.util.ArrayList;
 import java.util.Scanner;
-import persistence.GamePersistencia;
-import persistence.JugadorPersistencia;
 import presentation.CtrlPresentacion;
 import utils.Pair;
 
@@ -41,6 +40,120 @@ public class MasterMind {
         Pair<Boolean, String> p = CP.register(usuario,contraseña);
         System.out.println(p.getRight());
         return p.getLeft();
+    }
+    
+    protected static String GenerarOutput(ArrayList<Integer> codeB, ArrayList<Integer> codeM){
+        String linea = "";
+        if (codeB != null){
+            for (int i = 0; i < codeB.size(); ++i){
+                linea += Integer.toString(codeB.get(i));
+                linea += " ";
+            }
+        }
+        if (codeM != null){
+            for (int i = 0; i < codeM.size(); ++i){
+                linea += Integer.toString(codeM.get(i));
+            }
+        }
+        return linea;
+    }
+    
+    protected static void MostrarOutput(String[] output, int turn){
+        System.out.println("----------------");
+        for (int i = 0; i <= turn; ++i){
+            System.out.println(output[i]);
+        }
+    }
+    
+    protected static String[] CargarOutput(ArrayList<ArrayList<Integer>> codeB,ArrayList<ArrayList<Integer>> codeM, int total){
+        String[] output = new String[total];
+        if (codeB.size() > 0){
+            for (int i = 0; i < codeB.size(); ++i) {
+                if (codeM.size() > i) output[i] = GenerarOutput(codeB.get(i), codeM.get(i));
+                else output[i] = GenerarOutput(codeB.get(i), null);
+            }
+        }
+        return output;
+    }
+    
+    protected static void partidaCodeM(int dif, boolean carg, int turn){
+        String[] output = new String[dif];
+        ArrayList<Integer> codeB = new ArrayList();
+        if (!carg) {
+            CP.setCodIni_old();
+            codeB = CP.jugadaCodeB(new ArrayList());
+        }
+        else {
+            System.out.println("Código a adivinar: " + CP.getCodeIni());
+            ArrayList<ArrayList<Integer>> a = CP.getJugadasCodeB();
+            output = CargarOutput(a, CP.getJugadasCodeM(), dif);
+            codeB = a.get(a.size()-1);
+            MostrarOutput(output, turn-1);
+        }
+        while (turn < dif){
+            ArrayList<Integer> cods = CP.getJugadaCodeM_old();
+            if (cods.contains(-1)){
+                Pair<Boolean, String> p = CP.saveGame();
+                MostrarOutput(output, turn-1);
+                if (p.getLeft()) System.out.println("Se ha guardado la partida correctamente.");
+                else System.out.println("Ha habido un error guardando la partida.");
+            }
+            else if (cods.contains(-2)) return;
+            else {
+                output[turn] = GenerarOutput(codeB, cods);
+                MostrarOutput(output,turn);
+                if (cods.contains(1) || cods.contains(0)) {
+                    codeB = CP.jugadaCodeB(cods);
+                }
+                else {
+                    System.out.println("¡La IA ha acertado la combinación!");
+                    return;
+                }
+                ++turn;
+            }
+        }
+        System.out.println("La IA no ha acertado la combinación...");
+    }
+    
+    protected static void partidaCodeB(int dif, boolean carg, int turn){
+        String[] output = new String[dif];
+        ArrayList<Integer> codeM;
+        if (carg) {
+            output = CargarOutput(CP.getJugadasCodeB(), CP.getJugadasCodeM(), dif);
+            MostrarOutput(output, turn);
+        }
+        while (turn < dif){
+            ArrayList<Integer> cods = CP.getJugadaCodeB_old();
+            if (cods.contains(-1)){
+                Pair<Boolean, String> p = CP.saveGame();
+                MostrarOutput(output, turn-1);
+                if (p.getLeft()) System.out.println("Se ha guardado la partida correctamente.");
+                else System.out.println("Ha habido un error guardando la partida.");
+            }
+            else if (cods.contains(-2)) return;
+            else {
+                codeM = CP.jugadaCodeM(cods);
+                output[turn] = GenerarOutput(cods, codeM);
+                MostrarOutput(output,turn);
+                if (codeM.contains(1) || codeM.contains(0)) {
+                }
+                else {
+                    Pair<Boolean,Integer> p = CP.finishGame(true);
+                    if (p.getLeft()){
+                        Pair<Boolean,Integer> p2 = CP.actualizaRanking(CP.getName(),p.getRight());
+                        if(p2.getLeft()){
+                            System.out.println("¡Te has colocado en la "+p2.getRight()+"a posición en el ranking!");
+                        }
+                        else{
+                            System.out.println("No has logrado entrar en el ranking.");
+                        }
+                    }
+                    return;
+                }
+                ++turn;
+            }
+        }
+        System.out.println("Te has quedado sin turnos. Game Over :(");
     }
     
     /**
@@ -87,6 +200,11 @@ public class MasterMind {
             }
         } 
         CP.crearPartida(CP.getName(),id,dif,mod, num, ran);
+        int totalT = 12;
+        if (dif.equals("medio")) totalT = 10;
+        else if(dif.equals("dificil")) totalT = 8;
+        if (mod.equals("codemaker")) partidaCodeM(totalT,false,0);
+        else if (mod.equals("codebreaker")) partidaCodeB(totalT,false,0);
     }
     
     /**
@@ -112,6 +230,13 @@ public class MasterMind {
             }
         }
         CP.loadGame(partida);
+        ArrayList<String> stats = CP.getStatsPartida();
+        if (stats.get(0).equals("Codemaker") || stats.get(0).equals("codemaker")){
+            partidaCodeM(Integer.parseInt(stats.get(3)),true,Integer.parseInt(stats.get(4))-1);
+        }
+        else {
+            partidaCodeB(Integer.parseInt(stats.get(3)),true,Integer.parseInt(stats.get(4))-1);
+        }
     }
     
     protected static void muestraRanking(){

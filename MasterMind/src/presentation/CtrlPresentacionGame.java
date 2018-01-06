@@ -152,4 +152,16 @@ public class CtrlPresentacionGame {
     public int getPuntuacion() {
         return CDp.getPuntuacion();
     }
+    
+    public void setCodIni_old() {
+        CDp.setCodIni_old();
+    }
+    
+    public ArrayList<Integer> getJugadaCodeM_old() {
+        return CDp.getJugadaCodeM_old();
+    }
+    
+    public ArrayList<Integer> getJugadaCodeB_old() {
+        return CDp.getJugadaCodeB_old();
+    }
 }

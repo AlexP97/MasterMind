@@ -3,7 +3,6 @@ package presentation;
 import utils.KeyListenerPers;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
