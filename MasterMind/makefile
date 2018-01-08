@@ -25,6 +25,8 @@ CLASSES = \
 	src/domain/CtrlDominioRanking.java \
 	src/utils/Funciones.java \
 	src/utils/Pair.java \
+	src/utils/KeyListenerPers.java \
+	src/utils/WindowListener.java \
 	src/persistence/GamePersistencia.java \
 	src/persistence/JugadorPersistencia.java \
 	src/persistence/CtrlPersistencia.java \
@@ -70,3 +72,4 @@ clean:
 	$(RM) src/persistence/*.class
 	$(RM) src/utils/*.class
 	$(RM) src/presentation/*.class
+	$(RM) src/*.class
