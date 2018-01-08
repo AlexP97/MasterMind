@@ -9,7 +9,7 @@ JVM= java
 	
 
 CLASSES = \
-	src/domain/MasterMind.java \
+	src/MasterMind.java \
 	src/Main.java \
 	src/domain/Casilla.java \
 	src/domain/CodeBreaker.java \
@@ -36,7 +36,6 @@ CLASSES = \
 	src/presentation/CtrlPresentacionLoginRegister.java \
 	src/presentation/CtrlPresentacionModificarDatos.java \
 	src/presentation/CtrlPresentacionRanking.java \
-	src/presentation/KeyListenerPers.java \
 	src/presentation/VistaCargarPart.java \
 	src/presentation/VistaCodigoInicial.java \
 	src/presentation/VistaInfo.java \
@@ -50,11 +49,10 @@ CLASSES = \
 	src/presentation/VistaRanking.java \
 	src/presentation/VistaRegister.java \
 	src/presentation/VistaTableroCodeB.java \
-	src/presentation/VistaTableroCodeM.java \
-	src/presentation/WindowListener.java
+	src/presentation/VistaTableroCodeM.java 
 
 MAIN = Main
-MAINOLD = domain.MasterMind
+MAINOLD = MasterMind
 CLASSPATH = build
 
 default: classes
@@ -64,7 +62,7 @@ classes: $(CLASSES:.java=.class)
 run: src/Main.java
 	$(JVM) -cp ./src/:.src/presentation/:.src/resources/ $(MAIN)
 
-run_old: src/domain/MasterMind.class 
+run_old: src/MasterMind.class 
 	$(JVM) -cp ./src/ $(MAINOLD)
 
 clean:
