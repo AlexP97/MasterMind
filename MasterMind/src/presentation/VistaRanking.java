@@ -3,6 +3,7 @@ package presentation;
 import utils.KeyListenerPers;
 import utils.WindowListener;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class VistaRanking extends javax.swing.JFrame {
             labels[i].setFont(new Font("Comic Sans MS", Font.BOLD, 22));
             labels[i].setForeground(Color.white);
             labels[i].setOpaque(false);
-            labels[i].setBounds(138,y,77,32);
+            labels[i].setBounds(138,y,300,32);
             jPanel2.add(labels[i]);
             y += 46;
         }
