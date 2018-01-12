@@ -51,7 +51,7 @@ public class CtrlPersistenciaJugador {
      *
      * @param n1 el nombre anterior
      * @param n2 el nombre que se quiere asignar
-     * @param c
+     * @param c la contraseña del usuario
      * @return un booleano con si se ha podido asignar el nombre y un string con un mensaje de error si es necesario
      */
     public Pair<Boolean, String> setName(String n1, String n2, String c) {

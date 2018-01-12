@@ -580,8 +580,8 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
             int random = -1;
             boolean pistaValida = false;
             while(!pistaValida) {
-                random = ThreadLocalRandom.current().nextInt(1, num + 1);
-                if(!pistas.get(random-1)) {
+                random = ThreadLocalRandom.current().nextInt(0, num-1);
+                if(!pistas.get(random)) {
                     pistaValida = true;
                     pistas.set(random, true);
                 }
@@ -614,7 +614,7 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
             if(codeIni.get(random) == 9){
                 color = "azul mar";
             }
-            JOptionPane.showMessageDialog(null, "Hay una ficha "+color+" en la "+random+" posición.");
+            JOptionPane.showMessageDialog(null, "Hay una ficha "+color+" en la "+(random+1)+" posición.");
             actualizaPuntuacion();
         }
     }//GEN-LAST:event_jButton15ActionPerformed
