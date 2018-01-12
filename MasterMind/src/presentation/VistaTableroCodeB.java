@@ -24,6 +24,7 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
     int dif;
     int turno;
     int state;
+    int nPistas;
     boolean introducirJugada = true;
     Icon iconoVacio;
     Icon iconoVacioK;
@@ -117,7 +118,10 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
     
     public void actualizaPuntuacion(){
         int points = CP.getPuntuacion();
-        if(points < 0) JOptionPane.showMessageDialog(null, "Te has quedado sin puntos, Game over :(");
+        if(points < 0) {
+            JOptionPane.showMessageDialog(null, "Te has quedado sin puntos, Game over :(");
+            jButton4ActionPerformed(null);
+        }
         setTitle("MasterMind - Puntuación: "+points+" puntos.");
     }
     
@@ -134,6 +138,8 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
         this.ran = r;
         this.dif = d;  
         this.turno = t;
+        
+        this.nPistas = 0;
         
         this.pistas = new ArrayList();
         for(int i = 0; i < num; i++) {
@@ -579,8 +585,9 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
             ArrayList<Integer> codeIni = CP.getCodeIni();
             int random = -1;
             boolean pistaValida = false;
+            
             while(!pistaValida) {
-                random = ThreadLocalRandom.current().nextInt(0, num-1);
+                random = ThreadLocalRandom.current().nextInt(0, num);
                 if(!pistas.get(random)) {
                     pistaValida = true;
                     pistas.set(random, true);
@@ -616,6 +623,14 @@ public class VistaTableroCodeB extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(null, "Hay una ficha "+color+" en la "+(random+1)+" posición.");
             actualizaPuntuacion();
+            ++nPistas;
+            if (nPistas == num) {
+                this.nPistas = 0;
+
+                this.pistas = new ArrayList();
+                for(int i = 0; i < num; i++)
+                    pistas.add(false);
+            }
         }
     }//GEN-LAST:event_jButton15ActionPerformed
 
